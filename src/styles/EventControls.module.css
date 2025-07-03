@@ -1,0 +1,13 @@
+/* components/EventControls.module.css */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3f3f3;
+    padding: 1rem;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  

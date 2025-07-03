@@ -1,0 +1,37 @@
+/* styles/calendar.css */
+
+/* Apply default font smoothing */
+.react-calendar {
+    font-family: inherit;
+    border: none;
+    background: none;
+    width: 100%;
+  }
+  
+  .react-calendar__tile {
+    border-radius: 16px;
+    margin: 2px;
+    padding: 10px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  
+  /* Selected Date Styling */
+  .react-calendar__tile--now,
+  .react-calendar__tile--active {
+    background-color: #d90429;
+    color: white;
+    font-weight: bold;
+    border-radius: 16px;
+  }
+  
+  /* Remove the default outline */
+  .react-calendar__tile:focus {
+    outline: none;
+  }
+  
+  /* Remove border from surrounding box */
+  .react-calendar__month-view__days {
+    border: none;
+  }
+  

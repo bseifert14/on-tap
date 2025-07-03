@@ -1,0 +1,33 @@
+.filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .filterButton {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  
+  .filterButton:hover {
+    background: #f2f2f2;
+  }
+  
+  .active {
+    background: #222;
+    color: white;
+    border-color: #222;
+  }
+  
+  .icon {
+    font-size: 16px;
+  }
+  

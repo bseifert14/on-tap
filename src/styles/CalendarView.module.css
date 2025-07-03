@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.calendarWrapper {
+  flex-shrink: 0;
+}
+
+.eventsWrapper {
+  flex: 1;
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.eventCard {
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.eventTitle {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.eventLocation {
+  font-size: 0.9rem;
+  color: #555;
+}

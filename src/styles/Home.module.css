@@ -1,0 +1,12 @@
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
