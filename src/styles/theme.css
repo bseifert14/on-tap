@@ -1,0 +1,18 @@
+:root {
+
+    --color-red-primary: #D90027;
+    --color-red-secondary: #D31145;
+
+    --color-background: #2a2c46;
+
+    --color-primary: #D31145;
+    --color-dark: #2a2c46;
+    --color-light: #f3f3f3;
+    --color-white: #ffffff;
+    --color-text: #333;
+  
+    --radius-pill: 999px;
+    --radius: 8px;
+  
+    --font-main: 'Inter', sans-serif;
+  }

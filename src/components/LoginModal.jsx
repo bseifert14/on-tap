@@ -2,13 +2,13 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-export default function LoginModal({ close }) {
+export default function LoginModal({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => close())
+      .then(() => onClose())
       .catch((err) => alert(err.message));
   };
 
@@ -33,7 +33,7 @@ export default function LoginModal({ close }) {
           value={password} onChange={e => setPassword(e.target.value)} placeholder="Password"
         />
         <button onClick={signIn}>Log In</button>
-        <button onClick={close} style={{ marginLeft: 8 }}>Cancel</button>
+        <button onClick={onClose} style={{ marginLeft: 8 }}>Cancel</button>
       </div>
     </div>
   );

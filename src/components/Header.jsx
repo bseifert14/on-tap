@@ -1,85 +1,100 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
-import LoginModal from './LoginModal';
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import styles from "../styles/Header.module.css";
+import { Link } from "react-router-dom";
 
-export default function Header({ user }) {
-  const [showLogin, setShowLogin] = useState(false);
-  const navigate = useNavigate();
+export default function Header({ user, onLogout, onLoginClick }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
-  const handleProfileClick = () => {
-    if (user) {
-      navigate('/profile');
-    } else {
-      setShowLogin(true);
-    }
+  const isLoggedIn = !!user;
+
+    const isActive = (path) => location.pathname === path;
+  const handleCloseAndLogout = () => {
+    setMenuOpen(false);
+    onLogout();
   };
 
-  const handleLogout = async () => {
-    await signOut(auth);
-    navigate('/');
+  const handleLoginClick = () => {
+    setMenuOpen(false);
+    onLoginClick();
   };
 
   return (
-    <header style={{
-      backgroundColor: '#2c2d42',
-      color: '#fff',
-      padding: '1rem 2rem',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center'
-    }}>
-      {/* Logo */}
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-        <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>
-          WHAT'S UP <span style={{ fontStyle: 'italic' }}>Stowe</span>
+    <>
+      <header className={styles.header}>
+        <div className={styles.logo}>
+          WHAT'S <span>UP</span> <em>Stowe</em>
+        </div>
+
+        <nav className={styles.desktopNav}>
+        <Link
+            to="/"
+            className={`${styles.navButton} ${isActive("/") ? styles.navButtonActive : ""}`}
+        >
+            Home
         </Link>
-      </div>
+        <Link
+            to="/calendar"
+            className={`${styles.navButton} ${isActive("/calendar") ? styles.navButtonActive : ""}`}
+        >
+            Calendar
+        </Link>
+        <Link
+            to="/about"
+            className={`${styles.navButton} ${isActive("/about") ? styles.navButtonActive : ""}`}
+        >
+            About
+        </Link>
+        <Link
+            to="/contact"
+            className={`${styles.navButton} ${isActive("/contact") ? styles.navButtonActive : ""}`}
+        >
+            Contact Us
+        </Link>
 
-      {/* Nav Buttons */}
-      <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-        <Link to="/" style={navLinkStyle}>Home</Link>
-        <Link to="/calendar" style={navLinkStyle}>Calendar</Link>
-        <Link to="/about" style={navLinkStyle}>About</Link>
-        <Link to="/contact" style={navLinkStyle}>Contact Us</Link>
-      </nav>
+          {isLoggedIn ? (
+            <>
+              <Link
+                to="/profile"
+                className={`${styles.navButton} ${isActive("/profile") ? styles.navButtonActive : ""}`}
+            >
+                Profile
+            </Link>
+              <button className={styles.navButton} onClick={onLogout}>Log Out</button>
+            </>
+          ) : (
+            <button className={styles.navButton} onClick={onLoginClick}>Log In</button>
+          )}
+        </nav>
 
-      {/* Search + Auth Buttons */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        {/* 🔍 Search Icon Placeholder */}
-        <span style={{ fontSize: '1.2rem', cursor: 'pointer' }}>🔍</span>
+        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
+          ☰
+        </button>
+      </header>
 
-        {user ? (
-          <>
-            <button style={redButtonStyle} onClick={handleProfileClick}>Profile</button>
-            <button style={{ ...redButtonStyle, backgroundColor: '#444' }} onClick={handleLogout}>Log Out</button>
-          </>
-        ) : (
-          <button style={redButtonStyle} onClick={() => setShowLogin(true)}>
-            LOGIN
-          </button>
-        )}
-      </div>
+      {menuOpen && (
+        <>
+          <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
+          <div className={styles.mobileMenu}>
+            <button className={styles.closeBtn} onClick={() => setMenuOpen(false)}>✕</button>
 
-      {showLogin && <LoginModal close={() => setShowLogin(false)} />}
-    </header>
+            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+            <Link to="/calendar" onClick={() => setMenuOpen(false)}>Calendar</Link>
+            <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+
+            {isLoggedIn ? (
+              <>
+                <Link to="/profile" onClick={() => setMenuOpen(false)}>Profile</Link>
+                <button onClick={handleCloseAndLogout}>Log Out</button>
+              </>
+            ) : (
+              <button onClick={handleLoginClick}>Log In</button>
+            )}
+          </div>
+        </>
+      )}
+    </>
   );
 }
-
-const navLinkStyle = {
-  color: '#fff',
-  textDecoration: 'none',
-  fontWeight: '500',
-  fontSize: '1rem',
-};
-
-const redButtonStyle = {
-  backgroundColor: '#e3003b',
-  color: '#fff',
-  border: 'none',
-  padding: '0.5rem 1.25rem',
-  borderRadius: '999px',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};

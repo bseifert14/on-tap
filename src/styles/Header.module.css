@@ -1,0 +1,115 @@
+@import './theme.css';
+
+.header {
+    background-color: var(--color-background);
+    color: var(--color-white);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .desktopNav {
+    display: flex;
+    gap: 4px;
+  }
+  
+  /* Default nav link/button styling, excluding navButton */
+  .desktopNav a:not(.navButton),
+  .desktopNav button:not(.navButton) {
+    color: var(--color-white);
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  /* Button-style navigation (e.g., Login, Profile) */
+  .navButton {
+    color: var(--color-white);
+    padding: 6px 16px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .navButton:hover {
+    background-color: var(--color-red-secondary);
+  }
+  
+  .navButtonActive {
+    background-color: var(--color-red-primary);
+    color: var(--color-white);
+  }
+  
+  /* Mobile only */
+  .hamburger {
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 24px;
+    display: none;
+  }
+  
+  /* Slide-in drawer styles */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 9;
+  }
+  
+  .mobileMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100%;
+    background: var(--color-white);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+  }
+  
+  .mobileMenu a,
+  .mobileMenu button {
+    color: var(--color-background);
+    text-align: left;
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .closeBtn {
+    align-self: flex-end;
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .desktopNav {
+      display: none;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  }
+  
