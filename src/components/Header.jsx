@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../styles/Header.module.css";
+import { User } from "lucide-react";
 
 export default function Header({ user, onLogout, onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);      // mobile menu
@@ -55,7 +56,7 @@ export default function Header({ user, onLogout, onLoginClick }) {
 
           <div className={styles.userMenuWrapper} ref={dropdownRef}>
             <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
-              👤
+              <User strokeWidth={1.5} />
             </button>
 
             {dropdownOpen && (
@@ -84,14 +85,44 @@ export default function Header({ user, onLogout, onLoginClick }) {
           <div className={styles.mobileMenu}>
             <button className={styles.closeBtn} onClick={() => setMenuOpen(false)}>✕</button>
 
-            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-            <Link to="/calendar" onClick={() => setMenuOpen(false)}>Calendar</Link>
-            <Link to="/about" onClick={() => setMenuOpen(false)}>About</Link>
-            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+            <Link
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                className={location.pathname === "/" ? styles.mobileNavLinkActive : ""}
+            >
+                Home
+            </Link>
+            <Link
+                to="/calendar"
+                onClick={() => setMenuOpen(false)}
+                className={location.pathname === "/calendar" ? styles.mobileNavLinkActive : ""}
+            >
+                Calendar
+            </Link>
+            <Link
+                to="/about"
+                onClick={() => setMenuOpen(false)}
+                className={location.pathname === "/about" ? styles.mobileNavLinkActive : ""}
+            >
+                About
+            </Link>
+            <Link
+                to="/contact"
+                onClick={() => setMenuOpen(false)}
+                className={location.pathname === "/contact" ? styles.mobileNavLinkActive : ""}
+            >
+                Contact Us
+            </Link>
 
             {isLoggedIn ? (
               <>
-                <Link to="/profile" onClick={() => setMenuOpen(false)}>Profile</Link>
+                <Link
+                    to="/profile"
+                    onClick={() => setMenuOpen(false)}
+                    className={location.pathname === "/profile" ? styles.mobileNavLinkActive : ""}
+                >
+                    Profile
+                </Link>
                 <button onClick={handleCloseAndLogout}>Log Out</button>
               </>
             ) : (

@@ -1,25 +1,33 @@
 // components/EventFilters.jsx
 import styles from '../styles/EventFilters.module.css';
+import {
+  Calendar,
+  Volleyball,
+  Gamepad,
+  Baby,
+  Utensils,
+  Music,
+} from "lucide-react";
 
 const FILTERS = [
-    { label: "All", value: "All", icon: "📅" },
-    { label: "Sports", value: "Sports", icon: "⚽" },
-    { label: "Games", value: "Games", icon: "🎮" },
-    { label: "Kid Friendly", value: "Kid Friendly", icon: "🧒" },
-    { label: "Food & Bev", value: "Food & Bev", icon: "🍔" },
-    { label: "Music", value: "Music", icon: "🎵" },
+    { label: "All", value: "All", icon: Calendar },
+    { label: "Sports", value: "Sports", icon: Volleyball },
+    { label: "Games", value: "Games", icon: Gamepad },
+    { label: "Kid Friendly", value: "Kid Friendly", icon: Baby },
+    { label: "Food & Bev", value: "Food & Bev", icon: Utensils },
+    { label: "Music", value: "Music", icon: Music },
   ];
   
   export default function EventFilters({ selectedType, onTypeChange }) {
     return (
       <div className={styles.filterContainer}>
-        {FILTERS.map(({ label, value, icon }) => (
+        {FILTERS.map(({ label, value, icon: Icon }) => (
           <button
             key={value}
             className={`${styles.filterButton} ${selectedType === value ? styles.active : ''}`}
             onClick={() => onTypeChange(value)}
           >
-            <span className={styles.icon}>{icon}</span>
+            <Icon size={18} className={styles.icon} strokeWidth={1.5} />
             <span>{label}</span>
           </button>
         ))}

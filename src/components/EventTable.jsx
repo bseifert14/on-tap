@@ -1,11 +1,18 @@
 import React from "react";
 import styles from "../styles/EventTable.module.css";
+import {
+  Music,
+  Volleyball,
+  Baby,
+  Utensils,
+  SquareMenu
+} from "lucide-react";
 
 const ICONS = {
-  Music: "🎵",
-  Sports: "⚽",
-  "Kid Friendly": "🧒",
-  "Food & Bev": "🍔"
+  Music: Music,
+  Sports: Volleyball,
+  "Kid Friendly": Baby,
+  "Food & Bev": Utensils
 };
 
 export default function EventTable({ events = [] }) {
@@ -23,7 +30,13 @@ export default function EventTable({ events = [] }) {
           <tr key={event.id} className={styles.row}>
             <td className={styles.td}>
               <div className={styles.eventName}>
-                <span className={styles.iconCell}>{ICONS[event.event_type] || "📍"}</span>
+                <span className={styles.iconCell}>
+                  {ICONS[event.event_type] ? (
+                    React.createElement(ICONS[event.event_type], { size: 18 })
+                  ) : (
+                    <SquareMenu size={18} />
+                  )}
+                </span>
                 <span>{event.event_name}</span>
               </div>
             </td>
