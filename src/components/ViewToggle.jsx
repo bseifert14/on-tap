@@ -6,7 +6,7 @@ export default function ViewToggle() {
   const isCalendar = location.pathname === "/calendar";
 
   return (
-    <div style={{ display: "flex", gap: "10px", marginBottom: "1.5rem" }}>
+    <div style={{ display: "flex", gap: "10px" }}>
       <button
         style={{
           background: !isCalendar ? "#D80032" : "#E0E0E0",

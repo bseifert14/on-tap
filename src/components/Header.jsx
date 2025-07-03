@@ -1,24 +1,36 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import styles from "../styles/Header.module.css";
-import { Link } from "react-router-dom";
 
 export default function Header({ user, onLogout, onLoginClick }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);      // mobile menu
+  const [dropdownOpen, setDropdownOpen] = useState(false);  // profile dropdown
   const location = useLocation();
-
   const isLoggedIn = !!user;
+  const dropdownRef = useRef(null);
 
-    const isActive = (path) => location.pathname === path;
+  const isActive = (path) => location.pathname === path;
+
   const handleCloseAndLogout = () => {
-    setMenuOpen(false);
+    setDropdownOpen(false);
     onLogout();
   };
 
   const handleLoginClick = () => {
-    setMenuOpen(false);
+    setDropdownOpen(false);
     onLoginClick();
   };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -28,51 +40,44 @@ export default function Header({ user, onLogout, onLoginClick }) {
         </div>
 
         <nav className={styles.desktopNav}>
-        <Link
-            to="/"
-            className={`${styles.navButton} ${isActive("/") ? styles.navButtonActive : ""}`}
-        >
+          <Link to="/" className={`${styles.navButton} ${isActive("/") ? styles.navButtonActive : ""}`}>
             Home
-        </Link>
-        <Link
-            to="/calendar"
-            className={`${styles.navButton} ${isActive("/calendar") ? styles.navButtonActive : ""}`}
-        >
+          </Link>
+          <Link to="/calendar" className={`${styles.navButton} ${isActive("/calendar") ? styles.navButtonActive : ""}`}>
             Calendar
-        </Link>
-        <Link
-            to="/about"
-            className={`${styles.navButton} ${isActive("/about") ? styles.navButtonActive : ""}`}
-        >
+          </Link>
+          <Link to="/about" className={`${styles.navButton} ${isActive("/about") ? styles.navButtonActive : ""}`}>
             About
-        </Link>
-        <Link
-            to="/contact"
-            className={`${styles.navButton} ${isActive("/contact") ? styles.navButtonActive : ""}`}
-        >
+          </Link>
+          <Link to="/contact" className={`${styles.navButton} ${isActive("/contact") ? styles.navButtonActive : ""}`}>
             Contact Us
-        </Link>
+          </Link>
 
-          {isLoggedIn ? (
-            <>
-              <Link
-                to="/profile"
-                className={`${styles.navButton} ${isActive("/profile") ? styles.navButtonActive : ""}`}
-            >
-                Profile
-            </Link>
-              <button className={styles.navButton} onClick={onLogout}>Log Out</button>
-            </>
-          ) : (
-            <button className={styles.navButton} onClick={onLoginClick}>Log In</button>
-          )}
+          <div className={styles.userMenuWrapper} ref={dropdownRef}>
+            <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
+              👤
+            </button>
+
+            {dropdownOpen && (
+              <div className={styles.userDropdown}>
+                {isLoggedIn ? (
+                  <>
+                    <Link to="/profile" onClick={() => setDropdownOpen(false)}>Profile</Link>
+                    <button onClick={handleCloseAndLogout}>Log Out</button>
+                  </>
+                ) : (
+                  <button onClick={handleLoginClick}>Log In</button>
+                )}
+              </div>
+            )}
+          </div>
         </nav>
 
-        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
-          ☰
-        </button>
+        {/* Hamburger (mobile) */}
+        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>☰</button>
       </header>
 
+      {/* Mobile Slide-in Menu */}
       {menuOpen && (
         <>
           <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
