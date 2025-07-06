@@ -10,6 +10,9 @@ import Home from "./pages/Home";           // List View
 import Calendar from "./pages/Calendar";
 import Profile from "./pages/Profile";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
+import Footer from "./components/Footer";
+
+import './styles/global.css';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -33,7 +36,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <div className="pageWrapper">
       <Header
         user={user}
         onLoginClick={() => setShowLogin(true)}
@@ -59,12 +62,15 @@ export default function App() {
         />
       )}
 
-      <Routes>
-        <Route path="/" element={<Home />} /> {/* ← List View is now home */}
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile user={user} />} />
-        {/* Remove or redirect Landing if not needed */}
-      </Routes>
-    </>
+      <div className="mainContent">
+        <Routes>
+          <Route path="/" element={<Home />} /> {/* ← List View is now home */}
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/profile" element={<Profile user={user} />} />
+        </Routes>
+      </div>
+      
+      <Footer />
+    </div>
   );
 }

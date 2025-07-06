@@ -1,23 +1,32 @@
+import { MoveUpRight, SquareArrowOutUpRight } from "lucide-react";
 import styles from "../styles/EventCard.module.css";
+import { getDefaultImage } from "../utils/getDefaultImage";
+import { getIcon } from "../utils/getIcon";
 
-export default function EventCard({ event }) {
+export default function EventCard({ event, onClick }) {
+  const { event_date, event_description, event_location, event_name, event_photo_url, event_type } = event;
+  const IconComponent = getIcon(event_type);
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <img
-        src="https://via.placeholder.com/100x100.png?text=Event"
-        alt="Event"
+        src={event_photo_url || getDefaultImage(event_type)}
+        alt={event_name}
         className={styles.image}
       />
       <div className={styles.content}>
-        <p className={styles.location}>Stowe, VT • {event.event_date}</p>
         <h3 className={styles.title}>
-          {event.event_name}
+          {event_name}
         </h3>
+        <p className={styles.location}>{event_location} • {event_date}</p>
         <p className={styles.description}>
-          {event.event_description || "Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+          {event_description}
         </p>
       </div>
-      <div className={styles.icon}>↗</div>
+      <IconComponent size={18} strokeWidth={1.5} />
+      <div className={styles.icon}>
+        <SquareArrowOutUpRight size={18} strokeWidth={1.5} />
+      </div>
     </div>
   );
 }

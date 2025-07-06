@@ -1,4 +1,3 @@
-// components/EventFilters.jsx
 import styles from '../styles/EventFilters.module.css';
 import {
   Volleyball,

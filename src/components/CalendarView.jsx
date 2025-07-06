@@ -6,9 +6,11 @@ import "../styles/react-calendar-custom.css"; // your custom overrides
 import { supabase } from "../supabase";
 import styles from "../styles/CalendarView.module.css";
 import EventCard from "./EventCard";
+import EventModal from "./EventModal";
 
 export default function CalendarView({ selectedType }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedEvent, setSelectedEvent] = useState(null);
     const [events, setEvents] = useState([]);
   
     useEffect(() => {
@@ -74,11 +76,15 @@ export default function CalendarView({ selectedType }) {
               <p>No events for this day.</p>
             ) : (
               filtered.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={event} onClick={() => setSelectedEvent(event)}/>
               ))
             )}
           </div>
         </div>
+
+        {selectedEvent && (
+          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+        )}
       </div>
     );
   }

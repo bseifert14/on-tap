@@ -1,4 +1,3 @@
-// components/ViewControls.jsx
 import { useState, useEffect } from 'react';
 import ViewToggle from "./ViewToggle";
 import EventFilters from "./EventFilters";

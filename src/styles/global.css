@@ -31,6 +31,16 @@
     background: none;
     border: none;
   }
+
+  .pageWrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .mainContent {
+    flex: 1;
+  }
   
   @media (min-width: 768px) {
     body {

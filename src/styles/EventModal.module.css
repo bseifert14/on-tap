@@ -1,0 +1,139 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 80vh; 
+    max-width: 600px;
+    max-height: 90vh;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+    /* position: relative; */
+  }
+  
+  .image {
+    height: 43%;
+    width: 100%;
+    object-fit: cover;
+
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.2s ease;
+  }
+  
+  .closeButton:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  
+  .content {
+    padding: 1rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtext {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .button {
+    display: inline-block;
+    background: #d50032;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .modal {
+      width: 95%;
+      height: 90vh;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .infoButton {
+    background-color: #d31145;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+  }
+  
+  .dotsButton {
+    background-color: #d31145;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: none; /* hidden by default */
+  }
+  
+  /* Responsive swap */
+  @media (max-width: 768px) {
+    .infoButton {
+      display: none;
+    }
+  
+    .dotsButton {
+      display: inline-block;
+    }
+  }
+  

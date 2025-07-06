@@ -3,9 +3,11 @@ import { supabase } from "../supabase";
 import EventTable from "../components/EventTable";
 import ViewControls from "../components/ViewControls";
 import styles from "../styles/Home.module.css";
+import EventModal from "../components/EventModal";
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState("All");
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -28,7 +30,11 @@ export default function Home() {
         onTypeChange={setSelectedType}
         currentView="list"
       />
-      <EventTable events={filtered} />
+      <EventTable events={filtered} onSelectEvent={(event) => setSelectedEvent(event)}/>
+
+      {selectedEvent && (
+        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+      )}
     </div>
   );
 }

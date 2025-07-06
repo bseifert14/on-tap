@@ -1,46 +1,32 @@
 import React from "react";
 import styles from "../styles/EventTable.module.css";
-import {
-  Music,
-  Volleyball,
-  Baby,
-  Utensils,
-  SquareMenu
-} from "lucide-react";
+import { getDefaultImage } from "../utils/getDefaultImage";
+import { SquareArrowUpRight } from "lucide-react";
 
-const ICONS = {
-  Music: Music,
-  Sports: Volleyball,
-  "Kid Friendly": Baby,
-  "Food & Bev": Utensils
-};
-
-export default function EventTable({ events = [] }) {
+export default function EventTable({ events = [], onSelectEvent }) {
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
         <tr>
           <th className={styles.th} />
-          <th className={styles.th}>Events</th>
+          <th className={styles.th}>Event</th>
           <th className={styles.th}>Location & Time</th>
-          <th className={styles.th}></th>
+          <th />
         </tr>
       </thead>
       <tbody>
         {events.map((event) => (
           <tr key={event.id} className={styles.row}>
-            <td className={styles.tdIcon}>
-              <div className={styles.iconCell}>
-                {ICONS[event.event_type] ? (
-                  React.createElement(ICONS[event.event_type], { size: 18 })
-                ) : (
-                  <SquareMenu size={18} />
-                )}
-              </div>
+            <td className={styles.imageCell}>
+              <img
+                src={event.event_photo_url || getDefaultImage(event.event_type)}
+                alt={event.event_name}
+                className={styles.eventImage}
+              />
             </td>
             <td className={styles.td}>
               <div className={styles.eventName}>
-                <span>{event.event_name}</span>
+                {event.event_name}
               </div>
             </td>
             <td className={styles.td}>
@@ -50,10 +36,20 @@ export default function EventTable({ events = [] }) {
                 <span>{formatDate(event.event_date)}</span>
               </div>
             </td>
-            <td className={styles.td}>
+            <td className={styles.actionCell}>
               <div className={styles.actions}>
-                <button className={styles.infoButton}>More Info</button>
-                <button className={styles.dotsButton}>⋯</button>
+                <button
+                  className={styles.infoButton}
+                  onClick={() => onSelectEvent?.(event)}
+                >
+                  More Info
+                </button>
+                <button
+                  className={styles.dotsButton}
+                  onClick={() => onSelectEvent?.(event)}
+                >
+                  <SquareArrowUpRight size={18} strokeWidth={1.5} />
+                </button>
               </div>
             </td>
           </tr>

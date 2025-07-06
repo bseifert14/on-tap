@@ -1,9 +1,9 @@
 .calendarBody {
-    padding: 0 75px;
+    padding: 0 75px 75px 75px;
   }
   
   @media (max-width: 768px) {
     .calendarBody {
-      padding: 0 20px;
+      padding: 0 20px 50px 20px;
     }
   }
