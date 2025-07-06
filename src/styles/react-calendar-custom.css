@@ -11,7 +11,7 @@
   .react-calendar__tile {
     border-radius: 16px;
     margin: 2px;
-    padding: 10px 0;
+    padding: 18px 0;
     text-align: center;
     transition: all 0.2s ease;
   }
@@ -33,5 +33,19 @@
   /* Remove border from surrounding box */
   .react-calendar__month-view__days {
     border: none;
+  }
+
+  .react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .react-calendar__navigation button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: black;
+    cursor: pointer;
   }
   

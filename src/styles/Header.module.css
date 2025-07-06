@@ -34,9 +34,9 @@
   /* Button-style navigation (e.g., Login, Profile) */
   .navButton {
     color: var(--color-white);
-    padding: 6px 16px;
+    padding: 10px 16px;
     border: none;
-    border-radius: 999px;
+    border-radius: 20px;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s ease;

@@ -10,3 +10,12 @@
     gap: 1rem;
   }
   
+.homeBody {
+  padding: 0 75px;
+}
+
+@media (max-width: 768px) {
+  .homeBody {
+    padding: 0 20px;
+  }
+}

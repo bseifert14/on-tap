@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css"; // default styles
 import "../styles/react-calendar-custom.css"; // your custom overrides
 import { supabase } from "../supabase";
 import styles from "../styles/CalendarView.module.css";
+import EventCard from "./EventCard";
 
 const EVENT_ICONS = {
   Music: "🎵",
@@ -44,7 +45,24 @@ export default function CalendarView({ selectedType }) {
       <div className={styles.container}>
         {/* Left: Calendar */}
         <div className={styles.calendarWrapper}>
-          <Calendar onChange={setSelectedDate} value={selectedDate} />
+        <Calendar
+          onChange={setSelectedDate}
+          value={selectedDate}
+          tileClassName={({ date, view }) => {
+            if (view === "month") {
+              const dateStr = date.toISOString().split("T")[0];
+              const hasEvent = events.some(
+                (e) => e.event_date === dateStr && (selectedType === "All" || e.event_type === selectedType)
+              );
+              const isSelected = dateStr === selectedDate.toISOString().split("T")[0];
+              return [
+                hasEvent ? styles.hasEvent : "",
+                isSelected ? styles.selectedDay : ""
+              ].join(" ");
+            }
+          }}
+        />
+
         </div>
   
         {/* Right: Events */}
@@ -58,23 +76,16 @@ export default function CalendarView({ selectedType }) {
               day: "numeric",
             })}
           </h3>
-  
-          {filtered.length === 0 ? (
-            <p>No events for this day.</p>
-          ) : (
-            <div className={styles.eventList}>
-              {filtered.map((event) => (
-                <div key={event.id} className={styles.eventCard}>
-                  <div className={styles.eventTitle}>
-                    {EVENT_ICONS[event.event_type] || "📌"} {event.event_name}
-                  </div>
-                  <div className={styles.eventLocation}>
-                    {event.event_location}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+
+          <div className={styles.eventScrollArea}>
+            {filtered.length === 0 ? (
+              <p>No events for this day.</p>
+            ) : (
+              filtered.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))
+            )}
+          </div>
         </div>
       </div>
     );

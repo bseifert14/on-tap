@@ -1,3 +1,5 @@
+@import './theme.css';
+
 .filterContainer {
     display: flex;
     flex-wrap: wrap;
@@ -5,10 +7,10 @@
   }
   
   .filterButton {
-    background: white;
+    background: var(--color-white);
     border: 1px solid #ddd;
-    border-radius: 16px;
-    padding: 6px 12px;
+    border-radius: 20px;
+    padding: 10px 12px;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -17,17 +19,21 @@
     transition: 0.2s ease;
   }
   
-  .filterButton:hover {
+  .filterButton:not(.active):hover {
     background: #f2f2f2;
+    color: black;
   }
   
   .active {
-    background: #222;
-    color: white;
-    border-color: #222;
+    background: var(--color-red-primary);
+    color: var(--color-white);
+    border-color: var(--color-red-primary);
   }
   
   .icon {
     font-size: 16px;
   }
+  
+  
+
   

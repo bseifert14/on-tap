@@ -4,9 +4,124 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    padding: 1rem;
-    background-color: #f8f8f8;
-    border-radius: 16px 16px 0 0;
+    padding: 2rem 1rem;
+    background-color: #eaecef;
+    border-radius: 10px 10px 0 0;
     margin-top: 3rem;
+  }
+
+
+  .containerShadow {
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.12);
+    border-radius: 12px; /* optional for softer edges */
+  }
+
+  .controlsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .filterToggleButton {
+    background: #fff;
     border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .filterIcon {
+    margin-left: 0.5rem;
+  }
+  
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 75%;
+    max-width: 300px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+    z-index: 999;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .drawerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    z-index: 998;
+  }
+  
+
+  .mobileFilters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    width: fit-content;
+  }
+  
+  .filterToggleButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .activeFilterLabel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(-4px);
+    padding: 4px 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+  }
+  
+  .activeFilterButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .clearIcon {
+    font-size: 1rem;
+    color: #888;
   }

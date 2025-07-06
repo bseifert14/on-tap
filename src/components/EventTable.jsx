@@ -20,6 +20,7 @@ export default function EventTable({ events = [] }) {
     <table className={styles.table}>
       <thead className={styles.thead}>
         <tr>
+          <th className={styles.th} />
           <th className={styles.th}>Events</th>
           <th className={styles.th}>Location & Time</th>
           <th className={styles.th}></th>
@@ -28,15 +29,17 @@ export default function EventTable({ events = [] }) {
       <tbody>
         {events.map((event) => (
           <tr key={event.id} className={styles.row}>
+            <td className={styles.tdIcon}>
+              <div className={styles.iconCell}>
+                {ICONS[event.event_type] ? (
+                  React.createElement(ICONS[event.event_type], { size: 18 })
+                ) : (
+                  <SquareMenu size={18} />
+                )}
+              </div>
+            </td>
             <td className={styles.td}>
               <div className={styles.eventName}>
-                <span className={styles.iconCell}>
-                  {ICONS[event.event_type] ? (
-                    React.createElement(ICONS[event.event_type], { size: 18 })
-                  ) : (
-                    <SquareMenu size={18} />
-                  )}
-                </span>
                 <span>{event.event_name}</span>
               </div>
             </td>

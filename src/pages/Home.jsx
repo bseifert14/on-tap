@@ -3,6 +3,7 @@ import { supabase } from "../supabase";
 import EventTable from "../components/EventTable";
 // import EventViewControls from "../components/EventViewControls";
 import ViewControls from "../components/ViewControls";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [selectedType, setSelectedType] = useState("All");
@@ -22,7 +23,7 @@ export default function Home() {
     : events.filter(e => e.event_type === selectedType);
 
   return (
-    <div>
+    <div className={styles.homeBody}>
       <ViewControls
         selectedType={selectedType}
         onTypeChange={setSelectedType}

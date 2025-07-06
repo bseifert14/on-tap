@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import styles from "../styles/ViewToggle.module.css";
 
 export default function ViewToggle() {
   const navigate = useNavigate();
@@ -6,31 +7,15 @@ export default function ViewToggle() {
   const isCalendar = location.pathname === "/calendar";
 
   return (
-    <div style={{ display: "flex", gap: "10px" }}>
+    <div className={styles.toggleWrapper}>
       <button
-        style={{
-          background: !isCalendar ? "#D80032" : "#E0E0E0",
-          color: !isCalendar ? "#fff" : "#000",
-          padding: "10px 20px",
-          borderRadius: "20px",
-          border: "none",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
+        className={`${styles.toggleButton} ${!isCalendar ? styles.active : ""}`}
         onClick={() => navigate("/")}
       >
         List
       </button>
       <button
-        style={{
-          background: isCalendar ? "#D80032" : "#E0E0E0",
-          color: isCalendar ? "#fff" : "#000",
-          padding: "10px 20px",
-          borderRadius: "20px",
-          border: "none",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
+        className={`${styles.toggleButton} ${isCalendar ? styles.active : ""}`}
         onClick={() => navigate("/calendar")}
       >
         Calendar
