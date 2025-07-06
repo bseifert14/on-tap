@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabase";
 import EventTable from "../components/EventTable";
-// import EventViewControls from "../components/EventViewControls";
 import ViewControls from "../components/ViewControls";
 import styles from "../styles/Home.module.css";
 

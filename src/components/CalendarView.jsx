@@ -7,14 +7,6 @@ import { supabase } from "../supabase";
 import styles from "../styles/CalendarView.module.css";
 import EventCard from "./EventCard";
 
-const EVENT_ICONS = {
-  Music: "🎵",
-  Sports: "⚽",
-  Games: "🎮",
-  "Kid Friendly": "👶",
-  "Food & Bev": "🍔"
-};
-
 export default function CalendarView({ selectedType }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [events, setEvents] = useState([]);
