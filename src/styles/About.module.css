@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 4rem;
-    padding: 4rem;
+    padding: 6rem 4rem 4rem 4rem;
   }
   
   .section {
@@ -23,7 +23,7 @@
     border-radius: 1rem;
     object-fit: cover;
     flex-shrink: 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.3);
   }
   
   .text {

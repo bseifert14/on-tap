@@ -1,11 +1,12 @@
 import styles from '../styles/Footer.module.css';
 import { Instagram, X, Facebook, Mail } from 'lucide-react';
+import logo from "../../public/images/site/OnTapDieCutWhite.png";
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.topSection}>
-        <img src="/logo-white.svg" alt="What's Up Stowe" className={styles.logo} />
+        <img src={logo} alt="On Tap Stowe" className={styles.logo} />
 
         <div className={styles.socials}>
           <a href="#" className={styles.icon}><Instagram size={24} /></a>
@@ -16,7 +17,7 @@ export default function Footer() {
       </div>
 
       <div className={styles.bottomSection}>
-        <p>© 2025 What's Up Stowe, All rights reserved.</p>
+        <p>© 2025 On Tap Stowe, All rights reserved.</p>
         <div className={styles.links}>
           <a href="#">Privacy & Policy</a>
           <a href="#">Terms & Conditions</a>

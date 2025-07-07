@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 import { User } from "lucide-react";
+import logo from "../../public/images/site/OnTapDieCut.png";
 
 export default function Header({ user, onLogout, onLoginClick }) {
-  const [menuOpen, setMenuOpen] = useState(false);      // mobile menu
-  const [dropdownOpen, setDropdownOpen] = useState(false);  // profile dropdown
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const location = useLocation();
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
@@ -22,7 +23,6 @@ export default function Header({ user, onLogout, onLoginClick }) {
     onLoginClick();
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -36,21 +36,35 @@ export default function Header({ user, onLogout, onLoginClick }) {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.logo}>
-          WHAT'S <span>UP</span> <em>Stowe</em>
+        <div className={styles.logoWrapper}>
+          <Link to="/" className={styles.logo}>
+            <img src={logo} alt="On Tap Stowe" className={styles.logoImg} />
+          </Link>
         </div>
 
         <nav className={styles.desktopNav}>
-          <Link to="/" className={`${styles.navButton} ${isActive("/") ? styles.navButtonActive : ""}`}>
+          <Link
+            to="/"
+            className={`${styles.navButton} ${isActive("/") ? styles.navButtonActive : ""}`}
+          >
             Home
           </Link>
-          <Link to="/calendar" className={`${styles.navButton} ${isActive("/calendar") ? styles.navButtonActive : ""}`}>
+          <Link
+            to="/calendar"
+            className={`${styles.navButton} ${isActive("/calendar") ? styles.navButtonActive : ""}`}
+          >
             Calendar
           </Link>
-          <Link to="/about" className={`${styles.navButton} ${isActive("/about") ? styles.navButtonActive : ""}`}>
+          <Link
+            to="/about"
+            className={`${styles.navButton} ${isActive("/about") ? styles.navButtonActive : ""}`}
+          >
             About
           </Link>
-          <Link to="/contact" className={`${styles.navButton} ${isActive("/contact") ? styles.navButtonActive : ""}`}>
+          <Link
+            to="/contact"
+            className={`${styles.navButton} ${isActive("/contact") ? styles.navButtonActive : ""}`}
+          >
             Contact Us
           </Link>
 
@@ -58,12 +72,13 @@ export default function Header({ user, onLogout, onLoginClick }) {
             <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
               <User strokeWidth={1.5} />
             </button>
-
             {dropdownOpen && (
               <div className={styles.userDropdown}>
                 {isLoggedIn ? (
                   <>
-                    <Link to="/profile" onClick={() => setDropdownOpen(false)}>Profile</Link>
+                    <Link to="/profile" onClick={() => setDropdownOpen(false)}>
+                      Profile
+                    </Link>
                     <button onClick={handleCloseAndLogout}>Log Out</button>
                   </>
                 ) : (
@@ -74,54 +89,46 @@ export default function Header({ user, onLogout, onLoginClick }) {
           </div>
         </nav>
 
-        {/* Hamburger (mobile) */}
-        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>☰</button>
+        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
+          ☰
+        </button>
       </header>
 
-      {/* Mobile Slide-in Menu */}
       {menuOpen && (
         <>
           <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
           <div className={styles.mobileMenu}>
-            <button className={styles.closeBtn} onClick={() => setMenuOpen(false)}>✕</button>
-
-            <Link
-                to="/"
+            <button className={styles.closeBtn} onClick={() => setMenuOpen(false)}>
+              ✕
+            </button>
+            {[
+              { to: "/", label: "Home" },
+              { to: "/calendar", label: "Calendar" },
+              { to: "/about", label: "About" },
+              { to: "/contact", label: "Contact Us" },
+            ].map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
                 onClick={() => setMenuOpen(false)}
-                className={location.pathname === "/" ? styles.mobileNavLinkActive : ""}
-            >
-                Home
-            </Link>
-            <Link
-                to="/calendar"
-                onClick={() => setMenuOpen(false)}
-                className={location.pathname === "/calendar" ? styles.mobileNavLinkActive : ""}
-            >
-                Calendar
-            </Link>
-            <Link
-                to="/about"
-                onClick={() => setMenuOpen(false)}
-                className={location.pathname === "/about" ? styles.mobileNavLinkActive : ""}
-            >
-                About
-            </Link>
-            <Link
-                to="/contact"
-                onClick={() => setMenuOpen(false)}
-                className={location.pathname === "/contact" ? styles.mobileNavLinkActive : ""}
-            >
-                Contact Us
-            </Link>
+                className={
+                  location.pathname === to ? styles.mobileNavLinkActive : ""
+                }
+              >
+                {label}
+              </Link>
+            ))}
 
             {isLoggedIn ? (
               <>
                 <Link
-                    to="/profile"
-                    onClick={() => setMenuOpen(false)}
-                    className={location.pathname === "/profile" ? styles.mobileNavLinkActive : ""}
+                  to="/profile"
+                  onClick={() => setMenuOpen(false)}
+                  className={
+                    location.pathname === "/profile" ? styles.mobileNavLinkActive : ""
+                  }
                 >
-                    Profile
+                  Profile
                 </Link>
                 <button onClick={handleCloseAndLogout}>Log Out</button>
               </>

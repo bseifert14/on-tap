@@ -1,167 +1,192 @@
 @import './theme.css';
 
 .header {
-    background-color: var(--color-background);
-    color: var(--color-white);
-    padding: 20px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .logo {
-    font-weight: bold;
-    font-size: 18px;
-  }
-  
+  background: white;
+  padding: 20px 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logoWrapper {
+  position: absolute;
+  left: 50%;
+  top: 87px; /* lowered further to match red lines */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 0 16px;
+}
+
+.logoWrapper::before,
+.logoWrapper::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 100vw;
+  height: 1px;
+  background: black;
+  z-index: -1;
+  transform: translateY(-50%);
+}
+
+.logoWrapper::before {
+  right: 100%;
+  margin-right: 16px;
+}
+
+.logoWrapper::after {
+  left: 100%;
+  margin-left: 16px;
+}
+
+.logoImg {
+  height: 140px; /* increased size of logo */
+  width: auto;
+  object-fit: contain;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.desktopNav a:not(.navButton),
+.desktopNav button:not(.navButton) {
+  color: black; /* changed from white */
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.navButton {
+  color: black;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: var(--color-red-secondary);
+}
+
+.navButtonActive {
+  background-color: var(--color-red-primary);
+  color: var(--color-white);
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 28px; /* to match icon size if needed */
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 9;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  background: var(--color-white);
+  padding: 20px 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.mobileMenu a,
+.mobileMenu button {
+  color: var(--color-background);
+  text-align: left;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px;
+}
+
+.mobileNavLinkActive {
+  background-color: #f1f1f1 !important;
+  font-weight: bold;
+}
+
+.closeBtn {
+  align-self: flex-end;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
   .desktopNav {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  
-  /* Default nav link/button styling, excluding navButton */
-  .desktopNav a:not(.navButton),
-  .desktopNav button:not(.navButton) {
-    color: var(--color-white);
-    text-decoration: none;
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  /* Button-style navigation (e.g., Login, Profile) */
-  .navButton {
-    color: var(--color-white);
-    padding: 10px 16px;
-    border: none;
-    border-radius: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  
-  .navButton:hover {
-    background-color: var(--color-red-secondary);
-  }
-  
-  .navButtonActive {
-    background-color: var(--color-red-primary);
-    color: var(--color-white);
-  }
-  
-  /* Mobile only */
-  .hamburger {
-    background: none;
-    border: none;
-    color: var(--color-white);
-    font-size: 24px;
     display: none;
   }
-  
-  /* Slide-in drawer styles */
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 30%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 9;
-  }
-  
-  .mobileMenu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%;
-    height: 100%;
-    background: var(--color-white);
-    padding: 20px 5px;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
-  }
-  
-  .mobileMenu a,
-  .mobileMenu button {
-    color: var(--color-background);
-    text-align: left;
-    font-size: 18px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 14px;
-  }
 
-  .mobileNavLinkActive {
-    background-color: #f1f1f1 !important;
-    font-weight: bold;
+  .hamburger {
+    display: block;
   }
-  
-  .closeBtn {
-    align-self: flex-end;
-    font-size: 22px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .desktopNav {
-      display: none;
-    }
-  
-    .hamburger {
-      display: block;
-    }
-  }
-  
+}
 
-  .userMenuWrapper {
-    position: relative;
-    margin-left: 12px;
-  }
-  
-  .userIcon {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: white;
-  }
-  
-  .userDropdown {
-    position: absolute;
-    top: 30px; /* below the icon */
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    min-width: 140px;
-    padding: 6px 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    z-index: 20;
-  }
-  
-  .userDropdown a,
-  .userDropdown button {
-    padding: 10px 12px;
-    background: none;
-    border: none;
-    text-align: left;
-    font-size: 14px;
-    cursor: pointer;
-    color: #2a2c46 !important;
-    width: 100%;
-  }
-  
-  .userDropdown a:hover,
-  .userDropdown button:hover {
-    background-color: #f3f3f3;
-  }
-  
+.userMenuWrapper {
+  position: relative;
+  margin-left: 12px;
+}
+
+.userIcon {
+  background: none;
+  border: none;
+  font-size: 28px; /* increased from 20px */
+  cursor: pointer;
+  color: black;
+}
+
+.userDropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 140px;
+  padding: 6px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.userDropdown a,
+.userDropdown button {
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: #2a2c46 !important;
+  width: 100%;
+}
+
+.userDropdown a:hover,
+.userDropdown button:hover {
+  background-color: #f3f3f3;
+}

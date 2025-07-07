@@ -1,6 +1,8 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
 }
 
 .thead {
