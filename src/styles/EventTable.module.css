@@ -95,6 +95,18 @@
     border-radius: 6px;
     display: block;
   }
+
+  .thIcon {
+    padding: 8px 0 8px 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
+
+  .tdIcon {
+    padding: 8px 0 8px 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+  }
 }
 
 /* Mobile */
@@ -109,5 +121,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .thIcon {
+    display: none;
+  }
+
+  .tdIcon {
+    display: none;
   }
 }

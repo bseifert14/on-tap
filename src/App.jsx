@@ -13,6 +13,7 @@ import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
 import Footer from "./components/Footer";
 
 import './styles/global.css';
+import About from "./pages/About";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -67,9 +68,10 @@ export default function App() {
           <Route path="/" element={<Home />} /> {/* ← List View is now home */}
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
-      
+
       <Footer />
     </div>
   );

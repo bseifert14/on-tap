@@ -2,12 +2,14 @@ import React from "react";
 import styles from "../styles/EventTable.module.css";
 import { getDefaultImage } from "../utils/getDefaultImage";
 import { SquareArrowUpRight } from "lucide-react";
+import { getIcon } from "../utils/getIcon";
 
 export default function EventTable({ events = [], onSelectEvent }) {
   return (
     <table className={styles.table}>
       <thead className={styles.thead}>
         <tr>
+          <th className={styles.thIcon} />
           <th className={styles.th} />
           <th className={styles.th}>Event</th>
           <th className={styles.th}>Location & Time</th>
@@ -17,6 +19,9 @@ export default function EventTable({ events = [], onSelectEvent }) {
       <tbody>
         {events.map((event) => (
           <tr key={event.id} className={styles.row}>
+            <td className={styles.tdIcon}>
+              {React.createElement(getIcon(event.event_type), { size: 18, strokeWidth: 1.5 })}
+            </td>
             <td className={styles.imageCell}>
               <img
                 src={event.event_photo_url || getDefaultImage(event.event_type)}
