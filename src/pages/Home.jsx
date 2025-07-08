@@ -12,7 +12,11 @@ export default function Home() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data, error } = await supabase.from("events").select("*");
+      const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .gte("event_date", new Date().toISOString().split("T")[0]) // today or later
+        .order("event_date", { ascending: true });
       if (error) console.error("Error fetching events:", error);
       else setEvents(data);
     };

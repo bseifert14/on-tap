@@ -84,6 +84,7 @@
 @media (min-width: 769px) {
   .row {
     min-height: 70px;
+    height: 90px;
   }
 
   .imageCell {
@@ -148,10 +149,5 @@
 .tableWrapper {
   width: 100%;
   overflow-x: auto;
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.12);
 }
-
-/* @media (max-width: 768px) {
-  .tableWrapper {
-    padding: 0 12px;
-  }
-} */
