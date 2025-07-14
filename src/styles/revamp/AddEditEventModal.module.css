@@ -1,0 +1,115 @@
+.eventModal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .eventModal-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px; /* was 500px */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  @media (min-width: 1024px) {
+    .eventModal-box {
+      max-width: 720px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .eventModal-box {
+      max-width: 95%;
+      padding: 1.25rem;
+    }
+  }
+  
+  .eventModal-title {
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .eventModal-label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: 500;
+    display: block;
+  }
+  
+  .eventModal-input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  
+  .eventModal-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    resize: vertical;
+  }
+  
+  .eventModal-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: -4px;
+    margin-bottom: 12px;
+  }
+  
+  .eventModal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .eventModal-buttonPrimary {
+    padding: 8px 16px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .eventModal-buttonSecondary {
+    padding: 8px 16px;
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .eventModal-dropzone {
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    background: #fafafa;
+    margin-bottom: 8px;
+  }
+  .eventModal-dropzone:hover {
+    background-color: #f5f5f5;
+  }
+  

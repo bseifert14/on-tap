@@ -1,0 +1,24 @@
+.container {
+    padding: 24px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 16px;
+  }
+  
+  .tab {
+    padding: 0.5rem 1rem;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+  }
+  
+.active {
+    composes: tab;
+    background: #e3003b;
+    color: white;
+    font-weight: bold;
+}
+  

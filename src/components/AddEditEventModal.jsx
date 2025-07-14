@@ -1,26 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabase";
+import styles from "../styles/revamp/AddEditEventModal.module.css";
 
-const EVENT_TYPES = ["Music", "Sports", "Kid Friendly", "Food & Bev"];
+const EVENT_TYPES = [
+  "Music", "Sports", "Food & Bev", "Games", "Comedy",
+  "Talks / Panels", "Wellness / Fitness", "Art"
+];
+
+const AUDIENCE_TYPES = ["", "Kid Friendly", "18+", "21+"];
 
 export default function AddEditEventModal({ user, event, onClose, onSave }) {
   const [form, setForm] = useState({
-    event_type: "",
     event_name: "",
     event_location: "",
+    event_type: "",
     event_date: "",
+    event_timestamp: "",
     event_description: "",
+    event_audience: "",
+    event_url: "",
     event_photo_url: ""
   });
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const fileInputRef = useRef(null);
+  const maxFileSizeMB = 3;
 
   useEffect(() => {
     if (event) {
       setForm({
-        event_type: event.event_type || "",
         event_name: event.event_name || "",
         event_location: event.event_location || "",
+        event_type: event.event_type || "",
         event_date: event.event_date || "",
+        event_timestamp: event.event_timestamp || "",
         event_description: event.event_description || "",
+        event_audience: event.event_audience || "",
+        event_url: event.event_url || "",
         event_photo_url: event.event_photo_url || ""
       });
     }
@@ -30,100 +46,204 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     setForm({ ...form, [field]: value });
   };
 
+  const validateAndProcessFile = async (file) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Only JPG, PNG, or WebP images are allowed.");
+      return;
+    }
+
+    if (file.size > maxFileSizeMB * 1024 * 1024) {
+      alert(`Image must be smaller than ${maxFileSizeMB}MB.`);
+      return;
+    }
+
+    const resized = await resizeImageIfNeeded(file);
+    setSelectedFile(resized);
+  };
+
+  const resizeImageIfNeeded = (file, maxWidth = 1280) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        img.onload = () => {
+          if (img.width <= maxWidth) return resolve(file);
+
+          const canvas = document.createElement("canvas");
+          const scale = maxWidth / img.width;
+          canvas.width = maxWidth;
+          canvas.height = img.height * scale;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob((blob) => {
+            const resizedFile = new File([blob], file.name, { type: file.type });
+            resolve(resizedFile);
+          }, file.type);
+        };
+        img.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleSubmit = async () => {
+    let photoUrl = form.event_photo_url;
+
+    if (selectedFile) {
+      const fileExt = selectedFile.name.split('.').pop();
+      const fileName = `${user.uid}_${Date.now()}.${fileExt}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("event-photos")
+        .upload(fileName, selectedFile);
+
+      if (uploadError) {
+        alert("Image upload failed.");
+        console.error(uploadError);
+        return;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from("event-photos")
+        .getPublicUrl(fileName);
+
+      photoUrl = publicUrlData.publicUrl;
+    }
+
     const payload = {
       ...form,
-      created_by: user.uid
+      created_by: user.uid,
+      event_photo_url: photoUrl || null
     };
 
-    let result;
-    if (event) {
-      result = await supabase
-        .from("events")
-        .update(payload)
-        .eq("id", event.id);
-    } else {
-      result = await supabase.from("events").insert(payload);
-    }
+    const result = event
+      ? await supabase.from("events").update(payload).eq("id", event.id)
+      : await supabase.from("events").insert(payload);
 
     if (result.error) {
       alert("Error saving event");
+      console.error(result.error);
     } else {
       onSave();
     }
   };
 
   return (
-    <div style={modalOverlay}>
-      <div style={modalBox}>
-        <h3>{event ? "Edit Event" : "Add Event"}</h3>
+    <div className={styles["eventModal-overlay"]}>
+      <div className={styles["eventModal-box"]}>
+        <h3 className={styles["eventModal-title"]}>
+          {event ? "Edit Event" : "Add Event"}
+        </h3>
 
-        <select
-          value={form.event_type}
-          onChange={e => handleChange("event_type", e.target.value)}
-        >
-          <option value="">Select Event Type</option>
-          {EVENT_TYPES.map(t => <option key={t}>{t}</option>)}
-        </select>
-
+        <label className={styles["eventModal-label"]}>Event Name*</label>
         <input
-          placeholder="Event Name"
+          className={styles["eventModal-input"]}
           value={form.event_name}
           onChange={e => handleChange("event_name", e.target.value)}
         />
 
+        <label className={styles["eventModal-label"]}>Event Location*</label>
         <input
-          placeholder="Location"
+          className={styles["eventModal-input"]}
           value={form.event_location}
           onChange={e => handleChange("event_location", e.target.value)}
         />
 
+        <label className={styles["eventModal-label"]}>Event Type*</label>
+        <select
+          className={styles["eventModal-input"]}
+          value={form.event_type}
+          onChange={e => handleChange("event_type", e.target.value)}
+        >
+          <option value="">Select Event Type</option>
+          {EVENT_TYPES.map(type => (
+            <option key={type}>{type}</option>
+          ))}
+        </select>
+
+        <label className={styles["eventModal-label"]}>Event Date*</label>
         <input
+          className={styles["eventModal-input"]}
           type="date"
           value={form.event_date}
           onChange={e => handleChange("event_date", e.target.value)}
         />
 
+        <label className={styles["eventModal-label"]}>Event Time*</label>
+        <input
+          className={styles["eventModal-input"]}
+          type="time"
+          value={form.event_timestamp}
+          onChange={e => handleChange("event_timestamp", e.target.value)}
+        />
+
+        <label className={styles["eventModal-label"]}>Description*</label>
         <textarea
-          placeholder="Description"
+          className={styles["eventModal-textarea"]}
           value={form.event_description}
           onChange={e => handleChange("event_description", e.target.value)}
         />
 
+        <label className={styles["eventModal-label"]}>Audience</label>
+        <select
+          className={styles["eventModal-input"]}
+          value={form.event_audience}
+          onChange={e => handleChange("event_audience", e.target.value)}
+        >
+          {AUDIENCE_TYPES.map(type => (
+            <option key={type} value={type}>{type || "Select Audience"}</option>
+          ))}
+        </select>
+
+        <label className={styles["eventModal-label"]}>Event Link (optional)</label>
         <input
-          placeholder="Photo URL (optional)"
-          value={form.event_photo_url}
-          onChange={e => handleChange("event_photo_url", e.target.value)}
+          className={styles["eventModal-input"]}
+          type="url"
+          placeholder="https://example.com"
+          value={form.event_url}
+          onChange={e => handleChange("event_url", e.target.value)}
         />
 
-        <div style={{ marginTop: 10 }}>
-          <button onClick={handleSubmit}>Save</button>
-          <button onClick={onClose} style={{ marginLeft: 8 }}>Cancel</button>
+        <label className={styles["eventModal-label"]}>Event Photo (optional)</label>
+        <div
+          className={styles["eventModal-dropzone"]}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={(e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) validateAndProcessFile(file);
+          }}
+          onClick={() => fileInputRef.current?.click()}
+        >
+          {selectedFile ? selectedFile.name : "Click or drag a photo to upload"}
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={fileInputRef}
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) validateAndProcessFile(file);
+            }}
+          />
+        </div>
+        <small className={styles["eventModal-note"]}>
+          Max size {maxFileSizeMB}MB. If left blank, a default image will be used based on event type.
+        </small>
+
+        <div className={styles["eventModal-actions"]}>
+          <button className={styles["eventModal-buttonPrimary"]} onClick={handleSubmit}>
+            Save
+          </button>
+          <button className={styles["eventModal-buttonSecondary"]} onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>
   );
 }
-
-const modalOverlay = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  backgroundColor: "rgba(0,0,0,0.5)",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  zIndex: 999
-};
-
-const modalBox = {
-  background: "#fff",
-  padding: 20,
-  borderRadius: 8,
-  display: "flex",
-  flexDirection: "column",
-  gap: 10,
-  minWidth: 300
-};

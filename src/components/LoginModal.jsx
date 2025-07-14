@@ -2,10 +2,12 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import styles from "../styles/LoginModal.module.css";
+import PasswordResetModal from "./PasswordResetModal";
 
 export default function LoginModal({ onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showResetModal, setShowResetModal] = useState(false);
 
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -33,8 +35,12 @@ export default function LoginModal({ onClose }) {
         <div className={styles.buttonRow}>
           <button className={styles.button} onClick={signIn}>Log In</button>
           <button className={styles.cancelButton} onClick={onClose}>Cancel</button>
+          <button onClick={() => setShowResetModal(true)}>Forgot Password?</button>
         </div>
       </div>
+      {showResetModal && (
+        <PasswordResetModal onClose={() => setShowResetModal(false)} />
+      )}
     </div>
   );
 }

@@ -1,0 +1,107 @@
+.card {
+    display: flex;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+    gap: 1rem;
+    position: relative;
+  }
+  
+  .image {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .content {
+    flex: 1;
+  }
+
+  .categoryContainer {
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+  }
+  
+  .category {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    background: #f1f1f1;
+    color: #333;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .kidFriendly {
+    background: green;
+  }
+  
+  .title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .description {
+    color: #555;
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .details {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.75rem;
+    padding-top: 10px;
+  }
+  
+  .label {
+    color: #999;
+    margin-bottom: 0.25rem;
+  }
+  
+  .value {
+    font-weight: 500;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  
+  .ticketButton {
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+  
+  .detailsButton {
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 0.875rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+.iconValuePair {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+  

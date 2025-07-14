@@ -15,6 +15,8 @@ import Footer from "./components/Footer";
 import './styles/global.css';
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProfileLayout from "./pages/profile/ProfileLayout";
+import Recover from "./pages/Recover";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -68,9 +70,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} /> {/* ← List View is now home */}
           <Route path="/calendar" element={<Calendar />} />
-          <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/profile" element={<ProfileLayout user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+
+          <Route path="/recover" element={<Recover />} />
         </Routes>
       </div>
 
