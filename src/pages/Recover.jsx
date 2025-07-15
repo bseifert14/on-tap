@@ -6,7 +6,7 @@ import SetPasswordModal from "../components/SetPasswordModal";
 export default function Recover() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); // <- new
+  const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search); // <- use search, not hash
@@ -19,7 +19,10 @@ export default function Recover() {
     }
 
     const completeSession = async () => {
-      const { error } = await supabase.auth.setSession({ access_token, refresh_token });
+      const { error } = await supabase.auth.setSession({ 
+        access_token, 
+        refresh_token 
+      });
 
       if (error) {
         alert("Error completing session.");

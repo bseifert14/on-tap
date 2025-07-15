@@ -21,7 +21,7 @@ export default function Home() {
     const params = new URLSearchParams(location.search);
     const type = params.get("type");
     const accessToken = params.get("access_token");
-    console.log('location', { params, type, accessToken });
+
     if (type === "recovery" && accessToken) {
       setShowSetPasswordModal(true);
     }

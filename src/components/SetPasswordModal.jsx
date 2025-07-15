@@ -20,26 +20,6 @@ export default function SetPasswordModal({ onClose }) {
     if (!match || !pw1) return;
     setLoading(true);
 
-    const access_token = searchParams.get("access_token");
-    const refresh_token = searchParams.get("refresh_token");
-
-    if (!access_token || !refresh_token) {
-      alert("Missing recovery token. Please use the link in your email.");
-      setLoading(false);
-      return;
-    }
-
-    const { error: sessionError } = await supabase.auth.setSession({
-      access_token,
-      refresh_token,
-    });
-
-    if (sessionError) {
-      alert("Error completing session.");
-      setLoading(false);
-      return;
-    }
-
     const { error: pwError } = await supabase.auth.updateUser({ password: pw1 });
 
     if (pwError) {
