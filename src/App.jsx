@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { signOut } from 'firebase/auth';
+import { supabase } from "./supabase";
 
 import Header from "./components/Header";
 import LoginModal from "./components/LoginModal";
-import Home from "./pages/Home";           // List View
+import Home from "./pages/Home";
 import Calendar from "./pages/Calendar";
 import Profile from "./pages/Profile";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
@@ -24,18 +22,27 @@ export default function App() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    // Get initial user
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
     });
-    return () => unsubscribe();
+
+    // Subscribe to auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await supabase.auth.signOut();
       setUser(null);
     } catch (err) {
-      console.error("Logout error:", err);
+      console.error("Logout error:", err.message);
     }
   };
 
@@ -68,12 +75,11 @@ export default function App() {
 
       <div className="mainContent">
         <Routes>
-          <Route path="/" element={<Home />} /> {/* ← List View is now home */}
+          <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/profile" element={<ProfileLayout user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-
           <Route path="/recover" element={<Recover />} />
         </Routes>
       </div>
