@@ -21,8 +21,8 @@ export default function ProfileEvents({ user }) {
     let { data, error } = await supabase
       .from("events")
       .select("*")
-      .eq("created_by", user.uid);
-
+      .eq("created_by", user.id);
+    console.log(data);
     if (!error && data) {
       data = data.sort((a, b) => {
         const dateA = new Date(a.event_date);

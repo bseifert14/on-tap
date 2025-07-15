@@ -17,9 +17,11 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     event_date: "",
     event_timestamp: "",
     event_description: "",
-    event_audience: "",
     event_url: "",
-    event_photo_url: ""
+    event_photo_url: "",
+    is_kid_friendly: true,
+    is_18_plus: false,
+    is_21_plus: false
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -35,9 +37,11 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         event_date: event.event_date || "",
         event_timestamp: event.event_timestamp || "",
         event_description: event.event_description || "",
-        event_audience: event.event_audience || "",
         event_url: event.event_url || "",
-        event_photo_url: event.event_photo_url || ""
+        event_photo_url: event.event_photo_url || "",
+        is_kid_friendly: event.is_kid_friendly ?? true,
+        is_18_plus: event.is_18_plus ?? false,
+        is_21_plus: event.is_21_plus ?? false
       });
     }
   }, [event]);
@@ -96,7 +100,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
 
     if (selectedFile) {
       const fileExt = selectedFile.name.split('.').pop();
-      const fileName = `${user.uid}_${Date.now()}.${fileExt}`;
+      const fileName = `${user.id}_${Date.now()}.${fileExt}`;
       const { data, error: uploadError } = await supabase.storage
         .from("event-photos")
         .upload(fileName, selectedFile);
@@ -114,9 +118,14 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       photoUrl = publicUrlData.publicUrl;
     }
 
+    const fullTimestamp = form.event_date && form.event_timestamp
+    ? `${form.event_date}T${form.event_timestamp}:00`
+    : null;
+
     const payload = {
       ...form,
-      created_by: user.uid,
+      event_timestamp: fullTimestamp,
+      created_by: user.id,
       event_photo_url: photoUrl || null
     };
 
@@ -189,15 +198,56 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         />
 
         <label className={styles["eventModal-label"]}>Audience</label>
-        <select
-          className={styles["eventModal-input"]}
-          value={form.event_audience}
-          onChange={e => handleChange("event_audience", e.target.value)}
-        >
-          {AUDIENCE_TYPES.map(type => (
-            <option key={type} value={type}>{type || "Select Audience"}</option>
-          ))}
-        </select>
+        <div className={styles["eventModal-radioGroup"]}>
+          <label>
+            <input
+              type="radio"
+              name="audience"
+              checked={form.is_kid_friendly && !form.is_18_plus && !form.is_21_plus}
+              onChange={() =>
+                setForm({
+                  ...form,
+                  is_kid_friendly: true,
+                  is_18_plus: false,
+                  is_21_plus: false
+                })
+              }
+            />
+            All Ages
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="audience"
+              checked={!form.is_kid_friendly && form.is_18_plus && !form.is_21_plus}
+              onChange={() =>
+                setForm({
+                  ...form,
+                  is_kid_friendly: false,
+                  is_18_plus: true,
+                  is_21_plus: false
+                })
+              }
+            />
+            18+
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="audience"
+              checked={!form.is_kid_friendly && !form.is_18_plus && form.is_21_plus}
+              onChange={() =>
+                setForm({
+                  ...form,
+                  is_kid_friendly: false,
+                  is_18_plus: false,
+                  is_21_plus: true
+                })
+              }
+            />
+            21+
+          </label>
+        </div>
 
         <label className={styles["eventModal-label"]}>Event Link (optional)</label>
         <input

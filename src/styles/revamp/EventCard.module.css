@@ -2,9 +2,10 @@
     display: flex;
     background: white;
     border-radius: 1rem;
-    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.12);
+    border: solid 1px #ededed;
+    box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.12);
     padding: 1rem;
-    margin-bottom: 1.5rem;
+    margin: 1rem 0;
     align-items: flex-start;
     gap: 1rem;
     position: relative;
@@ -78,16 +79,6 @@
     flex-direction: column;
     gap: 0.5rem;
     margin-left: auto;
-  }
-  
-  .ticketButton {
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 9999px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-size: 0.875rem;
   }
   
   .detailsButton {

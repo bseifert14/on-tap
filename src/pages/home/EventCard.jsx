@@ -3,6 +3,7 @@ import styles from "../../styles/revamp/EventCard.module.css";
 import { getDefaultImage } from "../../utils/getDefaultImage";
 import { getIcon } from "../../utils/getIcon";
 import { Baby, Calendar, CircleAlert, MapPin } from "lucide-react";
+import Button from "../../components/common/Button";
 
 function getAgeClassification(is_kid_friendly, is_18_plus, is_21_plus) {
     // if (is_kid_friendly) {
@@ -69,7 +70,9 @@ export default function EventCard({ event, onSelectEvent }) {
       </div>
 
       <div className={styles.buttons}>
-        <button className={styles.ticketButton} onClick={() => onSelectEvent?.(event)}>See Details</button>
+        <Button onClick={() => onSelectEvent?.(event)}>
+            See Details
+        </Button>
       </div>
     </div>
   );
