@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { supabase } from "./supabase";
 
-import Header from "./components/Header";
+import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
 import Home from "./pages/Home";
 import Calendar from "./pages/Calendar";
@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <div className="pageWrapper">
-      <Header
+      <HeaderLayout
         user={user}
         onLoginClick={() => setShowLogin(true)}
         onLogout={() => setShowLogoutConfirm(true)}
