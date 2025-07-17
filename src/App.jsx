@@ -15,6 +15,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ProfileLayout from "./pages/profile/ProfileLayout";
 import Recover from "./pages/Recover";
+import CalendarLayout from "./modules/calendar/CalendarLayout";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -76,7 +77,7 @@ export default function App() {
       <div className="mainContent">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/calendar" element={<CalendarLayout />} />
           <Route path="/profile" element={<ProfileLayout user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

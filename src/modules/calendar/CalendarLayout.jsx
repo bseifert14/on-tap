@@ -1,9 +1,9 @@
 import { useState } from "react";
-import ViewControls from "../components/ViewControls";
-import CalendarView from "../modules/calendar/CalendarView";
-import styles from "../styles/Calendar.module.css";
+import ViewControls from "../../components/ViewControls";
+import CalendarView from "./CalendarView";
+import styles from "../../styles/Calendar.module.css";
 
-export default function Calendar() {
+export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("All");
 
   return (

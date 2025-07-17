@@ -1,5 +1,5 @@
 import React from "react";
-import EventCard from "./EventCard";
+import EventCard from "../../components/EventCard";
 
 export default function EventList({ events, onSelectEvent }) {
   return (

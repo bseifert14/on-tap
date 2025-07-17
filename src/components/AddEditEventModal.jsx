@@ -15,7 +15,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     event_location: "",
     event_type: "",
     event_date: "",
-    event_timestamp: "",
+    event_start_timestamp: "",
     event_description: "",
     event_url: "",
     event_photo_url: "",
@@ -35,7 +35,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         event_location: event.event_location || "",
         event_type: event.event_type || "",
         event_date: event.event_date || "",
-        event_timestamp: event.event_timestamp || "",
+        event_start_timestamp: event.event_start_timestamp || "",
         event_description: event.event_description || "",
         event_url: event.event_url || "",
         event_photo_url: event.event_photo_url || "",
@@ -118,13 +118,13 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       photoUrl = publicUrlData.publicUrl;
     }
 
-    const fullTimestamp = form.event_date && form.event_timestamp
-    ? `${form.event_date}T${form.event_timestamp}:00`
+    const fullTimestamp = form.event_date && form.event_start_timestamp
+    ? `${form.event_date}T${form.event_start_timestamp}:00`
     : null;
 
     const payload = {
       ...form,
-      event_timestamp: fullTimestamp,
+      event_start_timestamp: fullTimestamp,
       created_by: user.id,
       event_photo_url: photoUrl || null
     };
@@ -186,8 +186,8 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         <input
           className={styles["eventModal-input"]}
           type="time"
-          value={form.event_timestamp}
-          onChange={e => handleChange("event_timestamp", e.target.value)}
+          value={form.event_start_timestamp}
+          onChange={e => handleChange("event_start_timestamp", e.target.value)}
         />
 
         <label className={styles["eventModal-label"]}>Description*</label>

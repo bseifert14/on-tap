@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 80px;
@@ -16,7 +16,11 @@
 .eventsWrapper {
   flex: 1;
   min-width: 300px;
-  max-width: 600px;
+  /* max-width: 600px; */
+}
+
+.eventsHeader {
+  margin-left: 1rem;
 }
 
 .eventList {

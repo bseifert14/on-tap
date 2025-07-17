@@ -73,7 +73,7 @@ export default function Home() {
           is_21_plus,
           event_location,
           event_date,
-          event_timestamp,
+          event_start_timestamp,
           event_photo_url,
           business_id,
           businesses (
