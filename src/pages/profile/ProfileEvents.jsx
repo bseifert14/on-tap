@@ -3,7 +3,9 @@ import styles from "../../styles/revamp/ProfileEvents.module.css";
 import { supabase } from "../../supabase";
 import AddEditEventModal from "../../components/AddEditEventModal";
 import DeleteModal from "../../components/DeleteModal";
-import { format } from "date-fns";
+import UserEventTable from "../../modules/profile/UserEventTable";
+import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector";
+import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
 
 export default function ProfileEvents({ user }) {
   const [events, setEvents] = useState([]);
@@ -11,26 +13,22 @@ export default function ProfileEvents({ user }) {
   const [showModal, setShowModal] = useState(false);
   const [eventToDelete, setEventToDelete] = useState(null);
   const [search, setSearch] = useState("");
-  const [sortAsc, setSortAsc] = useState(true);
+  const [eventTypeFilter, setEventTypeFilter] = useState([]);
+  const [eventDateFilter, setEventDateFilter] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const EVENTS_PER_PAGE = 10;
 
   useEffect(() => {
     if (user) loadEvents();
-  }, [user, sortAsc]);
+  }, [user]);
 
   const loadEvents = async () => {
     let { data, error } = await supabase
       .from("events")
       .select("*")
       .eq("created_by", user.id);
-    console.log(data);
-    if (!error && data) {
-      data = data.sort((a, b) => {
-        const dateA = new Date(a.event_date);
-        const dateB = new Date(b.event_date);
-        return sortAsc ? dateA - dateB : dateB - dateA;
-      });
-      setEvents(data);
-    }
+    if (!error && data) setEvents(data);
   };
 
   const handleSaveEvent = () => {
@@ -46,59 +44,101 @@ export default function ProfileEvents({ user }) {
     loadEvents();
   };
 
-  const filtered = events.filter(e =>
-    e.event_name.toLowerCase().includes(search.toLowerCase())
+  const filtered = events
+    .filter(e =>
+      e.event_name.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter(e =>
+      eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type)
+    )
+    .filter(e =>
+      !eventDateFilter || e.event_date === eventDateFilter
+    );
+
+  const totalPages = Math.ceil(filtered.length / EVENTS_PER_PAGE);
+  const paginated = filtered.slice(
+    (currentPage - 1) * EVENTS_PER_PAGE,
+    currentPage * EVENTS_PER_PAGE
   );
 
   return (
     <div>
-      <div className={styles.controls}>
-        <button onClick={() => setShowModal(true)}>+ Add Event</button>
-        <input
-          type="text"
-          placeholder="Search events..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+      {/* Top Bar */}
+      <div className={styles.topBar}>
+        <div className={styles.leftGroup}>
+          <button
+            onClick={() => setShowModal(true)}
+            className={styles.addButton}
+          >
+            + Add Event
+          </button>
+          <input
+            type="text"
+            placeholder="Search events..."
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            className={styles.searchInput}
+          />
+        </div>
+        <div className={styles.rightFilters}>
+        <TableEventTypeSelector
+          selected={eventTypeFilter}
+          onApply={(newSel) => {
+            setEventTypeFilter(newSel);
+            setCurrentPage(1);
+          }}
         />
-        <button onClick={() => setSortAsc(!sortAsc)}>
-          Sort by Date {sortAsc ? "↑" : "↓"}
-        </button>
+                  {/* Date Dropdown */}
+        <div className={styles.filterWrapper}>
+        <TableEventDateSelector
+          selected={eventDateFilter}
+          onApply={(date) => {
+            setEventDateFilter(date);
+            setCurrentPage(1);
+          }}
+          onClear={() => {
+            setEventDateFilter(null);
+            setCurrentPage(1);
+          }}
+        />
+
+        </div>
+
+        </div>
       </div>
 
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Photo</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filtered.map(event => (
-            <tr key={event.id}>
-              <td>{event.event_type}</td>
-              <td>{event.event_name}</td>
-              <td>{event.event_location}</td>
-              <td>{event.event_date ? format(new Date(event.event_date), "PPP") : "—"}</td>
-              <td>{event.event_description}</td>
-              <td>
-                {event.event_photo_url ? (
-                  <a href={event.event_photo_url} target="_blank" rel="noreferrer">View</a>
-                ) : "—"}
-              </td>
-              <td>
-                <button onClick={() => { setEditingEvent(event); setShowModal(true); }}>Edit</button>
-                <button onClick={() => setEventToDelete(event)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Table */}
+      <UserEventTable
+        events={paginated}
+        onEdit={(event) => {
+          setEditingEvent(event);
+          setShowModal(true);
+        }}
+        onDelete={(event) => setEventToDelete(event)}
+      />
 
+      {/* Pagination */}
+      <div className={styles.paginationFooter}>
+        <div>
+          Showing {Math.min(EVENTS_PER_PAGE, filtered.length)} of {filtered.length} Events
+        </div>
+        <div className={styles.pageNumbers}>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              className={i + 1 === currentPage ? styles.activePage : ""}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Modals */}
       {showModal && (
         <AddEditEventModal
           user={user}

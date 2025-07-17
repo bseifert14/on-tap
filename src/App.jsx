@@ -6,7 +6,6 @@ import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
 import Home from "./pages/Home";
 import Calendar from "./pages/Calendar";
-import Profile from "./pages/Profile";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
 import Footer from "./components/Footer";
 
