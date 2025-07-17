@@ -21,16 +21,24 @@
     font-size: 1rem;
     color: #aaa;
   }
-  
+
+  .actionButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
   .actionButton {
     background: none;
     border: none;
     cursor: pointer;
-    color: #0070f3;
+    color: black;
     font-size: 0.875rem;
+    padding: 5px;
+    border-radius: 4px;
   }
   
   .actionButton:hover {
-    text-decoration: underline;
+    background: #a1a1a1;
   }
   

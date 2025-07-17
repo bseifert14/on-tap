@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/UserEventTableRow.module.css";
 import { format } from "date-fns";
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, Pencil, Trash2 } from "lucide-react";
 
 export default function UserEventTableRow({ event, onEdit, onDelete }) {
   const {
@@ -44,12 +44,14 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
         )}
       </td>
       <td className={styles.cell}>
-        <button className={styles.actionButton} onClick={onEdit}>
-          Edit
-        </button>
-        <button className={styles.actionButton} onClick={onDelete}>
-          Delete
-        </button>
+        <div className={styles.actionButtonContainer}>
+          <button className={styles.actionButton} onClick={onEdit}>
+            <Pencil size={15} strokeWidth={1.5} />
+          </button>
+          <button className={styles.actionButton} onClick={onDelete}>
+            <Trash2 size={15} strokeWidth={1.5} />
+          </button>
+        </div>
       </td>
     </tr>
   );
