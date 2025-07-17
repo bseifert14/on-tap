@@ -6,6 +6,7 @@ import DeleteModal from "../../components/DeleteModal";
 import UserEventTable from "../../modules/profile/UserEventTable";
 import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector";
 import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
+import TableActions from "../../modules/profile/TableActions";
 
 export default function ProfileEvents({ user }) {
   const [events, setEvents] = useState([]);
@@ -64,51 +65,16 @@ export default function ProfileEvents({ user }) {
   return (
     <div>
       {/* Top Bar */}
-      <div className={styles.topBar}>
-        <div className={styles.leftGroup}>
-          <button
-            onClick={() => setShowModal(true)}
-            className={styles.addButton}
-          >
-            + Add Event
-          </button>
-          <input
-            type="text"
-            placeholder="Search events..."
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setCurrentPage(1);
-            }}
-            className={styles.searchInput}
-          />
-        </div>
-        <div className={styles.rightFilters}>
-        <TableEventTypeSelector
-          selected={eventTypeFilter}
-          onApply={(newSel) => {
-            setEventTypeFilter(newSel);
-            setCurrentPage(1);
-          }}
-        />
-                  {/* Date Dropdown */}
-        <div className={styles.filterWrapper}>
-        <TableEventDateSelector
-          selected={eventDateFilter}
-          onApply={(date) => {
-            setEventDateFilter(date);
-            setCurrentPage(1);
-          }}
-          onClear={() => {
-            setEventDateFilter(null);
-            setCurrentPage(1);
-          }}
-        />
-
-        </div>
-
-        </div>
-      </div>
+      <TableActions
+        setShowModal={setShowModal}
+        searchValue={search}
+        setSearchValue={setSearch}
+        eventTypeFilter={eventTypeFilter}
+        eventDateFilter={eventDateFilter}
+        setEventTypeFilter={setEventTypeFilter}
+        setEventDateFilter={setEventDateFilter}
+        setCurrentPage={setCurrentPage}
+      />
 
       {/* Table */}
       <UserEventTable
