@@ -1,4 +1,3 @@
-// components/ConfirmLogoutModal.jsx
 import React from "react";
 
 export default function ConfirmLogoutModal({ onConfirm, onCancel }) {

@@ -1,6 +1,5 @@
 import { useState, useEffect, use } from "react";
 import { supabase } from "../supabase";
-import EventTable from "../components/EventTable";
 import ViewControls from "../components/ViewControls";
 import styles from "../styles/Home.module.css";
 import EventModal from "../components/EventModal";
@@ -110,7 +109,6 @@ export default function Home() {
         currentView="list"
       />
       <EventList events={events} onSelectEvent={(event) => setSelectedEvent(event)} />
-      {/* <EventTable events={filtered} onSelectEvent={(event) => setSelectedEvent(event)}/> */}
 
       {selectedEvent && (
         <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />

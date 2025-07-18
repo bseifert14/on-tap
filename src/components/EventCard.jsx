@@ -35,8 +35,8 @@ export default function EventCard({ event, onSelectEvent }) {
     const { event_date, event_description, event_location, event_name, event_photo_url, 
         event_type, is_kid_friendly, is_18_plus, is_21_plus
     } = event;
-    // console.log(event);
-  return (
+
+return (
     <div className={styles.card}>
       <img src={event_photo_url || getDefaultImage(event_type)} alt={event_name} className={styles.image} />
 
