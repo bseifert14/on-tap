@@ -17,7 +17,7 @@ export default function ViewControls({ selectedType, onTypeChange, currentView }
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Grow Your Network & Skills with Our Events</h1>
+      <h1 className={styles.heading}>Discover live music, events, and more — all in one place</h1>
 
       <div className={styles.toggleWrapper}>
         <ViewToggle currentView={currentView} />
