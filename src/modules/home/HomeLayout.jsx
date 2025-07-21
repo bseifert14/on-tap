@@ -103,20 +103,31 @@ export default function HomeLayout() {
     : events.filter(e => e.event_type === selectedType);
 
   return (
-    <div className={styles.homeBody}>
-        <HeroLayout currentView="list" />
-        <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
-        <EventList events={events} onSelectEvent={(event) => setSelectedEvent(event)} />
+    <div>
+      <div className={styles.heroTopper} />
+      <div className={styles.heroWrapper}>
+        <div className={styles.heroOverlay}>
+          <h1 className={styles.heroTitle}>
+            Discover live music, events, and more — all in one place
+          </h1>
+          {/* Optional: Add subtitle, button, etc. */}
+        </div>
+      </div>
+      <div className={styles.homeBody}>
+          <HeroLayout currentView="list" />
+          <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
+          <EventList events={events} onSelectEvent={(event) => setSelectedEvent(event)} />
 
-        {selectedEvent && (
-            <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-        )}
+          {selectedEvent && (
+              <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+          )}
 
-        {showSetPasswordModal && (
-            <SetPasswordModal
-            onClose={() => setShowSetPasswordModal(false)}
-            />
-        )}
+          {showSetPasswordModal && (
+              <SetPasswordModal
+              onClose={() => setShowSetPasswordModal(false)}
+              />
+          )}
+      </div>
     </div>
   );
 }

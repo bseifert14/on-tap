@@ -2,12 +2,28 @@
 
 .header {
   background: white;
-  padding: 20px 16px;
+  padding: 20px 24px;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  height: 80px; /* Lock in consistent height */
 }
+
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.logoImg {
+  height: 100px; /* Adjust to match your desired header height */
+  width: auto;
+  object-fit: contain;
+}
+
 
 .logoWrapper {
   position: absolute;
@@ -40,11 +56,11 @@
   margin-left: 16px;
 }
 
-.logoImg {
-  height: 140px; /* increased size of logo */
+/* .logoImg {
+  height: 140px;
   width: auto;
   object-fit: contain;
-}
+} */
 
 .desktopNav {
   display: flex;
