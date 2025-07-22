@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     min-width: 280px;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
   }
   
   .illustration {
@@ -83,6 +83,16 @@
   
     .right {
       padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding-bottom: 3rem; /* more space for CTA */
+    }
+  
+    .hero::after {
+      height: 60px; /* smaller fade for smaller screens */
     }
   }
   
