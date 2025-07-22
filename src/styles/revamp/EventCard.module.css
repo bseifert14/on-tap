@@ -21,6 +21,7 @@
 
 .content {
   flex: 1;
+  min-width: 0;
 }
 
 .categoryContainer {
@@ -50,6 +51,9 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description {
@@ -57,11 +61,18 @@
   font-size: 0.875rem;
   margin-bottom: 0.75rem;
   word-wrap: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Change to 2 for shorter truncation */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .details {
   display: flex;
-  gap: 2rem;
+  flex-direction: row;
+  justify-content: space-between;
+  /* gap: 2rem; */
   font-size: 0.75rem;
   padding-top: 10px;
 }
