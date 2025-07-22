@@ -1,15 +1,23 @@
-import styles from "../../styles/ViewControls.module.css";
-import ViewToggle from '../../components/ViewToggle';
+import styles from "../../styles/HeroLayout.module.css";
+import apresScene from '../../../public/images/hero/apres-scene.png';
 
 export default function HeroLayout({ currentView }) {
-
   return (
-    <div>
-      <h1 className={styles.heading}>Discover live music, events, and more — all in one place</h1>
-
-      <div className={styles.toggleWrapper}>
-        <ViewToggle currentView={currentView} />
+    <section className={styles.hero}>
+      <div className={styles.left}>
+        <img src={apresScene} alt="Apres Scene" className={styles.illustration} />
       </div>
-    </div>
+      <div className={styles.right}>
+        <h1 className={styles.heading}>
+          What's happening in Stowe this week?
+        </h1>
+        <p className={styles.subheading}>
+          From mountain adventures to live bands - never miss a beat on the events going on around town.
+        </p>
+        <a href="#eventSection" className={styles.ctaButton}>
+          Explore Events
+        </a>
+      </div>
+    </section>
   );
 }

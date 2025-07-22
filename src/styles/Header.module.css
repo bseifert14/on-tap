@@ -1,13 +1,13 @@
 @import './theme.css';
 
 .header {
-  background: white;
+  background: #fffdf6;
   padding: 20px 24px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px; /* Lock in consistent height */
+  height: 90px; /* Lock in consistent height */
 }
 
 
@@ -87,19 +87,19 @@
 }
 
 .navButtonInactive:hover {
-  background: #f2f2f2;
+  background: #fffdf7;
   color: black;
   border: 1px solid #e3e1e1;
 }
 
 .navButtonActive {
   background: black;
-  color: white;
+  color: #fffdf7;
   border: 1px solid black;
 }
 
 .navButtonInactive {
-  background: white;
+  background: #fffdf7;
   color: black;
   border: 1px solid transparent;
 }

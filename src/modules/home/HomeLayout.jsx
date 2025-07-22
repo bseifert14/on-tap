@@ -104,17 +104,8 @@ export default function HomeLayout() {
 
   return (
     <div>
-      <div className={styles.heroTopper} />
-      <div className={styles.heroWrapper}>
-        <div className={styles.heroOverlay}>
-          <h1 className={styles.heroTitle}>
-            Discover live music, events, and more — all in one place
-          </h1>
-          {/* Optional: Add subtitle, button, etc. */}
-        </div>
-      </div>
-      <div className={styles.homeBody}>
-          <HeroLayout currentView="list" />
+      <HeroLayout currentView="list" />
+      <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
           <EventList events={events} onSelectEvent={(event) => setSelectedEvent(event)} />
 

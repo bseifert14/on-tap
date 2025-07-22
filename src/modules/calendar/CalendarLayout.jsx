@@ -8,10 +8,12 @@ export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("All");
 
   return (
-    <div className={styles.calendarBody}>
+    <div>
       <HeroLayout currentView="calendar" />
-      <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
-      <CalendarView selectedType={selectedType} />
+      <div className={styles.calendarBody} id="eventSection">
+        <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
+        <CalendarView selectedType={selectedType} />
+      </div>
     </div>
   );
 }
