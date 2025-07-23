@@ -68,6 +68,7 @@ export default function HomeLayout() {
           event_name,
           event_description,
           event_type,
+          event_url,
           is_kid_friendly,
           is_18_plus,
           is_21_plus,

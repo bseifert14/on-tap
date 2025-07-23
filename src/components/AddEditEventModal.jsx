@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabase";
 import styles from "../styles/revamp/AddEditEventModal.module.css";
+import { formatTime, generateTimeOptions } from "../utils/formatDates";
 
 const EVENT_TYPES = [
   "Music", "Sports", "Food & Bev", "Games", "Comedy",
@@ -35,7 +36,9 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         event_location: event.event_location || "",
         event_type: event.event_type || "",
         event_date: event.event_date || "",
-        event_start_timestamp: event.event_start_timestamp || "",
+        event_start_timestamp: event.event_start_timestamp
+          ? new Date(event.event_start_timestamp).toISOString().slice(11, 16)  // "HH:MM"
+          : "",
         event_description: event.event_description || "",
         event_url: event.event_url || "",
         event_photo_url: event.event_photo_url || "",
@@ -118,9 +121,12 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       photoUrl = publicUrlData.publicUrl;
     }
 
-    const fullTimestamp = form.event_date && form.event_start_timestamp
-    ? `${form.event_date}T${form.event_start_timestamp}:00`
-    : null;
+    const fullTimestamp =
+      form.event_start_timestamp?.includes("T")
+        ? form.event_start_timestamp
+        : form.event_date && form.event_start_timestamp
+        ? `${form.event_date}T${form.event_start_timestamp}:00`
+        : null;
 
     const payload = {
       ...form,
@@ -140,7 +146,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       onSave();
     }
   };
-
+  console.log(form);
   return (
     <div className={styles["eventModal-overlay"]}>
       <div className={styles["eventModal-box"]}>
@@ -183,12 +189,16 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         />
 
         <label className={styles["eventModal-label"]}>Event Time*</label>
-        <input
+        <select
           className={styles["eventModal-input"]}
-          type="time"
           value={form.event_start_timestamp}
           onChange={e => handleChange("event_start_timestamp", e.target.value)}
-        />
+        >
+          <option value="">Select time</option>
+          {generateTimeOptions("06:00", "23:30", 30).map(time => (
+            <option key={time} value={time}>{formatTime(time)}</option>
+          ))}
+        </select>
 
         <label className={styles["eventModal-label"]}>Description*</label>
         <textarea

@@ -11,7 +11,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    height: 80vh; 
+    height: 80vh;
     max-width: 600px;
     max-height: 90vh;
     background: white;
@@ -24,10 +24,10 @@
   }
   
   .image {
-    height: 37%;
+    max-height: 250px;
     width: 100%;
     object-fit: cover;
-
+    flex-shrink: 0;
   }
 
   .closeButton {
@@ -61,6 +61,14 @@
     display: flex;
     flex-direction: column;
   }
+
+  .modalBody {
+    flex-grow: 1;
+  }
+
+  .modalFooter {
+    margin: 1rem
+  }
   
   .title {
     font-size: 1.8rem;
@@ -68,7 +76,7 @@
     margin-bottom: 0.5rem;
   
     display: -webkit-box;
-    -webkit-line-clamp: 3;       /* Limit to 3 lines */
+    -webkit-line-clamp: 2;       /* Limit to 3 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -81,12 +89,12 @@
   }
 
   .descriptionWrapper {
-  position: relative;
-  max-height: 200px;
-  overflow-y: auto;
-  /* padding-bottom: 1rem; */
-  margin-top: 1rem;
-}
+    position: relative;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+  }
 
 .descriptionWrapper::after {
   content: "";
@@ -107,26 +115,54 @@
 }
   
   .description {
-    font-size: 1rem;
+    font-size: 14px;
     line-height: 1.5;
     white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .placeholder {
+    font-style: italic;
+    color: #999;
+  }
+
+  .empty {
+    max-height: 3rem;
+    overflow: hidden;
+  }
+
+  .empty::after {
+    display: none; /* no fade effect */
+  }
+
+  .divider {
+    height: 1px;
+    background-color: #eee;
+    margin-top: 8px;
   }
   
   .button {
     display: inline-block;
-    background: #d50032;
+    background: black;
     color: white;
     text-decoration: none;
     padding: 0.75rem 1.25rem;
-    border-radius: 8px;
+    border-radius: 20px;
     font-weight: 600;
     text-align: center;
+    margin-top: 15px;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
     .modal {
       width: 92%;
-      height: 75vh;
+      max-height: 75vh;
+      height: auto;
+    }
+
+    .description {
+      font-size: 1rem;
     }
   }
 
