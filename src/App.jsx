@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { signOut } from 'firebase/auth';
+import { supabase } from "./supabase";
 
-import Header from "./components/Header";
+import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
-import Home from "./pages/Home";           // List View
+import Home from "./pages/Home";
 import Calendar from "./pages/Calendar";
-import Profile from "./pages/Profile";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
 import Footer from "./components/Footer";
 
 import './styles/global.css';
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProfileLayout from "./pages/profile/ProfileLayout";
+import Recover from "./pages/Recover";
+import CalendarLayout from "./modules/calendar/CalendarLayout";
+import HomeLayout from "./modules/home/HomeLayout";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -22,24 +23,33 @@ export default function App() {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    // Get initial user
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
     });
-    return () => unsubscribe();
+
+    // Subscribe to auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await supabase.auth.signOut();
       setUser(null);
     } catch (err) {
-      console.error("Logout error:", err);
+      console.error("Logout error:", err.message);
     }
   };
 
   return (
     <div className="pageWrapper">
-      <Header
+      <HeaderLayout
         user={user}
         onLoginClick={() => setShowLogin(true)}
         onLogout={() => setShowLogoutConfirm(true)}
@@ -66,11 +76,12 @@ export default function App() {
 
       <div className="mainContent">
         <Routes>
-          <Route path="/" element={<Home />} /> {/* ← List View is now home */}
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/" element={<HomeLayout />} />
+          <Route path="/calendar" element={<CalendarLayout />} />
+          <Route path="/profile" element={<ProfileLayout user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/recover" element={<Recover />} />
         </Routes>
       </div>
 

@@ -11,7 +11,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    height: 80vh; 
+    height: 80vh;
     max-width: 600px;
     max-height: 90vh;
     background: white;
@@ -24,10 +24,10 @@
   }
   
   .image {
-    height: 43%;
+    max-height: 250px;
     width: 100%;
     object-fit: cover;
-
+    flex-shrink: 0;
   }
 
   .closeButton {
@@ -54,17 +54,32 @@
     background-color: rgba(255, 255, 255, 1);
   }
   
-  
   .content {
-    padding: 1rem;
-    overflow-y: auto;
+    padding: 1rem 1rem 2rem 1rem;
     flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modalBody {
+    flex-grow: 1;
+  }
+
+  .modalFooter {
+    margin: 1rem
   }
   
   .title {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+  
+    display: -webkit-box;
+    -webkit-line-clamp: 2;       /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .subtext {
@@ -72,27 +87,82 @@
     color: #666;
     margin-bottom: 1rem;
   }
+
+  .descriptionWrapper {
+    position: relative;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+  }
+
+.descriptionWrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fffdf7);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.noFade::after {
+  opacity: 0;
+}
   
   .description {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .placeholder {
+    font-style: italic;
+    color: #999;
+  }
+
+  .empty {
+    max-height: 3rem;
+    overflow: hidden;
+  }
+
+  .empty::after {
+    display: none; /* no fade effect */
+  }
+
+  .divider {
+    height: 1px;
+    background-color: #eee;
+    margin-top: 8px;
   }
   
   .button {
     display: inline-block;
-    background: #d50032;
+    background: black;
     color: white;
     text-decoration: none;
     padding: 0.75rem 1.25rem;
-    border-radius: 8px;
+    border-radius: 20px;
     font-weight: 600;
     text-align: center;
+    margin-top: 15px;
+    width: 100%;
   }
 
   @media (max-width: 768px) {
     .modal {
-      width: 95%;
-      height: 90vh;
+      width: 92%;
+      max-height: 75vh;
+      height: auto;
+    }
+
+    .description {
+      font-size: 1rem;
     }
   }
 
@@ -124,6 +194,23 @@
     padding: 6px 10px;
     cursor: pointer;
     display: none; /* hidden by default */
+  }
+
+  .iconValuePair {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .iconValuePairTime {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding-top: 8px;
+  }
+
+  .value {
+    font-weight: 500;
   }
   
   /* Responsive swap */

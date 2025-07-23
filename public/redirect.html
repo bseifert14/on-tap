@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/recover" />
+    <script>
+      const hash = window.location.hash.substring(1); // removes #
+      const newUrl = `${window.location.origin}/recover?${hash}`;
+      window.location.replace(newUrl);
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html>

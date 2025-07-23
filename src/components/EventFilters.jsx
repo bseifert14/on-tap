@@ -7,6 +7,8 @@ import {
   Music,
   SquareMenu,
 } from "lucide-react";
+import Button from './common/Button';
+import btnStyles from "../styles/common/Button.module.css";
 
 const FILTERS = [
   { label: "All", value: "All", icon: SquareMenu },
@@ -21,14 +23,20 @@ export default function EventFilters({ selectedType, onTypeChange }) {
   return (
     <div className={styles.filterContainer}>
       {FILTERS.map(({ label, value, icon: Icon }) => (
-        <button
+        <Button
           key={value}
-          className={`${styles.filterButton} ${selectedType === value ? styles.active : ''}`}
           onClick={() => onTypeChange(value)}
+          className={
+            selectedType === value
+              ? btnStyles.buttonActive
+              : btnStyles.buttonInactive
+          }
         >
-          <Icon size={18} className={styles.icon} strokeWidth={1.5} />
-          <span>{label}</span>
-        </button>
+          <div className={styles.filter}>
+            <Icon size={14} className={styles.icon} strokeWidth={1.5} />
+            <span>{label}</span>
+          </div>
+        </Button>
       ))}
     </div>
   );

@@ -1,16 +1,25 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { supabase } from "../supabase";
 import styles from "../styles/LoginModal.module.css";
+import PasswordResetModal from "./PasswordResetModal";
 
-export default function LoginModal({ onClose }) {
+export default function LoginModal({ onClose, onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showResetModal, setShowResetModal] = useState(false);
 
-  const signIn = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then(() => onClose())
-      .catch((err) => alert(err.message));
+  const signIn = async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      onLoginSuccess?.(data.user); // Optional, in case you need to pass back the user
+      onClose();
+    }
   };
 
   return (
@@ -20,21 +29,26 @@ export default function LoginModal({ onClose }) {
         <input
           className={styles.input}
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
         <input
           type="password"
           className={styles.input}
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
         <div className={styles.buttonRow}>
           <button className={styles.button} onClick={signIn}>Log In</button>
           <button className={styles.cancelButton} onClick={onClose}>Cancel</button>
+          <button onClick={() => setShowResetModal(true)}>Forgot Password?</button>
         </div>
       </div>
+
+      {showResetModal && (
+        <PasswordResetModal onClose={() => setShowResetModal(false)} />
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ViewControls from "../components/ViewControls";
-import CalendarView from "../components/CalendarView";
+import CalendarView from "../modules/calendar/CalendarView";
 import styles from "../styles/Calendar.module.css";
 
 export default function Calendar() {

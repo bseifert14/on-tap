@@ -1,39 +1,14 @@
 @import './theme.css';
 
 .filterContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  
-  .filterButton {
-    background: var(--color-white);
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 10px 12px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    transition: 0.2s ease;
-  }
-  
-  .filterButton:not(.active):hover {
-    background: #f2f2f2;
-    color: black;
-  }
-  
-  .active {
-    background: var(--color-red-primary);
-    color: var(--color-white);
-    border-color: var(--color-red-primary);
-  }
-  
-  .icon {
-    font-size: 16px;
-  }
-  
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-  
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 4px;
+}

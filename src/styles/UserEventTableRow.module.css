@@ -1,0 +1,44 @@
+.cell {
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #333;
+  }
+  
+  .truncate {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .checkmark {
+    font-size: 1rem;
+    color: green;
+  }
+  
+  .empty {
+    font-size: 1rem;
+    color: #aaa;
+  }
+
+  .actionButtonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .actionButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black;
+    font-size: 0.875rem;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
+  .actionButton:hover {
+    background: #a1a1a1;
+  }
+  

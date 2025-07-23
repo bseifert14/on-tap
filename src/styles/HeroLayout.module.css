@@ -1,0 +1,98 @@
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 2rem 6rem; /* Add bottom padding for fade space */
+    background: var(--color-beige-main);
+    flex-wrap: wrap;
+    z-index: 1;
+    overflow: hidden; /* Ensures fade doesn't spill */
+  }
+  
+  .hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255, 253, 247, 0), rgba(255, 255, 255, 1));
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  
+  .left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 280px;
+    /* margin-bottom: 2rem; */
+  }
+  
+  .illustration {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .right {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+    padding-left: 2rem;
+  }
+  
+  .heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
+  }
+  
+  .subheading {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  .ctaButton {
+    background-color: black;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 2rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .ctaButton:hover {
+    background-color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+  
+    .right {
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding-bottom: 3rem; /* more space for CTA */
+    }
+  
+    .hero::after {
+      height: 60px; /* smaller fade for smaller screens */
+    }
+  }
+  

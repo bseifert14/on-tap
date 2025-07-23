@@ -1,12 +1,12 @@
-// components/CalendarView.jsx
 import { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // default styles
-import "../styles/react-calendar-custom.css"; // your custom overrides
-import { supabase } from "../supabase";
-import styles from "../styles/CalendarView.module.css";
-import EventCard from "./EventCard";
-import EventModal from "./EventModal";
+import "../../styles/react-calendar-custom.css"; // your custom overrides
+import { supabase } from "../../supabase";
+import styles from "../../styles/CalendarView.module.css";
+import EventModal from "../../components/EventModal";
+import EventCard from "../../components/EventCard";
+
 
 export default function CalendarView({ selectedType }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -61,7 +61,7 @@ export default function CalendarView({ selectedType }) {
   
         {/* Right: Events */}
         <div className={styles.eventsWrapper}>
-          <h3>
+          <h3 className={styles.eventsHeader}>
             Events on{" "}
             {selectedDate.toLocaleDateString(undefined, {
               weekday: "long",
@@ -76,7 +76,7 @@ export default function CalendarView({ selectedType }) {
               <p>No events for this day.</p>
             ) : (
               filtered.map((event) => (
-                <EventCard key={event.id} event={event} onClick={() => setSelectedEvent(event)}/>
+                <EventCard key={event.id} event={event} onSelectEvent={() => setSelectedEvent(event)} />
               ))
             )}
           </div>
