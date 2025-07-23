@@ -5,7 +5,6 @@
   overflow: hidden;
   display: flex;
   justify-content: center; /* centers horizontally */
-  margin-top: 60px;
 }
 
 .bgImage {

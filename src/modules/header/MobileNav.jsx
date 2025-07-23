@@ -2,25 +2,25 @@ import React, { useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../../styles/Header.module.css";
 
-export default function MobileNav({ user, onLogout, onLoginClick, setDropdownOpen, setMenuOpen }) {
+export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen }) {
   const location = useLocation();
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
 
   const handleCloseAndLogout = () => {
-    setDropdownOpen(false);
+    setMenuOpen(false);
     onLogout();
   };
 
   const handleLoginClick = () => {
-    setDropdownOpen(false);
+    setMenuOpen(false);
     onLoginClick();
   };
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
+        setMenuOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);

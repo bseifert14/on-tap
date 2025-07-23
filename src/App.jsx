@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
 
 import HeaderLayout from "./modules/header/HeaderLayout";
@@ -17,7 +17,10 @@ import Recover from "./pages/Recover";
 import CalendarLayout from "./modules/calendar/CalendarLayout";
 import HomeLayout from "./modules/home/HomeLayout";
 
+const CUSTOM_HEADER_LOCATIONS = ['/about', '/contact'];
+
 export default function App() {
+  const location = useLocation();
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -54,6 +57,10 @@ export default function App() {
         onLoginClick={() => setShowLogin(true)}
         onLogout={() => setShowLogoutConfirm(true)}
       />
+      {CUSTOM_HEADER_LOCATIONS.includes(location.pathname) && (
+        <div className="headerFade" />
+      )}
+
       {showLogin && (
         <LoginModal
           onClose={() => setShowLogin(false)}
