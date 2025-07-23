@@ -1,11 +1,10 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "../../supabase";
 import styles from "../../styles/Home.module.css";
 import EventModal from "../../components/EventModal";
 import EventList from "../../pages/home/EventList";
 
-// import mockEvents from "../mocks/mock-events.json";
 import SetPasswordModal from "../../components/SetPasswordModal";
 import HeroLayout from "../common/HeroLayout";
 import EventFiltersLayout from "../common/EventFiltersLayout";
@@ -99,16 +98,16 @@ export default function HomeLayout() {
     fetchEvents();
   }, []);
 
-  const filtered = selectedType === "All"
-    ? events
-    : events.filter(e => e.event_type === selectedType);
-
   return (
     <div>
       <HeroLayout currentView="list" />
       <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
-          <EventList events={events} onSelectEvent={(event) => setSelectedEvent(event)} />
+          <EventList
+            events={events}
+            selectedType={selectedType}
+            onSelectEvent={(event) => setSelectedEvent(event)}
+          />
 
           {selectedEvent && (
               <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
