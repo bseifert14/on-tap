@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 4rem 2rem 6rem; /* Add bottom padding for fade space */
-    background: #fffdf7;
+    background: var(--color-beige-main);
     flex-wrap: wrap;
     z-index: 1;
     overflow: hidden; /* Ensures fade doesn't spill */

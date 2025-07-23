@@ -1,7 +1,7 @@
 @import './theme.css';
 
 .header {
-  background: #fffdf6;
+  background: var(--color-beige-main);
   padding: 20px 24px;
   position: relative;
   display: flex;
@@ -86,19 +86,19 @@
 }
 
 .navButtonInactive:hover {
-  background: #fffdf7;
+  background: var(--color-beige-main);
   color: black;
   border: 1px solid #e3e1e1;
 }
 
 .navButtonActive {
   background: black;
-  color: #fffdf7;
+  color: var(--color-beige-main);
   border: 1px solid black;
 }
 
 .navButtonInactive {
-  background: #fffdf7;
+  background: var(--color-beige-main);
   color: black;
   border: 1px solid transparent;
 }
