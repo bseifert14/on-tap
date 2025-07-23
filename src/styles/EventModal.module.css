@@ -215,6 +215,16 @@
   
   /* Responsive swap */
   @media (max-width: 768px) {
+    .title {
+      font-size: 1.4rem;
+      -webkit-line-clamp: 1;
+    }
+
+    .value {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
     .infoButton {
       display: none;
     }
