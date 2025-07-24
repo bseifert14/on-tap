@@ -4,7 +4,16 @@ import { supabase } from "../../supabase";
 import AddressInput from "./AddressInput";
 
 export default function ProfileBusiness({ user }) {
-  const [business, setBusiness] = useState({ name: "", location: "", phone: "", email: "", address: "" });
+  const [business, setBusiness] = useState({ 
+    business_name: "",
+    street_address: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    phone: "",
+    email: "", 
+    url: ""
+  });
   const [contact, setContact] = useState({ name: "", phone: "", email: "" });
   const [businessId, setBusinessId] = useState(null);
 
@@ -16,7 +25,7 @@ export default function ProfileBusiness({ user }) {
     const { data: biz } = await supabase
       .from("businesses")
       .select("*")
-      .eq("user_id", user.uid)
+      .eq("user_id", user.id)
       .single();
 
     if (biz) {
@@ -28,7 +37,7 @@ export default function ProfileBusiness({ user }) {
         .select("*")
         .eq("business_id", biz.id)
         .single();
-
+      console.log(contactData);
       if (contactData) setContact(contactData);
     }
   };
@@ -36,7 +45,7 @@ export default function ProfileBusiness({ user }) {
   const saveBusiness = async () => {
     const { data, error } = await supabase
       .from("businesses")
-      .upsert({ ...business, user_id: user.uid })
+      .upsert({ ...business, user_id: user.id })
       .select()
       .single();
 
@@ -69,47 +78,92 @@ export default function ProfileBusiness({ user }) {
           <h2 className={styles.sectionTitle}>Business Information</h2>
           <form>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="businessName">Name</label>
+                <label className={styles.formLabel} htmlFor="business_name">Name</label>
                 <input
                   type="text"
-                  id="businessName"
+                  id="business_name"
+                  required
                   className={styles.formInput}
                   placeholder="Business name"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("businessName", e.target.value)}
+                  value={business.business_name}
+                  onChange={e => handleChange(setBusiness)("business_name", e.target.value)}
                 />
             </div>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="businessAddress">Address</label>
+                <label className={styles.formLabel} for="street_address">Street Address</label>
                 <input
                   type="text"
-                  id="businessAddress"
+                  id="street_address"
                   className={styles.formInput}
                   placeholder="Business Address"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("businessAddress", e.target.value)}
+                  value={business.street_address}
+                  onChange={e => handleChange(setBusiness)("street_address", e.target.value)}
                 />
             </div>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="businessPhone">Phone Number</label>
+                <label className={styles.formLabel} for="city">City</label>
+                <input
+                  type="text"
+                  id="city"
+                  className={styles.formInput}
+                  placeholder="Business City"
+                  value={business.city}
+                  onChange={e => handleChange(setBusiness)("city", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="state">State</label>
+                <input
+                  type="text"
+                  id="state"
+                  className={styles.formInput}
+                  placeholder="Business State"
+                  value={business.state}
+                  onChange={e => handleChange(setBusiness)("state", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="zipcode">Zipcode</label>
+                <input
+                  type="number"
+                  id="zipcode"
+                  className={styles.formInput}
+                  placeholder="Business Address"
+                  value={business.zipcode}
+                  onChange={e => handleChange(setBusiness)("zipcode", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} htmlFor="phone">Phone Number</label>
                 <input
                   type="text"
                   id="businessPhone"
                   className={styles.formInput}
                   placeholder="Business Phone Number"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("businessPhone", e.target.value)}
+                  value={business.phone}
+                  onChange={e => handleChange(setBusiness)("phone", e.target.value)}
                 />
             </div>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="businessEmail">Email</label>
+                <label className={styles.formLabel} htmlFor="email">Email</label>
                 <input
                   type="text"
-                  id="businessEmail"
+                  id="email"
                   className={styles.formInput}
                   placeholder="Business Email"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("businessEmail", e.target.value)}
+                  value={business.email}
+                  onChange={e => handleChange(setBusiness)("email", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} htmlFor="url">URL</label>
+                <input
+                  type="text"
+                  id="url"
+                  className={styles.formInput}
+                  placeholder="Business URL"
+                  value={business.url}
+                  onChange={e => handleChange(setBusiness)("url", e.target.value)}
                 />
             </div>
           </form>
@@ -120,36 +174,36 @@ export default function ProfileBusiness({ user }) {
           <h2 className={styles.sectionTitle}>Primary Contact</h2>
           <form>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="contactName">Contact Name</label>
+                <label className={styles.formLabel} htmlFor="name">Contact Name</label>
                 <input
                   type="text"
                   id="contactName"
                   className={styles.formInput}
                   placeholder="Contact Person Name"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("contactName", e.target.value)}
+                  value={contact.name}
+                  onChange={e => handleChange(setContact)("name", e.target.value)}
                 />
             </div>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="contactPhone">Contact Phone</label>
+                <label className={styles.formLabel} htmlFor="phone">Contact Phone</label>
                 <input
                   type="text"
                   id="contactPhone"
                   className={styles.formInput}
                   placeholder="Contact Phone Number"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("contactPhone", e.target.value)}
+                  value={contact.phone}
+                  onChange={e => handleChange(setContact)("phone", e.target.value)}
                 />
             </div>
             <div className={styles.formGroup}>
-                <label className={styles.formLabel} for="contactEmail">Contact Email</label>
+                <label className={styles.formLabel} htmlFor="email">Contact Email</label>
                 <input
                   type="text"
                   id="contactEmail"
                   className={styles.formInput}
                   placeholder="Contact Person Email"
-                  value={business.name}
-                  onChange={e => handleChange(setBusiness)("contactEmail", e.target.value)}
+                  value={contact.email}
+                  onChange={e => handleChange(setContact)("email", e.target.value)}
                 />
             </div>
           </form>

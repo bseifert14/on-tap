@@ -146,7 +146,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       onSave();
     }
   };
-  console.log(form);
+
   return (
     <div className={styles["eventModal-overlay"]}>
       <div className={styles["eventModal-box"]}>
