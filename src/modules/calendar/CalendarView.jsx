@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../../supabase";
 
-import styles from "../../styles/CalendarView.module.css";
 import "react-calendar/dist/Calendar.css"; // default styles
-import "../../styles/react-calendar-custom.css"; // your custom overrides
+import "../../styles/react-calendar-custom.css"; // custom overrides
+import styles from "../../styles/CalendarView.module.css";
 
 import Calendar from "react-calendar";
 import EventModal from "../../components/events/EventModal";
