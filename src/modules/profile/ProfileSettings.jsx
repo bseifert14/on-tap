@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import styles from "../../styles/revamp/ProfileBusiness.module.css";
+import styles from "../../styles/ProfileSettings.module.css";
 import { supabase } from "../../supabase";
-import AddressInput from "./AddressInput";
+import AddressInput from "../../components/inputs/AddressInput";
 
-export default function ProfileBusiness({ user }) {
+export default function ProfileSettings({ user }) {
   const [business, setBusiness] = useState({ 
     business_name: "",
     street_address: "",

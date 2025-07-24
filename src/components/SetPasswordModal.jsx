@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
-import styles from "../styles/revamp/SetPasswordModal.module.css";
+import styles from "../styles/SetPasswordModal.module.css";
 import { CheckCircle } from "lucide-react";
 
 export default function SetPasswordModal({ onClose }) {

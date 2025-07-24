@@ -1,8 +1,7 @@
 import { useState } from "react";
-import styles from "../../styles/revamp/ProfileLayout.module.css";
+import styles from "../../styles/ProfileLayout.module.css";
 import ProfileEvents from "./ProfileEvents";
-import ProfileBusiness from "./ProfileBusiness";
-import ProfileDetails from "./ProfileDetails";
+import ProfileSettings from "./ProfileSettings";
 
 export default function ProfileLayout({ user }) {
   const [activeTab, setActiveTab] = useState("events");
@@ -31,13 +30,11 @@ export default function ProfileLayout({ user }) {
         </div>
       </div>
 
-      {/* <ProfileDetails user={user} /> */}
-
       <div className={styles.content}>
         {activeTab === "events" ? (
           <ProfileEvents user={user} />
         ) : (
-          <ProfileBusiness user={user} />
+          <ProfileSettings user={user} />
         )}
       </div>
     </div>

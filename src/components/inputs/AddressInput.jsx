@@ -1,5 +1,4 @@
 import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
-import { useEffect, useState } from "react";
 import styles from '../../styles/AddressInput.module.css';
 // import useLoadGoogleMaps from "../../utils/hooks/useLoadGoogleMaps";
 

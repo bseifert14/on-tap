@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import EventFilters from '../../components/events/EventFilters';
 import styles from "../../styles/ViewControls.module.css";
+
 import { Funnel } from 'lucide-react';
-import ViewToggle from '../../components/ViewToggle';
+
 import Button from '../../components/common/Button';
+import EventFilters from '../../components/events/EventFilters';
+import ViewToggle from '../../components/ViewToggle';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
   const [showDrawer, setShowDrawer] = useState(false);

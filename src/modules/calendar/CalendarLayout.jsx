@@ -1,8 +1,9 @@
 import { useState } from "react";
-import CalendarView from "./CalendarView";
 import styles from "../../styles/CalendarLayout.module.css";
-import HeroLayout from "../common/HeroLayout";
+
+import CalendarView from "./CalendarView";
 import EventFiltersLayout from "../common/EventFiltersLayout";
+import HeroLayout from "../common/HeroLayout";
 
 export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("All");

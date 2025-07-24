@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styles from "../styles/Contact.module.css";
-import frascoDesktop from "../../public/images/site/frascoContactCrop.jpg";
-import frascoMobile from "../../public/images/site/mobileContact.jpg"; // ← your mobile image
+import styles from "../../styles/Contact.module.css";
+import frascoDesktop from "../../../public/images/site/frascoContactCrop.jpg";
+import frascoMobile from "../../../public/images/site/mobileContact.jpg"; // ← your mobile image
 
 export default function Contact() {
   const [bgImage, setBgImage] = useState(frascoDesktop);

@@ -1,4 +1,4 @@
-import styles from "../../styles/revamp/ProfileEvents.module.css";
+import styles from "../../styles/ProfileEvents.module.css";
 import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector";
 import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
 import Button from "../../components/common/Button";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { supabase } from "../supabase";
-import SetPasswordModal from "../components/SetPasswordModal";
+import { supabase } from "../../supabase";
+import SetPasswordModal from "../../components/SetPasswordModal";
 
 export default function Recover() {
   const [showModal, setShowModal] = useState(false);

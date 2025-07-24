@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import styles from "../../styles/revamp/ProfileEvents.module.css";
 import { supabase } from "../../supabase";
+
+import styles from "../../styles/ProfileEvents.module.css";
+
 import AddEditEventModal from "../../components/AddEditEventModal";
 import DeleteModal from "../../components/DeleteModal";
-import UserEventTable from "../../modules/profile/UserEventTable";
-import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector";
-import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
-import TableActions from "../../modules/profile/TableActions";
+import UserEventTable from "./UserEventTable";
+import TableEventTypeSelector from "./TableEventTypeSelector";
+import TableEventDateSelector from "./TableEventDateSelector";
+import TableActions from "./TableActions";
 
 export default function ProfileEvents({ user }) {
   const [events, setEvents] = useState([]);

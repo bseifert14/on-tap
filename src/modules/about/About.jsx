@@ -1,8 +1,9 @@
-import styles from '../styles/About.module.css';
-import G_LOVE from '../../public/images/defaults/music.jpg';
-import CHURCH from '../../public/images/site/church.jpg';
-import BIKING from '../../public/images/defaults/sports.jpg';
 import { Link } from 'react-router-dom';
+
+import styles from '../../styles/About.module.css';
+import G_LOVE from '../../../public/images/defaults/music.jpg';
+import CHURCH from '../../../public/images/site/church.jpg';
+import BIKING from '../../../public/images/defaults/sports.jpg';
 
 export default function About() {
   return (

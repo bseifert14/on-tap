@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/revamp/EventCard.module.css";
+import styles from "../../styles/EventCard.module.css";
 import { getDefaultImage } from "../../utils/getDefaultImage";
 import { getIcon } from "../../utils/getIcon";
 import { Calendar, MapPin } from "lucide-react";

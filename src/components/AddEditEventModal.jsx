@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabase";
-import styles from "../styles/revamp/AddEditEventModal.module.css";
+import styles from "../styles/AddEditEventModal.module.css";
 import { formatTime, generateTimeOptions } from "../utils/formatDates";
 
 const EVENT_TYPES = [

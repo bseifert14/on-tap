@@ -8,10 +8,10 @@ import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
 import Footer from "./components/Footer";
 
 import './styles/global.css';
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import ProfileLayout from "./pages/profile/ProfileLayout";
-import Recover from "./pages/Recover";
+import About from "./modules/about/About";
+import Contact from "./modules/contact/Contact";
+import ProfileLayout from "./modules/profile/ProfileLayout";
+import Recover from "./modules/common/Recover";
 import CalendarLayout from "./modules/calendar/CalendarLayout";
 import HomeLayout from "./modules/home/HomeLayout";
 import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
