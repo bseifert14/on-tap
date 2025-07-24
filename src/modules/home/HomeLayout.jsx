@@ -7,6 +7,7 @@ import EventList from "../../components/events/EventList";;
 import EventModal from "../../components/events/EventModal";
 import HeroLayout from "../common/HeroLayout";
 import SetPasswordModal from "../../components/SetPasswordModal";
+import EmptyEventsView from "../../components/events/EmptyEventsView";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -102,6 +103,7 @@ export default function HomeLayout() {
       <HeroLayout currentView="list" />
       <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
+          <EmptyEventsView currentView="list" />
           <EventList
             events={events}
             selectedType={selectedType}

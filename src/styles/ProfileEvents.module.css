@@ -15,7 +15,7 @@
 }
 
 .addButton {
-  background-color: #e3003b;
+  background-color: #e3003b !important;
   color: white;
   padding: 0.6rem 1rem;
   font-weight: bold;

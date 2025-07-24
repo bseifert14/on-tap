@@ -8,6 +8,7 @@ import styles from "../../styles/CalendarView.module.css";
 import Calendar from "react-calendar";
 import EventModal from "../../components/events/EventModal";
 import EventCard from "../../components/events/EventCard";
+import EmptyEventsView from "../../components/events/EmptyEventsView";
 
 
 export default function CalendarView({ selectedType }) {
@@ -75,7 +76,7 @@ export default function CalendarView({ selectedType }) {
 
           <div className={styles.eventScrollArea}>
             {filtered.length === 0 ? (
-              <p>No events for this day.</p>
+              <EmptyEventsView currentView="calendar" />
             ) : (
               filtered.map((event) => (
                 <EventCard key={event.id} event={event} onSelectEvent={() => setSelectedEvent(event)} />
