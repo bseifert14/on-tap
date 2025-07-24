@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CalendarView from "./CalendarView";
-import styles from "../../styles/Calendar.module.css";
+import styles from "../../styles/CalendarLayout.module.css";
 import HeroLayout from "../common/HeroLayout";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 

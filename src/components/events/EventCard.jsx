@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "../styles/revamp/EventCard.module.css";
-import { getDefaultImage } from "../utils/getDefaultImage";
-import { getIcon } from "../utils/getIcon";
+import styles from "../../styles/revamp/EventCard.module.css";
+import { getDefaultImage } from "../../utils/getDefaultImage";
+import { getIcon } from "../../utils/getIcon";
 import { Calendar, MapPin } from "lucide-react";
-import Button from "./common/Button";
-import { formatEventDateTime } from "../utils/formatDates";
+import { formatEventDateTime } from "../../utils/formatDates";
+import Button from "../common/Button";
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_photo_url, event_type } = event;

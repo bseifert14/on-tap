@@ -1,4 +1,6 @@
-import styles from '../styles/EventFilters.module.css';
+import styles from '../../styles/EventFilters.module.css';
+import btnStyles from "../../styles/common/Button.module.css";
+import Button from '../common/Button';
 import {
   Volleyball,
   Gamepad,
@@ -7,8 +9,6 @@ import {
   Music,
   SquareMenu,
 } from "lucide-react";
-import Button from './common/Button';
-import btnStyles from "../styles/common/Button.module.css";
 
 const FILTERS = [
   { label: "All", value: "All", icon: SquareMenu },

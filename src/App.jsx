@@ -4,8 +4,6 @@ import { supabase } from "./supabase";
 
 import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
-import Home from "./pages/Home";
-import Calendar from "./pages/Calendar";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
 import Footer from "./components/Footer";
 

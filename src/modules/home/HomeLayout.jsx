@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "../../supabase";
-import styles from "../../styles/Home.module.css";
-import EventModal from "../../components/EventModal";
-import EventList from "../../pages/home/EventList";
-
-import SetPasswordModal from "../../components/SetPasswordModal";
+import styles from "../../styles/HomeLayout.module.css";
+import EventFiltersLayout from "../common/EventFiltersLayout"
+import EventList from "../../components/events/EventList";;
+import EventModal from "../../components/events/EventModal";
 import HeroLayout from "../common/HeroLayout";
-import EventFiltersLayout from "../common/EventFiltersLayout";
+import SetPasswordModal from "../../components/SetPasswordModal";
 
 export default function HomeLayout() {
   const location = useLocation();

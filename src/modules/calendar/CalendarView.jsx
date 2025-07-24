@@ -4,8 +4,8 @@ import "react-calendar/dist/Calendar.css"; // default styles
 import "../../styles/react-calendar-custom.css"; // your custom overrides
 import { supabase } from "../../supabase";
 import styles from "../../styles/CalendarView.module.css";
-import EventModal from "../../components/EventModal";
-import EventCard from "../../components/EventCard";
+import EventModal from "../../components/events/EventModal";
+import EventCard from "../../components/events/EventCard";
 
 
 export default function CalendarView({ selectedType }) {

@@ -1,8 +1,8 @@
-import { Calendar, MapPin } from "lucide-react";
-import styles from "../styles/EventModal.module.css";
-import { formatEventDateTime } from "../utils/formatDates";
-import { getDefaultImage } from "../utils/getDefaultImage";
 import { useEffect, useRef, useState } from "react";
+import styles from "../../styles/EventModal.module.css";
+import { Calendar, MapPin } from "lucide-react";
+import { formatEventDateTime } from "../../utils/formatDates";
+import { getDefaultImage } from "../../utils/getDefaultImage";
 
 export default function EventModal({ event, onClose }) {
   if (!event) return null;

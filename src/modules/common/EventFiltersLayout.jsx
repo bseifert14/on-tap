@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import EventFilters from '../../components/EventFilters';
+import EventFilters from '../../components/events/EventFilters';
 import styles from "../../styles/ViewControls.module.css";
 import { Funnel } from 'lucide-react';
 import ViewToggle from '../../components/ViewToggle';

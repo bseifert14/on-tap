@@ -1,5 +1,5 @@
 import React from "react";
-import EventCard from "../../components/EventCard";
+import EventCard from "./EventCard";
 
 export default function EventList({ events, onSelectEvent, selectedType }) {
   const filtered = events.filter(
