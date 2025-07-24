@@ -23,7 +23,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
 
   return (
     <tr>
-      <td className={styles.cell}>{event_name}</td>
+      <td className={`${styles.cell} ${styles.eventNameCell}`}>{event_name}</td>
       <td className={styles.cell}>{formatDate(event_date)}</td>
       <td className={styles.cell}>{event_location}</td>
       <td className={`${styles.cell} ${styles.truncate}`}>

@@ -1,7 +1,120 @@
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
+.wrapper {
+  display: block;
+  /* display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem 1rem; */
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.formSection {
+  background: #fafbfc;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid #e9ecef;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #dc3545;
+}
+
+.formInput::placeholder {
+  color: #adb5bd;
+}
+
+.saveBtn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: background-color 0.2s;
+  float: right;
+}
+
+.saveBtn:hover {
+  background: #c82333;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.formGroup input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fafafa;
+}
+
+@media (max-width: 768px) {
+  .profileGrid {
+      grid-template-columns: 1fr;
+      gap: 32px;
   }
   
+  .pageHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+  }
+  
+  .tabs {
+      width: 100%;
+  }
+  
+  .tab {
+      flex: 1;
+      text-align: center;
+  }
+  
+  .nav {
+      display: none;
+  }
+}

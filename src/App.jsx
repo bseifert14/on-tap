@@ -16,8 +16,10 @@ import ProfileLayout from "./pages/profile/ProfileLayout";
 import Recover from "./pages/Recover";
 import CalendarLayout from "./modules/calendar/CalendarLayout";
 import HomeLayout from "./modules/home/HomeLayout";
+import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
 
-const CUSTOM_HEADER_LOCATIONS = ['/about', '/contact'];
+const CUSTOM_HEADER_LOCATIONS = ['/about', '/contact', '/profile'];
+const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
 
 export default function App() {
   const location = useLocation();
@@ -25,6 +27,8 @@ export default function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
+  useLoadGoogleMaps(VITE_GOOGLE_PLACES_API_KEY);
+  
   useEffect(() => {
     // Get initial user
     supabase.auth.getUser().then(({ data: { user } }) => {

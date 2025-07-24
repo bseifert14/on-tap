@@ -1,0 +1,11 @@
+.profileDetails {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    border: solid 1px #ededed;
+    padding: 1rem;
+    margin: 1rem 0 4rem 0;
+    align-items: stretch;
+    gap: 1rem;
+    position: relative;
+}

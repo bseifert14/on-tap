@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/revamp/ProfileBusiness.module.css";
 import { supabase } from "../../supabase";
+import AddressInput from "./AddressInput";
 
 export default function ProfileBusiness({ user }) {
   const [business, setBusiness] = useState({ name: "", location: "", phone: "", email: "", address: "" });
@@ -62,20 +63,112 @@ export default function ProfileBusiness({ user }) {
   };
 
   return (
-    <div className={styles.form}>
-      <h3>Business Information</h3>
-      <input placeholder="Business Name" value={business.name} onChange={e => handleChange(setBusiness)("name", e.target.value)} />
-      <input placeholder="Business Location" value={business.location} onChange={e => handleChange(setBusiness)("location", e.target.value)} />
-      <input placeholder="Business Phone" value={business.phone} onChange={e => handleChange(setBusiness)("phone", e.target.value)} />
-      <input placeholder="Business Email" value={business.email} onChange={e => handleChange(setBusiness)("email", e.target.value)} />
-      <input placeholder="Business Address" value={business.address} onChange={e => handleChange(setBusiness)("address", e.target.value)} />
-      <button onClick={saveBusiness}>Save Business Info</button>
+    <div className={styles.wrapper}>
+      <div className={styles.profileGrid}>
+        <div className={styles.formSection}>
+          <h2 className={styles.sectionTitle}>Business Information</h2>
+          <form>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="businessName">Name</label>
+                <input
+                  type="text"
+                  id="businessName"
+                  className={styles.formInput}
+                  placeholder="Business name"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("businessName", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="businessAddress">Address</label>
+                <input
+                  type="text"
+                  id="businessAddress"
+                  className={styles.formInput}
+                  placeholder="Business Address"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("businessAddress", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="businessPhone">Phone Number</label>
+                <input
+                  type="text"
+                  id="businessPhone"
+                  className={styles.formInput}
+                  placeholder="Business Phone Number"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("businessPhone", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="businessEmail">Email</label>
+                <input
+                  type="text"
+                  id="businessEmail"
+                  className={styles.formInput}
+                  placeholder="Business Email"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("businessEmail", e.target.value)}
+                />
+            </div>
+          </form>
+          <button className={styles.saveBtn} onClick={saveBusiness}>Save Business Info</button>
+        </div>
 
-      <h3 style={{ marginTop: 24 }}>Primary Contact</h3>
-      <input placeholder="Contact Name" value={contact.name} onChange={e => handleChange(setContact)("name", e.target.value)} />
-      <input placeholder="Contact Phone" value={contact.phone} onChange={e => handleChange(setContact)("phone", e.target.value)} />
-      <input placeholder="Contact Email" value={contact.email} onChange={e => handleChange(setContact)("email", e.target.value)} />
-      <button onClick={saveContact}>Save Contact Info</button>
+        <div className={styles.formSection}>
+          <h2 className={styles.sectionTitle}>Primary Contact</h2>
+          <form>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="contactName">Contact Name</label>
+                <input
+                  type="text"
+                  id="contactName"
+                  className={styles.formInput}
+                  placeholder="Contact Person Name"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("contactName", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="contactPhone">Contact Phone</label>
+                <input
+                  type="text"
+                  id="contactPhone"
+                  className={styles.formInput}
+                  placeholder="Contact Phone Number"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("contactPhone", e.target.value)}
+                />
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.formLabel} for="contactEmail">Contact Email</label>
+                <input
+                  type="text"
+                  id="contactEmail"
+                  className={styles.formInput}
+                  placeholder="Contact Person Email"
+                  value={business.name}
+                  onChange={e => handleChange(setBusiness)("contactEmail", e.target.value)}
+                />
+            </div>
+          </form>
+          <button className={styles.saveBtn} onClick={saveContact}>Save Contact Info</button>
+        </div>
+      </div>
+
+        {/* <AddressInput
+          onAddressSelect={(parts) =>
+            setBusiness((prev) => ({
+              ...prev,
+              streetNumber: parts.streetNumber,
+              streetName: parts.street,
+              city: parts.city,
+              state: parts.state,
+              zip: parts.zip,
+            }))
+          }
+        /> */}
     </div>
   );
 }

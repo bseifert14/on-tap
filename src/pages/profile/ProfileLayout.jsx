@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../../styles/revamp/ProfileLayout.module.css";
 import ProfileEvents from "./ProfileEvents";
 import ProfileBusiness from "./ProfileBusiness";
+import ProfileDetails from "./ProfileDetails";
 
 export default function ProfileLayout({ user }) {
   const [activeTab, setActiveTab] = useState("events");
@@ -12,26 +13,33 @@ export default function ProfileLayout({ user }) {
 
   return (
     <div className={styles.container}>
-      <h2>My Profile</h2>
-      <div className={styles.tabs}>
-        <button
-          className={activeTab === "events" ? styles.active : styles.tab}
-          onClick={() => setActiveTab("events")}
-        >
-          My Events
-        </button>
-        <button
-          className={activeTab === "business" ? styles.active : styles.tab}
-          onClick={() => setActiveTab("business")}
-        >
-          Business Profile
-        </button>
+      <div className={styles.headerContainer}>
+        <h2 className={styles.header}>Profile</h2>
+        <div className={styles.tabs}>
+          <button
+            className={activeTab === "events" ? styles.active : styles.tab}
+            onClick={() => setActiveTab("events")}
+          >
+            My Events
+          </button>
+          <button
+            className={activeTab === "business" ? styles.active : styles.tab}
+            onClick={() => setActiveTab("business")}
+          >
+            Business Profile
+          </button>
+        </div>
       </div>
-      {activeTab === "events" ? (
-        <ProfileEvents user={user} />
-      ) : (
-        <ProfileBusiness user={user} />
-      )}
+
+      {/* <ProfileDetails user={user} /> */}
+
+      <div className={styles.content}>
+        {activeTab === "events" ? (
+          <ProfileEvents user={user} />
+        ) : (
+          <ProfileBusiness user={user} />
+        )}
+      </div>
     </div>
   );
 }

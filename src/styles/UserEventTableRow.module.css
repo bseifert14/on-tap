@@ -41,4 +41,11 @@
   .actionButton:hover {
     background: #a1a1a1;
   }
+
+  .eventNameCell {
+    max-width: 300px; /* or whatever width fits your layout */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   
