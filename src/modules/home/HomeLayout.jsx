@@ -8,13 +8,17 @@ import EventModal from "../../components/events/EventModal";
 import HeroLayout from "../common/HeroLayout";
 import SetPasswordModal from "../../components/SetPasswordModal";
 import EmptyEventsView from "../../components/events/EmptyEventsView";
+import useGetListEvents from "../../utils/hooks/useGetListEvents";
+import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 
 export default function HomeLayout() {
   const location = useLocation();
+  const { events, isLoading } = useGetListEvents();
+
   const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
   const [selectedType, setSelectedType] = useState("All");
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [events, setEvents] = useState([]);
+
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -55,45 +59,29 @@ export default function HomeLayout() {
   
     handlePasswordRecovery();
   }, []);
-  
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      const { data, error } = await supabase
-        .from("events")
-        .select("*")
-        .gte("event_date", new Date().toISOString().split("T")[0])
-        .order("event_date", { ascending: true });
-    
-      if (error) {
-        console.error("Error fetching events:", error);
-      } else {
-        // Flatten `businesses.name` into `business_name`
-        const normalized = data.map(event => ({
-          ...event,
-          business_name: event.businesses?.name || null
-        }));
-        setEvents(normalized);
-      }
-    };
-    
-    fetchEvents();
-  }, []);
 
   return (
     <div>
       <HeroLayout currentView="list" />
       <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
-          { events.length === 0 && (
+
+          {isLoading && (
+            <EventCardSkeleton />
+          )}
+
+          { !isLoading && events.length === 0 && (
             <EmptyEventsView currentView="list" />
           )}
-          <EventList
-            events={events}
-            selectedType={selectedType}
-            onSelectEvent={(event) => setSelectedEvent(event)}
-          />
 
+          { !isLoading && (
+            <EventList
+              events={events}
+              selectedType={selectedType}
+              onSelectEvent={(event) => setSelectedEvent(event)}
+            />
+          )}
+          
           {selectedEvent && (
               <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
           )}

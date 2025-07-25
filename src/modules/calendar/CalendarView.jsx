@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../supabase";
+import { useState } from "react";
 
 import "react-calendar/dist/Calendar.css"; // default styles
 import "../../styles/react-calendar-custom.css"; // custom overrides
@@ -9,27 +8,16 @@ import Calendar from "react-calendar";
 import EventModal from "../../components/events/EventModal";
 import EventCard from "../../components/events/EventCard";
 import EmptyEventsView from "../../components/events/EmptyEventsView";
+import useGetCalendarEvents from "../../utils/hooks/useGetCalendarEvents";
+import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 
 
 export default function CalendarView({ selectedType }) {
+  const { events, isLoading } = useGetCalendarEvents();
+
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const [events, setEvents] = useState([]);
-  
-    useEffect(() => {
-      const fetchEvents = async () => {
-        const { data, error } = await supabase
-          .from("events")
-          .select("*")
-          .order("event_date");
-  
-        if (error) console.error("Error fetching events:", error);
-        else setEvents(data);
-      };
-  
-      fetchEvents();
-    }, []);
-  
+
     const selectedDateStr = selectedDate.toISOString().split("T")[0];
   
     const filtered = events.filter(
@@ -75,7 +63,11 @@ export default function CalendarView({ selectedType }) {
           </h3>
 
           <div className={styles.eventScrollArea}>
-            {filtered.length === 0 ? (
+            { isLoading && (
+              <EventCardSkeleton />
+            )}
+
+            { !isLoading && filtered.length === 0 ? (
               <EmptyEventsView currentView="calendar" />
             ) : (
               filtered.map((event) => (
