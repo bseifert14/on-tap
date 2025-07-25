@@ -31,6 +31,9 @@ export default function ProfileLayout({ user }) {
       </div>
 
       <div className={styles.content}>
+        <div className={styles.user}>
+          Logged in with, {user.email}
+        </div>  
         {activeTab === "events" ? (
           <ProfileEvents user={user} />
         ) : (

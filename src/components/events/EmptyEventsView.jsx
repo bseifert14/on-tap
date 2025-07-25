@@ -10,7 +10,7 @@ export default function EmptyEventsView({ currentView }) {
     <div>
         <div className={styles.emptyState}>
             <img src={emptyEventsView} alt="Empty stage" className={styles.image} />
-            <h2>No events scheduled for today.</h2>
+            <h2>No events scheduled.</h2>
             <p>{message}</p>
         </div>
     </div>

@@ -61,25 +61,7 @@ export default function HomeLayout() {
     const fetchEvents = async () => {
       const { data, error } = await supabase
         .from("events")
-        .select(`
-          id,
-          created_by,
-          event_name,
-          event_description,
-          event_type,
-          event_url,
-          is_kid_friendly,
-          is_18_plus,
-          is_21_plus,
-          event_location,
-          event_date,
-          event_start_timestamp,
-          event_photo_url,
-          business_id,
-          businesses (
-            name
-          )
-        `)
+        .select("*")
         .gte("event_date", new Date().toISOString().split("T")[0])
         .order("event_date", { ascending: true });
     
@@ -103,7 +85,9 @@ export default function HomeLayout() {
       <HeroLayout currentView="list" />
       <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
-          <EmptyEventsView currentView="list" />
+          { events.length === 0 && (
+            <EmptyEventsView currentView="list" />
+          )}
           <EventList
             events={events}
             selectedType={selectedType}

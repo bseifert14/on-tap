@@ -48,6 +48,10 @@
   border: 1px solid #e9ecef;
 }
 
+.user {
+  padding-bottom: 40px;
+}
+
 @media (max-width: 600px) {
   .content {
     padding: 20px;
