@@ -24,6 +24,8 @@ export default function useClientData(userId) {
     setEventTypeFilter,
     eventDateFilter,
     setEventDateFilter,
+    showPastEvents,
+    setShowPastEvents,
     loadEvents,
     isLoading: eventsLoading
   } = useClientEvents(userId);
@@ -44,6 +46,8 @@ export default function useClientData(userId) {
     setEventTypeFilter,
     eventDateFilter,
     setEventDateFilter,
+    showPastEvents,
+    setShowPastEvents,
     loadEvents,
     eventsLoading,
     isLoading: businessLoading || eventsLoading,

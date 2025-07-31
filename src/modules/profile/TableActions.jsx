@@ -3,21 +3,30 @@ import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector
 import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
 import Button from "../../components/common/Button";
 
-export default function TableActions({ user, setShowModal, searchValue, 
-    setSearchValue, eventTypeFilter, eventDateFilter,setEventTypeFilter, 
-    setEventDateFilter, setCurrentPage
+export default function TableActions({
+  user,
+  setShowModal,
+  searchValue,
+  setSearchValue,
+  eventTypeFilter,
+  eventDateFilter,
+  setEventTypeFilter,
+  setEventDateFilter,
+  setCurrentPage,
+  showPastEvents,
+  setShowPastEvents
 }) {
   return (
     <div>
       {/* Top Bar */}
       <div className={styles.topBar}>
         <div className={styles.leftGroup}>
-            <Button
-                onClick={() => setShowModal(true)}
-                className={styles.addButton}
-            >
-                + Add Event
-            </Button>
+          <Button
+            onClick={() => setShowModal(true)}
+            className={styles.addButton}
+          >
+            + Add Event
+          </Button>
           <input
             className={styles.searchInput}
             type="text"
@@ -29,30 +38,41 @@ export default function TableActions({ user, setShowModal, searchValue,
             }}
           />
         </div>
+
         <div className={styles.rightFilters}>
-        <TableEventTypeSelector
-          selected={eventTypeFilter}
-          onApply={(newSel) => {
-            setEventTypeFilter(newSel);
-            setCurrentPage(1);
-          }}
-        />
+          <TableEventTypeSelector
+            selected={eventTypeFilter}
+            onApply={(newSel) => {
+              setEventTypeFilter(newSel);
+              setCurrentPage(1);
+            }}
+          />
 
-        <div className={styles.filterWrapper}>
-        <TableEventDateSelector
-          selected={eventDateFilter}
-          onApply={(date) => {
-            setEventDateFilter(date);
-            setCurrentPage(1);
-          }}
-          onClear={() => {
-            setEventDateFilter(null);
-            setCurrentPage(1);
-          }}
-        />
+          <div className={styles.filterWrapper}>
+            <TableEventDateSelector
+              selected={eventDateFilter}
+              onApply={(date) => {
+                setEventDateFilter(date);
+                setCurrentPage(1);
+              }}
+              onClear={() => {
+                setEventDateFilter(null);
+                setCurrentPage(1);
+              }}
+            />
+          </div>
 
-        </div>
-
+          <label className={styles.filterCheckbox}>
+            <input
+              type="checkbox"
+              checked={showPastEvents}
+              onChange={() => {
+                setShowPastEvents(prev => !prev);
+                setCurrentPage(1);
+              }}
+            />
+            <span>Show Past Events</span>
+          </label>
         </div>
       </div>
     </div>

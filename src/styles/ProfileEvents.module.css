@@ -63,3 +63,27 @@
   gap: 8px; /* or whatever spacing you prefer */
   align-items: center;
 }
+
+.filterCheckbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  user-select: none;
+  transition: background 0.2s, border 0.2s;
+}
+
+.filterCheckbox input[type="checkbox"] {
+  accent-color: #e3003b;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.filterCheckbox:hover {
+  background-color: #f5f5f5;
+}

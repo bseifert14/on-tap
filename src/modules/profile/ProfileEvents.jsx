@@ -13,6 +13,7 @@ import useClientEvents from "../../utils/hooks/useClientEvents";
 import useClientData from "../../utils/hooks/useClientData";
 import useClientEventsModal from "../../utils/hooks/useClientEventsModal";
 import { useBusinessProfile } from "../../utils/hooks/useBusinessProfile";
+import TableSkeleton from "../../components/TableSkeleton";
 
 export default function ProfileEvents({ user }) {
   const {
@@ -28,6 +29,8 @@ export default function ProfileEvents({ user }) {
     setEventTypeFilter,
     eventDateFilter,
     setEventDateFilter,
+    showPastEvents,
+    setShowPastEvents,
     loadEvents,
     isLoading
   } = useClientData(user?.id);
@@ -43,7 +46,11 @@ export default function ProfileEvents({ user }) {
     handleDelete
   } = useClientEventsModal(loadEvents);
 
-  if (!business?.url || isLoading) {
+  if (isLoading) {
+    return <TableSkeleton />
+  }
+
+  if (!business?.url) {
     return <Banner message="Please complete your business profile before adding events." />
   }
 
@@ -59,6 +66,8 @@ export default function ProfileEvents({ user }) {
         setEventTypeFilter={setEventTypeFilter}
         setEventDateFilter={setEventDateFilter}
         setCurrentPage={setCurrentPage}
+        showPastEvents={showPastEvents}
+        setShowPastEvents={setShowPastEvents}
       />
 
       {/* Table */}

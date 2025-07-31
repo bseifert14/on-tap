@@ -12,22 +12,31 @@ export default function useClientEvents(userId) {
   const [search, setSearch] = useState("");
   const [eventTypeFilter, setEventTypeFilter] = useState([]);
   const [eventDateFilter, setEventDateFilter] = useState(null);
+  const [showPastEvents, setShowPastEvents] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const EVENTS_PER_PAGE = 10;
 
   useEffect(() => {
     if (userId) loadEvents();
-  }, [userId]);
+  }, [userId, showPastEvents]);
 
   const loadEvents = async () => {
     if (!userId) return;
 
     setIsLoading(true);
-    const { data, error } = await supabase
+
+    let query = supabase
       .from("events")
       .select("*")
       .eq("created_by", userId);
+
+    if (!showPastEvents) {
+      const today = new Date().toISOString().split("T")[0];
+      query = query.gte("event_date", today);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       console.error("Error loading events:", error);
@@ -39,9 +48,12 @@ export default function useClientEvents(userId) {
   };
 
   const filtered = events
-    .filter(e => e.event_name.toLowerCase().includes(search.toLowerCase()))
-    .filter(e => eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type))
-    .filter(e => !eventDateFilter || e.event_date === eventDateFilter);
+    .filter((e) => e.event_name.toLowerCase().includes(search.toLowerCase()))
+    .filter(
+      (e) =>
+        eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type)
+    )
+    .filter((e) => !eventDateFilter || e.event_date === eventDateFilter);
 
   const total = filtered.length;
   const totalPages = Math.ceil(total / EVENTS_PER_PAGE);
@@ -62,6 +74,8 @@ export default function useClientEvents(userId) {
     setEventTypeFilter,
     eventDateFilter,
     setEventDateFilter,
+    showPastEvents,
+    setShowPastEvents,
     loadEvents,
     isLoading,
   };
