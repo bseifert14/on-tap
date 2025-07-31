@@ -7,7 +7,11 @@ import { formatEventDateTime } from "../../utils/formatDates";
 import Button from "../common/Button";
 
 export default function EventCard({ event, onSelectEvent }) {
-    const { event_description, event_location, event_name, event_photo_url, event_type } = event;
+    const { event_description, event_location, event_name, event_photo_url, 
+        event_type, event_start_timestamp, event_end_timestamp 
+    } = event;
+
+    console.log(event_start_timestamp, event_end_timestamp);
 
     return (
         <div className={styles.card}>
@@ -25,7 +29,7 @@ export default function EventCard({ event, onSelectEvent }) {
             <div className={styles.details}>
                 <div className={styles.iconValuePair}>
                     <Calendar size={15} strokeWidth={1.5} color="#999" />
-                    <div className={styles.value}>{formatEventDateTime(event.event_start_timestamp)}</div>
+                    <div className={styles.value}>{formatEventDateTime(event_start_timestamp, event_end_timestamp)}</div>
                 </div>
                 <div className={styles.iconValuePair}>
                     <MapPin size={15} strokeWidth={1.5} color="#999" />

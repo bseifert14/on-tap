@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "./supabase";
 
 import HeaderLayout from "./modules/header/HeaderLayout";
@@ -21,6 +21,7 @@ const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
 
 export default function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -47,6 +48,7 @@ export default function App() {
     try {
       await supabase.auth.signOut();
       setUser(null);
+      navigate("/");
     } catch (err) {
       console.error("Logout error:", err.message);
     }
@@ -69,6 +71,7 @@ export default function App() {
           onLoginSuccess={(user) => {
             setUser(user);
             setShowLogin(false);
+            navigate("/profile");
           }}
         />
       )}

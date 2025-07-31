@@ -17,6 +17,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     event_type: "",
     event_date: "",
     event_start_timestamp: "",
+    event_end_timestamp: "",
     event_description: "",
     event_url: "",
     event_photo_url: "",
@@ -38,6 +39,9 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         event_date: event.event_date || "",
         event_start_timestamp: event.event_start_timestamp
           ? new Date(event.event_start_timestamp).toISOString().slice(11, 16)  // "HH:MM"
+          : "",
+          event_end_timestamp: event.event_end_timestamp
+          ? new Date(event.event_end_timestamp).toISOString().slice(11, 16)  // "HH:MM"
           : "",
         event_description: event.event_description || "",
         event_url: event.event_url || "",
@@ -121,16 +125,24 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
       photoUrl = publicUrlData.publicUrl;
     }
 
-    const fullTimestamp =
+    const fullStartTimestamp =
       form.event_start_timestamp?.includes("T")
         ? form.event_start_timestamp
         : form.event_date && form.event_start_timestamp
         ? `${form.event_date}T${form.event_start_timestamp}:00`
         : null;
 
+    const fullEndTimestamp =
+      form.event_end_timestamp?.includes("T")
+        ? form.event_end_timestamp
+        : form.event_date && form.event_end_timestamp
+        ? `${form.event_date}T${form.event_end_timestamp}:00`
+        : null;
+
     const payload = {
       ...form,
-      event_start_timestamp: fullTimestamp,
+      event_start_timestamp: fullStartTimestamp,
+      event_end_timestamp: fullEndTimestamp,
       created_by: user.id,
       event_photo_url: photoUrl || null
     };
@@ -188,17 +200,34 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           onChange={e => handleChange("event_date", e.target.value)}
         />
 
-        <label className={styles["eventModal-label"]}>Event Time*</label>
-        <select
-          className={styles["eventModal-input"]}
-          value={form.event_start_timestamp}
-          onChange={e => handleChange("event_start_timestamp", e.target.value)}
-        >
-          <option value="">Select time</option>
-          {generateTimeOptions("06:00", "23:30", 30).map(time => (
-            <option key={time} value={time}>{formatTime(time)}</option>
-          ))}
-        </select>
+        <div className={styles.timeFieldContainer}>
+          <div className={styles.timeFieldItem}>
+            <label className={styles["eventModal-label"]}>Event Start Time*</label>
+            <select
+              className={styles["eventModal-input"]}
+              value={form.event_start_timestamp}
+              onChange={e => handleChange("event_start_timestamp", e.target.value)}
+            >
+              <option value="">Select time</option>
+              {generateTimeOptions("06:00", "23:30", 30).map(time => (
+                <option key={time} value={time}>{formatTime(time)}</option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.timeFieldItem}>
+            <label className={styles["eventModal-label"]}>Event End Time</label>
+            <select
+              className={styles["eventModal-input"]}
+              value={form.event_end_timestamp}
+              onChange={e => handleChange("event_end_timestamp", e.target.value)}
+            >
+              <option value="">Select time</option>
+              {generateTimeOptions("06:00", "23:30", 30).map(time => (
+                <option key={time} value={time}>{formatTime(time)}</option>
+              ))}
+            </select>
+          </div>
+        </div>
 
         <label className={styles["eventModal-label"]}>Description*</label>
         <textarea

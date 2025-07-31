@@ -119,3 +119,14 @@
     background-color: #f5f5f5;
   }
   
+  .timeFieldContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    column-gap: 40px;
+  }
+
+  .timeFieldItem {
+    flex-basis: 50%
+  }
+  

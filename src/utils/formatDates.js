@@ -1,21 +1,28 @@
 import { format, isToday, isTomorrow, isThisWeek, parseISO } from 'date-fns';
 
-export function formatEventDateTime(isoString) {
-  const date = parseISO(isoString);
+export function formatEventDateTime(start, endTime) {
+  const startDate = parseISO(start);
+  const startTimeStr = format(startDate, 'h:mm a');
 
-  if (isToday(date)) {
-    return `Today • ${format(date, 'h:mm a')}`;
+  let endTimeStr = "";
+  if (endTime) {
+    const endDate = parseISO(endTime);
+    endTimeStr = ` - ${format(endDate, 'h:mm a')}`;
   }
 
-  if (isTomorrow(date)) {
-    return `Tomorrow • ${format(date, 'h:mm a')}`;
+  if (isToday(startDate)) {
+    return `Today • ${startTimeStr}${endTimeStr}`;
   }
 
-  if (isThisWeek(date)) {
-    return `${format(date, 'EEEE')} • ${format(date, 'h:mm a')}`; // e.g., "Thursday • 4:00 PM"
+  if (isTomorrow(startDate)) {
+    return `Tomorrow • ${startTimeStr}${endTimeStr}`;
   }
 
-  return `${format(date, 'EEE, MMM d')} • ${format(date, 'h:mm a')}`; // e.g., "Mon, Jul 28 • 7:00 PM"
+  if (isThisWeek(startDate)) {
+    return `${format(startDate, 'EEEE')} • ${startTimeStr}${endTimeStr}`;
+  }
+
+  return `${format(startDate, 'EEE, MMM d')} • ${startTimeStr}${endTimeStr}`;
 }
 
 export function generateTimeOptions(start, end, interval) {
