@@ -1,24 +1,18 @@
 {
-    "cleanUrls": true,
-    "trailingSlash": false,
-    "rewrites": [
-      {
-        "source": "/redirect.html",
-        "destination": "/redirect.html"
-      }
-    ],
     "redirects": [
       {
-        "source": "/:path*",
+        "source": "/(.*)",
         "has": [
           {
             "type": "host",
             "value": "www.whatsupstowe.io"
           }
         ],
-        "destination": "https://whatsupstowe.io/:path*",
+        "destination": "https://whatsupstowe.io/$1",
         "permanent": true
       }
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
   }
   
