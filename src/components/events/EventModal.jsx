@@ -6,10 +6,23 @@ import { getDefaultImage } from "../../utils/getDefaultImage";
 
 export default function EventModal({ event, onClose }) {
   if (!event) return null;
-  const { event_name, event_location, event_date, event_description, event_photo_url, event_type, event_url, event_start_timestamp } = event;
+  const { event_name, event_location, event_date, event_description, event_photo_url, 
+    event_type, event_url, event_start_timestamp, event_end_timestamp, business_url
+  } = event;
+
   const [showFade, setShowFade] = useState(false);
   const descriptionRef = useRef(null);
-  const safeUrl = event_url?.startsWith("http") ? event_url : `https://${event_url}`;
+
+  function getEventUrl(eventURL, businessURL) {
+      if (eventURL) {
+        return eventURL?.startsWith("http") ? eventURL : `https://${eventURL}`
+      } else if (businessURL) {
+        return businessURL?.startsWith("http") ? businessURL : `https://${businessURL}`;
+      }
+
+      return '#';
+  }
+
   useEffect(() => {
     const el = descriptionRef.current;
   
@@ -49,7 +62,7 @@ export default function EventModal({ event, onClose }) {
             </div>
             <div className={styles.iconValuePairTime}>
                 <Calendar size={15} strokeWidth={1.5} color="#999" />
-                <div className={styles.value}>{formatEventDateTime(event_start_timestamp)}</div>
+                <div className={styles.value}>{formatEventDateTime(event_start_timestamp, event_end_timestamp)}</div>
             </div>
             <div
               ref={descriptionRef}
@@ -65,11 +78,9 @@ export default function EventModal({ event, onClose }) {
         <div className={styles.modalFooter}>
             <>
               <div className={styles.divider} />
-              {event_url && (
-                <a href={safeUrl} className={styles.button} target="_blank" rel="noopener noreferrer">
-                  Learn More
-                </a>
-              )}
+              <a href={getEventUrl(event_url, business_url)} className={styles.button} target="_blank" rel="noopener noreferrer">
+                Learn More
+              </a>
             </>
           </div>
       </div>

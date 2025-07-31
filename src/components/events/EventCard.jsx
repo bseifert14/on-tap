@@ -11,8 +11,6 @@ export default function EventCard({ event, onSelectEvent }) {
         event_type, event_start_timestamp, event_end_timestamp 
     } = event;
 
-    console.log(event_start_timestamp, event_end_timestamp);
-
     return (
         <div className={styles.card}>
         <img src={event_photo_url || getDefaultImage(event_type)} alt={event_name} className={styles.image} />

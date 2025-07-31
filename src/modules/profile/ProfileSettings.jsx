@@ -37,7 +37,6 @@ export default function ProfileSettings({ user }) {
         .select("*")
         .eq("business_id", biz.id)
         .single();
-      console.log(contactData);
       if (contactData) setContact(contactData);
     }
   };

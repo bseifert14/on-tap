@@ -25,7 +25,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     is_18_plus: false,
     is_21_plus: false
   });
-  console.log(user);
+
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInputRef = useRef(null);
   const maxFileSizeMB = 3;
