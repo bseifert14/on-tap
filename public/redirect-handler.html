@@ -2,14 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Setting up your session...</title>
+    <title>Redirecting...</title>
     <script type="module">
-      import { createClient } from "https://esm.sh/@supabase/supabase-js";
-
-      const supabase = createClient(
-        "https://uudrtxlrcrbuklloginp.supabase.co", // ✅ replace with your actual project URL
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1ZHJ0eGxyY3JidWtsbG9naW5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MTM0MjQsImV4cCI6MjA2NzA4OTQyNH0.I1xoHWq-ENeis4wMQO5-jtT8qYw7ga3zcXVWBrpwnsk" // ✅ replace with your anon/public key
-      );
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
@@ -17,24 +12,25 @@
       const refresh_token = params.get("refresh_token");
 
       if (access_token && refresh_token) {
-        const { error } = await supabase.auth.setSession({
+        const supabase = createClient(
+          "https://uudrtxlrcrbuklloginp.supabase.co", // ✅ replace with your actual project URL
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1ZHJ0eGxyY3JidWtsbG9naW5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MTM0MjQsImV4cCI6MjA2NzA4OTQyNH0.I1xoHWq-ENeis4wMQO5-jtT8qYw7ga3zcXVWBrpwnsk" // ✅ replace with your anon/public key
+        );
+
+        supabase.auth.setSession({
           access_token,
           refresh_token,
+        }).then(() => {
+          // ✅ Finally redirect the user to a logged-in page
+          window.location.href = "/profile"; // or whatever page makes sense
         });
-
-        if (error) {
-          console.error("Failed to set session:", error.message);
-          window.location.href = "/error"; // or show an inline error
-        } else {
-          window.location.replace("/profile");
-        }
       } else {
-        console.error("Missing tokens in URL hash.");
-        window.location.href = "/login";
+        // 🚫 If tokens are missing, go home
+        window.location.href = "/";
       }
     </script>
   </head>
   <body>
-    Redirecting and setting up your session...
+    Redirecting...
   </body>
 </html>
