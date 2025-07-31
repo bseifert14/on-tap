@@ -1,14 +1,11 @@
 {
     "redirects": [
       {
-        "source": "/(.*)",
+        "source": "/",
         "has": [
-          {
-            "type": "host",
-            "value": "www.whatsupstowe.io"
-          }
+          { "type": "host", "value": "www.whatsupstowe.io" }
         ],
-        "destination": "https://whatsupstowe.io/$1",
+        "destination": "https://whatsupstowe.io/",
         "permanent": true
       }
     ],
