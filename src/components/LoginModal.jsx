@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabase";
+import { toast } from 'sonner';
+
 import styles from "../styles/LoginModal.module.css";
 import PasswordResetModal from "./PasswordResetModal";
 
@@ -15,7 +17,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
     });
 
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     } else {
       onLoginSuccess?.(data.user); // Optional, in case you need to pass back the user
       onClose();

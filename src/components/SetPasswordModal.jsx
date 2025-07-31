@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase";
-import styles from "../styles/SetPasswordModal.module.css";
+import { toast } from 'sonner';
 import { CheckCircle } from "lucide-react";
+
+import styles from "../styles/SetPasswordModal.module.css";
 
 export default function SetPasswordModal({ onClose }) {
   const [pw1, setPw1] = useState("");
@@ -22,12 +24,12 @@ export default function SetPasswordModal({ onClose }) {
     const { error: pwError } = await supabase.auth.updateUser({ password: pw1 });
 
     if (pwError) {
-      alert("Failed to set password.");
+      toast.error("Failed to set password.");
       setLoading(false);
       return;
     }
 
-    alert("Password set! You're now logged in.");
+    toast.success("Password set! You're now logged in.");
     window.history.replaceState(null, "", window.location.pathname);
     setLoading(false);
     onClose();

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../supabase";
+import { toast } from 'sonner';
+
 import SetPasswordModal from "../../components/SetPasswordModal";
 
 export default function Recover() {
@@ -14,7 +16,7 @@ export default function Recover() {
     const refresh_token = params.get("refresh_token");
 
     if (!access_token || !refresh_token) {
-      alert("Missing token. Please use the link in your email.");
+      toast.error("Missing token. Please use the link in your email.");
       return;
     }
 
@@ -25,7 +27,7 @@ export default function Recover() {
       });
 
       if (error) {
-        alert("Error completing session.");
+        toast.error("Error completing session.");
         return;
       }
 

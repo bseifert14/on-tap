@@ -15,6 +15,7 @@ import Recover from "./modules/common/Recover";
 import CalendarLayout from "./modules/calendar/CalendarLayout";
 import HomeLayout from "./modules/home/HomeLayout";
 import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
+import { Toaster } from 'sonner';
 
 const CUSTOM_HEADER_LOCATIONS = ['/about', '/contact', '/profile'];
 const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
@@ -56,6 +57,8 @@ export default function App() {
 
   return (
     <div className="pageWrapper">
+      <Toaster position="top-center" richColors />
+      
       <HeaderLayout
         user={user}
         onLoginClick={() => setShowLogin(true)}
