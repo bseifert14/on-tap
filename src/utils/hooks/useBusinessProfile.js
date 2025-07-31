@@ -26,8 +26,9 @@ export function useBusinessProfile(userId) {
   };
 
   const saveBusiness = async (updatedBusiness) => {
-    const cleanUrl = updatedBusiness.website_url
-        ? sanitizeUrl(updatedBusiness.website_url)
+    console.log(updatedBusiness);
+    const cleanUrl = updatedBusiness.url
+        ? sanitizeUrl(updatedBusiness.url)
         : null;
 
     const { data, error } = await supabase
