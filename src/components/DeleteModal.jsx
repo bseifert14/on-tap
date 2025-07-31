@@ -1,27 +1,29 @@
+import styles from '../styles/AddEditEventModal.module.css'
+import buttonStyle from "../styles/common/Button.module.css";
+import Button from './common/Button';
+
 export default function DeleteModal({ onConfirm, onCancel }) {
     return (
-      <div style={modalOverlay}>
-        <div style={modalBox}>
+      <div className={styles["eventModal-overlay"]}>
+        <div className={styles["eventModal-box"]}>
           <h3>Are you sure you want to delete this event?</h3>
-          <div style={{ marginTop: 10 }}>
-            <button onClick={onConfirm} style={{ background: "#e3003b", color: "#fff" }}>
+          <div style={actionButtonContainer}>
+            <Button onClick={onConfirm} className={buttonStyle.primaryButton}>
               Yes, Delete
-            </button>
-            <button onClick={onCancel} style={{ marginLeft: 8 }}>
+            </Button>
+            <Button onClick={onCancel} className={buttonStyle.secondaryButton}>
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
       </div>
     );
   }
   
-  const modalOverlay = {
-    position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
-    backgroundColor: "rgba(0,0,0,0.5)", display: "flex", justifyContent: "center", alignItems: "center"
-  };
-  
-  const modalBox = {
-    background: "#fff", padding: 20, borderRadius: 8, minWidth: 300
+  const actionButtonContainer = {
+    display: 'flex',
+    justifyContent: 'right',
+    columnGap: '15px',
+    paddingTop: '20px'
   };
   

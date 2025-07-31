@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase";
+import { sanitizeUrl } from "../sanitizeUrl";
 
 export function useBusinessProfile(userId) {
   const [business, setBusiness] = useState(null);
@@ -25,9 +26,17 @@ export function useBusinessProfile(userId) {
   };
 
   const saveBusiness = async (updatedBusiness) => {
+    const cleanUrl = updatedBusiness.website_url
+        ? sanitizeUrl(updatedBusiness.website_url)
+        : null;
+
     const { data, error } = await supabase
       .from("businesses")
-      .upsert({ ...updatedBusiness, user_id: userId })
+      .upsert({
+        ...updatedBusiness,
+        url: cleanUrl,
+        user_id: userId
+      })
       .select()
       .single();
 

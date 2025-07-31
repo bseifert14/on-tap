@@ -14,8 +14,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     handleSubmit,
     fileInputRef,
     selectedFile,
-    validateAndProcessFile,
-    maxFileSizeMB
+    validateAndProcessFile
   } = useEventForm(user, event, onSave);
 
   return (
@@ -148,7 +147,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           onDrop={(e) => {
             e.preventDefault();
             const file = e.dataTransfer.files[0];
-            if (file) handleFileChange(file);
+            if (file) validateAndProcessFile(file);
           }}
           onClick={() => fileInputRef.current?.click()}
         >
@@ -160,7 +159,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
             ref={fileInputRef}
             onChange={(e) => {
               const file = e.target.files[0];
-              if (file) handleFileChange(file);
+              if (file) validateAndProcessFile(file);
             }}
           />
         </div>

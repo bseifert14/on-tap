@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { supabase } from "../../supabase";
 import { toast } from "sonner";
 import resizeImageIfNeeded from "../resizeImageIfNeeded";
+import { sanitizeUrl } from "../sanitizeUrl";
 
 export default function useEventForm(user, event, onSave) {
   const [form, setForm] = useState({
@@ -94,13 +95,17 @@ export default function useEventForm(user, event, onSave) {
       form.event_date && form.event_start_timestamp
         ? `${form.event_date}T${form.event_start_timestamp}:00`
         : null;
+
     const fullEnd =
       form.event_date && form.event_end_timestamp
         ? `${form.event_date}T${form.event_end_timestamp}:00`
         : null;
+    
+    const cleanUrl = sanitizeUrl(form.event_url);
 
     const payload = {
       ...form,
+      event_url: cleanUrl || null,
       event_start_timestamp: fullStart,
       event_end_timestamp: fullEnd,
       created_by: user.id,
