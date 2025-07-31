@@ -1,6 +1,12 @@
 {
     "redirects": [
       {
+        "source": "/redirect-handler.html",
+        "destination": "/redirect-handler.html",
+        "has": [],
+        "permanent": false
+      },
+      {
         "source": "/",
         "has": [
           { "type": "host", "value": "www.whatsupstowe.io" }
