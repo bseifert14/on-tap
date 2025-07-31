@@ -2,6 +2,13 @@
     "outputDirectory": "dist",
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "https://www.whatsupstowe.io/:path*",
+        "destination": "https://whatsupstowe.io/:path*",
+        "permanent": true
+      }
+    ],
     "rewrites": [
       {
         "source": "/redirect.html",
