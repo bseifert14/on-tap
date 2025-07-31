@@ -20,9 +20,7 @@
           access_token,
           refresh_token,
         }).then(() => {
-          // Redirect to /recover with tokens
-          const search = new URLSearchParams({ access_token, refresh_token }).toString();
-          window.location.href = "/recover?" + search;
+          window.location.href = "/recover?access_token=" + access_token + "&refresh_token=" + refresh_token;
         });
       } else {
         window.location.href = "/";
