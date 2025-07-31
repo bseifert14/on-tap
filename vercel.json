@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/redirect.html",
-        "destination": "/redirect.html"
+        "destination": "/static/redirect.html"
       }
     ]
   }
