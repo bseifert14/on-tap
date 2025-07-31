@@ -6,7 +6,11 @@
     <script>
       const hash = window.location.hash.substring(1); // remove '#'
       const queryString = "?" + hash;
-      const targetUrl = "/recover" + queryString;
+
+      // Force to non-www domain
+      const host = window.location.hostname.replace("www.", "");
+      const targetUrl = "https://" + host + "/recover" + queryString;
+
       window.location.replace(targetUrl);
     </script>
   </head>
