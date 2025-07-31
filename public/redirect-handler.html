@@ -11,22 +11,23 @@
       const refresh_token = params.get("refresh_token");
 
       if (access_token && refresh_token) {
-        const client = supabase.createClient(
+        const supabase = supabase.createClient(
           "https://uudrtxlrcrbuklloginp.supabase.co",
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1ZHJ0eGxyY3JidWtsbG9naW5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MTM0MjQsImV4cCI6MjA2NzA4OTQyNH0.I1xoHWq-ENeis4wMQO5-jtT8qYw7ga3zcXVWBrpwnsk"
         );
 
-        // We don't need to `setSession` here at all!
-        // Just forward to the /recover route cleanly
-        const url = new URL(window.location.origin + "/recover");
-        url.searchParams.set("access_token", access_token);
-        url.searchParams.set("refresh_token", refresh_token);
-        window.location.replace(url);
+        supabase.auth.setSession({
+          access_token,
+          refresh_token,
+        }).then(() => {
+          const hash = window.location.hash.substring(1); // removes #
+          const newUrl = `${window.location.origin}/recover?${hash}`;
+          window.location.replace(newUrl);
+        });
       } else {
-        window.location.replace("/");
+        window.location.href = "/";
       }
     </script>
-
   </head>
   <body>
     Redirecting...
