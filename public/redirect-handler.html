@@ -10,23 +10,9 @@
       const access_token = params.get("access_token");
       const refresh_token = params.get("refresh_token");
 
-      if (access_token && refresh_token) {
-        const supabase = supabase.createClient(
-          "https://uudrtxlrcrbuklloginp.supabase.co",
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1ZHJ0eGxyY3JidWtsbG9naW5wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MTM0MjQsImV4cCI6MjA2NzA4OTQyNH0.I1xoHWq-ENeis4wMQO5-jtT8qYw7ga3zcXVWBrpwnsk"
-        );
-
-        supabase.auth.setSession({
-          access_token,
-          refresh_token,
-        }).then(() => {
-          const hash = window.location.hash.substring(1); // removes #
-          const newUrl = `${window.location.origin}/recover?${hash}`;
-          window.location.replace(newUrl);
-        });
-      } else {
-        window.location.href = "/";
-      }
+      const queryString = "?" + hash;
+      const targetUrl = "/recover" + queryString;
+      window.location.replace(targetUrl);
     </script>
   </head>
   <body>
