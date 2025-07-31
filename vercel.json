@@ -1,8 +1,12 @@
 {
+    "outputDirectory": "dist",
+    "cleanUrls": true,
+    "trailingSlash": false,
     "rewrites": [
       {
         "source": "/redirect.html",
-        "destination": "/static/redirect.html"
+        "destination": "/redirect.html"
       }
     ]
   }
+  
