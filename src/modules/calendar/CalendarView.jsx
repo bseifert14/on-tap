@@ -39,7 +39,8 @@ export default function CalendarView({ selectedType }) {
               const hasEvent = events.some(
                 (e) => e.event_date === dateStr && (selectedType === "All" || e.event_type === selectedType)
               );
-              const isSelected = dateStr === selectedDate.toISOString().split("T")[0];
+
+              const isSelected = date.toDateString() === selectedDate.toDateString();
               return [
                 hasEvent ? styles.hasEvent : "",
                 isSelected ? styles.selectedDay : ""

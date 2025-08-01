@@ -24,7 +24,8 @@ const overlayStyle = {
 
 const modalStyle = {
   background: "white", padding: 24, borderRadius: 8,
-  boxShadow: "0 0 20px rgba(0,0,0,0.2)", textAlign: "center"
+  boxShadow: "0 0 20px rgba(0,0,0,0.2)", textAlign: "center",
+  maxWidth: '90%'
 };
 
 const confirmButton = {

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "../../styles/UserEventTableFilterControls.module.css";
-
-const EVENT_TYPES = ["Music", "Food", "Art", "Fitness", "Other"];
+import { EVENT_TYPE_FILTERS } from '../../constants/eventTypes';
 
 export default function EventTypeFilter({ selected, onApply }) {
   const [tempSelection, setTempSelection] = useState(selected || []);
@@ -42,14 +41,14 @@ export default function EventTypeFilter({ selected, onApply }) {
     </button>
       {open && (
         <div className={styles.dropdownPanel}>
-          {EVENT_TYPES.map((type) => (
-            <label key={type} className={styles.checkboxItem}>
+          {EVENT_TYPE_FILTERS.map(({ label }) => (
+            <label key={label} className={styles.checkboxItem}>
               <input
                 type="checkbox"
-                checked={tempSelection.includes(type)}
-                onChange={() => toggleType(type)}
+                checked={tempSelection.includes(label)}
+                onChange={() => toggleType(label)}
               />
-              {type}
+              {label}
             </label>
           ))}
           <button className={styles.applyButton} onClick={handleApply}>

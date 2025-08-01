@@ -1,6 +1,7 @@
 import styles from "../styles/AddEditEventModal.module.css";
 import { formatTime, generateTimeOptions } from "../utils/formatDates";
 import useEventForm from "../utils/hooks/useEventForm";
+import FormLabel from "./form/FormLabel";
 
 const EVENT_TYPES = [
   "Music", "Sports", "Food & Bev", "Games", "Comedy",
@@ -24,21 +25,21 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           {event ? "Edit Event" : "Add Event"}
         </h3>
 
-        <label className={styles["eventModal-label"]}>Event Name*</label>
+        <FormLabel label="Event Name" name="event_name" isRequired />
         <input
           className={styles["eventModal-input"]}
           value={form.event_name}
           onChange={(e) => handleChange("event_name", e.target.value)}
         />
 
-        <label className={styles["eventModal-label"]}>Event Location*</label>
+        <FormLabel label="Event Location" name="event_location" isRequired />
         <input
           className={styles["eventModal-input"]}
           value={form.event_location}
           onChange={(e) => handleChange("event_location", e.target.value)}
         />
 
-        <label className={styles["eventModal-label"]}>Event Type*</label>
+        <FormLabel label="Event Type" name="event_type" isRequired />
         <select
           className={styles["eventModal-input"]}
           value={form.event_type}
@@ -50,7 +51,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           ))}
         </select>
 
-        <label className={styles["eventModal-label"]}>Event Date*</label>
+        <FormLabel label="Event Date" name="event_date" isRequired />
         <input
           className={styles["eventModal-input"]}
           type="date"
@@ -60,7 +61,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
 
         <div className={styles.timeFieldContainer}>
           <div className={styles.timeFieldItem}>
-            <label className={styles["eventModal-label"]}>Event Start Time*</label>
+            <FormLabel label="Start Time" name="event_start_timestamp" isRequired />
             <select
               className={styles["eventModal-input"]}
               value={form.event_start_timestamp}
@@ -73,7 +74,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
             </select>
           </div>
           <div className={styles.timeFieldItem}>
-            <label className={styles["eventModal-label"]}>Event End Time</label>
+            <FormLabel label="End Time" name="event_end_timestamp" />
             <select
               className={styles["eventModal-input"]}
               value={form.event_end_timestamp}
@@ -87,13 +88,14 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           </div>
         </div>
 
-        <label className={styles["eventModal-label"]}>Description*</label>
+        <FormLabel label="Description" name="event_description" isRequired />
         <textarea
           className={styles["eventModal-textarea"]}
           value={form.event_description}
           onChange={(e) => handleChange("event_description", e.target.value)}
         />
 
+        <FormLabel label="Audience" name="audience" />
         <label className={styles["eventModal-label"]}>Audience</label>
         <div className={styles["eventModal-radioGroup"]}>
           <label>
@@ -131,7 +133,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           </label>
         </div>
 
-        <label className={styles["eventModal-label"]}>Event Link (optional)</label>
+        <FormLabel label="Event Link" name="event_url" />
         <input
           className={styles["eventModal-input"]}
           type="url"
@@ -140,7 +142,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           onChange={(e) => handleChange("event_url", e.target.value)}
         />
 
-        <label className={styles["eventModal-label"]}>Event Photo (optional)</label>
+        <FormLabel label="Event Photo" name="event_photo_url" />
         <div
           className={styles["eventModal-dropzone"]}
           onDragOver={(e) => e.preventDefault()}

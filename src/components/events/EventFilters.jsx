@@ -1,28 +1,13 @@
 import styles from '../../styles/EventFilters.module.css';
 import btnStyles from "../../styles/common/Button.module.css";
 import Button from '../common/Button';
-import {
-  Volleyball,
-  Gamepad,
-  Baby,
-  Utensils,
-  Music,
-  SquareMenu,
-} from "lucide-react";
 
-const FILTERS = [
-  { label: "All", value: "All", icon: SquareMenu },
-  { label: "Sports", value: "Sports", icon: Volleyball },
-  { label: "Games", value: "Games", icon: Gamepad },
-  { label: "Kid Friendly", value: "Kid Friendly", icon: Baby },
-  { label: "Food & Bev", value: "Food & Bev", icon: Utensils },
-  { label: "Music", value: "Music", icon: Music },
-];
+import { EVENT_TYPE_FILTERS } from '../../constants/eventTypes';
 
 export default function EventFilters({ selectedType, onTypeChange }) {
   return (
     <div className={styles.filterContainer}>
-      {FILTERS.map(({ label, value, icon: Icon }) => (
+      {EVENT_TYPE_FILTERS.map(({ label, value, icon: Icon }) => (
         <Button
           key={value}
           onClick={() => onTypeChange(value)}

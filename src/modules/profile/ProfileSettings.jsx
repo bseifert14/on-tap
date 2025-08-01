@@ -4,6 +4,7 @@ import { useBusinessProfile } from "../../utils/hooks/useBusinessProfile";
 import { useContactProfile } from "../../utils/hooks/useContactProfile";
 
 import { toast } from "sonner";
+import FormLabel from "../../components/form/FormLabel";
 
 export default function ProfileSettings({ user }) {
   const {
@@ -43,7 +44,7 @@ export default function ProfileSettings({ user }) {
           <h2 className={styles.sectionTitle}>Business Information</h2>
           <form>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="business_name">Name</label>
+              <FormLabel label="Name" name="business_name" isRequired />
               <input
                 type="text"
                 id="business_name"
@@ -55,7 +56,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="street_address">Street Address</label>
+              <FormLabel label="Street Address" name="street_address" isRequired />
               <input
                 type="text"
                 id="street_address"
@@ -66,7 +67,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="city">City</label>
+              <FormLabel label="City" name="city" isRequired />
               <input
                 type="text"
                 id="city"
@@ -77,7 +78,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="state">State</label>
+              <FormLabel label="State" name="state" isRequired />
               <input
                 type="text"
                 id="state"
@@ -88,7 +89,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="zipcode">Zipcode</label>
+              <FormLabel label="Zipcode" name="zipcode" isRequired />
               <input
                 type="number"
                 id="zipcode"
@@ -99,7 +100,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="businessPhone">Phone Number</label>
+              <FormLabel label="Phone Number" name="businessPhone" isRequired />
               <input
                 type="text"
                 id="businessPhone"
@@ -110,7 +111,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="email">Email</label>
+              <FormLabel label="Email" name="email" isRequired />
               <input
                 type="text"
                 id="email"
@@ -121,7 +122,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="url">URL</label>
+              <FormLabel label="URL" name="url" isRequired />
               <input
                 type="text"
                 id="url"
@@ -139,7 +140,7 @@ export default function ProfileSettings({ user }) {
           <h2 className={styles.sectionTitle}>Primary Contact</h2>
           <form>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="contactName">Contact Name</label>
+              <FormLabel label="Contact Name" name="contactName" isRequired />
               <input
                 type="text"
                 id="contactName"
@@ -150,7 +151,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="contactPhone">Contact Phone</label>
+              <FormLabel label="Contact Phone" name="contactPhone" isRequired />
               <input
                 type="text"
                 id="contactPhone"
@@ -161,7 +162,7 @@ export default function ProfileSettings({ user }) {
               />
             </div>
             <div className={styles.formGroup}>
-              <label className={styles.formLabel} htmlFor="contactEmail">Contact Email</label>
+              <FormLabel label="Contact Email" name="contactEmail" isRequired />
               <input
                 type="text"
                 id="contactEmail"
