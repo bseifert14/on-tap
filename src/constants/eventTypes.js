@@ -12,4 +12,5 @@ export const EVENT_TYPE_FILTERS = [
   { label: "Art", value: "Art", icon: Palette },
 ];
 
+export const EVENT_TYPE_LABELS = EVENT_TYPE_FILTERS.map(f => f.label).filter(v => v !== "All");
 export const EVENT_TYPE_VALUES = EVENT_TYPE_FILTERS.map(f => f.value).filter(v => v !== "All");

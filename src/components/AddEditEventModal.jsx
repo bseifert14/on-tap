@@ -1,12 +1,9 @@
 import styles from "../styles/AddEditEventModal.module.css";
 import { formatTime, generateTimeOptions } from "../utils/formatDates";
 import useEventForm from "../utils/hooks/useEventForm";
+import Modal from "./common/Modal";
 import FormLabel from "./form/FormLabel";
-
-const EVENT_TYPES = [
-  "Music", "Sports", "Food & Bev", "Games", "Comedy",
-  "Talks / Panels", "Wellness / Fitness", "Art"
-];
+import { EVENT_TYPE_LABELS } from "../constants/eventTypes";
 
 export default function AddEditEventModal({ user, event, onClose, onSave }) {
   const {
@@ -18,13 +15,28 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     validateAndProcessFile
   } = useEventForm(user, event, onSave);
 
-  return (
-    <div className={styles["eventModal-overlay"]}>
-      <div className={styles["eventModal-box"]}>
-        <h3 className={styles["eventModal-title"]}>
-          {event ? "Edit Event" : "Add Event"}
-        </h3>
+  const Footer = () => {
+    return (
+      <div className={styles["eventModal-actions"]}>
+        <button className={styles["eventModal-buttonPrimary"]} onClick={handleSubmit}>
+          Save
+        </button>
+        <button className={styles["eventModal-buttonSecondary"]} onClick={onClose}>
+          Cancel
+        </button>
+      </div>
+    );
+  }
 
+  return (
+    <Modal
+      onClose={onClose}
+      footer={<Footer />}
+    >
+      <h3 className={styles["eventModal-title"]}>
+        {event ? "Edit Event" : "Add Event"}
+      </h3>
+      <div className={styles["eventModal-box"]}>
         <FormLabel label="Event Name" name="event_name" isRequired />
         <input
           className={styles["eventModal-input"]}
@@ -46,7 +58,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           onChange={(e) => handleChange("event_type", e.target.value)}
         >
           <option value="">Select Event Type</option>
-          {EVENT_TYPES.map((type) => (
+          {EVENT_TYPE_LABELS.map((type) => (
             <option key={type} value={type}>{type}</option>
           ))}
         </select>
@@ -168,16 +180,7 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         <small className={styles["eventModal-note"]}>
           Max size 3MB. If left blank, a default image will be used based on event type.
         </small>
-
-        <div className={styles["eventModal-actions"]}>
-          <button className={styles["eventModal-buttonPrimary"]} onClick={handleSubmit}>
-            Save
-          </button>
-          <button className={styles["eventModal-buttonSecondary"]} onClick={onClose}>
-            Cancel
-          </button>
-        </div>
       </div>
-    </div>
-  );
+    </Modal>
+  )
 }

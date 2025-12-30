@@ -15,9 +15,12 @@
     text-align: center;
     transition: all 0.2s ease;
   }
+
+   .react-calendar__tile--now {
+    background-color: transparent;
+   }
   
   /* Selected Date Styling */
-  .react-calendar__tile--now,
   .react-calendar__tile--active {
     background-color: #d90429;
     color: white;

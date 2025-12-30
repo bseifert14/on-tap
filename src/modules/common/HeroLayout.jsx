@@ -9,7 +9,7 @@ export default function HeroLayout({ currentView }) {
       </div>
       <div className={styles.right}>
         <h1 className={styles.heading}>
-          What's happening in Stowe this week?
+          What's going on in Stowe?
         </h1>
         <p className={styles.subheading}>
           From mountain adventures to live bands - never miss a beat on the events going on around town.

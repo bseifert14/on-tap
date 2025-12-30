@@ -7,16 +7,9 @@
     align-items: center;
     z-index: 999;
   }
-  
   .eventModal-box {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 700px; /* was 500px */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 60vh;
   }
 
   @media (min-width: 1024px) {
