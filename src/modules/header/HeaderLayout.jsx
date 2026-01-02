@@ -32,15 +32,6 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
             setMenuOpen={setMenuOpen}
         />
       </MobileMenu>
-
-      {/* {menuOpen && (
-        <MobileNav
-            user={user}
-            onLogout={onLogout}
-            onLoginClick={onLoginClick}
-            setMenuOpen={setMenuOpen}
-        />
-      )} */}
     </>
   );
 }
