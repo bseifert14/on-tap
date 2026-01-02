@@ -108,16 +108,13 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
         />
 
         <FormLabel label="Audience" name="audience" />
-        <label className={styles["eventModal-label"]}>Audience</label>
         <div className={styles["eventModal-radioGroup"]}>
           <label>
             <input
               type="radio"
               name="audience"
-              checked={form.is_kid_friendly && !form.is_18_plus && !form.is_21_plus}
-              onChange={() =>
-                setAudience("kid")
-              }
+              checked={form.event_min_age === 0}
+              onChange={() => handleChange("event_min_age", 0)}
             />
             All Ages
           </label>
@@ -125,10 +122,8 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
             <input
               type="radio"
               name="audience"
-              checked={!form.is_kid_friendly && form.is_18_plus && !form.is_21_plus}
-              onChange={() =>
-                setAudience("18")
-              }
+              checked={form.event_min_age === 18}
+              onChange={(e) => handleChange("event_min_age", 18)}
             />
             18+
           </label>
@@ -136,10 +131,8 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
             <input
               type="radio"
               name="audience"
-              checked={!form.is_kid_friendly && !form.is_18_plus && form.is_21_plus}
-              onChange={() =>
-                setAudience("21")
-              }
+              checked={form.event_min_age === 21}
+              onChange={() => handleChange("event_min_age", 21)}
             />
             21+
           </label>

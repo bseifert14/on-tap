@@ -18,7 +18,8 @@ export default function useEventForm(user, event, onSave) {
     event_photo_url: "",
     is_kid_friendly: true,
     is_18_plus: false,
-    is_21_plus: false
+    is_21_plus: false,
+    event_min_age: 0
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -42,6 +43,7 @@ export default function useEventForm(user, event, onSave) {
         event_description: event.event_description || "",
         event_url: event.event_url || "",
         event_photo_url: event.event_photo_url || "",
+        event_min_age: event.event_min_age || 0,
         is_kid_friendly: event.is_kid_friendly ?? true,
         is_18_plus: event.is_18_plus ?? false,
         is_21_plus: event.is_21_plus ?? false,
