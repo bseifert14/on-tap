@@ -6,6 +6,7 @@ import { Funnel } from 'lucide-react';
 import Button from '../../components/common/Button';
 import EventFilters from '../../components/events/EventFilters';
 import ViewToggle from '../../components/ViewToggle';
+import MobileMenu from '../../components/common/MobileMenu';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -43,25 +44,20 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
             </button>
           )}
           <ViewToggle />
-
-          {showDrawer && (
-            <>
-              <div className={styles.backdrop} onClick={() => setShowDrawer(false)} />
-              <div className={styles.drawer}>
-                <div className={styles.drawerHeader}>
-                  <h3>Filters</h3>
-                  <button onClick={() => setShowDrawer(false)}>✕</button>
-                </div>
-                <EventFilters
-                  selectedType={selectedType}
-                  onTypeChange={(val) => {
-                    onTypeChange(val);
-                    setShowDrawer(false);
-                  }}
-                />
-              </div>
-            </>
-          )}
+          <MobileMenu
+            isOpen={showDrawer}
+            onClose={() => setShowDrawer(false)}
+            title="Filters"
+            id="mobile-filters-menu"
+          >
+            <EventFilters
+              selectedType={selectedType}
+              onTypeChange={(val) => {
+                onTypeChange(val);
+                setShowDrawer(false);
+              }}
+            />
+          </MobileMenu>
         </div>
       )}
     </div>

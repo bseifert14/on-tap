@@ -122,21 +122,13 @@
   z-index: 9;
 }
 
-.mobileMenu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 70%;
-  height: 100%;
-  background: var(--color-white);
-  padding: 20px 5px;
+.mobileNavContainer {
   display: flex;
   flex-direction: column;
-  z-index: 10;
 }
 
-.mobileMenu a,
-.mobileMenu button {
+.mobileNavContainer a,
+.mobileNavContainer button {
   color: var(--color-background);
   text-align: left;
   font-size: 18px;
@@ -144,6 +136,7 @@
   border: none;
   cursor: pointer;
   padding: 14px;
+  border-radius: 4px;
 }
 
 .mobileNavLinkActive {

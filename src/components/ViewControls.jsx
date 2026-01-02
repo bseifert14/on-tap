@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ViewToggle from "./ViewToggle";
 import EventFilters from "./EventFilters";
-import styles from "../styles/ViewControls.module.css";
+import styles from "../styles/MobileFilterMenu.module.css";
 import { Funnel } from 'lucide-react';
 
 export default function ViewControls({ selectedType, onTypeChange, currentView }) {

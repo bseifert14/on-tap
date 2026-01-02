@@ -1,7 +1,7 @@
 import styles from "../../styles/HeroLayout.module.css";
 import apresScene from '../../../public/images/hero/apres-scene.png';
 
-export default function HeroLayout({ currentView }) {
+export default function HeroLayout() {
   return (
     <section className={styles.hero}>
       <div className={styles.left}>
