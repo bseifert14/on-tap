@@ -3,6 +3,7 @@ import styles from "../../styles/Header.module.css";
 import HeaderLogo from "./HeaderLogo";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
+import MobileMenu from "../../components/common/MobileMenu";
 
 export default function HeaderLayout({ user, onLogout, onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,14 +20,27 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
         </button>
       </header>
 
-      {menuOpen && (
+      <MobileMenu
+        id="mobile-nav-menu"
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      >
         <MobileNav
             user={user}
             onLogout={onLogout}
             onLoginClick={onLoginClick}
             setMenuOpen={setMenuOpen}
         />
-      )}
+      </MobileMenu>
+
+      {/* {menuOpen && (
+        <MobileNav
+            user={user}
+            onLogout={onLogout}
+            onLoginClick={onLoginClick}
+            setMenuOpen={setMenuOpen}
+        />
+      )} */}
     </>
   );
 }

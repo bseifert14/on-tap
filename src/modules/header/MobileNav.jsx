@@ -2,6 +2,13 @@ import React, { useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../../styles/Header.module.css";
 
+const NAV_ELEMENTS = [
+  { to: "/", label: "Home" },
+  { to: "/calendar", label: "Calendar" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact Us" }
+]
+
 export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen }) {
   const location = useLocation();
   const isLoggedIn = !!user;
@@ -28,27 +35,17 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
   }, []);
 
   return (
-    <>
-        <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
-        <div className={styles.mobileMenu}>
-        <button className={styles.closeBtn} onClick={() => setMenuOpen(false)}>
-            ✕
-        </button>
-        {[
-            { to: "/", label: "Home" },
-            { to: "/calendar", label: "Calendar" },
-            { to: "/about", label: "About" },
-            { to: "/contact", label: "Contact Us" },
-        ].map(({ to, label }) => (
+      <div className={styles.mobileNavContainer}>
+        {NAV_ELEMENTS.map(({ to, label }) => (
             <Link
-            key={to}
-            to={to}
-            onClick={() => setMenuOpen(false)}
-            className={
-                location.pathname === to ? styles.mobileNavLinkActive : ""
-            }
+              key={to}
+              to={to}
+              onClick={() => setMenuOpen(false)}
+              className={
+                  location.pathname === to ? styles.mobileNavLinkActive : ""
+              }
             >
-            {label}
+              {label}
             </Link>
         ))}
 
@@ -68,7 +65,6 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
         ) : (
             <button onClick={handleLoginClick}>Log In</button>
         )}
-        </div>
-    </>
+      </div>
   );
 }
