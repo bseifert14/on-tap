@@ -4,7 +4,7 @@ import EventFilters from "./EventFilters";
 import styles from "../styles/MobileFilterMenu.module.css";
 import { Funnel } from 'lucide-react';
 
-export default function MobileFilterMenu({ selectedType, onTypeChange, currentView }) {
+export default function ViewControls({ selectedType, onTypeChange, currentView }) {
   const [showDrawer, setShowDrawer] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 

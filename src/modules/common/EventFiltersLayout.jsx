@@ -4,11 +4,12 @@ import styles from "../../styles/ViewControls.module.css";
 import { Funnel } from 'lucide-react';
 
 import Button from '../../components/common/Button';
-import MobileFilterMenu from '../../components/events/MobileFilterMenu';
+import EventFilters from '../../components/events/EventFilters';
 import ViewToggle from '../../components/ViewToggle';
+import MobileMenu from '../../components/common/MobileMenu';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
-  const [showMobileFilterMenu, setShowMobileFilterMenu] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
           {selectedType === "All" ? (
             <Button
               className={styles.filterToggleButton}
-              onClick={() => setShowMobileFilterMenu(true)}
+              onClick={() => setShowDrawer(true)}
             >
               <Funnel strokeWidth={1.5} color="black"/>
             </Button>
@@ -43,25 +44,20 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
             </button>
           )}
           <ViewToggle />
-
-          {showMobileFilterMenu && (
-            <>
-              <div className={styles.backdrop} onClick={() => setShowMobileFilterMenu(false)} />
-              <div className={styles.drawer}>
-                <div className={styles.drawerHeader}>
-                  <h3>Filters</h3>
-                  <button onClick={() => setShowMobileFilterMenu(false)}>✕</button>
-                </div>
-                <MobileFilterMenu
-                  selectedType={selectedType}
-                  onTypeChange={(val) => {
-                    onTypeChange(val);
-                    setShowMobileFilterMenu(false);
-                  }}
-                />
-              </div>
-            </>
-          )}
+          <MobileMenu
+            isOpen={showDrawer}
+            onClose={() => setShowDrawer(false)}
+            title="Filters"
+            id="mobile-filters-menu"
+          >
+            <EventFilters
+              selectedType={selectedType}
+              onTypeChange={(val) => {
+                onTypeChange(val);
+                setShowDrawer(false);
+              }}
+            />
+          </MobileMenu>
         </div>
       )}
     </div>
