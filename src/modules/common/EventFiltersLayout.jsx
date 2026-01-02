@@ -4,11 +4,11 @@ import styles from "../../styles/ViewControls.module.css";
 import { Funnel } from 'lucide-react';
 
 import Button from '../../components/common/Button';
-import EventFilters from '../../components/events/EventFilters';
+import MobileFilterMenu from '../../components/events/MobileFilterMenu';
 import ViewToggle from '../../components/ViewToggle';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
-  const [showDrawer, setShowDrawer] = useState(false);
+  const [showMobileFilterMenu, setShowMobileFilterMenu] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
           {selectedType === "All" ? (
             <Button
               className={styles.filterToggleButton}
-              onClick={() => setShowDrawer(true)}
+              onClick={() => setShowMobileFilterMenu(true)}
             >
               <Funnel strokeWidth={1.5} color="black"/>
             </Button>
@@ -44,19 +44,19 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
           )}
           <ViewToggle />
 
-          {showDrawer && (
+          {showMobileFilterMenu && (
             <>
-              <div className={styles.backdrop} onClick={() => setShowDrawer(false)} />
+              <div className={styles.backdrop} onClick={() => setShowMobileFilterMenu(false)} />
               <div className={styles.drawer}>
                 <div className={styles.drawerHeader}>
                   <h3>Filters</h3>
-                  <button onClick={() => setShowDrawer(false)}>✕</button>
+                  <button onClick={() => setShowMobileFilterMenu(false)}>✕</button>
                 </div>
-                <EventFilters
+                <MobileFilterMenu
                   selectedType={selectedType}
                   onTypeChange={(val) => {
                     onTypeChange(val);
-                    setShowDrawer(false);
+                    setShowMobileFilterMenu(false);
                   }}
                 />
               </div>
