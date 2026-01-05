@@ -20,7 +20,6 @@
 
   @media (max-width: 480px) {
     .eventModal-box {
-      max-width: 95%;
       padding: 1.25rem;
     }
   }

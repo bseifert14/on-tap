@@ -1,18 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/EventModal.module.css";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, CircleArrowRight, Locate, MapPin, Navigation } from "lucide-react";
 import { formatEventDateTime } from "../../utils/formatDates";
 import { getDefaultImage } from "../../utils/getDefaultImage";
 import Modal from "../common/Modal";
+import { getAddressURL } from "../../utils/getAddress";
 
 export default function EventModal({ event, onClose }) {
   if (!event) return null;
-  const { event_name, event_location, event_date, event_description, event_photo_url, 
-    event_type, event_url, event_start_timestamp, event_end_timestamp, business_url
+  const { event_name, event_location, event_description, event_photo_url, 
+    event_type, event_url, event_start_timestamp, event_end_timestamp, business_url,
+    event_business_name, businesses: { business_name }
   } = event;
 
   const [showFade, setShowFade] = useState(false);
   const descriptionRef = useRef(null);
+
+  function getEventLocation() {
+        return event_business_name || business_name;
+    }
 
   function getEventUrl(eventURL, businessURL) {
       if (eventURL) {
@@ -74,7 +80,18 @@ export default function EventModal({ event, onClose }) {
       <h2 className={styles.title}>{event_name}</h2>
       <div className={styles.iconValuePair}>
           <MapPin size={15} strokeWidth={1.5} color="#999" />
-          <div className={styles.value}>{event_location}</div>
+          <a
+            href={getAddressURL(event_location)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.value}
+            aria-label={`Get directions to ${business_name}`}
+          >
+            <span className={styles.iconValuePair}>
+              {getEventLocation()}
+              <CircleArrowRight size={13} strokeWidth={1.5} color="#999" />
+            </span>
+          </a>
       </div>
       <div className={styles.iconValuePairTime}>
           <Calendar size={15} strokeWidth={1.5} color="#999" />

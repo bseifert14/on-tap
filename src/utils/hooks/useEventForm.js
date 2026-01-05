@@ -9,6 +9,7 @@ export default function useEventForm(user, event, onSave) {
   const [form, setForm] = useState({
     event_name: "",
     event_location: "",
+    event_business_name: "",
     event_type: "",
     event_date: "",
     event_start_timestamp: "",
@@ -32,6 +33,7 @@ export default function useEventForm(user, event, onSave) {
         ...form,
         event_name: event.event_name || "",
         event_location: event.event_location || "",
+        event_business_name: event.event_business_name || "",
         event_type: event.event_type || "",
         event_date: event.event_date || "",
         event_start_timestamp: event.event_start_timestamp

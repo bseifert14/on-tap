@@ -26,7 +26,6 @@ export function useBusinessProfile(userId) {
   };
 
   const saveBusiness = async (updatedBusiness) => {
-    console.log(updatedBusiness);
     const cleanUrl = updatedBusiness.url
         ? sanitizeUrl(updatedBusiness.url)
         : null;

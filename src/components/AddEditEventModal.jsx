@@ -5,7 +5,7 @@ import Modal from "./common/Modal";
 import FormLabel from "./form/FormLabel";
 import { EVENT_TYPE_LABELS } from "../constants/eventTypes";
 
-export default function AddEditEventModal({ user, event, onClose, onSave }) {
+export default function AddEditEventModal({ user, business, event, onClose, onSave }) {
   const {
     form,
     handleChange,
@@ -28,6 +28,8 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
     );
   }
 
+  const defaultAddress = `${business.street_address} ${business.city}, ${business.state} ${business.zipcode}`;
+
   return (
     <Modal
       onClose={onClose}
@@ -44,13 +46,6 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
           onChange={(e) => handleChange("event_name", e.target.value)}
         />
 
-        <FormLabel label="Event Location" name="event_location" isRequired />
-        <input
-          className={styles["eventModal-input"]}
-          value={form.event_location}
-          onChange={(e) => handleChange("event_location", e.target.value)}
-        />
-
         <FormLabel label="Event Type" name="event_type" isRequired />
         <select
           className={styles["eventModal-input"]}
@@ -62,6 +57,22 @@ export default function AddEditEventModal({ user, event, onClose, onSave }) {
             <option key={type} value={type}>{type}</option>
           ))}
         </select>
+
+        <FormLabel label="Event Address" name="event_location" isRequired />
+        <input
+          className={styles["eventModal-input"]}
+          value={form.event_location}
+          placeholder={defaultAddress}
+          onChange={(e) => handleChange("event_location", e.target.value)}
+        />
+
+        <FormLabel label="Event Business Name" name="event_business_name" isRequired />
+        <input
+          className={styles["eventModal-input"]}
+          value={form.event_business_name}
+          placeholder={business.business_name}
+          onChange={(e) => handleChange("event_business_name", e.target.value)}
+        />
 
         <FormLabel label="Event Date" name="event_date" isRequired />
         <input
