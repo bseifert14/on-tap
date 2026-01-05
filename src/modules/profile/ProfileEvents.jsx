@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../supabase";
-import { toast } from 'sonner';
-
 import styles from "../../styles/ProfileEvents.module.css";
 
 import AddEditEventModal from "../../components/AddEditEventModal";
@@ -9,10 +5,8 @@ import DeleteModal from "../../components/DeleteModal";
 import UserEventTable from "./UserEventTable";
 import TableActions from "./TableActions";
 import Banner from "../../components/common/Banner";
-import useClientEvents from "../../utils/hooks/useClientEvents";
 import useClientData from "../../utils/hooks/useClientData";
 import useClientEventsModal from "../../utils/hooks/useClientEventsModal";
-import { useBusinessProfile } from "../../utils/hooks/useBusinessProfile";
 import TableSkeleton from "../../components/TableSkeleton";
 
 export default function ProfileEvents({ user }) {
@@ -102,6 +96,7 @@ export default function ProfileEvents({ user }) {
       {showModal && (
         <AddEditEventModal
           user={user}
+          business={business}
           event={editingEvent}
           onClose={() => {
             setShowModal(false);

@@ -5,11 +5,16 @@ import { getIcon } from "../../utils/getIcon";
 import { Calendar, MapPin } from "lucide-react";
 import { formatEventDateTime } from "../../utils/formatDates";
 import Button from "../common/Button";
+import { getAddressURL } from "../../utils/getAddress";
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_photo_url, 
-        event_type, event_start_timestamp, event_end_timestamp 
+        event_type, event_start_timestamp, event_end_timestamp, event_business_name, businesses: { business_name }
     } = event;
+
+    function getEventLocation() {
+        return event_business_name || business_name;
+    }
 
     return (
         <div className={styles.card}>
@@ -31,7 +36,15 @@ export default function EventCard({ event, onSelectEvent }) {
                 </div>
                 <div className={styles.iconValuePair}>
                     <MapPin size={15} strokeWidth={1.5} color="#999" />
-                    <div className={styles.value}>{event_location}</div>
+                    <a
+                        href={getAddressURL(event_location)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.value}
+                        aria-label={`Get directions to ${business_name}`}
+                    >
+                        {getEventLocation()}
+                    </a>
                 </div>
             </div>
         </div>

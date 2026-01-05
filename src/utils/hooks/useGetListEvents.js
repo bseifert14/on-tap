@@ -11,7 +11,10 @@ export default function useGetListEvents() {
       setIsLoading(true);
       const { data, error } = await supabase
         .from("events")
-        .select("*")
+        .select(`
+          *,
+          businesses ( business_name )
+        `)
         .gte("event_date", new Date().toISOString().split("T")[0])
         .order("event_date", { ascending: true });
 
