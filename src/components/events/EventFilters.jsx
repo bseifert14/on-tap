@@ -8,20 +8,22 @@ export default function EventFilters({ selectedType, onTypeChange }) {
   return (
     <div className={styles.filterContainer}>
       {EVENT_TYPE_FILTERS.map(({ label, value, icon: Icon }) => (
-        <Button
-          key={value}
-          onClick={() => onTypeChange(value)}
-          className={
-            selectedType === value
-              ? btnStyles.buttonActive
-              : btnStyles.buttonInactive
-          }
-        >
-          <div className={styles.filter}>
-            <Icon size={14} className={styles.icon} strokeWidth={1.5} />
-            <span>{label}</span>
-          </div>
-        </Button>
+        <span className={styles.filterItem} key={value}>
+          <Button
+            key={value}
+            onClick={() => onTypeChange(value)}
+            className={
+              selectedType === value
+                ? btnStyles.buttonActive
+                : btnStyles.buttonInactive
+            }
+          >
+            <div className={styles.filter}>
+              <Icon size={14} className={styles.icon} strokeWidth={1.5} />
+              <span>{label}</span>
+            </div>
+          </Button>
+        </span>
       ))}
     </div>
   );
