@@ -46,7 +46,6 @@
     justify-content: space-between;
     align-items: flex-start;
     position: relative;
-    /* width: fit-content; */
     margin: 0 1rem;
   }
   
@@ -61,6 +60,7 @@
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
+    width: fit-content;
   }
   
   .activeFilterButton {

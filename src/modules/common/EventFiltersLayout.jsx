@@ -51,6 +51,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
             id="mobile-filters-menu"
           >
             <EventFilters
+              isMenu={true}
               selectedType={selectedType}
               onTypeChange={(val) => {
                 onTypeChange(val);

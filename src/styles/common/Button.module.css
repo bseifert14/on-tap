@@ -6,6 +6,7 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     font-size: 0.875rem;
+    width: 100%;
 }
 
 .buttonActive {
