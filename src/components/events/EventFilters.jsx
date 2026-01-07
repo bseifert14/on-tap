@@ -4,11 +4,11 @@ import Button from '../common/Button';
 
 import { EVENT_TYPE_FILTERS } from '../../constants/eventTypes';
 
-export default function EventFilters({ selectedType, onTypeChange }) {
+export default function EventFilters({ selectedType, onTypeChange, isMenu = false }) {
   return (
     <div className={styles.filterContainer}>
       {EVENT_TYPE_FILTERS.map(({ label, value, icon: Icon }) => (
-        <span className={styles.filterItem} key={value}>
+        <span className={isMenu ? styles.mobileFilterItem : ''} key={value}>
           <Button
             key={value}
             onClick={() => onTypeChange(value)}
