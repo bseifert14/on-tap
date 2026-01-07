@@ -51,4 +51,9 @@
     color: black;
     cursor: pointer;
   }
+
+  .react-calendar__month-view__days__day,
+  .react-calendar__month-view__days__day--weekend {
+    color: black;
+  }
   

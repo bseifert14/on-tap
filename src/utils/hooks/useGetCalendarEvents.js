@@ -12,7 +12,10 @@ export default function useGetCalendarEvents() {
         setIsLoading(true);
       const { data, error } = await supabase
         .from("events")
-        .select("*")
+        .select(`
+          *,
+          businesses ( business_name )
+        `)
         .order("event_date");
 
       if (error) {
