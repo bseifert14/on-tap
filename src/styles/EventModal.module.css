@@ -3,13 +3,21 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 999;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  
+  .backdropVisible {
+    opacity: 1;
+    pointer-events: auto;
   }
   
   .modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.98);
     width: 90%;
     height: 80vh;
     max-width: 600px;
@@ -20,11 +28,20 @@
     flex-direction: column;
     overflow: hidden;
     z-index: 1001;
-    /* position: relative; */
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.4,0,0.2,1);
+    pointer-events: none;
+  }
+
+  
+  .modalVisible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
   }
   
   .image {
-    max-height: 250px;
+    height: 200px;
     width: 100%;
     object-fit: cover;
     flex-shrink: 0;
@@ -67,7 +84,7 @@
   }
 
   .modalFooter {
-    margin: 1rem
+    margin: 0.2rem 1rem 1rem 1rem;
   }
   
   .title {
@@ -90,9 +107,8 @@
 
   .descriptionWrapper {
     position: relative;
-    max-height: 200px;
+    max-height: 150px;
     overflow-y: auto;
-    padding-bottom: 1rem;
     margin-top: 1rem;
   }
 
@@ -229,4 +245,3 @@
       display: inline-block;
     }
   }
-  
