@@ -8,7 +8,7 @@ import useContactForm from "../../utils/hooks/useContactForm";
 export default function Contact() {
   const [bgImage, setBgImage] = useState(frascoDesktop);
   const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
-  
+
   useEffect(() => {
     const updateImage = () => {
       setBgImage(window.innerWidth <= 768 ? frascoMobile : frascoDesktop);
@@ -17,7 +17,6 @@ export default function Contact() {
     window.addEventListener("resize", updateImage);
     return () => window.removeEventListener("resize", updateImage);
   }, []);
-
 
   const inputClass = (field) =>
     `${styles.input} ${errors[field] ? styles.inputError : ""}`;
