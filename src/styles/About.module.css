@@ -1,88 +1,105 @@
-.aboutPage {
+.topLevelContainer {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    padding: 6rem 4rem 4rem 4rem;
-  }
-  
-  .section {
-    display: flex;
+    row-gap: 30px;
     align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .reverse {
-    flex-direction: row-reverse;
-  }
-  
-  .image {
+    justify-content: center;
+}
+
+.midLevelContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.aboutHeader {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.aboutText {
+    text-align: center;
+}
+
+.imageContainer {
+  margin-top: 25px;
+}
+
+.testImageContainer {
+  margin-top: 25px;
+  height: 375px;
+}
+
+.testImageMAIN {
     width: 100%;
     max-width: 500px;
     height: auto;
-    border-radius: 1rem;
+    border-radius: 50%;
     object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.3);
-  }
-  
-  .text {
-    flex: 1;
-    /* min-width: 300px; */
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .section {
-      /* flex-direction: column; */
-      align-items: center;
-      text-align: center;
-    }
-  
-    .reverse {
-      flex-direction: column;
-    }
-  
-    .image {
-      max-width: 100%;
-    }
-  }
-  
+    padding: 10px;
+}
 
-  .textBlock {
+.testImageCHILD_ONE {
+    position: relative;
+    width: 40%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    bottom: 100px;
+    left: 190px;
+}
+
+.testImageCHILD_TWO {
+    position: relative;
+    width: 40%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    bottom: 345px;
+    left: 175px;
+}
+
+.testImageCHILD_THREE {
+    position: relative;
+    width: 40%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    bottom: 345px;
+    left: 175px;
+}
+
+.imageUPDATE {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 10px;
+}
+
+.ctaWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    max-width: 500px;
+    align-items: center;
+    row-gap: 5px;
+    padding-top: 40px;
   }
-  
-  .mainText {
-    font-size: 1.25rem;
-    line-height: 1.6;
-  }
-  
-  .ctaWrapper {
-    text-align: left;
-  }
-  
-  .ctaHeading {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  
-  .ctaButton {
+
+.ctaHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.ctaButton {
     display: inline-block;
     background-color: #e60033;
     color: white;
@@ -91,9 +108,17 @@
     text-decoration: none;
     font-weight: 600;
     transition: background 0.3s ease;
-  }
-  
-  .ctaButton:hover {
-    background-color: #c2002b;
-  }
+    font-size: 1.3rem;
+}
+
+.ctaButton:hover {
+  background-color: #c2002b;
+}
+
+@media (max-width: 768px) {
+    .aboutPageBody {
+      padding: 20px 20px 50px 20px;
+    }
+}
+
   
