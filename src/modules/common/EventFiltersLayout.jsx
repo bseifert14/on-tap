@@ -1,19 +1,12 @@
-import { useState, useEffect } from 'react';
 import styles from "../../styles/ViewControls.module.css";
+import useMediaQuery from '../../utils/hooks/useMediaQuery';
 
 import EventFilters from '../../components/events/EventFilters';
 import ViewToggle from '../../components/ViewToggle';
 import MobileEventFilters from '../../components/events/MobileEventFilters';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const updateSize = () => setIsMobile(window.innerWidth <= 1042);
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const isMobile = useMediaQuery();
 
   return (
     <div>

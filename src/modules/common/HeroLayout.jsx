@@ -1,37 +1,38 @@
 import styles from "../../styles/HeroLayout.module.css";
-import StoweBirdsEye from '../../../public/images/hero/mansfield-stars.jpg';
+import MansfieldStars from '../../../public/images/hero/mansfield-stars.jpg';
+import StowePanorama from '../../../public/images/hero/jeffrey-clayton-stowe.jpg';
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
 
 export default function HeroLayout() {
-  // return (
-  //   <section className={styles.hero}>
-  //     <div className={styles.left}>
-  //       <img src={apresScene} alt="Apres Scene" className={styles.illustration} />
-  //     </div>
-  //     <div className={styles.right}>
-  //       <h1 className={styles.heading}>
-  //         What's going on in Stowe?
-  //       </h1>
-        // <p className={styles.subheading}>
-        //   From mountain adventures to live bands - never miss a beat on the events going on around town.
-        // </p>
-        // <a href="#eventSection" className={styles.ctaButton}>
-        //   Explore Events
-        // </a>
-  //     </div>
-  //   </section>
-  // );
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
   return (
-    <section className={styles.heroContainer}>
-      <img src={StoweBirdsEye} alt="Stowe Birds Eye View" className={styles.illustration} />
-      <div className={styles.heroTextContainer}>
-        <p className={styles.heroText}>What's going on tonight in Stowe?</p>
-        <p className={styles.subheading}>
-          From mountain adventures to live bands - never miss a beat around town.
-        </p>
-        <a href="#eventSection" className={styles.ctaButton}>
-          Explore Events
-        </a>
-      </div>
-    </section>
+    !isMobile ? (
+      <section className={styles.heroContainer}>
+        <img src={StowePanorama} alt="Photo by Jeffrey Clayton on Unsplash" className={styles.illustration} />
+        <div className={styles.heroTextContainer}>
+          <p className={styles.heroText}>What's going on tonight in Stowe?</p>
+          <p className={styles.subheading}>
+            From mountain adventures to live bands - never miss a beat around town.
+          </p>
+          <a href="#eventSection" className={styles.ctaButton}>
+            Explore Events
+          </a>
+        </div>
+      </section>
+    ) : (
+      <section className={styles.heroContainer}>
+        <img src={MansfieldStars} alt="Mount Mansfield Stowe Astrophotography" className={styles.illustration} />
+        <div className={styles.heroTextContainer}>
+          <p className={styles.heroText}>What's going on tonight in Stowe?</p>
+          <p className={styles.subheading}>
+            From mountain adventures to live bands - never miss a beat around town.
+          </p>
+          <a href="#eventSection" className={styles.ctaButton}>
+            Explore Events
+          </a>
+        </div>
+      </section>
+    )
   );
 }
