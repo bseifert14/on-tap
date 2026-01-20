@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import styles from "../../styles/ViewControls.module.css";
 
-import { Funnel } from 'lucide-react';
-
-import Button from '../../components/common/Button';
 import EventFilters from '../../components/events/EventFilters';
 import ViewToggle from '../../components/ViewToggle';
-import MobileMenu from '../../components/common/MobileMenu';
+import MobileEventFilters from '../../components/events/MobileEventFilters';
 
 export default function EventFiltersLayout({ selectedType, onTypeChange }) {
-  const [showDrawer, setShowDrawer] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -29,39 +25,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
       ) : (
         <>
           <ViewToggle />
-          <div className={styles.mobileFilters}>
-          {selectedType === "All" ? (
-            <Button
-              className={styles.filterToggleButton}
-              onClick={() => setShowDrawer(true)}
-            >
-              <Funnel strokeWidth={1.5} color="black"/>
-            </Button>
-          ) : (
-            <button
-              className={styles.activeFilterButton}
-              onClick={() => onTypeChange("All")}
-            >
-              {selectedType} <span className={styles.clearIcon}>✕</span>
-            </button>
-          )}
-          {/* <ViewToggle /> */}
-          <MobileMenu
-            isOpen={showDrawer}
-            onClose={() => setShowDrawer(false)}
-            title="Filters"
-            id="mobile-filters-menu"
-          >
-            <EventFilters
-              isMenu={true}
-              selectedType={selectedType}
-              onTypeChange={(val) => {
-                onTypeChange(val);
-                setShowDrawer(false);
-              }}
-            />
-          </MobileMenu>
-        </div>
+          <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
         </>
       )}
     </div>
