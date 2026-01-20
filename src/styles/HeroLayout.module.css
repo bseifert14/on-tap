@@ -52,16 +52,17 @@
   }
   
   .subheading {
-    font-size: 1.2rem;
-    color: #444;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    color: white;
+    padding: 0 30px;
+    text-align: center;
   }
 
   .ctaButton {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 0.75rem 1.5rem;
-    border-radius: 999px;
+    border-radius: 15px;
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
@@ -96,4 +97,28 @@
       height: 60px; /* smaller fade for smaller screens */
     }
   }
+
+
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroTextContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+    top: 4rem;
+}
   
+.heroText {
+  font-size: 2rem;
+  color: white;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+}

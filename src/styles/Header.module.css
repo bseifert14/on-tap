@@ -1,24 +1,21 @@
 @import './theme.css';
 
 .header {
-  background: var(--color-beige-main);
   padding: 20px 24px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 90px; /* Lock in consistent height */
+  height: 65px;
 }
 
 .logoLink {
   display: flex;
   align-items: center;
-  padding-top: 20px;
-  padding-left: 20px;
 }
 
 .logoImg {
-  height: 100px; /* Adjust to match your desired header height */
+  height: 60px; /* Adjust to match your desired header height */
   width: auto;
   object-fit: contain;
 }

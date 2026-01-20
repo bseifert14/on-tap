@@ -27,7 +27,9 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
           <ViewToggle />
         </div>
       ) : (
-        <div className={styles.mobileFilters}>
+        <>
+          <ViewToggle />
+          <div className={styles.mobileFilters}>
           {selectedType === "All" ? (
             <Button
               className={styles.filterToggleButton}
@@ -43,7 +45,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
               {selectedType} <span className={styles.clearIcon}>✕</span>
             </button>
           )}
-          <ViewToggle />
+          {/* <ViewToggle /> */}
           <MobileMenu
             isOpen={showDrawer}
             onClose={() => setShowDrawer(false)}
@@ -60,6 +62,7 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
             />
           </MobileMenu>
         </div>
+        </>
       )}
     </div>
   );

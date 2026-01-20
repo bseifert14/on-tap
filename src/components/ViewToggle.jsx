@@ -15,7 +15,7 @@ export default function ViewToggle() {
         className={`${styles.toggleBtn} ${!isCalendarSelected ? activeListClass : styles.toggleBtnInactive}`}
         onClick={() => navigate("/")}
       >
-        List
+        List View
       </Button>
       <Button
         className={
