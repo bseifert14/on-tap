@@ -14,6 +14,12 @@
   padding: 75px 75px 75px 75px;
 }
 
+.eventListHeader {
+  margin: 15px 0;
+  font-weight: 600;
+}
+
+
 @media (max-width: 768px) {
   .homeBody {
     padding: 20px 20px 50px 20px;

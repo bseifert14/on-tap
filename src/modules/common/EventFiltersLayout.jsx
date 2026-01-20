@@ -15,8 +15,14 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
     <div>
       {!isMobile ? (
         <div className={styles.filtersRow}>
-          <EventFilters selectedType={selectedType} onTypeChange={onTypeChange} />
-          <ViewToggle />
+          <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            onClear={() => setSearchQuery("")}
+          />
+          {/* <EventFilters selectedType={selectedType} onTypeChange={onTypeChange} /> */}
+          {/* <ViewToggle /> */}
         </div>
       ) : (
         <>

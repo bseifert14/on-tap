@@ -66,6 +66,8 @@ export default function HomeLayout() {
       <div className={styles.homeBody} id="eventSection">
           <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
 
+          <p className={styles.eventListHeader}>Upcoming Events</p>
+    
           {isLoading && (
             <EventCardSkeleton />
           )}
