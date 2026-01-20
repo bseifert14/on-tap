@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   gap: 80px;
   padding: 75px 20px;
+  align-items: center;
 }
 
 .calendarWrapper {

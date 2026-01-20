@@ -3,7 +3,6 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch; /* smooth iOS momentum scrolling */
   scrollbar-width: none; /* Firefox hide scrollbar */
-  padding: 0 6px;
 }
 
 .scroller::-webkit-scrollbar {
