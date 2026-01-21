@@ -13,8 +13,7 @@ import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 
 export default function HomeLayout() {
   const location = useLocation();
-  const { events, isLoading } = useGetListEvents();
-
+  const { events, isLoading, error } = useGetListEvents();
   const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
   const [selectedType, setSelectedType] = useState("All");
   const [selectedEvent, setSelectedEvent] = useState(null);
