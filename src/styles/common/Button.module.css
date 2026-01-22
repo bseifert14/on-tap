@@ -2,10 +2,11 @@
     background: black;
     color: white;
     border: none;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    padding: 12px;
     cursor: pointer;
     font-size: 0.875rem;
+    font-weight: 600;
     width: 100%;
 }
 

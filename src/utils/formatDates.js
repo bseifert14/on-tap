@@ -25,6 +25,25 @@ export function formatEventDateTime(start, endTime) {
   return `${format(startDate, 'EEE, MMM d')} • ${startTimeStr}${endTimeStr}`;
 }
 
+export function formatEventStartTime(start) {
+  const startDate = parseISO(start);
+  const startTimeStr = format(startDate, 'h:mm a');
+
+  if (isToday(startDate)) {
+    return `Today • ${startTimeStr}`;
+  }
+
+  if (isTomorrow(startDate)) {
+    return `Tomorrow • ${startTimeStr}`;
+  }
+
+  if (isThisWeek(startDate)) {
+    return `${format(startDate, 'EEEE')} • ${startTimeStr}`;
+  }
+
+  return `${format(startDate, 'EEE, MMM d')} • ${startTimeStr}`;
+}
+
 export function generateTimeOptions(start, end, interval) {
     const times = [];
     let [h, m] = start.split(":").map(Number);
