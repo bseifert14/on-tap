@@ -1,0 +1,46 @@
+.scroller {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch; /* smooth iOS momentum scrolling */
+  scrollbar-width: none; /* Firefox hide scrollbar */
+}
+
+.scroller::-webkit-scrollbar {
+  display: none; /* Chrome/Safari hide scrollbar */
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  width: max-content; /* key: row can be wider than viewport */
+  padding: 12px 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap; /* prevents wrapping inside chips */
+  cursor: pointer;
+  height: 35px;
+}
+
+.active {
+  background: #f57c1f;
+  /* background: var(--color-red-primary); */
+  border-color: transparent;
+  color: #fff;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

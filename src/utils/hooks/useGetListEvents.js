@@ -1,38 +1,30 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabase";
+import { fetchEvents } from "../api/fetchEvents";
 
 export default function useGetListEvents() {
   const [events, setEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // for skeleton
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      setIsLoading(true);
-      const { data, error } = await supabase
-        .from("events")
-        .select(`
-          *,
-          businesses ( business_name )
-        `)
-        .gte("event_date", new Date().toISOString().split("T")[0])
-        .order("event_date", { ascending: true });
+    let cancelled = false;
 
-      if (error) {
-        console.error("Error fetching events:", error);
-        setError(error);
-      } else {
-        const normalized = data.map(event => ({
-          ...event,
-          business_name: event.businesses?.name || null,
-        }));
-        setEvents(normalized);
+    (async () => {
+      try {
+        setIsLoading(true);
+        const today = new Date().toISOString().split("T")[0];
+        const data = await fetchEvents({ mode: "list", from: today, limit: "50" });
+        if (!cancelled) setEvents(data);
+      } catch (e) {
+        if (!cancelled) setError(e);
+      } finally {
+        if (!cancelled) setIsLoading(false);
       }
+    })();
 
-      setIsLoading(false);
+    return () => {
+      cancelled = true;
     };
-
-    fetchEvents();
   }, []);
 
   return { events, isLoading, error };

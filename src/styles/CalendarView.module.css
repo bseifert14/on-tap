@@ -3,49 +3,30 @@
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 80px;
+  gap: 45px;
   padding: 75px 20px;
+  align-items: center;
 }
 
 .calendarWrapper {
-  flex: 1;
+  flex: 2;
   min-width: 300px;
   max-width: 450px;
+  background-color: white;
+  padding: 10px 20px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 1px solid #F2F2F2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px rgba(0, 0, 0, 0.06);
 }
 
 .eventsWrapper {
   flex: 1;
   min-width: 300px;
-  /* max-width: 600px; */
 }
 
 .eventsHeader {
   margin-left: 1rem;
-}
-
-.eventList {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.eventCard {
-  background: #f9f9f9;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.eventTitle {
-  font-weight: bold;
-  margin-bottom: 4px;
-  font-size: 1.1rem;
-}
-
-.eventLocation {
-  font-size: 0.95rem;
-  color: #666;
 }
 
 /* Custom Day Styles */
@@ -61,48 +42,17 @@
   font-weight: bold;
 }
 
-/* Optional tweaks for calendar alignment */
-.react-calendar__tile {
-  height: 48px;
-  padding: 8px 0;
-}
-
-.react-calendar__tile:enabled:hover {
-  background-color: #e8e8e8;
-  border-radius: 12px;
-}
-
 /* Stack vertically on mobile */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    padding: 1rem;
+    padding: unset;
   }
 
   .calendarWrapper,
   .eventsWrapper {
     width: 100%;
   }
-}
-
-.calendarWrapper {
-  flex: 1;
-}
-
-.eventsWrapper {
-  flex: 2;
-}
-
-.eventList {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.eventCard {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 1rem;
 }
 
 .eventScrollArea {

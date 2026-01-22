@@ -1,99 +1,100 @@
-.hero {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4rem 2rem 6rem; /* Add bottom padding for fade space */
-    background: var(--color-beige-main);
-    flex-wrap: wrap;
-    z-index: 1;
-    overflow: hidden; /* Ensures fade doesn't spill */
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.illustration {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.heroTextContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px;
+  top: 5rem;
+}
+  
+.heroText {
+  font-size: 3rem;
+  color: white;
+  font-family: "Playfair Display", serif;
+  text-align: center;
+}
+
+.subheading {
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.ctaButton {
+  background-color: white;
+  color: black;
+  padding: 0.75rem 1.5rem;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 5rem;
+  transition: background-color 0.2s ease;
+}
+
+.ctaButton:hover {
+  background-color: #c0c0c0;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .heroTextContainer {
+    padding: 0 40px;
+    top: 4rem;
   }
-  
-  .hero::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 100px;
-    width: 100%;
-    background: linear-gradient(to bottom, rgba(255, 253, 247, 0), rgba(255, 255, 255, 1));
-    pointer-events: none;
-    z-index: 2;
+  .heroText {
+    font-size: 3rem;
   }
-  
-  
-  .left {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    min-width: 280px;
-    /* margin-bottom: 2rem; */
-  }
-  
-  .illustration {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-  
-  .right {
-    flex: 1;
-    max-width: 600px;
-    text-align: left;
-    padding-left: 2rem;
-  }
-  
-  .heading {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #000;
-  }
-  
+
   .subheading {
     font-size: 1.2rem;
-    color: #444;
-    line-height: 1.6;
+  }
+}
+
+/* Mini Tablet */
+@media (max-width: 900px) {
+  .heroText {
+    font-size: 2.5rem;
+  }
+
+  .subheading {
+    font-size: 1rem;
   }
 
   .ctaButton {
-    background-color: black;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 2rem;
-    transition: background-color 0.2s ease;
+    margin-top: 3rem;
   }
-  
-  .ctaButton:hover {
-    background-color: #333;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .heroTextContainer {
+    top: 4rem;
   }
-  
-  @media (max-width: 768px) {
-    .hero {
-      flex-direction: column;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-  
-    .right {
-      text-align: center;
-      padding-left: 0;
-    }
+  .heroText {
+    font-size: 2rem;
   }
 
-  @media (max-width: 600px) {
-    .hero {
-      padding-bottom: 3rem; /* more space for CTA */
-    }
-  
-    .hero::after {
-      height: 60px; /* smaller fade for smaller screens */
-    }
+  .subheading {
+    font-size: 0.9rem;
   }
-  
+
+  .ctaButton {
+    margin-top: 4rem;
+  }
+}

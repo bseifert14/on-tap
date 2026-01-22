@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from "react";
 import styles from "../../styles/Contact.module.css";
-import frascoDesktop from "../../../public/images/site/frascoContactCrop.jpg";
-import frascoMobile from "../../../public/images/site/mobileContact.jpg";
+import FRASCO from "../../../public/images/site/frasco-apres-ben-seifert-photography.jpg";
 import FormLabel from "../../components/form/FormLabel";
 import useContactForm from "../../utils/hooks/useContactForm";
 
 export default function Contact() {
-  const [bgImage, setBgImage] = useState(frascoDesktop);
   const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
-  
-  useEffect(() => {
-    const updateImage = () => {
-      setBgImage(window.innerWidth <= 768 ? frascoMobile : frascoDesktop);
-    };
-    updateImage();
-    window.addEventListener("resize", updateImage);
-    return () => window.removeEventListener("resize", updateImage);
-  }, []);
-
-
   const inputClass = (field) =>
     `${styles.input} ${errors[field] ? styles.inputError : ""}`;
 
   return (
-    <div className={styles.contactWrapper}>
-      <img src={bgImage.src} alt="Live show" className={styles.bgImage} />
-      <div className={styles.imageOverlay} />
-
+    <div id="contactForm">
+      <section className={styles.contactHeroContainer}>
+        <img src={FRASCO} alt="Live show" className={styles.illustration}/>
+        <h1 className={styles.contactHeroText}>Get In Touch</h1>
+      </section>
+      <div className={styles.descriptorContainer}>
+        <p>Have questions about an event or want to list your own? Drop us a line and we'll get back to you faster than the gondola can take you to the top of the mountain.</p>
+      </div>
       <div className={styles.formContainer}>
         <form
           className={styles.form}

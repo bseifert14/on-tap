@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { supabase } from "./supabase";
 
 import HeaderLayout from "./modules/header/HeaderLayout";
@@ -17,11 +17,9 @@ import HomeLayout from "./modules/home/HomeLayout";
 import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
 import { Toaster } from 'sonner';
 
-const CUSTOM_HEADER_LOCATIONS = ['/about', '/contact', '/profile'];
 const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
 
 export default function App() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
@@ -64,9 +62,6 @@ export default function App() {
         onLoginClick={() => setShowLogin(true)}
         onLogout={() => setShowLogoutConfirm(true)}
       />
-      {CUSTOM_HEADER_LOCATIONS.includes(location.pathname) && (
-        <div className="headerFade" />
-      )}
 
       {showLogin && (
         <LoginModal

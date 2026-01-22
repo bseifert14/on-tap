@@ -1,35 +1,40 @@
-// src/hooks/useGetCalendarEvents.js
-import { useState, useEffect } from "react";
-import { supabase } from "../../supabase";
+import { useEffect, useState } from "react";
+import { fetchEvents } from "../api/fetchEvents";
 
-export default function useGetCalendarEvents() {
+export default function useGetCalendarEvents({ start, end } = {}) {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-        setIsLoading(true);
-      const { data, error } = await supabase
-        .from("events")
-        .select(`
-          *,
-          businesses ( business_name )
-        `)
-        .order("event_date");
+    let cancelled = false;
 
-      if (error) {
-        console.error("Error fetching events:", error);
-        setError(error);
-      } else {
-        setEvents(data);
-      }
-
+    if (!start || !end) {
       setIsLoading(false);
-    };
+      return;
+    }
 
-    fetchEvents();
-  }, []);
+    (async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchEvents({
+          mode: "calendar",
+          start,
+          end,
+          limit: "200",
+        });
+        if (!cancelled) setEvents(data);
+      } catch (e) {
+        if (!cancelled) setError(e);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [start, end]);
 
   return { events, isLoading, error };
 }
