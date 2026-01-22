@@ -1,21 +1,27 @@
 {
-    "redirects": [
-      {
-        "source": "/redirect-handler.html",
-        "destination": "/redirect-handler.html",
-        "has": [],
-        "permanent": false
-      },
-      {
-        "source": "/",
-        "has": [
-          { "type": "host", "value": "www.whatsupstowe.io" }
-        ],
-        "destination": "https://whatsupstowe.io/",
-        "permanent": true
-      }
-    ],
-    "cleanUrls": true,
-    "trailingSlash": false
-  }
+  "redirects": [
+    {
+      "source": "/redirect-handler.html",
+      "destination": "/redirect-handler.html",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.ontap-events.com" }],
+      "destination": "https://ontap-events.com/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    {
+      "source": "/(.*)",
+      "destination": "/",
+      "has": [
+        { "type": "header", "key": "x-vercel-deployment-url", "value": ".*" }
+      ]
+    }
+  ]
+}
+
   
