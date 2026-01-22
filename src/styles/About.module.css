@@ -1,99 +1,88 @@
-.aboutPage {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    padding: 6rem 4rem 4rem 4rem;
-  }
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
   
-  .section {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .reverse {
-    flex-direction: row-reverse;
-  }
-  
-  .image {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 1rem;
-    object-fit: cover;
-    flex-shrink: 0;
-    box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.3);
-  }
-  
-  .text {
-    flex: 1;
-    /* min-width: 300px; */
-  }
-  
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .section {
-      /* flex-direction: column; */
-      align-items: center;
-      text-align: center;
-    }
-  
-    .reverse {
-      flex-direction: column;
-    }
-  
-    .image {
-      max-width: 100%;
-    }
-  }
-  
+.aboutHero {
+  position: relative;
+  overflow: hidden;
+}
 
-  .textBlock {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    max-width: 500px;
-  }
-  
-  .mainText {
-    font-size: 1.25rem;
-    line-height: 1.6;
-  }
-  
-  .ctaWrapper {
-    text-align: left;
-  }
-  
-  .ctaHeading {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  
-  .ctaButton {
-    display: inline-block;
-    background-color: #e60033;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease;
-  }
-  
-  .ctaButton:hover {
-    background-color: #c2002b;
-  }
-  
+.illustration {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(80%);
+}
+
+.aboutHeroTextContainer {
+  position: absolute;
+  padding: 0 50px;
+  width: 100%;
+  top: 10px;
+  color: white;
+  text-align: center;
+}
+
+.aboutHeroText {
+  font-family: 'Noto Serif', serif;
+  /* font-family: "Playfair Display", serif; */
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.aboutHeroSubTextContainer {
+  position: absolute;
+  padding: 0 30px;
+  width: 100%;
+  bottom: 30px;
+  color: white;
+  text-align: center;
+}
+
+.aboutHeroSubText {
+  font-size: 18px;
+}
+
+.visionSectionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem;
+}
+
+.photoContainer {
+  margin: 20px 30px;
+}
+
+.photo {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 6px 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.ctaSectionContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  padding-bottom: 3rem;
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: #e60033;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: #c2002b;
+}

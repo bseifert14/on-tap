@@ -23,7 +23,7 @@ export default function Contact() {
     `${styles.input} ${errors[field] ? styles.inputError : ""}`;
 
   return (
-    <div className={styles.contactWrapper}>
+    <div className={styles.contactWrapper} id="contactForm">
       <img src={bgImage.src} alt="Live show" className={styles.bgImage} />
       <div className={styles.imageOverlay} />
 
