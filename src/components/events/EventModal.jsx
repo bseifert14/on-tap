@@ -10,7 +10,7 @@ export default function EventModal({ event, onClose }) {
   if (!event) return null;
   const { event_name, event_location, event_description, event_photo_url, 
     event_type, event_url, event_start_timestamp, event_end_timestamp, business_url,
-    event_business_name, businesses: { business_name }
+    event_business_name, business_name
   } = event;
 
   const [showFade, setShowFade] = useState(false);
