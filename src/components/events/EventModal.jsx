@@ -62,12 +62,11 @@ export default function EventModal({ event, onClose }) {
 
   const Footer = () => {
     return (
-      <>
-        <div className={styles.divider} />
+      <div className={styles.modalFooter}>
         <a href={getEventUrl(event_url, business_url)} className={styles.button} target="_blank" rel="noopener noreferrer">
           Learn More
         </a>
-      </>
+      </div>
     );
   }
 
