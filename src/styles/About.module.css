@@ -68,8 +68,9 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 2rem;
-  padding-bottom: 3rem;
+  row-gap: 35px;
+  padding: 0 30px 50px 30px;
+  text-align: center;
 }
 
 .ctaButton {

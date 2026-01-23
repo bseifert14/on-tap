@@ -1,6 +1,6 @@
 import styles from '../styles/Footer.module.css';
 import { Instagram, X, Facebook, Mail } from 'lucide-react';
-import logo from "../../public/images/site/OnTapDieCutWhite.png";
+import logo from "../../public/images/site/OnTapDieCut.png";
 
 export default function Footer() {
   return (

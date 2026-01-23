@@ -1,5 +1,6 @@
 .footer {
-    background-color: #2a2c46;
+    background-color: #F2F5F9;
+    border-top: solid 2px #E6F0EA;
     color: white;
     padding: 2rem 1rem;
     display: flex;
@@ -46,6 +47,7 @@
   
   .bottomSection {
     display: flex;
+    color: black;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -60,10 +62,10 @@
   .links {
     display: flex;
     gap: 1.5rem;
+    color: black;
   }
   
   .links a {
-    color: white;
     text-decoration: none;
   }
   

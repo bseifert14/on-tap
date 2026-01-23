@@ -30,7 +30,7 @@ export default function About() {
         <p>Whether you're a local, a visitor, or somewhere in between, On Tap has you covered with up-to-date event details.</p>
       </section>
       <section className={styles.ctaSectionContainer}>
-        <h1>Want to list your event?</h1>
+        <h1>Want to list your event on here?</h1>
         <Link to="/contact" className={styles.ctaButton}>Get started here</Link>
       </section>
     </div>

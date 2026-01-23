@@ -52,12 +52,6 @@
   margin-left: 16px;
 }
 
-/* .logoImg {
-  height: 140px;
-  width: auto;
-  object-fit: contain;
-} */
-
 .desktopNav {
   display: flex;
   align-items: center;
@@ -76,26 +70,23 @@
 
 .navButton {
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.875rem;
 }
 
 .navButtonInactive:hover {
-  background: var(--color-beige-main);
   color: black;
   border: 1px solid #e3e1e1;
 }
 
 .navButtonActive {
-  background: black;
-  color: var(--color-beige-main);
-  border: 1px solid black;
+  border-bottom: 2px solid black;
+  border-radius: unset;
 }
 
 .navButtonInactive {
-  background: var(--color-beige-main);
   color: black;
   border: 1px solid transparent;
 }

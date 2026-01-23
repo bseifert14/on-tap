@@ -7,7 +7,7 @@ import MobileMenu from "../../components/common/MobileMenu";
 
 export default function HeaderLayout({ user, onLogout, onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  
+
   return (
     <>
       <header className={styles.header}>
