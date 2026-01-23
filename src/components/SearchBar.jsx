@@ -6,32 +6,42 @@ export default function SearchBar({
   onChange,
   placeholder = "Search Events...",
   onClear,
+  onSubmit
 }) {
   const showClear = Boolean(value?.length);
 
   return (
-    <div className={styles.inputShell}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit?.();
+      }}
+      role="search"
+    >
+      <div className={styles.inputShell}>
         <Search className={styles.icon} aria-hidden="true" />
 
         <input
-            className={styles.input}
-            type="text"
-            value={value}
-            onChange={(e) => onChange?.(e.target.value)}
-            placeholder={placeholder}
-            aria-label={placeholder}
+          className={styles.input}
+          type="search"
+          enterKeyHint="search"
+          value={value}
+          onChange={(e) => onChange?.(e.target.value)}
+          placeholder={placeholder}
+          aria-label={placeholder}
         />
 
         {showClear && (
-            <button
+          <button
             type="button"
             className={styles.clearBtn}
             onClick={() => onClear?.()}
             aria-label="Clear search"
-            >
+          >
             ×
-            </button>
+          </button>
         )}
-        </div>
+      </div>
+    </form>
   );
 }

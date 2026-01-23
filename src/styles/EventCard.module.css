@@ -174,7 +174,6 @@
 }
 
 
-/* ✅ MOBILE FIX: Moved to bottom */
 @media (max-width: 640px) {
   .card {
     flex-direction: column;

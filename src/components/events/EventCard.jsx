@@ -16,7 +16,7 @@ function getEventDate(dateStr) {
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_photo_url, event_date, 
-        event_type, event_start_timestamp, event_end_timestamp, event_business_name, businesses: { business_name }
+        event_type, event_start_timestamp, event_end_timestamp, event_business_name, business_name
     } = event;
     
     const { month, day } = getEventDate(event_date);

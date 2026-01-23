@@ -1,15 +1,19 @@
 import styles from "../../styles/ViewControls.module.css";
-import useMediaQuery from '../../utils/hooks/useMediaQuery';
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
 
-import EventFilters from '../../components/events/EventFilters';
-import ViewToggle from '../../components/ViewToggle';
-import MobileEventFilters from '../../components/events/MobileEventFilters';
-import { useState } from "react";
+import ViewToggle from "../../components/ViewToggle";
+import MobileEventFilters from "../../components/events/MobileEventFilters";
 import SearchBar from "../../components/SearchBar";
 
-export default function EventFiltersLayout({ selectedType, onTypeChange }) {
+export default function EventFiltersLayout({
+  selectedType,
+  onTypeChange,
+  searchValue,
+  onSearchChange,
+  onSearchSubmit,
+  onSearchClear,
+}) {
   const isMobile = useMediaQuery();
-  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div>
@@ -17,21 +21,21 @@ export default function EventFiltersLayout({ selectedType, onTypeChange }) {
         <div className={styles.filtersRow}>
           <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
           <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
-            onClear={() => setSearchQuery("")}
+            value={searchValue}
+            onChange={onSearchChange}
+            onSubmit={onSearchSubmit}
+            onClear={onSearchClear}
           />
-          {/* <EventFilters selectedType={selectedType} onTypeChange={onTypeChange} /> */}
-          {/* <ViewToggle /> */}
         </div>
       ) : (
         <>
           <ViewToggle />
           <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
           <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
-            onClear={() => setSearchQuery("")}
+            value={searchValue}
+            onChange={onSearchChange}
+            onSubmit={onSearchSubmit}
+            onClear={onSearchClear}
           />
         </>
       )}

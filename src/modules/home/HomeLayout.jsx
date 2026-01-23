@@ -2,22 +2,28 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "../../supabase";
 import styles from "../../styles/HomeLayout.module.css";
-import EventFiltersLayout from "../common/EventFiltersLayout"
-import EventList from "../../components/events/EventList";;
+import EventFiltersLayout from "../common/EventFiltersLayout";
+import EventList from "../../components/events/EventList";
 import EventModal from "../../components/events/EventModal";
 import HeroLayout from "../common/HeroLayout";
 import SetPasswordModal from "../../components/SetPasswordModal";
-import EmptyEventsView from "../../components/events/EmptyEventsView";
 import useGetListEvents from "../../utils/hooks/useGetListEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 
 export default function HomeLayout() {
   const location = useLocation();
-  const { events, isLoading, error } = useGetListEvents();
-  const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
+
   const [selectedType, setSelectedType] = useState("All");
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  const [searchInput, setSearchInput] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const { events, isLoading, error } = useGetListEvents({
+    search: searchTerm,
+  });
+
+  const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -32,66 +38,71 @@ export default function HomeLayout() {
   useEffect(() => {
     const handlePasswordRecovery = async () => {
       const hash = window.location.hash;
-      const params = new URLSearchParams(hash.substring(1)); // remove the #
+      const params = new URLSearchParams(hash.substring(1));
       const accessToken = params.get("access_token");
       const refreshToken = params.get("refresh_token");
       const type = params.get("type");
-  
+
       if (accessToken && refreshToken && type === "recovery") {
         const { error } = await supabase.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken,
         });
-  
+
         if (error) {
           console.error("Error setting session from recovery link:", error.message);
           return;
         }
-  
-        // Clean up the hash from the URL
+
         window.history.replaceState({}, document.title, window.location.pathname);
-  
-        // Show password modal
         setShowSetPasswordModal(true);
       }
     };
-  
+
     handlePasswordRecovery();
   }, []);
+
+  const handleSearchSubmit = () => {
+    setSearchTerm(searchInput.trim());
+  };
+
+  const handleSearchClear = () => {
+    setSearchInput("");
+    setSearchTerm("");
+  };
 
   return (
     <div>
       <HeroLayout currentView="list" />
       <div className={styles.homeBody} id="eventSection">
-          <EventFiltersLayout selectedType={selectedType} onTypeChange={setSelectedType} />
+        <EventFiltersLayout
+          selectedType={selectedType}
+          onTypeChange={setSelectedType}
+          searchValue={searchInput}
+          onSearchChange={setSearchInput}
+          onSearchSubmit={handleSearchSubmit}
+          onSearchClear={handleSearchClear}
+        />
 
-          <p className={styles.eventListHeader}>Upcoming Events</p>
-    
-          {isLoading && (
-            <EventCardSkeleton />
-          )}
+        <p className={styles.eventListHeader}>Upcoming Events</p>
 
-          { !isLoading && events.length === 0 && (
-            <EmptyEventsView currentView="list" />
-          )}
+        {isLoading && <EventCardSkeleton />}
 
-          { !isLoading && (
-            <EventList
-              events={events}
-              selectedType={selectedType}
-              onSelectEvent={(event) => setSelectedEvent(event)}
-            />
-          )}
-          
-          {selectedEvent && (
-              <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-          )}
+        {!isLoading && (
+          <EventList
+            events={events}
+            selectedType={selectedType}
+            onSelectEvent={(event) => setSelectedEvent(event)}
+          />
+        )}
 
-          {showSetPasswordModal && (
-              <SetPasswordModal
-              onClose={() => setShowSetPasswordModal(false)}
-              />
-          )}
+        {selectedEvent && (
+          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+        )}
+
+        {showSetPasswordModal && (
+          <SetPasswordModal onClose={() => setShowSetPasswordModal(false)} />
+        )}
       </div>
     </div>
   );

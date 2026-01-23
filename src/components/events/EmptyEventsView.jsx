@@ -1,11 +1,11 @@
-import React from "react";
 import styles from '../../styles/EmptyEventsView.module.css';
 import emptyEventsView from '../../../public/images/site/empty-events-view.png';
 
 export default function EmptyEventsView({ currentView }) {
-    const message = currentView === 'list' ?
-        'Try selecting a different day in the \'Calendar\' view or adjusting your filters.' :
-        'Try selecting a different day or adjusting your filters.'
+  const message = currentView === 'list' ?
+        'Try selecting a different filter or adjusting your search query.' :
+        'Try selecting a different day or adjusting your filters.';
+    
   return (
     <div>
         <div className={styles.emptyState}>

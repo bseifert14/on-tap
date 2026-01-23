@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 
-export default function useGetListEvents() {
+export default function useGetListEvents({ search = "" } = {}) {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,8 +12,16 @@ export default function useGetListEvents() {
     (async () => {
       try {
         setIsLoading(true);
-        const today = new Date().toISOString().split("T")[0];
-        const data = await fetchEvents({ mode: "list", from: today, limit: "50" });
+        setError(null);
+
+        const trimmed = search.trim();
+
+        const params =
+          trimmed.length >= 2
+            ? { mode: "search", q: trimmed, limit: "50" }
+            : { mode: "list", from: new Date().toISOString().split("T")[0], limit: "50" };
+
+        const data = await fetchEvents(params);
         if (!cancelled) setEvents(data);
       } catch (e) {
         if (!cancelled) setError(e);
@@ -25,7 +33,7 @@ export default function useGetListEvents() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [search]);
 
   return { events, isLoading, error };
 }
