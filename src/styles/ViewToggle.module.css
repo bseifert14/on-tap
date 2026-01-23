@@ -6,10 +6,10 @@
   column-gap: 10px;
   background-color: #f1f1f1;
   border-radius: 15px;
-  width: 180px;
+  min-width: 275px;
   position: relative;
   border: 1px solid #d9d9d9;
-  height: 45px;
+  height: 40px;
 }
 
 .toggleBtn {
@@ -20,7 +20,7 @@
   position: relative;
   transition: all 0.2s ease;
   border-radius: 13px;
-  height: 35px;
+  height: 30px;
   font-size: 1rem;
   padding: unset;
 }

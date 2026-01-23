@@ -13,19 +13,22 @@ export default function EventFiltersLayout({
   onSearchSubmit,
   onSearchClear,
 }) {
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
     <div>
       {!isMobile ? (
-        <div className={styles.filtersRow}>
+        <div className={styles.filtersContainer}>
+          <div className={styles.filterToggleSearch}>
+            <SearchBar
+              value={searchValue}
+              onChange={onSearchChange}
+              onSubmit={onSearchSubmit}
+              onClear={onSearchClear}
+            />
+            <ViewToggle />
+          </div>
           <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
-          <SearchBar
-            value={searchValue}
-            onChange={onSearchChange}
-            onSubmit={onSearchSubmit}
-            onClear={onSearchClear}
-          />
         </div>
       ) : (
         <>

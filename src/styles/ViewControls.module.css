@@ -107,3 +107,15 @@
     margin: 0 1rem;
   }
   
+
+  .filterToggleSearch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .filtersContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }

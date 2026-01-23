@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useMediaQuery(query = "(max-width: 1042px)") {
+export default function useMediaQuery(query = "(max-width: 767px)") {
   const getMatches = () => {
     if (typeof window === "undefined") return false;
     return window.matchMedia(query).matches;
