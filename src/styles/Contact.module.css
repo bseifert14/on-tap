@@ -55,15 +55,17 @@
   bottom: 10px;
   right: 20px;
   line-height: 3rem;
-  font-size: 35px;
+  font-size: 40px;
+  font-style: italic;
   color: white;
   text-align: right;
-  font-family: 'Noto Serif', serif;
+  font-family: "Blinker", sans-serif;
 }
 
 .descriptorContainer {
   padding: 25px 30px;
   text-align: center;
+  font-size: 20px;
 }
 
 .formContainer {

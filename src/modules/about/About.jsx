@@ -19,9 +19,10 @@ export default function About() {
         </div>
       </section>
       <section className={styles.visionSectionContainer}>
-        <h1>Our Vision</h1>
-        <p><em>Our goal is simple</em>: To help the community stay connected with everything going on around town.</p>
-        <p>As locals, we've missed out on events just because we didn’t know they were happening. So we built something we wished already existed - a central space where businesses and individuals can easily share what they have going on, and where the community can quickly find it all in one place. No more missing the good stuff.</p>
+        <h1 className={styles.visionSectionHeader}>Our Vision</h1>
+        <p className={styles.visionSectionDescriptor}>Our goal is simple: To help the community stay connected with everything going on around town.</p>
+        <p className={styles.visionSectionText}>As locals, we've missed out on events just because we didn’t know they were happening. So we built something we wished already existed - a central space where businesses and individuals can easily share what they have going on, and where the community can quickly find it all in one place.</p>
+        <p className={styles.visionSectionCaller}>No more missing the good stuff.</p>
       </section>
       <div className={styles.photoContainer}>
         <img src={POND_SKIM} alt="Stowe Mountain Pond Skim Photo By Jameson Halnon" className={styles.photo} />

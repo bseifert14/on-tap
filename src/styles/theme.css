@@ -18,4 +18,15 @@
 
     --color-beige-main: #FFFBEF;
     /* --color-beige-main: #fcf7e6; */
+
+
+    --color-background-primary: #f8f5f2;
+    --color-button-primary: #2E7D6B;
+    --color-button-secondary: #f45d48;
+    --color-text-headline: #232323;
+
+    --color-darkest: #2E6F40;
+    --color-darker: #00a985;
+    --color-lighter: #ebfdf8;
+    --color-lightest: #f3eada;
   }

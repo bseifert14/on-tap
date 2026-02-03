@@ -11,7 +11,7 @@ export default function HeroLayout({ currentView }) {
       <div className={styles.heroTextContainer}>
         <p className={styles.heroText}>{heroText}</p>
         <p className={styles.subheading}>
-          From mountain adventures to live bands - never miss a beat around town.
+          From mountain adventures to live bands; never miss a beat around town.
         </p>
         <a href="#eventSection" className={styles.ctaButton}>
           Explore Events

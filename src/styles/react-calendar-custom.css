@@ -67,7 +67,7 @@
 .react-calendar__navigation__label {
   color: black;
   font-weight: bold;
-  font-family: "Playfair Display", serif;
+  font-family: "Blinker", sans-serif;
   font-size: 18px !important; /* override react-calendar__navigation button */
 }
 

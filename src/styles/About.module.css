@@ -12,23 +12,22 @@ p {
   max-width: 100%;
   height: auto;
   object-fit: contain;
-  filter: brightness(80%);
+  filter: brightness(60%);
 }
 
 .aboutHeroTextContainer {
   position: absolute;
   padding: 0 50px;
   width: 100%;
-  top: 10px;
+  top: 20px;
   color: white;
   text-align: center;
 }
 
 .aboutHeroText {
-  font-family: 'Noto Serif', serif;
-  /* font-family: "Playfair Display", serif; */
-  font-size: 2rem;
-  font-weight: bold;
+  font-family: "Blinker", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
 }
 
 .aboutHeroSubTextContainer {
@@ -47,7 +46,7 @@ p {
 .visionSectionContainer {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 25px;
   padding: 2rem;
 }
 
@@ -73,6 +72,11 @@ p {
   text-align: center;
 }
 
+.ctaSectionHeader {
+  font-family: "Blinker", sans-serif;
+  font-size: 45px;
+}
+
 .ctaButton {
   display: inline-block;
   background-color: #e60033;
@@ -82,8 +86,33 @@ p {
   text-decoration: none;
   font-weight: 600;
   transition: background 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
 }
 
 .ctaButton:hover {
   background-color: #c2002b;
+}
+
+.visionSectionHeader {
+  border-left: 7px solid var(--color-darkest);
+  padding-left: 20px;
+  font-size: 34px;
+}
+
+.visionSectionDescriptor {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.visionSectionText {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.visionSectionCaller {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-darkest);
 }

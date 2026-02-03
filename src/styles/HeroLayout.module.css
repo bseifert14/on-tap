@@ -31,7 +31,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 10px;
+  row-gap: 25px;
   padding: 0 20px;
   text-align: center;
   transform: translateY(-2.5rem);
@@ -52,7 +52,8 @@
 .heroText {
   font-size: 3rem;
   color: white;
-  font-family: "Playfair Display", serif;
+  font-family: "Blinker", sans-serif;
+  font-weight: 800;
 }
 
 .subheading {
@@ -115,18 +116,19 @@
 /* Mobile */
 @media (max-width: 767px) {
   .heroTextContainer {
-    transform: translateY(-5.5rem);
+    transform: translateY(-4.5rem);
   }
 
   .heroText {
-    font-size: 2rem;
+    font-size: 45px;
   }
 
   .subheading {
-    font-size: 0.9rem;
+    font-size: 19px;
+    font-weight: 500;
   }
 
   .ctaButton {
-    margin-top: 3.5rem;
+    margin-top: 1.5rem;
   }
 }

@@ -34,8 +34,8 @@
 }
 
 .active {
-  background: #f57c1f;
-  /* background: var(--color-red-primary); */
+  /* background: #f57c1f; */
+  background: var(--color-darkest);
   border-color: transparent;
   color: #fff;
 }
