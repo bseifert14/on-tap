@@ -3,21 +3,12 @@ import { Link } from 'react-router-dom';
 import styles from '../../styles/About.module.css';
 import CHURCH from '../../../public/images/site/church.jpg';
 import POND_SKIM from '../../../public/images/site/jameson-halnon-photography.jpg';
+import AboutHero from './AboutHero';
 
 export default function About() {
   return (
     <div>
-      <section className={styles.aboutHero}>
-        <img src={CHURCH} alt="Stowe Church" className={styles.illustration} />
-        <div className={styles.aboutHeroTextContainer}>
-          <p className={styles.aboutHeroText}>Your Guide to the Heart of Stowe</p>
-        </div>
-        <div className={styles.aboutHeroSubTextContainer}>
-          <p className={styles.aboutHeroSubText}>
-              Connecting you with authentic local experiences and community-driven events.
-          </p>
-        </div>
-      </section>
+      <AboutHero />
       <section className={styles.visionSectionContainer}>
         <h1 className={styles.visionSectionHeader}>Our Vision</h1>
         <p className={styles.visionSectionDescriptor}>Our goal is simple: To help the community stay connected with everything going on around town.</p>

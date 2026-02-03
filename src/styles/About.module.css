@@ -8,6 +8,26 @@ p {
   overflow: hidden;
 }
 
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 55vh;
+}
+
+/* background layer only */
+.heroContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../../public/images/site/church.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  filter: brightness(60%);
+  z-index: 1;
+}
+
 .illustration {
   max-width: 100%;
   height: auto;
@@ -16,7 +36,8 @@ p {
 }
 
 .aboutHeroTextContainer {
-  position: absolute;
+  position: relative;
+  z-index: 2;
   padding: 0 50px;
   width: 100%;
   top: 20px;
@@ -32,6 +53,7 @@ p {
 
 .aboutHeroSubTextContainer {
   position: absolute;
+  z-index: 2;
   padding: 0 30px;
   width: 100%;
   bottom: 30px;
