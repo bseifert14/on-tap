@@ -1,12 +1,13 @@
+import { PhotoRef } from "../../constants/photoRef";
 import styles from "../../styles/CommunityMoments.module.css";
 
 const images = [
-  "/public/images/site/frasco-apres.jpg",
-  "/public/images/site/jameson-halnon-photography.jpg",
-  "/public/images/site/firework-church.jpg",
-  "/public/images/site/jess-yoga.jpg",
-  "/public/images/site/duke-apres.jpg",
-  "/public/images/site/lot-brews.jpg"
+  PhotoRef.FrascoApres,
+  PhotoRef.JamesonHalnonPhotography,
+  PhotoRef.FireworkChurch,
+  PhotoRef.JessYoga,
+  PhotoRef.DukeApres,
+  PhotoRef.LotBrews
 ];
 
 export default function CommunityMoments() {

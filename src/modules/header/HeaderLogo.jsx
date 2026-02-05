@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/Header.module.css";
-import logo from "../../../public/images/site/OnTapDieCut.png";
+import logo from "/images/site/OnTapDieCut.png";
 
 export default function HeaderLogo() {
   return (

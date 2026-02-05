@@ -1,12 +1,13 @@
 import { Heart, Map, MountainSnow } from "lucide-react";
 import styles from "../../styles/AboutHeroSection.module.css";
+import { PhotoRef } from "../../constants/photoRef";
 
 export default function AboutHeroSection() {
   return (
     <>
       <div
         className={styles.hero}
-        style={{ "--hero-bg": "url(/public/images/hero/mansfield-sunset.jpg)" }}
+        style={{ "--hero-bg": `url(${PhotoRef.MansfieldSunset})` }}
       >
         <div className={styles.heroContent}>
           <h1 className={styles.title}>

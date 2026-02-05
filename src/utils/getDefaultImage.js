@@ -1,8 +1,11 @@
+import { PhotoRef } from "../constants/photoRef";
+
 const DEFAULT_EVENT_IMAGES = {
-    music: '/images/defaults/music.jpg',
-    sports: '/images/defaults/sports.jpg',
-    kidFriendly: '/images/defaults/kid-friendly.jpg',
-    foodAndBev: '/images/defaults/food-and-bev.jpg'
+    foodAndBev: PhotoRef.EventImages.DefaultFoodAndBev,
+    games: PhotoRef.EventImages.DefaultGames,
+    kidFriendly: PhotoRef.EventImages.DefaultKidFriendly,
+    music: PhotoRef.EventImages.DefaultMusic,
+    sports: PhotoRef.EventImages.DefaultSports
   };
 
 export const getDefaultImage = (type) => {
@@ -12,7 +15,7 @@ export const getDefaultImage = (type) => {
       case 'sports':
         return DEFAULT_EVENT_IMAGES.sports;
       case 'games':
-        return '/defaults/games.png';
+        return DEFAULT_EVENT_IMAGES.games;
       case 'kid friendly':
         return DEFAULT_EVENT_IMAGES.kidFriendly;
       case 'food & bev':

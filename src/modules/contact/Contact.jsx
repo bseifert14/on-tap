@@ -1,6 +1,7 @@
 import styles from "../../styles/Contact.module.css";
 import FormLabel from "../../components/form/FormLabel";
 import useContactForm from "../../utils/hooks/useContactForm";
+import { PhotoRef } from "../../constants/photoRef";
 
 export default function Contact() {
     const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
@@ -11,7 +12,7 @@ export default function Contact() {
     <div className={styles.page}>
       <section
         className={styles.hero}
-        style={{ "--hero-bg": "url(/public/images/site/frasco-apres-ben-seifert-photography.jpg)" }}
+        style={{ "--hero-bg": `url(${PhotoRef.FrascoApresTwo})` }}
       >
         <h1 className={styles.heroTitle}>Get In Touch</h1>
       </section>
