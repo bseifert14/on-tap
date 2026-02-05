@@ -10,6 +10,7 @@ import useGetListEvents from "../../utils/hooks/useGetListEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import Hero from "../common/Hero";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import { PhotoRef } from "../../constants/photoRef";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -72,7 +73,7 @@ export default function HomeLayout() {
     setSearchTerm("");
   };
 
-  const bgImageUrl = isMobile ? '/images/hero/mansfield-stars.jpg' : '/images/hero/jeffrey-clayton-stowe.jpg';
+  const bgImageUrl = isMobile ? PhotoRef.MansfieldStars : PhotoRef.StowePanorama;
 
   return (
     <div>
