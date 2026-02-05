@@ -23,6 +23,7 @@ export default async function handler(req, res) {
         event_description,
         event_photo_url,
         event_url,
+        event_business_name,
         businesses ( business_name )
         `;
 

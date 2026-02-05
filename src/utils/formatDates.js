@@ -70,3 +70,16 @@ export function generateTimeOptions(start, end, interval) {
     const hour = h % 12 || 12;
     return `${hour}:${m.toString().padStart(2, "0")} ${ampm}`;
   }
+
+/** FOR BACKEND USE */
+export function formatStartTime(timestamp) {
+  const date = new Date(timestamp);
+
+  const time = date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+  
+  return time;
+}

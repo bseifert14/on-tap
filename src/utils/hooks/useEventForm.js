@@ -4,6 +4,7 @@ import { supabase } from "../../supabase";
 import { toast } from "sonner";
 import resizeImageIfNeeded from "../resizeImageIfNeeded";
 import { sanitizeUrl } from "../sanitizeUrl";
+import { formatStartTime } from "../formatDates";
 
 export default function useEventForm(user, event, onSave) {
   const [form, setForm] = useState({
@@ -37,10 +38,10 @@ export default function useEventForm(user, event, onSave) {
         event_type: event.event_type || "",
         event_date: event.event_date || "",
         event_start_timestamp: event.event_start_timestamp
-          ? new Date(event.event_start_timestamp).toISOString().slice(11, 16)
+          ? formatStartTime(event.event_start_timestamp)
           : "",
         event_end_timestamp: event.event_end_timestamp
-          ? new Date(event.event_end_timestamp).toISOString().slice(11, 16)
+          ? formatStartTime(event.event_end_timestamp)
           : "",
         event_description: event.event_description || "",
         event_url: event.event_url || "",
