@@ -14,7 +14,8 @@
   position: absolute;
   inset: 0;
 
-  background-image: var(--hero-bg);
+  /* background-image: var(--hero-bg); */
+  background-image: url("../../public/images/hero/mansfield-stars.jpg");
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
