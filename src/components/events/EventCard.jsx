@@ -46,11 +46,11 @@ export default function EventCard({ event, onSelectEvent }) {
                 <p className={styles.description}>{event_description}</p>
                 <div className={styles.details}>
                     <div className={styles.iconValuePair}>
-                        <Clock size={15} strokeWidth={1.5} color="#999"/>
+                        <Clock size={15} strokeWidth={1.5} />
                         <div className={styles.value}>{formatEventStartTime(event_start_timestamp)}</div>
                     </div>
                     <div className={styles.iconValuePair}>
-                        <MapPin size={15} strokeWidth={1.5} color="#999" />
+                        <MapPin size={15} strokeWidth={1.5} />
                         <a
                             href={getAddressURL(event_location)}
                             target="_blank"

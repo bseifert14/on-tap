@@ -25,6 +25,7 @@
 
 .eventsHeader {
   margin-bottom: 10px;
+  color: var(--color-secondary)
 }
 
 /* Custom Day Styles */
@@ -34,7 +35,6 @@
 }
 
 .selectedDay {
-  background-color: #d80032 !important;
   color: white !important;
   border-radius: 12px;
   font-weight: bold;

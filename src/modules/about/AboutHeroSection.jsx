@@ -22,7 +22,7 @@ export default function AboutHeroSection() {
       </div>
       <div className={styles.values}>
         <div className={styles.value}>
-            <MountainSnow />
+            <MountainSnow color="#d6252c" />
     
           <h3>Community Vision</h3>
           <p>
@@ -34,7 +34,7 @@ export default function AboutHeroSection() {
         </div>
 
         <div className={styles.value}>
-            <Heart />
+            <Heart color="#d6252c" />
           <h3>Local Spirit</h3>
           <p>
             Our community thrives when we come together. Knowing what's happening 
@@ -44,7 +44,7 @@ export default function AboutHeroSection() {
         </div>
 
         <div className={styles.value}>
-            <Map />
+            <Map color="#d6252c" />
           <h3>The Guide</h3>
           <p>
             We bring events together in one easy place, so you always know what's on 

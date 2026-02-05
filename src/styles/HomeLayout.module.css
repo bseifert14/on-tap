@@ -5,6 +5,7 @@
 .eventListHeader {
   margin: 15px 0;
   font-weight: 600;
+  color: var(--color-secondary);
 }
 
 

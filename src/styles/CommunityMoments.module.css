@@ -13,13 +13,13 @@
   font-size: 28px;
   font-weight: 800;
   letter-spacing: 0.02em;
-  color: #111;
+  color: var(--color-secondary);
 }
 
 .subtitle {
   margin-top: 10px;
   font-size: 15px;
-  color: #c95a5a; /* matches your accent red */
+  color: var(--color-tertiary);
 }
 
 .grid {

@@ -74,15 +74,16 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.875rem;
+  color: var(--color-secondary)
 }
 
 .navButtonInactive:hover {
   color: black;
-  border: 1px solid #e3e1e1;
+  border: 1px solid var(--color-quaternary-accent-2);
 }
 
 .navButtonActive {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--color-secondary);
   border-radius: unset;
 }
 
@@ -160,7 +161,7 @@
   border: none;
   font-size: 28px; /* increased from 20px */
   cursor: pointer;
-  color: black;
+  color: var(--color-secondary);
 }
 
 .userDropdown {

@@ -1,6 +1,7 @@
 .emptyState {
     text-align: center;
     padding: 2rem;
+    color: var(--color-secondary);
   }
   
   .image {

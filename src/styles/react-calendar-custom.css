@@ -21,7 +21,7 @@
   
 /* Selected Date Styling */
 .react-calendar__tile--active {
-  background-color: #d90429;
+  background-color: var(--color-tertiary);
   color: white;
   font-weight: bold;
 }
@@ -65,7 +65,7 @@
 }
 
 .react-calendar__navigation__label {
-  color: black;
+  color: #092a34;
   font-weight: bold;
   font-family: "Blinker", sans-serif;
   font-size: 18px !important; /* override react-calendar__navigation button */

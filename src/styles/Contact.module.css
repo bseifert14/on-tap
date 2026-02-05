@@ -75,7 +75,7 @@
 .button {
   padding: 12px 16px;
   border: none;
-  background: var(--color-red-primary);
+  background: var(--color-tertiary);
   color: white;
   font-weight: bold;
   border-radius: 24px;
@@ -84,6 +84,7 @@
 }
 
 .descriptorContainer {
+  color: var(--color-secondary);
   padding: 25px 30px;
     text-align: center;
     font-size: 20px;

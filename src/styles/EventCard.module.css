@@ -43,13 +43,14 @@
 
 .dateWidgetMonth {
   font-size: 10px;
-  color: orange;
+  color: var(--color-tertiary);
   font-weight: 600;
 }
 
 .dateWidgetDay {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--color-secondary);
 }
 
 .content {
@@ -84,10 +85,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--color-secondary)
 }
 
 .description {
-  color: #555;
+  color: var(--color-secondary);
   font-size: 0.875rem;
   margin-bottom: 0.75rem;
   word-wrap: break-word;
@@ -115,6 +117,7 @@
 
 .value {
   font-weight: 500;
+  color: var(--color-secondary);
 }
 
 .buttons {
@@ -137,6 +140,7 @@
   display: flex;
   gap: 4px;
   align-items: center;
+  color: var(--color-secondary);
 }
 
 @media (max-width: 640px) {

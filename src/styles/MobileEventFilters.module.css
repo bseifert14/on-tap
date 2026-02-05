@@ -30,12 +30,11 @@
   white-space: nowrap; /* prevents wrapping inside chips */
   cursor: pointer;
   height: 35px;
-  color: black;
+  color: var(--color-secondary);
 }
 
 .active {
-  /* background: #f57c1f; */
-  background: var(--color-darkest);
+  background: var(--color-tertiary);
   border-color: transparent;
   color: #fff;
 }
