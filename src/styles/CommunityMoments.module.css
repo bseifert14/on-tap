@@ -36,17 +36,17 @@
   aspect-ratio: 1 / 1;
   border-radius: 18px;
   overflow: hidden;
-
   background-image: var(--bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
-
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .tile::after {

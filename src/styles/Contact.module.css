@@ -6,16 +6,13 @@
   position: relative;
   min-height: 320px;
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-image: var(--hero-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;

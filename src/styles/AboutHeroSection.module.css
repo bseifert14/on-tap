@@ -10,6 +10,9 @@
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: 0 22px 55px rgba(0, 0, 0, 0.18);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .hero::before {

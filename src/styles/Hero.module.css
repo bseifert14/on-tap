@@ -13,15 +13,16 @@
   content: "";
   position: absolute;
   inset: 0;
-
   background-image: var(--hero-bg);
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
-
   filter: brightness(60%);
   transform: scale(1.02);
   z-index: 1;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .hero > * {
