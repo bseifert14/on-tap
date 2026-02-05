@@ -11,7 +11,7 @@ export default function Hero({
   return (
     <section
       className={`${styles.hero} ${styles[variant]}`}
-      style={{ "--hero-bg": `url(${bgImageUrl})` }}
+      style={{ "--hero-bg": `url("${bgImageUrl}")` }}
     >
       <div className={styles.main}>
         <h1 className={styles.title}>{title}</h1>
