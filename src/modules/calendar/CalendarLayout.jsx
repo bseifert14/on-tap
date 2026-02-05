@@ -4,6 +4,7 @@ import CalendarView from "./CalendarView";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import Hero from "../common/Hero";
+import { PhotoRef } from "../../constants/photoRef";
 
 export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("All");
@@ -21,7 +22,7 @@ export default function CalendarLayout() {
     setSearchTerm("");
   };
 
-  const bgImageUrl = isMobile ? '/public/images/hero/mansfield-stars.jpg' : '/public/images/hero/jeffrey-clayton-stowe.jpg';
+  const bgImageUrl = isMobile ? PhotoRef.MansfieldStars : PhotoRef.StowePanorama;
 
   return (
     <div>

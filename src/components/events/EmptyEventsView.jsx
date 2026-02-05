@@ -1,5 +1,5 @@
 import styles from '../../styles/EmptyEventsView.module.css';
-import emptyEventsView from '../../../public/images/site/empty-events-view.png';
+import emptyEventsView from '/images/site/empty-events-view.png';
 
 export default function EmptyEventsView({ currentView }) {
   const message = currentView === 'list' ?
