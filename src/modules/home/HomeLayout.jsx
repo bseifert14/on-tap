@@ -72,7 +72,7 @@ export default function HomeLayout() {
     setSearchTerm("");
   };
 
-  const bgImageUrl = isMobile ? '../../public/images/hero/mansfield-stars.jpg' : '../../public/images/hero/jeffrey-clayton-stowe.jpg';
+  const bgImageUrl = isMobile ? '/images/hero/mansfield-stars.jpg' : '/images/hero/jeffrey-clayton-stowe.jpg';
 
   return (
     <div>
