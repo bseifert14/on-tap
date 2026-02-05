@@ -11,14 +11,13 @@ export default function AboutHeroSection() {
       >
         <div className={styles.heroContent}>
           <h1 className={styles.title}>
-            Your Guide to the  <br />
-            Heart of Stowe
+            Your Inside Guide to Stowe
           </h1>
 
-          <p className={styles.subtitle}>
+          {/* <p className={styles.subtitle}>
             Curating the finest local gatherings, mountain traditions, and hidden
             gems in the village of Stowe, Vermont.
-          </p>
+          </p> */}
         </div>
       </div>
       <div className={styles.values}>
@@ -27,9 +26,10 @@ export default function AboutHeroSection() {
     
           <h3>Community Vision</h3>
           <p>
-            On Tap Stowe was born from a simple desire: to unify the vibrant
-            energy of our mountain town. We bridge the gap between historic
-            traditions and modern culture.
+            On Tap Stowe was born with a simple goal in mind: to help the community 
+            stay connected with everything going on around town - whether it's a 
+            familiar local favorite or something new happening this weekend. No more 
+            missing the good stuff.
           </p>
         </div>
 
@@ -37,9 +37,9 @@ export default function AboutHeroSection() {
             <Heart />
           <h3>Local Spirit</h3>
           <p>
-            Authenticity is our compass. From local brewery pop-ups to seasonal
-            farm-to-table dinners and the legendary Stowe pond skimming, we
-            celebrate the makers and dreamers.
+            Our community thrives when we come together. Knowing what's happening 
+            around town helps all of us show up, support local businesses, see great 
+            live music, and be part of the community.
           </p>
         </div>
 
@@ -47,9 +47,9 @@ export default function AboutHeroSection() {
             <Map />
           <h3>The Guide</h3>
           <p>
-            More than a calendar, we’re a curated editorial guide. We provide
-            context, stories, and insight into what’s happening — and why it
-            matters.
+            We bring events together in one easy place, so you always know what's on 
+            tap around town. Whether you're a local, a visitor, or somewhere in between, 
+            On Tap Stowe keeps you up to date with what's happening.
           </p>
         </div>
       </div>

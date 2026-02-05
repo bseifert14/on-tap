@@ -16,7 +16,7 @@ export default function CommunityMoments() {
       <div className={styles.header}>
         <h2 className={styles.title}>Community Moments</h2>
         <p className={styles.subtitle}>
-          A visual journey through the seasons and celebrations of Stowe.
+          Want to be featured here? Get in touch below with a photo from your favorite event.
         </p>
       </div>
 
