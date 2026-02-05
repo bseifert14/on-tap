@@ -78,7 +78,7 @@ export default function EventModal({ event, onClose }) {
     >
       <h2 className={styles.title}>{event_name}</h2>
       <div className={styles.iconValuePair}>
-          <MapPin size={15} strokeWidth={1.5} color="#999" />
+          <MapPin size={15} strokeWidth={1.5} color="#092a34" />
           <a
             href={getAddressURL(event_location)}
             target="_blank"
@@ -88,12 +88,12 @@ export default function EventModal({ event, onClose }) {
           >
             <span className={styles.iconValuePair}>
               {getEventLocation()}
-              <CircleArrowRight size={13} strokeWidth={1.5} color="#999" />
+              <CircleArrowRight size={13} strokeWidth={1.5} color="#092a34" />
             </span>
           </a>
       </div>
       <div className={styles.iconValuePairTime}>
-          <Calendar size={15} strokeWidth={1.5} color="#999" />
+          <Calendar size={15} strokeWidth={1.5} color="#092a34" />
           <div className={styles.value}>{formatEventDateTime(event_start_timestamp, event_end_timestamp)}</div>
       </div>
       <div

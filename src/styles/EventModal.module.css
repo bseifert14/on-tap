@@ -102,6 +102,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--color-secondary);
   }
   
   .subtext {
@@ -140,6 +141,7 @@
     line-height: 1.5;
     white-space: pre-wrap;
     word-wrap: break-word;
+    color: var(--color-secondary);
   }
 
   .placeholder {
@@ -157,7 +159,7 @@
   }
   
   .button {
-    background: black;
+    background: var(--color-tertiary);
     color: white;
     border: none;
     border-radius: 12px;
@@ -210,6 +212,7 @@
     display: flex;
     gap: 4px;
     align-items: center;
+    color: var(--color-secondary);
   }
 
   .iconValuePairTime {
