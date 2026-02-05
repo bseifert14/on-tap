@@ -1,95 +1,98 @@
 import styles from "../../styles/Contact.module.css";
-import FRASCO from "../../../public/images/site/frasco-apres-ben-seifert-photography.jpg";
 import FormLabel from "../../components/form/FormLabel";
 import useContactForm from "../../utils/hooks/useContactForm";
 
 export default function Contact() {
-  const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
-  const inputClass = (field) =>
-    `${styles.input} ${errors[field] ? styles.inputError : ""}`;
+    const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
+    const inputClass = (field) =>
+        `${styles.input} ${errors[field] ? styles.inputError : ""}`;
 
   return (
-    <div id="contactForm">
-      <section className={styles.contactHeroContainer}>
-        <img src={FRASCO} alt="Live show" className={styles.illustration}/>
-        <h1 className={styles.contactHeroText}>Get In Touch</h1>
+    <div className={styles.page}>
+      <section
+        className={styles.hero}
+        style={{ "--hero-bg": "url(/public/images/site/frasco-apres-ben-seifert-photography.jpg)" }}
+      >
+        <h1 className={styles.heroTitle}>Get In Touch</h1>
       </section>
+
       <div className={styles.descriptorContainer}>
-        <p>Have questions about an event or want to list your own? Drop us a line and we'll get back to you faster than the gondola can take you to the top of the mountain.</p>
+          <p>Have questions about an event or want to list your own? Drop us a line and we'll get back to you faster than the gondola can take you to the top of the mountain.</p>
       </div>
+
       <div className={styles.formContainer}>
-        <form
-          className={styles.form}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-          noValidate
-        >
-          {/* Honeypot: hidden */}
-          <input
-            type="text"
-            name="website"
-            autoComplete="off"
-            tabIndex={-1}
-            value={form.website}
-            onChange={(e) => handleChange("website", e.target.value)}
-            style={{ display: "none" }}
-          />
-
-          <div>
-            <FormLabel label="Name" isRequired={true} name="name" />
+            <form
+                className={styles.form}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit();
+                }}
+                noValidate
+            >
+            {/* Honeypot: hidden */}
             <input
-              id="name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              className={inputClass("name")}
-              value={form.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              aria-invalid={!!errors.name}
+                type="text"
+                name="website"
+                autoComplete="off"
+                tabIndex={-1}
+                value={form.website}
+                onChange={(e) => handleChange("website", e.target.value)}
+                style={{ display: "none" }}
             />
-            {errors.name && <p className={styles.error}>{errors.name}</p>}
-          </div>
-
-          <div>
-            <FormLabel label="Email" isRequired={true} name="email" />
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              className={inputClass("email")}
-              value={form.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              aria-invalid={!!errors.email}
-            />
-            {errors.email && <p className={styles.error}>{errors.email}</p>}
-          </div>
-
-          <div>
-            <FormLabel label="Message" isRequired={true} name="message" />
-            <textarea
-              id="message"
-              name="message"
-              rows="7"
-              autoComplete="off"
-              className={inputClass("message")}
-              value={form.message}
-              onChange={(e) => handleChange("message", e.target.value)}
-              aria-invalid={!!errors.message}
-              style={{ resize: "none" }}
-            />
-            {errors.message && <p className={styles.error}>{errors.message}</p>}
-          </div>
-
-          {errors.form && <p className={styles.error}>{errors.form}</p>}
-
-          <button type="submit" className={styles.button} disabled={isSubmitting}>
-            {isSubmitting ? "Sending…" : "Send"}
-          </button>
-        </form>
-      </div>
+    
+            <div>
+                <FormLabel label="Name" isRequired={true} name="name" />
+                <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                className={inputClass("name")}
+                value={form.name}
+                onChange={(e) => handleChange("name", e.target.value)}
+                aria-invalid={!!errors.name}
+                />
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
+            </div>
+    
+            <div>
+                <FormLabel label="Email" isRequired={true} name="email" />
+                <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                className={inputClass("email")}
+                value={form.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                aria-invalid={!!errors.email}
+                />
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
+            </div>
+    
+            <div>
+                <FormLabel label="Message" isRequired={true} name="message" />
+                <textarea
+                id="message"
+                name="message"
+                rows="7"
+                autoComplete="off"
+                className={inputClass("message")}
+                value={form.message}
+                onChange={(e) => handleChange("message", e.target.value)}
+                aria-invalid={!!errors.message}
+                style={{ resize: "none" }}
+                />
+                {errors.message && <p className={styles.error}>{errors.message}</p>}
+            </div>
+    
+            {errors.form && <p className={styles.error}>{errors.form}</p>}
+    
+            <button type="submit" className={styles.button} disabled={isSubmitting}>
+                {isSubmitting ? "Sending…" : "Send"}
+            </button>
+            </form>
+        </div>
     </div>
   );
 }

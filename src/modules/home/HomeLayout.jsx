@@ -5,19 +5,20 @@ import styles from "../../styles/HomeLayout.module.css";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 import EventList from "../../components/events/EventList";
 import EventModal from "../../components/events/EventModal";
-import HeroLayout from "../common/HeroLayout";
 import SetPasswordModal from "../../components/SetPasswordModal";
 import useGetListEvents from "../../utils/hooks/useGetListEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
+import Hero from "../common/Hero";
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
 
 export default function HomeLayout() {
   const location = useLocation();
-
   const [selectedType, setSelectedType] = useState("All");
   const [selectedEvent, setSelectedEvent] = useState(null);
-
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const { events, isLoading, error } = useGetListEvents({
     search: searchTerm,
@@ -71,9 +72,16 @@ export default function HomeLayout() {
     setSearchTerm("");
   };
 
+  const bgImageUrl = isMobile ? '/public/images/hero/mansfield-stars.jpg' : '/public/images/hero/jeffrey-clayton-stowe.jpg';
+
   return (
     <div>
-      <HeroLayout currentView="list" />
+      <Hero
+        title="What's going on tonight in Stowe?"
+        subtitleTop="From mountain adventures to live bands - never miss a beat around town."
+        ctaLabel="Explore Events"
+        bgImageUrl={bgImageUrl}
+      />
       <div className={styles.homeBody} id="eventSection">
         <EventFiltersLayout
           selectedType={selectedType}

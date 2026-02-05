@@ -1,15 +1,16 @@
 import { useState } from "react";
 import styles from "../../styles/CalendarLayout.module.css";
-
 import CalendarView from "./CalendarView";
 import EventFiltersLayout from "../common/EventFiltersLayout";
-import HeroLayout from "../common/HeroLayout";
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import Hero from "../common/Hero";
 
 export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("All");
-
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   const handleSearchSubmit = () => {
     setSearchTerm(searchInput.trim());
@@ -20,9 +21,16 @@ export default function CalendarLayout() {
     setSearchTerm("");
   };
 
+  const bgImageUrl = isMobile ? '/public/images/hero/mansfield-stars.jpg' : '/public/images/hero/jeffrey-clayton-stowe.jpg';
+
   return (
     <div>
-      <HeroLayout currentView="calendar" />
+      <Hero
+        title="What's going on this month in Stowe?"
+        subtitleTop="From mountain adventures to live bands - never miss a beat around town."
+        ctaLabel="Explore Events"
+        bgImageUrl={bgImageUrl}
+      />
       <div className={styles.calendarBody} id="eventSection">
         <EventFiltersLayout
           selectedType={selectedType}

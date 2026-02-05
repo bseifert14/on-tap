@@ -1,14 +1,51 @@
+.page {
+  background: #faf7f5;
+}
+
+.hero {
+  position: relative;
+  min-height: 320px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.heroTitle {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(28px, 5vw, 48px);
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.formContainer {
+  padding: 10px 32px 25px 32px;
+  margin: 0 auto;
+  max-width: 500px;
+  height: fit-content;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.error {
-  color: red;
-  padding-left: 4px;
-  line-height: 1.6;
-  font-weight: 500;
 }
 
 .input {
@@ -27,6 +64,13 @@
   /* border-color: var(--color-red-primary); */
 }
 
+.error {
+  color: red;
+  padding-left: 4px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
 .button {
   padding: 12px 16px;
   border: none;
@@ -38,38 +82,21 @@
   margin-top: 10px;
 }
 
-
-.contactHeroContainer {
-  position: relative;
-  overflow: hidden;
-}
-
-.illustration {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-.contactHeroText {
-  position: absolute;
-  bottom: 10px;
-  right: 20px;
-  line-height: 3rem;
-  font-size: 40px;
-  font-style: italic;
-  color: white;
-  text-align: right;
-  font-family: "Blinker", sans-serif;
-}
-
 .descriptorContainer {
   padding: 25px 30px;
-  text-align: center;
-  font-size: 20px;
+    text-align: center;
+    font-size: 20px;
+    max-width: 700px;
+    margin: 10px auto;
 }
 
-.formContainer {
-  padding: 10px 32px 25px 32px;
-  max-width: 500px;
-  height: fit-content;
+@media (max-width: 768px) {
+  .hero {
+    min-height: 260px;
+  }
+
+  .descriptorContainer {
+    max-width: unset;
+    margin: unset;
+  }
 }
