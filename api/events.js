@@ -21,6 +21,7 @@ export default async function handler(req, res) {
         event_start_timestamp,
         event_end_timestamp,
         event_description,
+        event_min_age,
         event_photo_url,
         event_url,
         event_business_name,

@@ -16,7 +16,7 @@ function getEventDate(dateStr) {
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_photo_url, event_date, 
-        event_type, event_start_timestamp, event_end_timestamp, event_business_name, business_name
+        event_type, event_start_timestamp, event_min_age, event_business_name, business_name
     } = event;
     
     const { month, day } = getEventDate(event_date);
@@ -41,7 +41,14 @@ export default function EventCard({ event, onSelectEvent }) {
                         {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
                         {event_type}
                     </div>
+
+                    {event_min_age ? 
+                        <div className={styles.category}>
+                            Age: {event_min_age}+
+                        </div>
+                    : null}
                 </div>
+
                 <h3 className={styles.title}>{event_name}</h3>
                 <p className={styles.description}>{event_description}</p>
                 <div className={styles.details}>
