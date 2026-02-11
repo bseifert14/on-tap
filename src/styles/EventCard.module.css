@@ -100,8 +100,8 @@
 
 .details {
   display: flex;
-  flex-direction: row;
-  flex-wrap:wrap;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: flex-start;
   font-size: 0.75rem;
   padding-top: 10px;
