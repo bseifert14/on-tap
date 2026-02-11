@@ -49,7 +49,7 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
             </Link>
         ))}
 
-        {isLoggedIn ? (
+        {/* {isLoggedIn ? (
             <>
             <Link
                 to="/profile"
@@ -64,7 +64,7 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
             </>
         ) : (
             <button onClick={handleLoginClick}>Log In</button>
-        )}
+        )} */}
       </div>
   );
 }

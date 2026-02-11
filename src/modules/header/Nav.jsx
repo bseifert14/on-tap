@@ -36,7 +36,7 @@ export default function Nav({ user, onLogout, onLoginClick }) {
         <NavButton path="/about" title="About" />
         <NavButton path="/contact" title="Contact Us" />
 
-        <div className={styles.userMenuWrapper} ref={dropdownRef}>
+        {/* <div className={styles.userMenuWrapper} ref={dropdownRef}>
         <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
             <User strokeWidth={1.5} />
         </button>
@@ -54,7 +54,7 @@ export default function Nav({ user, onLogout, onLoginClick }) {
             )}
             </div>
         )}
-        </div>
+        </div> */}
     </nav>
   );
 }
