@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import resizeImageIfNeeded from "../resizeImageIfNeeded";
 import { sanitizeUrl } from "../sanitizeUrl";
 import { formatStartTime } from "../formatDates";
+import { uploadOrReuseEventPhoto } from "../uploadOrReuseEventPhoto";
 
 export default function useEventForm(user, event, onSave) {
   const [form, setForm] = useState({
@@ -18,6 +19,7 @@ export default function useEventForm(user, event, onSave) {
     event_description: "",
     event_url: "",
     event_photo_url: "",
+    event_photo_path: "",
     is_kid_friendly: true,
     is_18_plus: false,
     is_21_plus: false,
@@ -46,6 +48,7 @@ export default function useEventForm(user, event, onSave) {
         event_description: event.event_description || "",
         event_url: event.event_url || "",
         event_photo_url: event.event_photo_url || "",
+        event_photo_path: event.event_photo_path || "",
         event_min_age: event.event_min_age || 0,
         is_kid_friendly: event.is_kid_friendly ?? true,
         is_18_plus: event.is_18_plus ?? false,
@@ -75,25 +78,17 @@ export default function useEventForm(user, event, onSave) {
   };
 
   const handleSubmit = async () => {
-    let photoUrl = form.event_photo_url;
+    let photoPath = form.event_photo_path || null;
 
     if (selectedFile) {
-      const fileExt = selectedFile.name.split(".").pop();
-      const fileName = `${user.id}_${Date.now()}.${fileExt}`;
-      const { error: uploadError } = await supabase.storage
-        .from("event-photos")
-        .upload(fileName, selectedFile);
-
-      if (uploadError) {
+      try {
+        const { storagePath } = await uploadOrReuseEventPhoto(selectedFile);
+        photoPath = storagePath;
+      } catch (err) {
+        console.error(err);
         toast.error("Image upload failed.");
         return;
       }
-
-      const { data: publicUrlData } = supabase.storage
-        .from("event-photos")
-        .getPublicUrl(fileName);
-
-      photoUrl = publicUrlData.publicUrl;
     }
 
     const fullStart =
@@ -114,7 +109,7 @@ export default function useEventForm(user, event, onSave) {
       event_start_timestamp: fullStart,
       event_end_timestamp: fullEnd,
       created_by: user.id,
-      event_photo_url: photoUrl || null
+      event_photo_path: photoPath || null,
     };
 
     const result = event

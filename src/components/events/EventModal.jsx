@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/EventModal.module.css";
 import { Calendar, CircleArrowRight, Locate, MapPin, Navigation } from "lucide-react";
 import { formatEventDateTime } from "../../utils/formatDates";
-import { getDefaultImage } from "../../utils/getDefaultImage";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
+import { getEventImageUrl } from "../../utils/getEventImageUrl";
 
 export default function EventModal({ event, onClose }) {
   if (!event) return null;
-  const { event_name, event_location, event_description, event_photo_url, 
-    event_type, event_url, event_start_timestamp, event_end_timestamp, business_url,
+  const { event_name, event_location, event_description, 
+    event_url, event_start_timestamp, event_end_timestamp, business_url,
     event_business_name, business_name
   } = event;
 
@@ -53,7 +53,7 @@ export default function EventModal({ event, onClose }) {
   const Image = () => {
     return (
       <img
-          src={event_photo_url || getDefaultImage(event_type)}
+          src={getEventImageUrl(event)}
           alt={event_name}
           className={styles.image}
         />

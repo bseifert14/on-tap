@@ -6,6 +6,7 @@ import { Clock, MapPin } from "lucide-react";
 import { formatEventStartTime } from "../../utils/formatDates";
 import Button from "../common/Button";
 import { getAddressURL } from "../../utils/getAddress";
+import { getEventImageUrl } from "../../utils/getEventImageUrl";
 
 function getEventDate(dateStr) {
     const date = new Date(`${dateStr}T00:00:00`);
@@ -15,7 +16,7 @@ function getEventDate(dateStr) {
 }
 
 export default function EventCard({ event, onSelectEvent }) {
-    const { event_description, event_location, event_name, event_photo_url, event_date, 
+    const { event_description, event_location, event_name, event_date, 
         event_type, event_start_timestamp, event_min_age, event_business_name, business_name
     } = event;
     
@@ -28,7 +29,7 @@ export default function EventCard({ event, onSelectEvent }) {
     return (
         <div className={styles.card}>
             <div className={styles.imageContainer}>
-                <img src={event_photo_url || getDefaultImage(event_type)} alt={event_name} className={styles.image} />
+                <img src={getEventImageUrl(event)} alt={event_name} className={styles.image} />
                 <div className={styles.dateWidget}>
                     <div className={styles.dateWidgetMonth}>{month}</div>
                     <div className={styles.dateWidgetDay}>{day}</div>

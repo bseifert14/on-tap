@@ -10,6 +10,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
     event_location,
     event_description,
     event_photo_url,
+    event_photo_path,
     event_external_link, // optional field for link support
   } = event;
 
@@ -30,7 +31,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
         {event_description ? truncate(event_description) : "—"}
       </td>
       <td className={styles.cell}>
-        {event_photo_url ? (
+        {(event_photo_url || event_photo_path) ? (
           <Check className={styles.checkmark} size={16} />
         ) : (
           <Minus className={styles.empty} size={16} />

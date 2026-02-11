@@ -104,7 +104,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
               onChange={(e) => handleChange("event_end_timestamp", e.target.value)}
             >
               <option value="">Select time</option>
-              {generateTimeOptions("06:00", "23:30", 30).map((time) => (
+              {generateTimeOptions("00:00", "23:30", 30).map((time) => (
                 <option key={time} value={time}>{formatTime(time)}</option>
               ))}
             </select>
@@ -158,7 +158,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
           onChange={(e) => handleChange("event_url", e.target.value)}
         />
 
-        <FormLabel label="Event Photo" name="event_photo_url" />
+        <FormLabel label="Event Photo" name="event_photo_path" />
         <div
           className={styles["eventModal-dropzone"]}
           onDragOver={(e) => e.preventDefault()}
