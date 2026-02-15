@@ -21,8 +21,9 @@ export default function HomeLayout() {
 
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const { events, isLoading, error } = useGetListEvents({
+  const { events, isLoading, isLoadingMore, hasMore, loadMore, error } = useGetListEvents({
     search: searchTerm,
+    pageSize: 12,
   });
 
   const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
@@ -97,12 +98,34 @@ export default function HomeLayout() {
 
         {isLoading && <EventCardSkeleton />}
 
-        {!isLoading && (
+        {/* {!isLoading && (
           <EventList
             events={events}
             selectedType={selectedType}
             onSelectEvent={(event) => setSelectedEvent(event)}
           />
+        )} */}
+
+        {!isLoading && (
+          <>
+            <EventList
+              events={events}
+              selectedType={selectedType}
+              onSelectEvent={(event) => setSelectedEvent(event)}
+            />
+
+            {hasMore && (
+              <div className={styles.loadMoreWrap}>
+                <button
+                  className={styles.loadMoreBtn}
+                  onClick={loadMore}
+                  disabled={isLoadingMore}
+                >
+                  {isLoadingMore ? "Loading..." : "Load More"}
+                </button>
+              </div>
+            )}
+          </>
         )}
 
         {selectedEvent && (
