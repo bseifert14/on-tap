@@ -8,10 +8,9 @@ import useGetCalendarDots from "../../utils/hooks/useGetCalendarDots";
 import useGetCalendarDayEvents from "../../utils/hooks/useGetCalendarDayEvents";
 
 import EventModal from "../../components/events/EventModal";
-import EventCard from "../../components/events/EventCard";
-import EmptyEventsView from "../../components/events/EmptyEventsView";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import LoadMoreButton from "../../components/LoadMoreButton";
+import EventList from "../../components/events/EventList";
 
 function toDateKeyLocal(d) {
   const yyyy = d.getFullYear();
@@ -97,20 +96,19 @@ export default function CalendarView({ selectedType, searchTerm }) {
         <div className={styles.eventScrollArea}>
           {isLoading && <EventCardSkeleton />}
 
-          {!isLoading && dayEvents.length === 0 ? (
-            <EmptyEventsView currentView="calendar" />
-          ) : (
-            dayEvents.map((event) => (
-              <EventCard
-                key={event.id}
-                event={event}
-                onSelectEvent={() => setSelectedEvent(event)}
+          {!isLoading && (
+            <>
+              <EventList
+                currentView="calendar"
+                events={dayEvents}
+                selectedType={selectedType}
+                onSelectEvent={(event) => setSelectedEvent(event)}
               />
-            ))
-          )}
-          
-          {!isLoading && hasMore && (
-            <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
+
+              {hasMore && (
+                <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
+              )}
+            </>
           )}
 
           {error && <div style={{ padding: 12 }}>Something went wrong loading events.</div>}

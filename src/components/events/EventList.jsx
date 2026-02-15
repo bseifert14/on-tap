@@ -2,7 +2,7 @@ import EventCard from "./EventCard";
 import EmptyEventsView from "./EmptyEventsView";
 import styles from "../../styles/EventList.module.css";
 
-export default function EventList({ events, onSelectEvent, selectedType }) {
+export default function EventList({ events, onSelectEvent, selectedType, currentView }) {
   const filtered = events.filter(
     (e) =>
       (selectedType === "All" || e.event_type === selectedType)
@@ -10,7 +10,7 @@ export default function EventList({ events, onSelectEvent, selectedType }) {
 
   if (filtered.length === 0 || events.length === 0) {
     return (
-      <EmptyEventsView currentView="list" />
+      <EmptyEventsView currentView={currentView} />
     )
   }
 

@@ -102,6 +102,7 @@ export default function HomeLayout() {
         {!isLoading && (
           <>
             <EventList
+              currentView="list"
               events={events}
               selectedType={selectedType}
               onSelectEvent={(event) => setSelectedEvent(event)}
