@@ -1,7 +1,6 @@
 import { supabaseServer } from "./_supabaseServer.js";
 
 function escapeLike(str) {
-  // prevent % and _ from turning into wildcard “match everything”
   return str.replace(/[\\%_]/g, (m) => `\\${m}`);
 }
 
@@ -12,11 +11,27 @@ export default async function handler(req, res) {
     const mode = (req.query.mode ?? "list").toString();
 
     const limit = Math.min(parseInt(req.query.limit ?? "50", 10), 200);
-
-    // offset comes from your "Load More" hook
     const offset = Math.max(parseInt(req.query.offset ?? "0", 10), 0);
     const rangeFrom = offset;
     const rangeTo = offset + limit - 1;
+
+    const type = (req.query.type ?? "All").toString();
+    const qRaw = (req.query.q ?? "").toString().trim();
+
+    // helper filters
+    const applyType = (query) => (type !== "All" ? query.eq("event_type", type) : query);
+
+    const applySearch = (query) => {
+      if (qRaw.length >= 2) {
+        const q = escapeLike(qRaw);
+        const pattern = `%${q}%`;
+        return query.or(
+          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_description.ilike.${pattern}`
+        );
+      }
+      if (qRaw.length > 0) return null; // 1 char => empty result (same rule as your search)
+      return query;
+    };
 
     const select = `
       id,
@@ -35,6 +50,71 @@ export default async function handler(req, res) {
       businesses ( business_name )
     `;
 
+    // --------------------------
+    // CALENDAR DOTS (MONTH VIEW)
+    // --------------------------
+    if (mode === "calendar_dots") {
+      const start = (req.query.start ?? "").toString();
+      const end = (req.query.end ?? "").toString();
+
+      if (!start || !end) {
+        return res.status(400).json({ error: "start and end are required for calendar_dots" });
+      }
+
+      let query = supabase
+        .from("events")
+        .select("event_date")
+        .gte("event_date", start)
+        .lte("event_date", end);
+
+      query = applyType(query);
+
+      const searched = applySearch(query);
+      if (searched === null) return res.status(200).json({ dates: [] });
+      query = searched;
+
+      const { data, error } = await query.order("event_date", { ascending: true });
+      if (error) return res.status(500).json({ error: error.message });
+
+      const dates = Array.from(new Set((data ?? []).map((r) => r.event_date)));
+      return res.status(200).json({ dates });
+    }
+
+    // --------------------------
+    // DAY EVENTS (RIGHT PANEL)
+    // --------------------------
+    if (mode === "day") {
+      const date = (req.query.date ?? "").toString();
+      if (!date) return res.status(400).json({ error: "date is required for day mode" });
+
+      let query = supabase.from("events").select(select).eq("event_date", date);
+
+      query = applyType(query);
+
+      const searched = applySearch(query);
+      if (searched === null) return res.status(200).json({ data: [] });
+      query = searched;
+
+      query = query
+        .order("event_start_timestamp", { ascending: true, nullsFirst: false })
+        .order("id", { ascending: true })
+        .range(rangeFrom, rangeTo);
+
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+
+      const normalized = (data ?? []).map((event) => ({
+        ...event,
+        business_name: event.businesses?.business_name ?? null,
+        businesses: undefined,
+      }));
+
+      return res.status(200).json({ data: normalized });
+    }
+
+    // --------------------------
+    // KEEP YOUR EXISTING MODES
+    // --------------------------
     let query = supabase.from("events").select(select);
 
     if (mode === "list") {
@@ -43,20 +123,16 @@ export default async function handler(req, res) {
 
       query = query
         .gte("event_date", fromDate)
-        // stable ordering for pagination:
         .order("event_date", { ascending: true })
         .order("event_start_timestamp", { ascending: true, nullsFirst: false })
         .order("id", { ascending: true })
         .range(rangeFrom, rangeTo);
     } else if (mode === "search") {
-      const qRaw = (req.query.q ?? "").toString().trim();
+      const q = (req.query.q ?? "").toString().trim();
+      if (q.length < 2) return res.status(200).json({ data: [] });
 
-      if (qRaw.length < 2) {
-        return res.status(200).json({ data: [] });
-      }
-
-      const q = escapeLike(qRaw);
-      const pattern = `%${q}%`;
+      const escaped = escapeLike(q);
+      const pattern = `%${escaped}%`;
 
       query = query
         .or(
@@ -67,29 +143,16 @@ export default async function handler(req, res) {
         .order("id", { ascending: true })
         .range(rangeFrom, rangeTo);
     } else if (mode === "calendar") {
+      // You can keep this for old usage, but I’d stop using it in the UI.
       const start = (req.query.start ?? "").toString();
       const end = (req.query.end ?? "").toString();
-      const qRaw = (req.query.q ?? "").toString().trim();
-
       if (!start || !end) {
         return res.status(400).json({ error: "start and end are required for calendar mode" });
       }
 
       query = query
         .gte("event_date", start)
-        .lte("event_date", end);
-
-      if (qRaw.length >= 2) {
-        const q = escapeLike(qRaw);
-        const pattern = `%${q}%`;
-        query = query.or(
-          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_description.ilike.${pattern}`
-        );
-      } else if (qRaw.length > 0) {
-        return res.status(200).json({ data: [] });
-      }
-
-      query = query
+        .lte("event_date", end)
         .order("event_date", { ascending: true })
         .order("event_start_timestamp", { ascending: true, nullsFirst: false })
         .order("id", { ascending: true })
@@ -99,7 +162,6 @@ export default async function handler(req, res) {
     }
 
     const { data, error } = await query;
-
     if (error) return res.status(500).json({ error: error.message });
 
     const normalized = (data ?? []).map((event) => ({

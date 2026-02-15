@@ -3,12 +3,15 @@ import Calendar from "react-calendar";
 
 import styles from "../../styles/CalendarView.module.css";
 import "../../styles/react-calendar-custom.css";
-import useGetCalendarEvents from "../../utils/hooks/useGetCalendarEvents";
+
+import useGetCalendarDots from "../../utils/hooks/useGetCalendarDots";
+import useGetCalendarDayEvents from "../../utils/hooks/useGetCalendarDayEvents";
 
 import EventModal from "../../components/events/EventModal";
 import EventCard from "../../components/events/EventCard";
 import EmptyEventsView from "../../components/events/EmptyEventsView";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
+import LoadMoreButton from "../../components/LoadMoreButton";
 
 function toDateKeyLocal(d) {
   const yyyy = d.getFullYear();
@@ -32,31 +35,31 @@ export default function CalendarView({ selectedType, searchTerm }) {
 
   const { startKey, endKey } = useMemo(() => monthRangeKeys(activeStartDate), [activeStartDate]);
 
-  const { events, isLoading, error } = useGetCalendarEvents({
-    start: startKey,
-    end: endKey,
-    search: searchTerm,
-  });
-
   const selectedDateStr = toDateKeyLocal(selectedDate);
 
-  const eventsByDate = useMemo(() => {
-    const map = new Map();
+  const { dates: dotDates } = useGetCalendarDots({
+    start: startKey,
+    end: endKey,
+    selectedType,
+    searchTerm,
+  });
 
-    for (const e of events) {
-      if (selectedType !== "All" && e.event_type !== selectedType) continue;
+  const datesWithEvents = useMemo(() => new Set(dotDates), [dotDates]);
 
-      const key = e.event_date;
-      const arr = map.get(key);
-      if (arr) arr.push(e);
-      else map.set(key, [e]);
-    }
+  const {
+    events: dayEvents,
+    isLoading,
+    isLoadingMore,
+    hasMore,
+    loadMore,
+    error,
+  } = useGetCalendarDayEvents({
+    date: selectedDateStr,
+    selectedType,
+    searchTerm,
+    pageSize: 12,
+  });
 
-    return map;
-  }, [events, selectedType]);
-
-  const datesWithEvents = useMemo(() => new Set(eventsByDate.keys()), [eventsByDate]);
-  const filtered = eventsByDate.get(selectedDateStr) ?? [];
 
   return (
     <div className={styles.container}>
@@ -94,16 +97,20 @@ export default function CalendarView({ selectedType, searchTerm }) {
         <div className={styles.eventScrollArea}>
           {isLoading && <EventCardSkeleton />}
 
-          {!isLoading && filtered.length === 0 ? (
+          {!isLoading && dayEvents.length === 0 ? (
             <EmptyEventsView currentView="calendar" />
           ) : (
-            filtered.map((event) => (
+            dayEvents.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
                 onSelectEvent={() => setSelectedEvent(event)}
               />
             ))
+          )}
+          
+          {!isLoading && hasMore && (
+            <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
           )}
 
           {error && <div style={{ padding: 12 }}>Something went wrong loading events.</div>}

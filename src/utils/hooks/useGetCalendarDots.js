@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 
-export default function useGetCalendarEvents({ start, end, search } = {}) {
-  const [events, setEvents] = useState([]);
+export default function useGetCalendarDots({ start, end, selectedType, searchTerm } = {}) {
+  const [dates, setDates] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
   useEffect(() => {
     let cancelled = false;
@@ -14,22 +16,20 @@ export default function useGetCalendarEvents({ start, end, search } = {}) {
       return;
     }
 
-    const trimmed = (search ?? "").trim();
-
     (async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const data = await fetchEvents({
-          mode: "calendar",
+        const dates = await fetchEvents({
+          mode: "calendar_dots",
           start,
           end,
+          type: selectedType ?? "All",
           q: trimmed,
-          limit: "500",
         });
 
-        if (!cancelled) setEvents(data);
+        if (!cancelled) setDates(dates);
       } catch (e) {
         if (!cancelled) setError(e);
       } finally {
@@ -40,7 +40,7 @@ export default function useGetCalendarEvents({ start, end, search } = {}) {
     return () => {
       cancelled = true;
     };
-  }, [start, end, search]);
+  }, [start, end, selectedType, trimmed]);
 
-  return { events, isLoading, error };
+  return { dates, isLoading, error };
 }

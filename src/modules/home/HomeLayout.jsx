@@ -11,6 +11,7 @@ import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import Hero from "../common/Hero";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import { PhotoRef } from "../../constants/photoRef";
+import LoadMoreButton from "../../components/LoadMoreButton";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -98,14 +99,6 @@ export default function HomeLayout() {
 
         {isLoading && <EventCardSkeleton />}
 
-        {/* {!isLoading && (
-          <EventList
-            events={events}
-            selectedType={selectedType}
-            onSelectEvent={(event) => setSelectedEvent(event)}
-          />
-        )} */}
-
         {!isLoading && (
           <>
             <EventList
@@ -115,15 +108,7 @@ export default function HomeLayout() {
             />
 
             {hasMore && (
-              <div className={styles.loadMoreWrap}>
-                <button
-                  className={styles.loadMoreBtn}
-                  onClick={loadMore}
-                  disabled={isLoadingMore}
-                >
-                  {isLoadingMore ? "Loading..." : "Load More"}
-                </button>
-              </div>
+              <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
             )}
           </>
         )}
