@@ -2,53 +2,56 @@ import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 import { FILTER_TO_TYPES } from "../../constants/eventTypes";
 
-export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 } = {}) {
+export default function useGetCalendarDayEvents({
+  date,
+  selectedType = "All",
+  searchTerm = "",
+  pageSize = 12,
+} = {}) {
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState(null);
 
-  const trimmed = useMemo(() => search.trim(), [search]);
+  const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
-  // Convert selectedType (UI id) => array of DB types
   const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
   const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
 
-  // Reset when search OR selectedType changes
   useEffect(() => {
     setEvents([]);
     setOffset(0);
     setHasMore(true);
-  }, [trimmed, typeIn]);
+  }, [date, trimmed, typeIn]); // use typeIn
 
   useEffect(() => {
     let cancelled = false;
 
-    const run = async () => {
+    if (!date) {
+      setIsLoading(false);
+      return;
+    }
+
+    (async () => {
       try {
         setError(null);
-
         if (offset === 0) setIsLoading(true);
         else setIsLoadingMore(true);
 
-        const from = new Date().toISOString().split("T")[0];
-
-        const baseParams =
-          trimmed.length >= 2
-            ? { mode: "search", q: trimmed, from } // include from
-            : { mode: "list", from };
-
         const params = {
-          ...baseParams,
+          mode: "day",
+          date,
+          q: trimmed,
           limit: String(pageSize),
           offset: String(offset),
-          ...(typeIn ? { type_in: typeIn } : {}),
+          ...(typeIn ? { type_in: typeIn } : {}), // important
         };
 
         const data = await fetchEvents(params);
+
         if (cancelled) return;
 
         setEvents((prev) => (offset === 0 ? data : [...prev, ...data]));
@@ -61,14 +64,12 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
           setIsLoadingMore(false);
         }
       }
-    };
-
-    if (hasMore || offset === 0) run();
+    })();
 
     return () => {
       cancelled = true;
     };
-  }, [trimmed, typeIn, offset, pageSize]);
+  }, [date, trimmed, typeIn, offset, pageSize]);
 
   const loadMore = () => {
     if (isLoading || isLoadingMore || !hasMore) return;

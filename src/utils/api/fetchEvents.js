@@ -9,5 +9,10 @@ export async function fetchEvents(params) {
     const json = await res.json();
 
     if (!res.ok) throw new Error(json?.error || "Failed to fetch events");
+
+    //calendar_dots returns { dates: [...] }
+    if (Array.isArray(json.dates)) return json.dates;
+
     return json.data ?? [];
 }
+

@@ -11,18 +11,21 @@ import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import Hero from "../common/Hero";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import { PhotoRef } from "../../constants/photoRef";
+import LoadMoreButton from "../../components/LoadMoreButton";
 
 export default function HomeLayout() {
   const location = useLocation();
-  const [selectedType, setSelectedType] = useState("All");
+  const [selectedType, setSelectedType] = useState("events");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const { events, isLoading, error } = useGetListEvents({
+  const { events, isLoading, isLoadingMore, hasMore, loadMore, error } = useGetListEvents({
     search: searchTerm,
+    selectedType,
+    pageSize: 12,
   });
 
   const [showSetPasswordModal, setShowSetPasswordModal] = useState(false);
@@ -98,11 +101,17 @@ export default function HomeLayout() {
         {isLoading && <EventCardSkeleton />}
 
         {!isLoading && (
-          <EventList
-            events={events}
-            selectedType={selectedType}
-            onSelectEvent={(event) => setSelectedEvent(event)}
-          />
+          <>
+            <EventList
+              currentView="list"
+              events={events}
+              onSelectEvent={(event) => setSelectedEvent(event)}
+            />
+
+            {hasMore && (
+              <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
+            )}
+          </>
         )}
 
         {selectedEvent && (
