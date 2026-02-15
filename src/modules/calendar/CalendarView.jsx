@@ -101,7 +101,6 @@ export default function CalendarView({ selectedType, searchTerm }) {
               <EventList
                 currentView="calendar"
                 events={dayEvents}
-                selectedType={selectedType}
                 onSelectEvent={(event) => setSelectedEvent(event)}
               />
 

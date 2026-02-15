@@ -1,12 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
+import { FILTER_TO_TYPES } from "../../constants/eventTypes";
 
-export default function useGetCalendarDots({ start, end, selectedType, searchTerm } = {}) {
+export default function useGetCalendarDots({ start, end, selectedType = "All", searchTerm } = {}) {
   const [dates, setDates] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
+
+  const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
+  const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
 
   useEffect(() => {
     let cancelled = false;
@@ -21,13 +25,15 @@ export default function useGetCalendarDots({ start, end, selectedType, searchTer
         setIsLoading(true);
         setError(null);
 
-        const dates = await fetchEvents({
+        const params = {
           mode: "calendar_dots",
           start,
           end,
-          type: selectedType ?? "All",
           q: trimmed,
-        });
+          ...(typeIn ? { type_in: typeIn } : {}), // important
+        };
+
+        const dates = await fetchEvents(params);
 
         if (!cancelled) setDates(dates);
       } catch (e) {
@@ -40,7 +46,7 @@ export default function useGetCalendarDots({ start, end, selectedType, searchTer
     return () => {
       cancelled = true;
     };
-  }, [start, end, selectedType, trimmed]);
+  }, [start, end, trimmed, typeIn]);
 
   return { dates, isLoading, error };
 }

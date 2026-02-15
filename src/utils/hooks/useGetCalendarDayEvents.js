@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
+import { FILTER_TO_TYPES } from "../../constants/eventTypes";
 
 export default function useGetCalendarDayEvents({
   date,
@@ -17,11 +18,14 @@ export default function useGetCalendarDayEvents({
 
   const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
+  const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
+  const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
+
   useEffect(() => {
     setEvents([]);
     setOffset(0);
     setHasMore(true);
-  }, [date, selectedType, trimmed]);
+  }, [date, trimmed, typeIn]); // use typeIn
 
   useEffect(() => {
     let cancelled = false;
@@ -37,14 +41,16 @@ export default function useGetCalendarDayEvents({
         if (offset === 0) setIsLoading(true);
         else setIsLoadingMore(true);
 
-        const data = await fetchEvents({
+        const params = {
           mode: "day",
           date,
-          type: selectedType,
           q: trimmed,
           limit: String(pageSize),
           offset: String(offset),
-        });
+          ...(typeIn ? { type_in: typeIn } : {}), // important
+        };
+
+        const data = await fetchEvents(params);
 
         if (cancelled) return;
 
@@ -63,7 +69,7 @@ export default function useGetCalendarDayEvents({
     return () => {
       cancelled = true;
     };
-  }, [date, selectedType, trimmed, offset, pageSize]);
+  }, [date, trimmed, typeIn, offset, pageSize]);
 
   const loadMore = () => {
     if (isLoading || isLoadingMore || !hasMore) return;

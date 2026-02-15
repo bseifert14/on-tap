@@ -15,7 +15,7 @@ import LoadMoreButton from "../../components/LoadMoreButton";
 
 export default function HomeLayout() {
   const location = useLocation();
-  const [selectedType, setSelectedType] = useState("All");
+  const [selectedType, setSelectedType] = useState("events");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,6 +24,7 @@ export default function HomeLayout() {
 
   const { events, isLoading, isLoadingMore, hasMore, loadMore, error } = useGetListEvents({
     search: searchTerm,
+    selectedType,
     pageSize: 12,
   });
 
@@ -104,7 +105,6 @@ export default function HomeLayout() {
             <EventList
               currentView="list"
               events={events}
-              selectedType={selectedType}
               onSelectEvent={(event) => setSelectedEvent(event)}
             />
 

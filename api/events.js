@@ -18,8 +18,16 @@ export default async function handler(req, res) {
     const type = (req.query.type ?? "All").toString();
     const qRaw = (req.query.q ?? "").toString().trim();
 
+    const typeInRaw = (req.query.type_in ?? "").toString().trim();
+    const typeInList = typeInRaw ? typeInRaw.split(",").map((s) => s.trim()).filter(Boolean) : null;
+
+
     // helper filters
-    const applyType = (query) => (type !== "All" ? query.eq("event_type", type) : query);
+    const applyType = (query) => {
+      if (typeInList && typeInList.length > 0) return query.in("event_type", typeInList);
+      if (type !== "All") return query.eq("event_type", type);
+      return query;
+    };
 
     const applySearch = (query) => {
       if (qRaw.length >= 2) {
@@ -122,28 +130,43 @@ export default async function handler(req, res) {
       const fromDate = (req.query.from ?? today).toString();
 
       query = query
-        .gte("event_date", fromDate)
-        .order("event_date", { ascending: true })
-        .order("event_start_timestamp", { ascending: true, nullsFirst: false })
-        .order("id", { ascending: true })
-        .range(rangeFrom, rangeTo);
-    } else if (mode === "search") {
-      const q = (req.query.q ?? "").toString().trim();
-      if (q.length < 2) return res.status(200).json({ data: [] });
+        .gte("event_date", fromDate);
 
-      const escaped = escapeLike(q);
-      const pattern = `%${escaped}%`;
+      // APPLY FILTERS
+      query = applyType(query);
+      const searched = applySearch(query);
+      if (searched === null) return res.status(200).json({ data: [] });
+      query = searched;
 
       query = query
-        .or(
-          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_description.ilike.${pattern}`
-        )
         .order("event_date", { ascending: true })
         .order("event_start_timestamp", { ascending: true, nullsFirst: false })
         .order("id", { ascending: true })
         .range(rangeFrom, rangeTo);
+
+    } else if (mode === "search") {
+      // Don't create a separate q variable and bypass applySearch
+      // Use the existing qRaw + applySearch pipeline
+
+      // Optional: keep results "upcoming" even in search mode
+      const today = new Date().toISOString().split("T")[0];
+      const fromDate = (req.query.from ?? today).toString();
+
+      query = query.gte("event_date", fromDate);
+
+      // APPLY FILTERS
+      query = applyType(query);
+      const searched = applySearch(query);
+      if (searched === null) return res.status(200).json({ data: [] });
+      query = searched;
+
+      query = query
+        .order("event_date", { ascending: true })
+        .order("event_start_timestamp", { ascending: true, nullsFirst: false })
+        .order("id", { ascending: true })
+        .range(rangeFrom, rangeTo);
+
     } else if (mode === "calendar") {
-      // You can keep this for old usage, but I’d stop using it in the UI.
       const start = (req.query.start ?? "").toString();
       const end = (req.query.end ?? "").toString();
       if (!start || !end) {
@@ -152,14 +175,24 @@ export default async function handler(req, res) {
 
       query = query
         .gte("event_date", start)
-        .lte("event_date", end)
+        .lte("event_date", end);
+
+      // APPLY FILTERS
+      query = applyType(query);
+      const searched = applySearch(query);
+      if (searched === null) return res.status(200).json({ data: [] });
+      query = searched;
+
+      query = query
         .order("event_date", { ascending: true })
         .order("event_start_timestamp", { ascending: true, nullsFirst: false })
         .order("id", { ascending: true })
         .range(rangeFrom, rangeTo);
+
     } else {
       return res.status(400).json({ error: `Unknown mode: ${mode}` });
     }
+
 
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });

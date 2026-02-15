@@ -1,24 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
+import { FILTER_TO_TYPES } from "../../constants/eventTypes";
 
-export default function useGetListEvents({ search = "", pageSize = 12 } = {}) {
+export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 } = {}) {
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-
   const [error, setError] = useState(null);
 
   const trimmed = useMemo(() => search.trim(), [search]);
 
-  // Reset when search changes
+  // Convert selectedType (UI id) => array of DB types
+  const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
+  const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
+
+  // Reset when search OR selectedType changes
   useEffect(() => {
     setEvents([]);
     setOffset(0);
     setHasMore(true);
-  }, [trimmed]);
+  }, [trimmed, typeIn]);
 
   useEffect(() => {
     let cancelled = false;
@@ -27,22 +31,24 @@ export default function useGetListEvents({ search = "", pageSize = 12 } = {}) {
       try {
         setError(null);
 
-        // If offset is 0, it's a fresh load
         if (offset === 0) setIsLoading(true);
         else setIsLoadingMore(true);
 
-        const params =
+        const from = new Date().toISOString().split("T")[0];
+
+        const baseParams =
           trimmed.length >= 2
-            ? { mode: "search", q: trimmed, limit: String(pageSize), offset: String(offset) }
-            : {
-                mode: "list",
-                from: new Date().toISOString().split("T")[0],
-                limit: String(pageSize),
-                offset: String(offset),
-              };
+            ? { mode: "search", q: trimmed, from } // include from
+            : { mode: "list", from };
+
+        const params = {
+          ...baseParams,
+          limit: String(pageSize),
+          offset: String(offset),
+          ...(typeIn ? { type_in: typeIn } : {}),
+        };
 
         const data = await fetchEvents(params);
-
         if (cancelled) return;
 
         setEvents((prev) => (offset === 0 ? data : [...prev, ...data]));
@@ -57,16 +63,14 @@ export default function useGetListEvents({ search = "", pageSize = 12 } = {}) {
       }
     };
 
-    // Only fetch if we still think there's more
     if (hasMore || offset === 0) run();
 
     return () => {
       cancelled = true;
     };
-  }, [trimmed, offset, pageSize]); // intentionally NOT depending on hasMore
+  }, [trimmed, typeIn, offset, pageSize]);
 
   const loadMore = () => {
-    // don’t spam requests
     if (isLoading || isLoadingMore || !hasMore) return;
     setOffset((prev) => prev + pageSize);
   };

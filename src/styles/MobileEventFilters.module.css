@@ -29,7 +29,7 @@
   line-height: 1;
   white-space: nowrap; /* prevents wrapping inside chips */
   cursor: pointer;
-  height: 35px;
+  height: 40px;
   color: var(--color-secondary);
 }
 
@@ -43,4 +43,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .chip {
+    height: 50px;
+  }
 }
