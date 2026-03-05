@@ -3,15 +3,8 @@ import styles from "../../styles/EventCard.module.css";
 import { getDefaultImage } from "../../utils/getDefaultImage";
 import { getIcon } from "../../utils/getIcon";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
-import { formatEventStartTime } from "../../utils/formatDates";
+import { formatEventStartTime, getEventDate } from "../../utils/formatDates";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
-
-function getEventDate(dateStr) {
-    const date = new Date(`${dateStr}T00:00:00`);
-    const month = date.toLocaleString("en-US", { month: "short" });
-    const day = date.getDate();
-    return { month, day };
-}
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_date, 

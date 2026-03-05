@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../styles/EventModal.module.css";
 import { Calendar, CircleArrowRight, Locate, MapPin, Navigation } from "lucide-react";
-import { formatEventDateTime } from "../../utils/formatDates";
+import { formatEventDateTime, getEventDate } from "../../utils/formatDates";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
 import EventModalSkeleton from "./EventModalSkeleton";
 import emptyEventsView from '/images/site/empty-events-view.png';
+import { getIcon } from "../../utils/getIcon";
 
 export default function EventModal({ event, onClose, isLoading, error }) {
 
@@ -29,10 +30,12 @@ export default function EventModal({ event, onClose, isLoading, error }) {
 
   if (!event) return null;
 
-  const { event_name, event_location, event_description, 
+  const { event_name, event_location, event_description, event_date, event_type,
     event_url, event_start_timestamp, event_end_timestamp, business_url,
     event_business_name, business_name
   } = event;
+
+  const { month, day } = getEventDate(event_date);
 
   const [showFade, setShowFade] = useState(false);
   const descriptionRef = useRef(null);
@@ -71,13 +74,23 @@ export default function EventModal({ event, onClose, isLoading, error }) {
     return () => el?.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const Image = () => {
+  const Hero = () => {
     return (
-      <img
+      <>
+        <img
           src={getEventImageUrl(event)}
           alt={event_name}
           className={styles.image}
         />
+        <div className={styles.heroDateBadge}>
+          <div className={styles.heroDateMonth}>{month}</div>
+          <div className={styles.heroDateDay}>{day}</div>
+        </div>
+        <div className={styles.heroCategory}>
+          {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
+          {event_type}
+        </div>
+      </>
     );
   }
 
@@ -94,7 +107,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
   return (
     <Modal
       onClose={onClose}
-      image={<Image />}
+      hero={<Hero />}
       footer={<Footer />}
       isLoading={isLoading}
     >

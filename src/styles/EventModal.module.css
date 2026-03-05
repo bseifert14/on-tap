@@ -1,7 +1,8 @@
 .backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
     z-index: 999;
     opacity: 0;
     transition: opacity 0.2s ease;
@@ -39,12 +40,74 @@
     transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
   }
+
+  .modalHero {
+    position: relative;
+    height: 260px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .modalHero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background: linear-gradient(to top, rgba(26, 25, 23, 1) 0%, rgba(26, 25, 23, 0) 100%);
+  }
   
   .image {
-    height: 200px;
     width: 100%;
     object-fit: cover;
     flex-shrink: 0;
+  }
+
+  .heroDateBadge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    background: var(--color-red);
+    color: var(--color-white);
+    border-radius: 6px;
+    padding: 7px 11px;
+    text-align: center;
+    line-height: 1;
+
+  }
+  
+  .heroDateMonth {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .heroDateDay {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    display: block;
+  }
+
+  .heroCategory {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    bottom: 18px;
+    left: 20px;
+    z-index: 3;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold);
   }
 
   .errorImage {
@@ -58,6 +121,24 @@
     text-align: center;
     font-size: 18px;
     color: var(--color-secondary);
+  }
+
+  .iconButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(14, 13, 11, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-white);
   }
 
   .closeButton {
@@ -91,6 +172,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background: var(--color-dark-2);
   }
 
   .modalBody {
@@ -115,7 +197,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--color-secondary);
+    color: var(--color-white);
   }
   
   .subtext {

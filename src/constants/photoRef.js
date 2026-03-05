@@ -6,6 +6,7 @@ export const PhotoRef = {
     JamesonHalnonPhotography: "/images/site/jameson-halnon-photography.jpg",
     JessYoga: "/images/site/jess-yoga.jpg",
     LotBrews: "/images/site/lot-brews.jpg",
+    MansfieldSnow: "/images/hero/mansfield-snow.jpg",
     MansfieldStars: "/images/hero/mansfield-stars.jpg",
     MansfieldSunset: "/images/hero/mansfield-sunset.jpg",
     StowePanorama: "/images/hero/jeffrey-clayton-stowe.jpg",

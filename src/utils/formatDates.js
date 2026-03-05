@@ -77,6 +77,13 @@ export function generateTimeOptions(start, end, interval) {
     return (hour >= 3 && hour < 15) ? "today" : "tonight";
   }
 
+  export function getEventDate(dateStr) {
+    const date = new Date(`${dateStr}T00:00:00`);
+    const month = date.toLocaleString("en-US", { month: "short" });
+    const day = date.getDate();
+    return { month, day };
+  }
+
 /** FOR BACKEND USE */
 export function formatStartTime(timestamp) {
   const date = new Date(timestamp);

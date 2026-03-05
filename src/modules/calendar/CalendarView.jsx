@@ -89,12 +89,14 @@ export default function CalendarView({ selectedType, searchTerm }) {
       <div className={styles.eventsWrapper}>
         <h3 className={styles.eventsHeader}>
           Events on{" "}
-          {selectedDate.toLocaleDateString(undefined, {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
+          <em>
+            {selectedDate.toLocaleDateString(undefined, {
+              weekday: "long",
+              month: "long",
+              day: "numeric",
+            })}
+          </em>
+          
         </h3>
 
         <div className={styles.eventScrollArea}>

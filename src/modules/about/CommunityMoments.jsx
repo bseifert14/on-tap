@@ -13,12 +13,11 @@ const images = [
 export default function CommunityMoments() {
   return (
     <section className={styles.section}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Community Moments</h2>
-        <p className={styles.subtitle}>
-          Want to be featured here? Get in touch below with a photo from your favorite event.
-        </p>
-      </div>
+      <div className={styles.sectionEyebrow}>Community</div>
+      <div className={styles.sectionTitle}>Moments from <br/> <em>around town</em></div>
+      <p className={styles.subtitle}>
+        Want to be featured here? Get in touch below with a photo from your favorite event.
+      </p>
 
       <div className={styles.grid}>
         {images.map((src, i) => (

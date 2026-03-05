@@ -29,6 +29,10 @@
   color: var(--color-white);
   letter-spacing: -0.02em;
   margin-bottom: 20px;
+
+  em {
+    color: var(--color-gold);
+  }
 }
 
 /* Custom Day Styles */

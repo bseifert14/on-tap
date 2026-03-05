@@ -1,6 +1,86 @@
 .section {
-  /* background: #faf7f5; */
-  padding: 56px 24px 72px;
+  padding: 0 24px 48px;
+}
+
+.ctaCard {
+  background: var(--color-red);
+  border-radius: 16px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.ctaCard::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.ctaEyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.ctaTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+.ctaBody {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-white);
+  color: var(--color-red);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 15px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
 }
 
 .card {
@@ -76,7 +156,7 @@
 /* Mobile tweaks */
 @media (max-width: 768px) {
   .section {
-    padding: 42px 16px 56px;
+    /* padding: 42px 16px 56px; */
   }
 
   .card {
