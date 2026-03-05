@@ -16,7 +16,9 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
         <Nav user={user} onLogout={onLogout} onLoginClick={onLoginClick} />
 
         <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
-          ☰
+          <span/>
+          <span/>
+          <span/>
         </button>
       </header>
 

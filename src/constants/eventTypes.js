@@ -8,13 +8,13 @@ import {
   Podcast,
   BicepsFlexed,
   Palette,
-  PartyPopper,
+  Star,
 } from "lucide-react";
 
 // UI filters
 export const EVENT_TYPE_FILTERS = [
   { label: "All", value: "All", icon: SquareMenu },
-  { label: "Events", value: "events", icon: PartyPopper },
+  { label: "Events", value: "events", icon: Star },
   { label: "Wellness", value: "Wellness & Fitness", icon: BicepsFlexed },
   { label: "Food & Bev", value: "Food & Bev", icon: Utensils },
   { label: "Music", value: "Music", icon: Music },

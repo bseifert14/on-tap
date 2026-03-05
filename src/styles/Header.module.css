@@ -1,12 +1,17 @@
 @import './theme.css';
 
 .header {
-  padding: 20px 24px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 65px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(14, 13, 11, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .logoLink {
@@ -14,42 +19,29 @@
   align-items: center;
 }
 
-.logoImg {
-  height: 60px; /* Adjust to match your desired header height */
-  width: auto;
-  object-fit: contain;
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  align-items: start;
 }
 
-
-.logoWrapper {
-  position: absolute;
-  left: 50%;
-  top: 87px; /* lowered further to match red lines */
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  padding: 0 16px;
+.logoTop {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
 }
 
-.logoWrapper::before,
-.logoWrapper::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 100vw;
-  height: 1px;
-  background: black;
-  z-index: -1;
-  transform: translateY(-50%);
+.logoBottom {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--color-white);
 }
 
-.logoWrapper::before {
-  right: 100%;
-  margin-right: 16px;
-}
-
-.logoWrapper::after {
-  left: 100%;
-  margin-left: 16px;
+.logoPeriod {
+  color: var(--color-red);
 }
 
 .desktopNav {
@@ -92,13 +84,23 @@
   border: 1px solid transparent;
 }
 
-
 .hamburger {
-  background: none;
-  border: none;
-  color: black;
-  font-size: 28px; /* to match icon size if needed */
-  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-white);
+    transition: all 0.3s;
+  }
+  :last-child {
+    width: 14px;
+  }
 }
 
 .overlay {
@@ -144,10 +146,6 @@
 @media (max-width: 768px) {
   .desktopNav {
     display: none;
-  }
-
-  .hamburger {
-    display: block;
   }
 }
 

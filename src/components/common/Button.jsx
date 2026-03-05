@@ -7,7 +7,7 @@ export default function Button({ children, className, onClick, isDisabled }) {
         onClick={onClick}
         disabled={isDisabled}
       >
-            {children}
+        {children}
     </button>
   );
 }

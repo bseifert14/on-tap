@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   gap: 45px;
   padding: 20px 0;
+  margin: 0 20px;
 }
 
 .calendarWrapper {
@@ -24,8 +25,12 @@
 }
 
 .eventsHeader {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
   margin-bottom: 20px;
-  color: var(--color-secondary)
 }
 
 /* Custom Day Styles */

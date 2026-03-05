@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "../../styles/CalendarLayout.module.css";
 import CalendarView from "./CalendarView";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
@@ -26,13 +25,8 @@ export default function CalendarLayout() {
 
   return (
     <div>
-      <Hero
-        title="What's going on this month in Stowe?"
-        subtitleTop="From mountain adventures to live bands - never miss a beat around town."
-        ctaLabel="Explore Events"
-        bgImageUrl={bgImageUrl}
-      />
-      <div className={styles.calendarBody} id="eventSection">
+      <Hero bgImageUrl={bgImageUrl} label="this month" />
+      <div id="eventSection">
         <EventFiltersLayout
           selectedType={selectedType}
           onTypeChange={setSelectedType}

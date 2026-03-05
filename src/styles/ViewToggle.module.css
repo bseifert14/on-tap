@@ -1,55 +1,37 @@
 @import './theme.css';
 
 .toggleWrapper {
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  background-color: #f1f1f1;
-  border-radius: 15px;
-  min-width: 275px;
-  position: relative;
-  border: 1px solid #d9d9d9;
-  height: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-dark-3);
+  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .toggleBtn {
-  flex: 1;
-  color: var(--color-secondary) !important;
+  padding: 10px;
+  text-align: center;
+  background: var(--color-dark-3);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-radius: 6px;
   cursor: pointer;
-  z-index: 1;
-  position: relative;
-  transition: all 0.2s ease;
-  border-radius: 13px;
-  height: 30px;
-  font-size: 1rem;
-  padding: unset;
+  transition: all 0.2s;
 }
 
 .toggleBtnActive {
-  background-color: #fff !important;
-  font-weight: 600;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.04),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.toggleBtnActiveList {
-  margin-left: 5px;
-}
-
-.toggleBtnActiveCalendar {
-  margin-right: 5px;
-}
-
-.toggleBtnInactive {
-  background-color: #f1f1f1 !important;
-  color: #909090 !important;
+  background: var(--color-dark-2);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Phone */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .toggleWrapper {
     width: 100%;
   }
-}
+} */
   

@@ -1,30 +1,25 @@
 import styles from '../../styles/EventFilters.module.css';
-import btnStyles from "../../styles/common/Button.module.css";
-import Button from '../common/Button';
 
 import { EVENT_TYPE_FILTERS } from '../../constants/eventTypes';
 
-export default function EventFilters({ selectedType, onTypeChange, isMenu = false }) {
+export default function EventFilters({ activeId, onSelect }) {
   return (
-    <div className={styles.filterContainer}>
-      {EVENT_TYPE_FILTERS.map(({ label, value, icon: Icon }) => (
-        <span className={isMenu ? styles.mobileFilterItem : ''} key={value}>
-          <Button
-            key={value}
-            onClick={() => onTypeChange(value)}
-            className={
-              selectedType === value
-                ? btnStyles.buttonActive
-                : btnStyles.buttonInactive
-            }
-          >
-            <div className={styles.filter}>
-              <Icon size={14} className={styles.icon} strokeWidth={1.5} />
+      <div className={styles.filtersContainer} aria-label="Event categories">
+        {EVENT_TYPE_FILTERS.map(({ label, value, icon: Icon }) => {
+          const active = value === activeId;
+
+          return (
+            <button
+              key={value}
+              type="button"
+              className={`${styles.filterOption} ${active ? styles.active : ""}`}
+              onClick={() => onSelect(value)}
+            >
+              <Icon size={12} className={styles.icon} strokeWidth={1.5} />
               <span>{label}</span>
-            </div>
-          </Button>
-        </span>
-      ))}
-    </div>
-  );
+            </button>
+          );
+        })}
+      </div>
+    );
 }

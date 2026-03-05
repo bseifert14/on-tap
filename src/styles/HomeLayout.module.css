@@ -1,16 +1,18 @@
-.homeBody {
-  padding: 75px 75px 75px 75px;
-}
-
 .eventListHeader {
   margin: 15px 0;
   font-weight: 600;
   color: var(--color-secondary);
 }
 
+.eventsSection {
+  padding: 0 20px;
+}
 
-@media (max-width: 768px) {
-  .homeBody {
-    padding: 20px 20px 50px 20px;
-  }
+.eventsHeader {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
 }

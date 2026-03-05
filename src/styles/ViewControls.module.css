@@ -119,3 +119,9 @@
     flex-direction: column;
     row-gap: 10px;
   }
+
+
+  .filterSection {
+    background: var(--color-dark);
+    padding: 24px 20px 0;
+  }

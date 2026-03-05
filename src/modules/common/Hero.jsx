@@ -1,40 +1,28 @@
+import { ArrowRight } from "lucide-react";
 import styles from "../../styles/Hero.module.css";
 
-export default function Hero({
-  variant = "home",
-  title,
-  subtitleTop,
-  subtitleBottom,
-  ctaLabel,
-  bgImageUrl,
-}) {
+export default function Hero({ bgImageUrl, label }) {
   return (
-    <section
-      className={`${styles.hero} ${styles[variant]}`}
-      style={{ "--hero-bg": `url("${bgImageUrl}")` }}
-    >
-      <div className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
-      </div>
-      
-      <div className={styles.middle}>
-        {variant === "home" && subtitleTop && (
-          <p className={styles.subtitleTop}>{subtitleTop}</p>
-        )}
-      </div>
+    <section className={styles.hero}>
+        <div className={styles.heroImg} style={{ "--hero-bg": `url("${bgImageUrl}")` }} />
 
-      <div className={styles.ctaBottom}>
-        {variant === "home" && ctaLabel && (
-            <a href="#eventSection" className={styles.cta}>
-                {ctaLabel}
+        <div className={styles.heroContent}>
+            <div className={styles.heroEyebrow}>
+                Stowe, Vermont
+            </div>
+
+            <h1 className={styles.heroTitle}>
+                What's going on
+                <br/>
+                <em>{label}?</em>
+            </h1>
+
+            <p className={styles.heroSubtitle}>From mountain adventures to live bands; never miss a beat around town.</p>
+
+            <a href="#eventSection" className={styles.heroCTA}>
+                Explore Events
+                <ArrowRight size={20} strokeWidth={1.5} />
             </a>
-        )}
-        </div>
-
-        <div className={styles.subTitleBottom}>
-            {variant === "about" && subtitleBottom && (
-                <p className={styles.subtitleBottomText}>{subtitleBottom}</p>
-            )}
         </div>
     </section>
   );

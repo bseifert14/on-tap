@@ -6,7 +6,13 @@ import logo from "/images/site/OnTapDieCut.png";
 export default function HeaderLogo() {
   return (
     <Link to="/" className={styles.logoLink}>
-      <img src={logo} alt="On Tap Stowe" className={styles.logoImg} />
+      <div className={styles.logoContainer}>
+        <div className={styles.logoTop}>ON TAP</div>
+        <div className={styles.logoBottom}>
+          Stowe
+          <span className={styles.logoPeriod}>.</span>
+        </div>
+      </div>
     </Link>
   );
 }
