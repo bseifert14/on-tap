@@ -8,6 +8,7 @@
   padding: 4px;
   margin-bottom: 16px;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  width: 300px;
 }
 
 .toggleBtn {
@@ -29,9 +30,9 @@
 }
 
 /* Phone */
-/* @media (max-width: 768px) {
+@media (max-width: 767px) {
   .toggleWrapper {
     width: 100%;
   }
-} */
+}
   

@@ -1,11 +1,5 @@
-.eventListHeader {
-  margin: 15px 0;
-  font-weight: 600;
-  color: var(--color-secondary);
-}
-
 .eventsSection {
-  padding: 0 20px;
+  padding: 20px 60px 60px;
 }
 
 .eventsHeader {
@@ -16,3 +10,9 @@
   letter-spacing: -0.02em;
   margin-bottom: 20px;
 }
+
+ @media (max-width: 767px) {
+    .eventsSection {
+      padding: 0 20px;
+    }
+  }

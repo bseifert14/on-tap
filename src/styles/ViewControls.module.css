@@ -111,7 +111,7 @@
   .filterToggleSearch {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
   }
 
   .filtersContainer {
@@ -123,5 +123,11 @@
 
   .filterSection {
     background: var(--color-dark);
-    padding: 24px 20px 0;
+    padding: 40px 60px 0 60px;
+  }
+
+  @media (max-width: 767px) {
+    .filterSection {
+      padding: 24px 20px 0;
+    }
   }

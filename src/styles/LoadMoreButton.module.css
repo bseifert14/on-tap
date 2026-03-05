@@ -1,5 +1,7 @@
 .loadMoreWrap {
-  padding: 8px 20px 40px;
+  padding: 8px 0 40px;
+  max-width: fit-content;
+  margin: auto;
 }
 
 .loadMoreBtn {
@@ -8,7 +10,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px;
+  padding: 16px 120px;
   border-radius: 8px;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -27,8 +29,25 @@
   cursor: not-allowed;
 }
 
+.loadMoreBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .buttonContent {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+@media (max-width: 767px) {
+  .loadMoreWrap {
+    padding: 8px 0 40px;
+    max-width: unset;
+    margin: unset;
+  }
+
+  .loadMoreBtn {
+    padding: 16px;
+  }
 }

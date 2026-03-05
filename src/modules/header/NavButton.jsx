@@ -9,7 +9,7 @@ export default function NavButton({ path, title }) {
   return (
         <Link
             to={path}
-            className={`${styles.navButton} ${isActive(path) ? styles.navButtonActive : styles.navButtonInactive}`}
+            className={`${isActive(path) ? styles.active : ""}`}
         >
             {title}
         </Link>

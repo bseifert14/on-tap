@@ -44,45 +44,42 @@
   color: var(--color-red);
 }
 
-.desktopNav {
+.navLinks {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  gap: 36px;
+
+  a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+    
+  }
+
+  a.active, a:hover {
+    color: var(--color-white);
+  }
+
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-red);
+    transition: width 0.25s;
+  }
+
+  a.active::after, a:hover::after  {
+    width: 100%;
+  }
 }
 
-.desktopNav a:not(.navButton),
-.desktopNav button:not(.navButton) {
-  color: black; /* changed from white */
-  text-decoration: none;
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.navButton {
-  border: none;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: var(--color-secondary)
-}
-
-.navButtonInactive:hover {
-  color: black;
-  border: 1px solid var(--color-quaternary-accent-2);
-}
-
-.navButtonActive {
-  border-bottom: 2px solid var(--color-secondary);
-  border-radius: unset;
-}
-
-.navButtonInactive {
-  color: black;
-  border: 1px solid transparent;
-}
 
 .hamburger {
   display: flex;
@@ -143,8 +140,8 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .desktopNav {
+@media (max-width: 767px) {
+  .navLinks {
     display: none;
   }
 }

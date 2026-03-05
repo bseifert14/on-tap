@@ -20,7 +20,7 @@ export default function EventFiltersLayout({
     <>
       {!isMobile ? (
         <>
-          <div className={styles.filtersContainer}>
+          <div className={styles.filterSection}>
             <div className={styles.filterToggleSearch}>
               <SearchBar
                 value={searchValue}
@@ -30,7 +30,7 @@ export default function EventFiltersLayout({
               />
               <ViewToggle />
             </div>
-            <MobileEventFilters activeId={selectedType} onSelect={onTypeChange} />
+            <EventFilters activeId={selectedType} onSelect={onTypeChange} />
           </div>
         </>
       ) : (
