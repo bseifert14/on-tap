@@ -121,6 +121,35 @@ export default async function handler(req, res) {
     }
 
     // --------------------------
+    // SINGLE EVENT (SHARE LINK)
+    // --------------------------
+    if (mode === "by_id") {
+      const id = (req.query.id ?? "").toString().trim();
+      if (!id) return res.status(400).json({ error: "id is required for by_id mode" });
+
+      let query = supabase
+        .from("events")
+        .select(select)
+        .eq("id", id)
+        .limit(1);
+
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+
+      const event = (data ?? [])[0] ?? null;
+
+      const normalized = event
+        ? {
+            ...event,
+            business_name: event.businesses?.business_name ?? null,
+            businesses: undefined,
+          }
+        : null;
+
+      return res.status(200).json({ data: normalized });
+    }
+
+    // --------------------------
     // KEEP YOUR EXISTING MODES
     // --------------------------
     let query = supabase.from("events").select(select);
