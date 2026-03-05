@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "../../supabase";
 import styles from "../../styles/HomeLayout.module.css";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 import EventList from "../../components/events/EventList";
-import EventModal from "../../components/events/EventModal";
 import SetPasswordModal from "../../components/SetPasswordModal";
 import useGetListEvents from "../../utils/hooks/useGetListEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
@@ -15,8 +14,9 @@ import LoadMoreButton from "../../components/LoadMoreButton";
 
 export default function HomeLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const [selectedType, setSelectedType] = useState("events");
-  const [selectedEvent, setSelectedEvent] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -105,17 +105,17 @@ export default function HomeLayout() {
             <EventList
               currentView="list"
               events={events}
-              onSelectEvent={(event) => setSelectedEvent(event)}
+              onSelectEvent={(event) =>
+                navigate(`/events/${event.id}`, {
+                  state: { backgroundLocation: location, event },
+                })
+              }
             />
 
             {hasMore && (
               <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
             )}
           </>
-        )}
-
-        {selectedEvent && (
-          <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
         )}
 
         {showSetPasswordModal && (

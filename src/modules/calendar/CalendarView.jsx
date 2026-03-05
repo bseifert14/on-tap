@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 
 import styles from "../../styles/CalendarView.module.css";
@@ -7,7 +8,6 @@ import "../../styles/react-calendar-custom.css";
 import useGetCalendarDots from "../../utils/hooks/useGetCalendarDots";
 import useGetCalendarDayEvents from "../../utils/hooks/useGetCalendarDayEvents";
 
-import EventModal from "../../components/events/EventModal";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import EventList from "../../components/events/EventList";
@@ -26,11 +26,13 @@ function monthRangeKeys(activeStartDate) {
 }
 
 export default function CalendarView({ selectedType, searchTerm }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(
     new Date(new Date().getFullYear(), new Date().getMonth(), 1)
   );
-  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const { startKey, endKey } = useMemo(() => monthRangeKeys(activeStartDate), [activeStartDate]);
 
@@ -59,6 +61,11 @@ export default function CalendarView({ selectedType, searchTerm }) {
     pageSize: 12,
   });
 
+  const handleSelectEvent = (event) => {
+    navigate(`/events/${event.id}`, {
+      state: { backgroundLocation: location, event },
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -74,10 +81,7 @@ export default function CalendarView({ selectedType, searchTerm }) {
             const hasEvent = datesWithEvents.has(dateStr);
             const isSelected = dateStr === selectedDateStr;
 
-            return [
-              hasEvent ? styles.hasEvent : "",
-              isSelected ? styles.selectedDay : "",
-            ].join(" ");
+            return [hasEvent ? styles.hasEvent : "", isSelected ? styles.selectedDay : ""].join(" ");
           }}
         />
       </div>
@@ -101,22 +105,16 @@ export default function CalendarView({ selectedType, searchTerm }) {
               <EventList
                 currentView="calendar"
                 events={dayEvents}
-                onSelectEvent={(event) => setSelectedEvent(event)}
+                onSelectEvent={handleSelectEvent}
               />
 
-              {hasMore && (
-                <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
-              )}
+              {hasMore && <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />}
             </>
           )}
 
           {error && <div style={{ padding: 12 }}>Something went wrong loading events.</div>}
         </div>
       </div>
-
-      {selectedEvent && (
-        <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-      )}
     </div>
   );
 }

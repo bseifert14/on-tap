@@ -5,9 +5,30 @@ import { formatEventDateTime } from "../../utils/formatDates";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
+import EventModalSkeleton from "./EventModalSkeleton";
+import emptyEventsView from '/images/site/empty-events-view.png';
 
-export default function EventModal({ event, onClose }) {
+export default function EventModal({ event, onClose, isLoading, error }) {
+
+  if (isLoading) {
+    return (
+      <EventModalSkeleton isLoading={isLoading} onClose={onClose} />
+    );
+  }
+
+  if (error) {
+    return (
+      <Modal onClose={onClose}>
+        <img src={emptyEventsView} alt="Empty stage" className={styles.errorImage} />
+        <div className={styles.errorText}>
+          <p>{error}</p>
+        </div>
+      </Modal>
+    );
+  }
+
   if (!event) return null;
+
   const { event_name, event_location, event_description, 
     event_url, event_start_timestamp, event_end_timestamp, business_url,
     event_business_name, business_name
@@ -75,6 +96,7 @@ export default function EventModal({ event, onClose }) {
       onClose={onClose}
       image={<Image />}
       footer={<Footer />}
+      isLoading={isLoading}
     >
       <h2 className={styles.title}>{event_name}</h2>
       <div className={styles.iconValuePair}>

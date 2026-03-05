@@ -47,6 +47,19 @@
     flex-shrink: 0;
   }
 
+  .errorImage {
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .errorText {
+    padding: 1rem;
+    text-align: center;
+    font-size: 18px;
+    color: var(--color-secondary);
+  }
+
   .closeButton {
     position: absolute;
     top: 12px;
