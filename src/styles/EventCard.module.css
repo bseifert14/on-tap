@@ -7,6 +7,8 @@
   transition: transform 0.25s, border-color 0.25s;
   cursor: pointer;
   animation: fadeUp 0.5s forwards;
+  display: flex;
+  flex-direction: column;
 
   featured {
     background: linear-gradient(135deg, #1c1a18, #0E0D0B);
@@ -104,6 +106,9 @@
 
 .cardBody {
   padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .cardCategory {
@@ -131,6 +136,7 @@
 }
 
 .cardDescription {
+    flex: 1;
     font-size: 13px;
     color: rgba(255, 255, 255, 0.5);
     text-align: left;

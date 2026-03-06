@@ -117,19 +117,27 @@
 
 .mobileNavContainer a,
 .mobileNavContainer button {
-  color: var(--color-background);
+  color: rgba(255,255,255,0.6);            /* was var(--color-background) */
   text-align: left;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 500;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 14px;
-  border-radius: 4px;
+  padding: 16px 14px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.mobileNavContainer a:hover {
+  color: var(--color-white);
+  background: rgba(255,255,255,0.04);
 }
 
 .mobileNavLinkActive {
-  background-color: #f1f1f1 !important;
-  font-weight: bold;
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--color-white) !important;
+  font-weight: 600 !important;
 }
 
 .closeBtn {

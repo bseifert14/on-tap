@@ -97,7 +97,13 @@ export default function HomeLayout() {
         <section className={styles.eventsSection}>
           <h2 className={styles.eventsHeader}>Upcoming</h2>
 
-          {isLoading && <EventCardSkeleton />}
+          {isLoading && (
+            <>
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+            </>
+          )}
 
           {!isLoading && (
             <>

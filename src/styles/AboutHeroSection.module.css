@@ -40,22 +40,11 @@
   z-index: 1;
 }
 
-/* .heroContent {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 52px;
-  max-width: 640px;
-} */
-
 .heroUpdated {
   position: relative;
   height: 400px;
   overflow: hidden;
-  margin: 10px 20px;
+  margin: 20px 60px;
 }
 
 .heroImg {
@@ -192,10 +181,9 @@
     margin-bottom: 36px;
   }
 
-  /* .heroContent {
-    padding: 32px 26px;
-    max-width: 100%;
-  } */
+  .heroUpdated {
+    margin: 10px 20px;
+  }
 
   .subtitle {
     font-size: 15px;

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styles from "../../styles/EventModal.module.css";
-import { Calendar, CircleArrowRight, Locate, MapPin, Navigation } from "lucide-react";
+import { ArrowRight, Calendar, CircleArrowRight, MapPin, Share2 } from "lucide-react";
 import { formatEventDateTime, getEventDate } from "../../utils/formatDates";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
@@ -37,9 +37,6 @@ export default function EventModal({ event, onClose, isLoading, error }) {
 
   const { month, day } = getEventDate(event_date);
 
-  const [showFade, setShowFade] = useState(false);
-  const descriptionRef = useRef(null);
-
   function getEventLocation() {
         return event_business_name || business_name;
     }
@@ -53,26 +50,6 @@ export default function EventModal({ event, onClose, isLoading, error }) {
 
       return '#';
   }
-
-  useEffect(() => {
-    const el = descriptionRef.current;
-  
-    const handleScroll = () => {
-      if (!el) return;
-  
-      const hasOverflow = el.scrollHeight > el.clientHeight;
-      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
-  
-      setShowFade(hasOverflow && !atBottom);
-    };
-  
-    if (el) {
-      handleScroll(); // Initial state
-      el.addEventListener("scroll", handleScroll);
-    }
-  
-    return () => el?.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const Hero = () => {
     return (
@@ -96,11 +73,15 @@ export default function EventModal({ event, onClose, isLoading, error }) {
 
   const Footer = () => {
     return (
-      <div className={styles.modalFooter}>
-        <a href={getEventUrl(event_url, business_url)} className={styles.button} target="_blank" rel="noopener noreferrer">
+      <>
+        <a href={getEventUrl(event_url, business_url)} className={styles.footerBtnPrimary} target="_blank" rel="noopener noreferrer">
           Learn More
+          <ArrowRight size={15} strokeWidth={1.5} color="white" />
         </a>
-      </div>
+        <button onClick={() => console.log('clicked share')} className={styles.footerBtnShare}>
+          <Share2 size={15} strokeWidth={1.5} color="white" />
+        </button>
+      </>
     );
   }
 
@@ -112,32 +93,41 @@ export default function EventModal({ event, onClose, isLoading, error }) {
       isLoading={isLoading}
     >
       <h2 className={styles.title}>{event_name}</h2>
-      <div className={styles.iconValuePair}>
-          <MapPin size={15} strokeWidth={1.5} color="#092a34" />
-          <a
-            href={getAddressURL(event_location)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.value}
-            aria-label={`Get directions to ${business_name}`}
-          >
-            <span className={styles.iconValuePair}>
+      <div className={styles.eventMetaGrid}>
+        <div className={styles.eventMetaItem}>
+          <div className={styles.eventMetaIcon}>
+            <Calendar size={15} strokeWidth={1.5} color="white" />
+          </div>
+          <div className={styles.eventMetaText}>
+            <div className={styles.eventMetaLabel}>DATE & TIME</div>
+            <div className={styles.eventMetaValue}>
+              {formatEventDateTime(event_start_timestamp, event_end_timestamp)}
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.eventMetaItem}>
+          <div className={styles.eventMetaIcon}>
+            <MapPin size={15} strokeWidth={1.5} color="white" />
+          </div>
+          <div className={styles.eventMetaText}>
+            <div className={styles.eventMetaLabel}>LOCATION</div>
+            <a
+              href={getAddressURL(event_location)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.eventMetaValue}
+              aria-label={`Get directions to ${business_name}`}
+            >
               {getEventLocation()}
-              <CircleArrowRight size={13} strokeWidth={1.5} color="#092a34" />
-            </span>
-          </a>
+              <CircleArrowRight size={13} strokeWidth={1.5} />
+            </a>
+          </div>
+        </div>
       </div>
-      <div className={styles.iconValuePairTime}>
-          <Calendar size={15} strokeWidth={1.5} color="#092a34" />
-          <div className={styles.value}>{formatEventDateTime(event_start_timestamp, event_end_timestamp)}</div>
-      </div>
-      <div
-        ref={descriptionRef}
-        className={`${styles.descriptionWrapper} ${!event_description || !event_description.trim() ? styles.empty : showFade ? "" : styles.noFade}`}
-      >
-        <p className={styles.description}>
-          {event_description?.trim() || <span className={styles.placeholder}>No description available</span>}
-        </p>
+      <div className={styles.eventDescriptionHeader}>ABOUT THIS EVENT</div>
+      <div className={styles.eventDescriptionText}>
+        {event_description || <span className={styles.placeholder}>No description available</span>}
       </div>
     </Modal>
   );

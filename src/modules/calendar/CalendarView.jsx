@@ -100,7 +100,13 @@ export default function CalendarView({ selectedType, searchTerm }) {
         </h3>
 
         <div className={styles.eventScrollArea}>
-          {isLoading && <EventCardSkeleton />}
+          {isLoading && (
+            <>
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+            </>
+          )}
 
           {!isLoading && (
             <>

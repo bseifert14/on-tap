@@ -20,11 +20,11 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0.98);
     width: 90%;
-    height: 80vh;
+    height: 88vh;
     max-width: 600px;
-    max-height: 90vh;
-    background: white;
-    border-radius: 12px;
+    max-height: 92vh;
+    background: var(--color-dark-2);;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -46,6 +46,7 @@
     height: 260px;
     flex-shrink: 0;
     overflow: hidden;
+    background: var(--color-dark-2);
   }
 
   .modalHero::after {
@@ -55,11 +56,13 @@
     left: 0;
     right: 0;
     height: 70%;
-    background: linear-gradient(to top, rgba(26, 25, 23, 1) 0%, rgba(26, 25, 23, 0) 100%);
+    background: linear-gradient(to top, var(--color-dark-2) 0%, rgba(26, 25, 23, 0) 100%);
   }
+  
   
   .image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -167,27 +170,34 @@
   }
   
   .content {
-    padding: 1rem 1rem 2rem 1rem;
+    padding: 1rem 1rem 0 1rem;
     flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     background: var(--color-dark-2);
+    min-height: 0;
   }
 
   .modalBody {
     flex-grow: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .modalFooter {
-    margin: 0.2rem 1rem 1rem 1rem;
+    padding: 16px 22px 28px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-dark-2);
     display: flex;
-    flex-direction: column;
-    row-gap: 12px;
-    text-align: center;
+    gap: 10px;
+    flex-shrink: 0;
   }
   
   .title {
+    font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
@@ -199,58 +209,10 @@
     text-overflow: ellipsis;
     color: var(--color-white);
   }
-  
-  .subtext {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 1rem;
-  }
-
-  .descriptionWrapper {
-    position: relative;
-    max-height: 150px;
-    overflow-y: auto;
-    margin-top: 1rem;
-  }
-
-.descriptionWrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2rem;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), #fffdf7);
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.2s ease-in-out;
-  opacity: 1;
-}
-
-.noFade::after {
-  opacity: 0;
-}
-  
-  .description {
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: var(--color-secondary);
-  }
 
   .placeholder {
     font-style: italic;
     color: #999;
-  }
-
-  .empty {
-    max-height: 3rem;
-    overflow: hidden;
-  }
-
-  .empty::after {
-    display: none; /* no fade effect */
   }
   
   .button {
@@ -268,65 +230,136 @@
   @media (max-width: 768px) {
     .modal {
       width: 92%;
-      max-height: 75vh;
+      max-height: 85vh;
       height: auto;
     }
-  }
-
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    align-items: center;
-  }
-  
-  .infoButton {
-    background-color: #d31145;
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    display: inline-block;
-  }
-  
-  .dotsButton {
-    background-color: #d31145;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 6px 10px;
-    cursor: pointer;
-    display: none; /* hidden by default */
-  }
-
-  .iconValuePair {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    color: var(--color-secondary);
-  }
-
-  .iconValuePairTime {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding-top: 8px;
   }
 
   .value {
     font-weight: 500;
   }
+
+  .eventMetaGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .eventMetaItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eventMetaIcon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--color-dark-3);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-text-muted);
+  }
+
+  .eventMetaText {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    a:hover {
+      color: var(--color-gold);
+    }
+  }
+
+  .eventMetaLabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+  }
+
+  .eventMetaValue {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-white);
+
+    svg:hover {
+      color: var(--color-gold);
+    }
+  }
+
+  .eventDescriptionHeader {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+  }
+
+  .eventDescriptionText {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 6px;
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .eventDescriptionText::-webkit-scrollbar {
+    display: none;        /* hides scrollbar on Chrome/Safari */
+  }
+
+  .footerBtnPrimary {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-red);
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+  }
+
+  .footerBtnShare {
+    width: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-dark-3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
   
   /* Responsive swap */
   @media (max-width: 768px) {
-    .title {
-      font-size: 1.4rem;
-      -webkit-line-clamp: 1;
-    }
+    /* .title {
+      font-size: 1.8rem;
+    } */
 
     .value {
       font-weight: 500;
