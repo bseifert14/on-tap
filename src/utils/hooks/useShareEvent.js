@@ -4,7 +4,6 @@ export function useShareEvent() {
   const [toastVisible, setToastVisible] = useState(false);
 
   const shareEvent = async (event) => {
-    console.log('shareEvent called with event:', event); // Debug log
     const { event_name, id, event_business_name, business_name } = event;
     const location = event_business_name || business_name;
     const url = `https://ontap-events.com/events/${id}`;
@@ -13,7 +12,7 @@ export function useShareEvent() {
       if (navigator.share) {
         await navigator.share({
           title: event_name,
-          text: `🎶 ${event_name} at ${location} — check it out on On Tap Stowe`,
+          text: `${event_name} at ${location} — check it out on On Tap Stowe`,
           url,
         });
       } else {

@@ -65,21 +65,6 @@ export default function Contact() {
                         </div>
                     </div>
                     <div className={styles.formGroup}>
-                        <FormLabel label="Subject" isRequired={true} name="subject" />
-                        <input
-                            id="subject"
-                            name="subject"
-                            type="subject"
-                            autoComplete="subject"
-                            placeholder="What's this about?"
-                            className={inputClass("subject")}
-                            value={form.subject}
-                            onChange={(e) => handleChange("subject", e.target.value)}
-                            aria-invalid={!!errors.subject}
-                        />
-                        {errors.message && <p className={styles.error}>{errors.message}</p>}
-                    </div>
-                    <div className={styles.formGroup}>
                         <FormLabel label="Message" isRequired={true} name="message" />
                         <textarea
                             id="message"
