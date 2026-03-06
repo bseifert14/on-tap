@@ -1,9 +1,0 @@
-.calendarBody {
-    padding: 75px 75px 75px 75px;
-  }
-  
-  @media (max-width: 768px) {
-    .calendarBody {
-      padding: 20px 20px 50px 20px;
-    }
-  }

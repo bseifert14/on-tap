@@ -11,6 +11,7 @@ import Hero from "../common/Hero";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
+import { getTimeLabel } from "../../utils/formatDates";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -77,16 +78,13 @@ export default function HomeLayout() {
   };
 
   const bgImageUrl = isMobile ? PhotoRef.MansfieldStars : PhotoRef.StowePanorama;
+  const timeLabel = getTimeLabel();
+  const label = timeLabel !== 'undefined' ? timeLabel : 'tonight';
 
   return (
     <div>
-      <Hero
-        title="What's going on tonight in Stowe?"
-        subtitleTop="From mountain adventures to live bands - never miss a beat around town."
-        ctaLabel="Explore Events"
-        bgImageUrl={bgImageUrl}
-      />
-      <div className={styles.homeBody} id="eventSection">
+      <Hero bgImageUrl={bgImageUrl} label={label} />
+      <div id="eventSection">
         <EventFiltersLayout
           selectedType={selectedType}
           onTypeChange={setSelectedType}
@@ -96,27 +94,35 @@ export default function HomeLayout() {
           onSearchClear={handleSearchClear}
         />
 
-        <p className={styles.eventListHeader}>Upcoming Events</p>
+        <section className={styles.eventsSection}>
+          <h2 className={styles.eventsHeader}>Upcoming</h2>
 
-        {isLoading && <EventCardSkeleton />}
+          {isLoading && (
+            <>
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+              <EventCardSkeleton />
+            </>
+          )}
 
-        {!isLoading && (
-          <>
-            <EventList
-              currentView="list"
-              events={events}
-              onSelectEvent={(event) =>
-                navigate(`/events/${event.id}`, {
-                  state: { backgroundLocation: location, event },
-                })
-              }
-            />
+          {!isLoading && (
+            <>
+              <EventList
+                currentView="list"
+                events={events}
+                onSelectEvent={(event) =>
+                  navigate(`/events/${event.id}`, {
+                    state: { backgroundLocation: location, event },
+                  })
+                }
+              />
 
-            {hasMore && (
-              <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
-            )}
-          </>
-        )}
+              {hasMore && (
+                <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />
+              )}
+            </>
+          )}
+        </section>
 
         {showSetPasswordModal && (
           <SetPasswordModal onClose={() => setShowSetPasswordModal(false)} />

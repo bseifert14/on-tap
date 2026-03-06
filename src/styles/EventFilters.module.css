@@ -1,18 +1,33 @@
 @import './theme.css';
 
-.filterContainer {
+.filtersContainer {
   display: flex;
-  flex-wrap: wrap;
   gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  margin-bottom: 20px;
 }
 
-.filter {
+.filterOption {
+  flex-shrink: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  column-gap: 4px;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
 }
 
-.mobileFilterItem{
-  width: 100%;
+.active {
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
 }

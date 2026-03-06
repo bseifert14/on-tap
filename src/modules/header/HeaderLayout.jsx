@@ -4,9 +4,11 @@ import HeaderLogo from "./HeaderLogo";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
 import MobileMenu from "../../components/common/MobileMenu";
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
 
 export default function HeaderLayout({ user, onLogout, onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = useMediaQuery();
 
   return (
     <>
@@ -15,9 +17,14 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
 
         <Nav user={user} onLogout={onLogout} onLoginClick={onLoginClick} />
 
-        <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
-          ☰
-        </button>
+        {isMobile && (
+          <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
+            <span/>
+            <span/>
+            <span/>
+          </button>
+        )}
+        
       </header>
 
       <MobileMenu

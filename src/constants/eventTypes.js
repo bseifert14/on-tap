@@ -8,21 +8,27 @@ import {
   Podcast,
   BicepsFlexed,
   Palette,
-  PartyPopper,
+  Star,
+  Mountain,
+  Hammer,
 } from "lucide-react";
 
 // UI filters
 export const EVENT_TYPE_FILTERS = [
   { label: "All", value: "All", icon: SquareMenu },
-  { label: "Events", value: "events", icon: PartyPopper },
-  { label: "Wellness", value: "Wellness & Fitness", icon: BicepsFlexed },
-  { label: "Food & Bev", value: "Food & Bev", icon: Utensils },
-  { label: "Music", value: "Music", icon: Music },
-  { label: "Art", value: "Art", icon: Palette },
-  { label: "Comedy", value: "Comedy", icon: Laugh },
-  { label: "Games", value: "Games", icon: Gamepad },
-  { label: "Sports", value: "Sports", icon: Volleyball },
-  { label: "Talks & Panels", value: "Talks & Panels", icon: Podcast },
+  { label: "Events", value: "events", icon: Star },
+  { label: "Fitness", value: "Wellness & Fitness", icon: BicepsFlexed },
+  { label: "Food & Drink", value: "Food & Bev", icon: Utensils },
+
+  // NEED TO ADD TO DATABASE
+  { label: "Outdoors", value: "outdoors", icon: Mountain },
+  { label: "Workshops", value: "workshops", icon: Hammer },
+  // { label: "Music", value: "Music", icon: Music },
+  // { label: "Art", value: "Art", icon: Palette },
+  // { label: "Comedy", value: "Comedy", icon: Laugh },
+  // { label: "Games", value: "Games", icon: Gamepad },
+  // { label: "Sports", value: "Sports", icon: Volleyball },
+  // { label: "Talks & Panels", value: "Talks & Panels", icon: Podcast },
 ];
 
 // Event types coming from DB - table.column is events.event_type
@@ -30,6 +36,10 @@ export const EVENT_TYPES_DB = {
   MUSIC: "Music",
   WELLNESS: "Wellness & Fitness",
   FOOD: "Food & Bev",
+
+  OUTDOORS: "outdoors",
+  WORKSHOPS: "workshops",
+
   ART: "Art",
   COMEDY: "Comedy",
   GAMES: "Games",
@@ -49,6 +59,11 @@ export const FILTER_TO_TYPES = {
   Music: [EVENT_TYPES_DB.MUSIC],
   "Wellness & Fitness": [EVENT_TYPES_DB.WELLNESS],
   "Food & Bev": [EVENT_TYPES_DB.FOOD],
+
+  outdoors: [EVENT_TYPES_DB.OUTDOORS],
+  workshops: [EVENT_TYPES_DB.WORKSHOPS],
+
+
   Art: [EVENT_TYPES_DB.ART],
   Comedy: [EVENT_TYPES_DB.COMEDY],
   Games: [EVENT_TYPES_DB.GAMES],

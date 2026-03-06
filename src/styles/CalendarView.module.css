@@ -4,18 +4,17 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 45px;
-  padding: 20px 0;
+  padding: 20px 60px 60px;
 }
 
 .calendarWrapper {
   flex: 2;
   min-width: 300px;
   max-width: 450px;
-  background-color: white;
+  background-color: var(--color-dark-2);
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid #F2F2F2;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
 }
 
 .eventsWrapper {
@@ -24,14 +23,34 @@
 }
 
 .eventsHeader {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
   margin-bottom: 20px;
-  color: var(--color-secondary)
+
+  em {
+    color: var(--color-gold);
+  }
 }
 
 /* Custom Day Styles */
 .hasEvent {
-  background-color: #fbd6dc;
+  /* background-color: #fbd6dc; */
   border-radius: 12px;
+}
+
+.hasEvent::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-gold);
 }
 
 .selectedDay {
@@ -60,6 +79,7 @@
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
+    padding: 20px 20px;
   }
 
   .calendarWrapper,

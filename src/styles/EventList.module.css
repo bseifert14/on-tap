@@ -2,7 +2,5 @@
     --minCard: 290px;
     display: grid;
     gap: 24px;
-    align-items: start;
-
     grid-template-columns: repeat(auto-fit, minmax(var(--minCard), 1fr));
 }

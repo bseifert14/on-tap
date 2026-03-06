@@ -5,7 +5,7 @@ import { supabase } from "./supabase";
 import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
-import Footer from "./components/Footer";
+import Footer from "./modules/footer/Footer";
 
 import './styles/global.css';
 import About from "./modules/about/About";
@@ -23,11 +23,10 @@ const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
 
 export default function App() {
   const navigate = useNavigate();
-  const location = useLocation(); // NEW
+  const location = useLocation();
 
-  // This is the magic: when you open a modal, you store the “background” location in state.
   const state = location.state;
-  const backgroundLocation = state?.backgroundLocation; // NEW
+  const backgroundLocation = state?.backgroundLocation;
 
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);

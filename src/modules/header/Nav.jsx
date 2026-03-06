@@ -30,7 +30,7 @@ export default function Nav({ user, onLogout, onLoginClick }) {
   }, []);
 
   return (
-    <nav className={styles.desktopNav}>
+    <nav className={styles.navLinks}>
         <NavButton path="/" title="Home" />
         <NavButton path="/calendar" title="Calendar" />
         <NavButton path="/about" title="About" />

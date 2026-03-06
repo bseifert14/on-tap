@@ -111,11 +111,23 @@
   .filterToggleSearch {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
   }
 
   .filtersContainer {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+  }
+
+
+  .filterSection {
+    background: var(--color-dark);
+    padding: 40px 60px 0 60px;
+  }
+
+  @media (max-width: 767px) {
+    .filterSection {
+      padding: 24px 20px 0;
+    }
   }

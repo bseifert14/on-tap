@@ -6,20 +6,19 @@ export default function ViewToggle() {
   const navigate = useNavigate();
   const location = useLocation();
   const isCalendarSelected = location.pathname === "/calendar";
-  const activeListClass = `${styles.toggleBtnActive} ${styles.toggleBtnActiveList}`;
-  const activeCalendarClass = `${styles.toggleBtnActive} ${styles.toggleBtnActiveCalendar}`;
+
 
   return (
     <div className={styles.toggleWrapper}>
       <Button
-        className={`${styles.toggleBtn} ${!isCalendarSelected ? activeListClass : styles.toggleBtnInactive}`}
+        className={`${styles.toggleBtn} ${!isCalendarSelected ? styles.toggleBtnActive : ""}`}
         onClick={() => navigate("/")}
       >
         List View
       </Button>
       <Button
         className={
-          `${styles.toggleBtn} ${isCalendarSelected ? activeCalendarClass : styles.toggleBtnInactive}`
+          `${styles.toggleBtn} ${isCalendarSelected ? styles.toggleBtnActive : ""}`
         }
         onClick={() => navigate("/calendar")}
       >
