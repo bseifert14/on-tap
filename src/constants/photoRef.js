@@ -8,7 +8,6 @@ export const PhotoRef = {
     LotBrews: "/images/site/lot-brews.jpg",
     MansfieldSnow: "/images/hero/mansfield-snow.jpg",
     MansfieldStars: "/images/hero/mansfield-stars.jpg",
-    MansfieldSunset: "/images/hero/mansfield-sunset.jpg",
     StowePanorama: "/images/hero/jeffrey-clayton-stowe.jpg",
     EventImages: {
         DefaultGames: "/images/defaults/games.png",
