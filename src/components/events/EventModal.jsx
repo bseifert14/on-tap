@@ -8,8 +8,10 @@ import { getEventImageUrl } from "../../utils/getEventImageUrl";
 import EventModalSkeleton from "./EventModalSkeleton";
 import emptyEventsView from '/images/site/empty-events-view.png';
 import { getIcon } from "../../utils/getIcon";
+import { useShareEvent } from "../../utils/hooks/useShareEvent";
 
 export default function EventModal({ event, onClose, isLoading, error }) {
+  const { shareEvent, toastVisible } = useShareEvent();
 
   if (isLoading) {
     return (
@@ -78,7 +80,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
           Learn More
           <ArrowRight size={15} strokeWidth={1.5} color="white" />
         </a>
-        <button onClick={() => console.log('clicked share')} className={styles.footerBtnShare}>
+        <button onClick={() => shareEvent(event)} className={styles.footerBtnShare}>
           <Share2 size={15} strokeWidth={1.5} color="white" />
         </button>
       </>
@@ -92,6 +94,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
       footer={<Footer />}
       isLoading={isLoading}
     >
+      {toastVisible && <div className={styles.toast}>Link copied!</div>}
       <h2 className={styles.title}>{event_name}</h2>
       <div className={styles.eventMetaGrid}>
         <div className={styles.eventMetaItem}>

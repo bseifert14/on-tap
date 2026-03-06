@@ -47,7 +47,10 @@
   img {
     width: 100%;
     object-fit: cover;
+    object-position: 50% 25%;
     transition: transform 0.4s;
+    height: 100%;
+    display: block;
   }
 }
 
