@@ -8,12 +8,12 @@ import { formatStartTime } from "../formatDates";
 import { uploadOrReuseEventPhoto } from "../uploadOrReuseEventPhoto";
 
 export default function useEventForm(user, event, onSave) {
+  console.log(event);
   const [form, setForm] = useState({
     event_name: "",
     event_location: "",
     event_business_name: "",
-    // event_type: "",
-    event_type: event.event_type_slug || "",
+    event_type: "",
     event_date: "",
     event_start_timestamp: "",
     event_end_timestamp: "",
@@ -92,6 +92,18 @@ export default function useEventForm(user, event, onSave) {
       }
     }
 
+    // Resolve slug → UUID
+    const { data: typeRow, error: typeError } = await supabase
+      .from("event_types")
+      .select("id")
+      .eq("slug", form.event_type)
+      .single();
+
+    if (typeError || !typeRow) {
+      toast.error("Invalid event type. Please select one from the list.");
+      return;
+    }
+
     const fullStart =
       form.event_date && form.event_start_timestamp
         ? `${form.event_date}T${form.event_start_timestamp}:00`
@@ -101,11 +113,14 @@ export default function useEventForm(user, event, onSave) {
       form.event_date && form.event_end_timestamp
         ? `${form.event_date}T${form.event_end_timestamp}:00`
         : null;
-    
+
     const cleanUrl = sanitizeUrl(form.event_url);
 
+    const { event_type, event_photo_url, ...rest } = form; // strip old/derived fields
+
     const payload = {
-      ...form,
+      ...rest,
+      event_type_id: typeRow.id,          // ← UUID from event_types table
       event_url: cleanUrl || null,
       event_start_timestamp: fullStart,
       event_end_timestamp: fullEnd,
@@ -118,6 +133,7 @@ export default function useEventForm(user, event, onSave) {
       : await supabase.from("events").insert(payload);
 
     if (result.error) {
+      console.error(result.error);
       toast.error("Error saving event.");
     } else {
       onSave();

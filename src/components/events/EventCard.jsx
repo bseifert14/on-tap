@@ -1,16 +1,16 @@
 import React from "react";
 import styles from "../../styles/EventCard.module.css";
-import { getDefaultImage } from "../../utils/getDefaultImage";
-import { getIcon } from "../../utils/getIcon";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
 import { formatEventStartTime, getEventDate } from "../../utils/formatDates";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
+import { getIconForSlug } from "../../constants/eventTypes";
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_date, 
-        event_type, event_start_timestamp, event_min_age, event_business_name, business_name
+        event_type, event_type_slug, event_start_timestamp, event_min_age, 
+        event_business_name, business_name
     } = event;
-    
+
     const { month, day } = getEventDate(event_date);
 
     function getEventLocation() {
@@ -33,7 +33,7 @@ export default function EventCard({ event, onSelectEvent }) {
 
             <div className={styles.cardBody}>
                 <div className={styles.cardCategory}>
-                    {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
+                    {React.createElement(getIconForSlug(event_type_slug), { size: 15, strokeWidth: 1.5 })}
                     {event_type}
                 </div>
                 <div className={styles.cardTitle}>{event_name}</div>

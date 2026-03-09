@@ -8,8 +8,8 @@ const DEFAULT_EVENT_IMAGES = {
     sports: PhotoRef.EventImages.DefaultSports
   };
 
-export const getDefaultImage = (type) => {
-    switch (type?.toLowerCase()) {
+export const getDefaultImage = (slug) => {
+    switch (slug) {
       case 'music':
         return DEFAULT_EVENT_IMAGES.music;
       case 'sports':
@@ -20,6 +20,18 @@ export const getDefaultImage = (type) => {
         return DEFAULT_EVENT_IMAGES.kidFriendly;
       case 'food & bev':
         return DEFAULT_EVENT_IMAGES.foodAndBev;
+
+      // Fitness subtypes
+      case 'barre':
+        return PhotoRef.DEFAULT_IMAGES.barre;
+      case 'pilates':
+        return PhotoRef.DEFAULT_IMAGES.pilates;
+      case 'yoga':
+        return PhotoRef.DEFAULT_IMAGES.yoga;
+
+      // Workshops subtype
+      case 'textile-fiber':
+        return PhotoRef.DEFAULT_IMAGES["textile-fiber"];
       default:
         return '/defaults/default.png';
     }

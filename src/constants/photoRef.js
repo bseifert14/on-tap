@@ -15,5 +15,15 @@ export const PhotoRef = {
         DefaultKidFriendly: "/images/defaults/kid-friendly.jpg",
         DefaultMusic: "/images/defaults/music.jpg",
         DefaultSports: "/images/defaults/sports.jpg",
+    },
+    DEFAULT_IMAGES: {
+        music: "/images/defaults/music.jpg",
+        sports: "/images/defaults/sports.jpg",
+        games: "/images/defaults/games.png",
+        // Fitness
+        barre: "/images/defaults/barre.jpg",
+        pilates: "/images/defaults/pilates.jpg",
+        yoga: "/images/defaults/yoga.jpg",
+        "textile-fiber": "/images/defaults/textile-fiber.jpg",
     }
 };

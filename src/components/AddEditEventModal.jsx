@@ -3,7 +3,7 @@ import { formatTime, generateTimeOptions } from "../utils/formatDates";
 import useEventForm from "../utils/hooks/useEventForm";
 import Modal from "./common/Modal";
 import FormLabel from "./form/FormLabel";
-import { EVENT_TYPE_LIST } from "../constants/eventTypes";
+import EventTypeOptionList from "./inputs/EventTypeOptionList";
 
 export default function AddEditEventModal({ user, business, event, onClose, onSave }) {
   const {
@@ -52,10 +52,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
           value={form.event_type}
           onChange={(e) => handleChange("event_type", e.target.value)}
         >
-          <option value="">Select Event Type</option>
-          {EVENT_TYPE_LIST.map(({ slug, label }) => (
-            <option key={slug} value={slug}>{label}</option>
-          ))}
+          <EventTypeOptionList />
         </select>
 
         <FormLabel label="Event Address" name="event_location" isRequired />
@@ -91,7 +88,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
               onChange={(e) => handleChange("event_start_timestamp", e.target.value)}
             >
               <option value="">Select time</option>
-              {generateTimeOptions("06:00", "23:30", 30).map((time) => (
+              {generateTimeOptions("06:00", "23:30", 15).map((time) => (
                 <option key={time} value={time}>{formatTime(time)}</option>
               ))}
             </select>
@@ -104,7 +101,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
               onChange={(e) => handleChange("event_end_timestamp", e.target.value)}
             >
               <option value="">Select time</option>
-              {generateTimeOptions("00:00", "23:30", 30).map((time) => (
+              {generateTimeOptions("00:00", "23:30", 15).map((time) => (
                 <option key={time} value={time}>{formatTime(time)}</option>
               ))}
             </select>

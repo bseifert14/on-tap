@@ -38,6 +38,8 @@ export const EVENT_TYPES = {
   yoga: { label: "Yoga",  slug: "yoga",  icon: Flower2 },
   wellness: { label: "Wellness",  slug: "wellness", icon: Dumbbell },
   meditation: { label: "Meditation", slug: "meditation", icon: Brain },
+  pilates: { label: "Pilates", slug: "pilates", icon: HeartPulse },
+  barre: { label: "Barre", slug: "barre", icon: PersonStanding },
 
   // ── Food & Drink
   "food-drink": { label: "Food & Drink", slug: "food-drink", icon: Utensils },
@@ -63,9 +65,9 @@ export const EVENT_TYPES = {
 export const EVENT_TYPE_FILTERS = [
   { label: "All", value: "all", icon: SquareMenu  },
   { label: "Events",  value: "events", icon: CalendarDays},
-  { label: "Outdoors", value: "outdoors", icon: Mountain  },
-  { label: "Fitness", value: "fitness",  icon: Dumbbell  },
+  { label: "Fitness", value: "fitness",  icon: BicepsFlexed  },
   { label: "Food & Drink", value: "food-drink", icon: Utensils  },
+  { label: "Outdoors", value: "outdoors", icon: Mountain  },
   { label: "Workshops",  value: "workshops",  icon: Hammer },
 ];
 
@@ -73,7 +75,7 @@ export const EVENT_TYPE_FILTERS = [
 export const FILTER_TO_TYPES = {
   events:  ["events","festival","holiday","fundraiser","networking","family","music","comedy","theater","dance","film","open-mic","trivia","games"],
   outdoors: ["outdoors","skiing","hiking","cycling","running","climbing"],
-  fitness: ["fitness","yoga","wellness","meditation"],
+  fitness: ["fitness","yoga","wellness","meditation","pilates","barre"],
   "food-drink": ["food-drink","wine-tasting","beer-tasting","dinner","brunch","cooking-class","farmers-market"],
   workshops:  ["workshops","pottery","painting","photography","woodworking","jewelry-making","textile-fiber"],
 };

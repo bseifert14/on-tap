@@ -7,8 +7,8 @@ import { getAddressURL } from "../../utils/getAddress";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
 import EventModalSkeleton from "./EventModalSkeleton";
 import emptyEventsView from '/images/site/empty-events-view.png';
-import { getIcon } from "../../utils/getIcon";
 import { useShareEvent } from "../../utils/hooks/useShareEvent";
+import { getIconForSlug } from "../../constants/eventTypes";
 
 export default function EventModal({ event, onClose, isLoading, error }) {
   const { shareEvent, toastVisible } = useShareEvent();
@@ -33,7 +33,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
   if (!event) return null;
 
   const { event_name, event_location, event_description, event_date, event_type,
-    event_url, event_start_timestamp, event_end_timestamp, business_url,
+    event_type_slug, event_url, event_start_timestamp, event_end_timestamp, business_url,
     event_business_name, business_name
   } = event;
 
@@ -66,7 +66,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
           <div className={styles.heroDateDay}>{day}</div>
         </div>
         <div className={styles.heroCategory}>
-          {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
+          {React.createElement(getIconForSlug(event_type_slug), { size: 15, strokeWidth: 1.5 })}
           {event_type}
         </div>
       </>
