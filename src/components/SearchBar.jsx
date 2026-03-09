@@ -1,15 +1,17 @@
 import { Search } from "lucide-react";
 import styles from "../styles/SearchBar.module.css";
 
+const MUTED_TEXT_COLOR = "#8A8680";
+
 export default function SearchBar({
   value,
   onChange,
-  placeholder = "Search Events...",
+  placeholder = "Search events...",
   onClear,
   onSubmit
 }) {
   const showClear = Boolean(value?.length);
-
+  
   return (
     <form
       onSubmit={(e) => {
@@ -18,12 +20,12 @@ export default function SearchBar({
       }}
       role="search"
     >
-      <div className={styles.inputShell}>
-        <Search className={styles.icon} aria-hidden="true" />
+      <div className={styles.searchBar}>
+        <Search color={MUTED_TEXT_COLOR} aria-hidden="true" size={15} strokeWidth={1.5} />
 
         <input
-          className={styles.input}
           type="search"
+          id="event-search"
           enterKeyHint="search"
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
@@ -33,7 +35,7 @@ export default function SearchBar({
 
         {showClear && (
           <button
-            type="button"
+            type="reset"
             className={styles.clearBtn}
             onClick={() => onClear?.()}
             aria-label="Clear search"

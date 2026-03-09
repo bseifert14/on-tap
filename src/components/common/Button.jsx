@@ -1,12 +1,13 @@
-import React from "react";
 import styles from "../../styles/common/Button.module.css";
 
-export default function Button({ children, className, onClick }) {
+export default function Button({ children, className, onClick, isDisabled }) {
   return (
     <button
         className={`${styles.button} ${className}`}
-        onClick={onClick}>
-            {children}
+        onClick={onClick}
+        disabled={isDisabled}
+      >
+        {children}
     </button>
   );
 }

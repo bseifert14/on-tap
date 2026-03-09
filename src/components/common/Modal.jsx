@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/EventModal.module.css";
 
-export default function Modal({ onClose, image, children, footer }) {
+export default function Modal({ onClose, hero, image, children, footer }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,8 +25,11 @@ export default function Modal({ onClose, image, children, footer }) {
         className={`${styles.modal} ${visible ? styles.modalVisible : ""}`}
         tabIndex={-1}
       >
-        <button className={styles.closeButton} onClick={handleClose}>✕</button>
-        {image && image}
+        <div className={styles.modalHero}>
+          <button className={styles.iconButton} onClick={handleClose}>✕</button>
+          {hero && hero}
+          {/* {image && image} */}
+        </div>
         <div className={styles.content}>
           <div className={styles.modalBody}>{children}</div>
         </div>

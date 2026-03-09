@@ -10,9 +10,12 @@
 .react-calendar__tile {
   border-radius: 10px;
   margin: 2px;
-  padding: 12px 0;
+  padding: 18px 0;
   text-align: center;
   transition: all 0.2s ease;
+  font-size: 17px;
+  font-weight: 500;
+  position: relative;
 }
 
 .react-calendar__tile--now {
@@ -35,8 +38,8 @@
 .react-calendar__month-view__days {
   border: none;
   display: grid !important;
-  grid-template-columns: 14.2% 14.2% 14.2% 14.2% 14.2% 14.2% 14.2%; 
-
+  grid-template-columns: repeat(7, 14.2%); 
+  
   .react-calendar__tile {
     max-width: initial !important;
   }
@@ -46,34 +49,43 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  padding: 10px 0 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .react-calendar__navigation button {
+  color: var(--color-white);
   background: none;
-  border: none;
   cursor: pointer;
 }
 
 .react-calendar__navigation__arrow {
-  padding: 10px;
-  font-size: 30px;
+  padding: 5px;
+  margin: 3px;
+  font-size: 22px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
 }
 
 .react-calendar__month-view__days__day,
 .react-calendar__month-view__days__day--weekend {
-  color: black;
+  color: var(--color-white);
+  font-size: 13px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--color-white);
+  }
 }
 
 .react-calendar__navigation__label {
   color: #092a34;
   font-weight: bold;
-  font-family: "Blinker", sans-serif;
-  font-size: 18px !important; /* override react-calendar__navigation button */
+  font-family: 'Playfair Display', serif;
+  font-size: 20px !important; /* override react-calendar__navigation button */
 }
 
 .react-calendar__navigation__arrow {
   flex-grow: 0.333;
-  color: grey;
   font-size: 20px;
 }
 
@@ -82,9 +94,12 @@
 }
 
 .react-calendar__month-view__weekdays__weekday {
-  color: gray;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 14px;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .react-calendar__month-view__weekdays__weekday abbr {
@@ -93,5 +108,6 @@
 
 /* neighboring month styles */
 .react-calendar__month-view__days__day--neighboringMonth {
-  opacity: 0.3;
+  color: rgba(255, 255, 255, 0.18);
+  cursor: default;
 }

@@ -1,12 +1,17 @@
 @import './theme.css';
 
 .header {
-  padding: 20px 24px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 65px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(14, 13, 11, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .logoLink {
@@ -14,91 +19,85 @@
   align-items: center;
 }
 
-.logoImg {
-  height: 60px; /* Adjust to match your desired header height */
-  width: auto;
-  object-fit: contain;
-}
-
-
-.logoWrapper {
-  position: absolute;
-  left: 50%;
-  top: 87px; /* lowered further to match red lines */
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  padding: 0 16px;
-}
-
-.logoWrapper::before,
-.logoWrapper::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 100vw;
-  height: 1px;
-  background: black;
-  z-index: -1;
-  transform: translateY(-50%);
-}
-
-.logoWrapper::before {
-  right: 100%;
-  margin-right: 16px;
-}
-
-.logoWrapper::after {
-  left: 100%;
-  margin-left: 16px;
-}
-
-.desktopNav {
+.logoContainer {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-direction: column;
+  line-height: 1;
+  align-items: start;
 }
 
-.desktopNav a:not(.navButton),
-.desktopNav button:not(.navButton) {
-  color: black; /* changed from white */
-  text-decoration: none;
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
+.logoTop {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
 }
 
-.navButton {
-  border: none;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  color: var(--color-secondary)
+.logoBottom {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--color-white);
 }
 
-.navButtonInactive:hover {
-  color: black;
-  border: 1px solid var(--color-quaternary-accent-2);
+.logoPeriod {
+  color: var(--color-red);
 }
 
-.navButtonActive {
-  border-bottom: 2px solid var(--color-secondary);
-  border-radius: unset;
-}
+.navLinks {
+  display: flex;
+  gap: 36px;
 
-.navButtonInactive {
-  color: black;
-  border: 1px solid transparent;
+  a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 2px;
+    
+  }
+
+  a.active, a:hover {
+    color: var(--color-white);
+  }
+
+  a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-red);
+    transition: width 0.25s;
+  }
+
+  a.active::after, a:hover::after  {
+    width: 100%;
+  }
 }
 
 
 .hamburger {
-  background: none;
-  border: none;
-  color: black;
-  font-size: 28px; /* to match icon size if needed */
-  display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-white);
+    transition: all 0.3s;
+  }
+  :last-child {
+    width: 14px;
+  }
 }
 
 .overlay {
@@ -118,19 +117,27 @@
 
 .mobileNavContainer a,
 .mobileNavContainer button {
-  color: var(--color-background);
+  color: rgba(255,255,255,0.6);            /* was var(--color-background) */
   text-align: left;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 500;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 14px;
-  border-radius: 4px;
+  padding: 16px 14px;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.mobileNavContainer a:hover {
+  color: var(--color-white);
+  background: rgba(255,255,255,0.04);
 }
 
 .mobileNavLinkActive {
-  background-color: #f1f1f1 !important;
-  font-weight: bold;
+  background: rgba(255,255,255,0.06) !important;
+  color: var(--color-white) !important;
+  font-weight: 600 !important;
 }
 
 .closeBtn {
@@ -141,13 +148,9 @@
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .desktopNav {
+@media (max-width: 767px) {
+  .navLinks {
     display: none;
-  }
-
-  .hamburger {
-    display: block;
   }
 }
 

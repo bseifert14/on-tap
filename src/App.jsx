@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
 
 import HeaderLayout from "./modules/header/HeaderLayout";
 import LoginModal from "./components/LoginModal";
 import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
-import Footer from "./components/Footer";
+import Footer from "./modules/footer/Footer";
 
 import './styles/global.css';
 import About from "./modules/about/About";
@@ -17,10 +17,17 @@ import HomeLayout from "./modules/home/HomeLayout";
 import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
 import { Toaster } from 'sonner';
 
+import EventRoute from "./modules/events/EventRoute";
+
 const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
 
 export default function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const state = location.state;
+  const backgroundLocation = state?.backgroundLocation;
+
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -28,12 +35,10 @@ export default function App() {
   useLoadGoogleMaps(VITE_GOOGLE_PLACES_API_KEY);
   
   useEffect(() => {
-    // Get initial user
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
     });
 
-    // Subscribe to auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
@@ -85,14 +90,25 @@ export default function App() {
       )}
 
       <div className="mainContent">
-        <Routes>
+        {/* MAIN ROUTES */}
+        <Routes location={backgroundLocation || location}>
           <Route path="/" element={<HomeLayout />} />
           <Route path="/calendar" element={<CalendarLayout />} />
           <Route path="/profile" element={<ProfileLayout user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/recover" element={<Recover />} />
+
+          {/* If someone lands on a share link directly, they’ll hit this route */}
+          <Route path="/events/:eventId" element={<EventRoute />} />
         </Routes>
+
+        {/* MODAL LAYER (only when we have a background location) */}
+        {backgroundLocation && (
+          <Routes>
+            <Route path="/events/:eventId" element={<EventRoute />} />
+          </Routes>
+        )}
       </div>
 
       <Footer />

@@ -39,4 +39,18 @@
     --color-quaternary: #829296;
     --color-quaternary-accent-1: #4c626d;
     --color-quaternary-accent-2: #e0e2e0;
+
+
+
+    /* Revamp */
+    --color-background-dark: #0d0d0b;
+    --color-red: #C8232C;
+    --color-red-light: #E8353F;
+    --color-gold: #D4A843;
+    --color-text-muted: #8A8680;
+    --color-text-placeholder: #514f4d;
+    --color-dark: #0E0D0B;
+    --color-dark-2: #1A1917;
+    --color-dark-3: #252320;
+    --color-border: rgba(255, 255, 255, 0.06);
   }

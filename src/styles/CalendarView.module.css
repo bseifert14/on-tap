@@ -4,18 +4,17 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 45px;
-  padding: 20px 0;
+  padding: 20px 60px 60px;
 }
 
 .calendarWrapper {
   flex: 2;
   min-width: 300px;
   max-width: 450px;
-  background-color: white;
+  background-color: var(--color-dark-2);
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid #F2F2F2;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
 }
 
 .eventsWrapper {
@@ -24,14 +23,34 @@
 }
 
 .eventsHeader {
-  margin-bottom: 10px;
-  color: var(--color-secondary)
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+
+  em {
+    color: var(--color-gold);
+  }
 }
 
 /* Custom Day Styles */
 .hasEvent {
-  background-color: #fbd6dc;
+  /* background-color: #fbd6dc; */
   border-radius: 12px;
+}
+
+.hasEvent::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-gold);
 }
 
 .selectedDay {
@@ -40,22 +59,10 @@
   font-weight: bold;
 }
 
-/* Stack vertically on mobile */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .calendarWrapper,
-  .eventsWrapper {
-    width: 100%;
-  }
-}
-
 .eventScrollArea {
   max-height: 65vh; /* adjust height as needed */
   overflow-y: auto;
-  padding-right: 4px;
+  padding: 0 12px 12px 0;
   scrollbar-width: thin;
 }
 
@@ -66,4 +73,23 @@
 .eventScrollArea::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+}
+
+/* Stack vertically on mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 20px 20px;
+  }
+
+  .calendarWrapper,
+  .eventsWrapper {
+    width: 100%;
+  }
+
+  .eventScrollArea {
+    max-height: none;
+    overflow-y: visible;
+    padding: unset;
+  }
 }

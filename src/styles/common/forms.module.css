@@ -1,9 +1,13 @@
-.formLabel {
-    display: block;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.6;
-    margin-left: 4px;
+.formLabel { 
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
   }
 
 .required::after {

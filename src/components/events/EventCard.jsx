@@ -2,18 +2,9 @@ import React from "react";
 import styles from "../../styles/EventCard.module.css";
 import { getDefaultImage } from "../../utils/getDefaultImage";
 import { getIcon } from "../../utils/getIcon";
-import { Clock, MapPin } from "lucide-react";
-import { formatEventStartTime } from "../../utils/formatDates";
-import Button from "../common/Button";
-import { getAddressURL } from "../../utils/getAddress";
+import { ArrowRight, Clock, MapPin } from "lucide-react";
+import { formatEventStartTime, getEventDate } from "../../utils/formatDates";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
-
-function getEventDate(dateStr) {
-    const date = new Date(`${dateStr}T00:00:00`);
-    const month = date.toLocaleString("en-US", { month: "short" });
-    const day = date.getDate();
-    return { month, day };
-}
 
 export default function EventCard({ event, onSelectEvent }) {
     const { event_description, event_location, event_name, event_date, 
@@ -27,56 +18,37 @@ export default function EventCard({ event, onSelectEvent }) {
     }
 
     return (
-        <div className={styles.card}>
-            <div className={styles.imageContainer}>
-                <img src={getEventImageUrl(event)} alt={event_name} className={styles.image} />
-                <div className={styles.dateWidget}>
-                    <div className={styles.dateWidgetMonth}>{month}</div>
-                    <div className={styles.dateWidgetDay}>{day}</div>
+        <button className={styles.card} onClick={() => onSelectEvent?.(event)}>
+            <div className={styles.cardImageWrapper}>
+                <img src={getEventImageUrl(event)} alt={event_name} />
+                <div className={styles.cardDateBadge}>
+                    <div className={styles.cardDateMonth}>{month}</div>
+                    <div className={styles.cardDateDay}>{day}</div>
+                </div>
+                <div className={styles.cardVenueTag}>
+                    <MapPin size={15} strokeWidth={1.5} />
+                    {getEventLocation()}
                 </div>
             </div>
 
-            <div className={styles.content}>
-                <div className={styles.categoryContainer}>
-                    <div className={styles.category}>
-                        {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
-                        {event_type}
-                    </div>
-
-                    {event_min_age ? 
-                        <div className={styles.category}>
-                            Age: {event_min_age}+
-                        </div>
-                    : null}
+            <div className={styles.cardBody}>
+                <div className={styles.cardCategory}>
+                    {React.createElement(getIcon(event_type), { size: 15, strokeWidth: 1.5 })}
+                    {event_type}
                 </div>
-
-                <h3 className={styles.title}>{event_name}</h3>
-                <p className={styles.description}>{event_description}</p>
-                <div className={styles.details}>
-                    <div className={styles.iconValuePair}>
+                <div className={styles.cardTitle}>{event_name}</div>
+                <div className={styles.cardDescription}>{event_description}</div>
+                <div className={styles.cardFooter}>
+                    <div className={styles.cardMeta}>
                         <Clock size={15} strokeWidth={1.5} />
-                        <div className={styles.value}>{formatEventStartTime(event_start_timestamp)}</div>
+                        {formatEventStartTime(event_start_timestamp)}
                     </div>
-                    <div className={styles.iconValuePair}>
-                        <MapPin size={15} strokeWidth={1.5} />
-                        <a
-                            href={getAddressURL(event_location)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.value}
-                            aria-label={`Get directions to ${business_name}`}
-                        >
-                            {getEventLocation()}
-                        </a>
+                    <div className={styles.cardAction}>
+                        Details
+                        <ArrowRight size={15} strokeWidth={1.5} />
                     </div>
                 </div>
             </div>
-
-            <div className={styles.buttons}>
-                <Button onClick={() => onSelectEvent?.(event)}>
-                    See Details
-                </Button>
-            </div>
-        </div>
+        </button>
     );
 }
