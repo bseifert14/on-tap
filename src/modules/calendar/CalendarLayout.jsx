@@ -6,7 +6,7 @@ import Hero from "../common/Hero";
 import { PhotoRef } from "../../constants/photoRef";
 
 export default function CalendarLayout() {
-  const [selectedType, setSelectedType] = useState("All");
+  const [selectedType, setSelectedType] = useState("all");
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
