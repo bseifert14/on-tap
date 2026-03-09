@@ -12,7 +12,8 @@ export default function useEventForm(user, event, onSave) {
     event_name: "",
     event_location: "",
     event_business_name: "",
-    event_type: "",
+    // event_type: "",
+    event_type: event.event_type_slug || "",
     event_date: "",
     event_start_timestamp: "",
     event_end_timestamp: "",
@@ -37,7 +38,7 @@ export default function useEventForm(user, event, onSave) {
         event_name: event.event_name || "",
         event_location: event.event_location || "",
         event_business_name: event.event_business_name || "",
-        event_type: event.event_type || "",
+        event_type: event.event_type_slug || event.event_type || "",
         event_date: event.event_date || "",
         event_start_timestamp: event.event_start_timestamp
           ? formatStartTime(event.event_start_timestamp)

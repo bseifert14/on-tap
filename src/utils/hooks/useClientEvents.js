@@ -28,7 +28,7 @@ export default function useClientEvents(userId) {
 
     let query = supabase
       .from("events")
-      .select("*")
+      .select("*, businesses(business_name), event_types(id, name, slug)")
       .eq("created_by", userId);
 
     if (!showPastEvents) {
@@ -41,7 +41,15 @@ export default function useClientEvents(userId) {
     if (error) {
       console.error("Error loading events:", error);
     } else {
-      setEvents(data);
+      const normalized = (data ?? []).map((e) => ({
+        ...e,
+        business_name: e.businesses?.business_name ?? null,
+        event_type: e.event_types?.name ?? null,
+        event_type_slug: e.event_types?.slug ?? null,
+        businesses: undefined,
+        event_types: undefined,
+      }));
+      setEvents(normalized);
     }
 
     setIsLoading(false);
@@ -51,7 +59,7 @@ export default function useClientEvents(userId) {
     .filter((e) => e.event_name.toLowerCase().includes(search.toLowerCase()))
     .filter(
       (e) =>
-        eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type)
+        eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type_slug)
     )
     .filter((e) => !eventDateFilter || e.event_date === eventDateFilter);
 
