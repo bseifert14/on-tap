@@ -49,7 +49,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
           <button className={styles.actionButton} onClick={onEdit}>
             <Pencil size={15} strokeWidth={1.5} />
           </button>
-          <button className={styles.actionButton} onClick={onDelete}>
+          <button className={`${styles.actionButton} ${styles.delete}`} onClick={onDelete}>
             <Trash2 size={15} strokeWidth={1.5} />
           </button>
         </div>

@@ -37,79 +37,137 @@
     display: block;
   }
   
-  .eventModal-input {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-  }
-  
-  .eventModal-textarea {
-    width: 100%;
-    min-height: 80px;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
-    resize: vertical;
-  }
-  
-  .eventModal-note {
-    font-size: 0.8rem;
-    color: #666;
-    margin-top: -4px;
-    margin-bottom: 12px;
-  }
-  
-  .eventModal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .eventModal-buttonPrimary {
-    padding: 8px 16px;
-    background-color: #000;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .eventModal-buttonSecondary {
-    padding: 8px 16px;
-    background-color: transparent;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    cursor: pointer;
-  }
+.eventModal-input,
+.eventModal-textarea,
+select.eventModal-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-dark-3);
+  color: var(--color-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
 
-  .eventModal-radioGroup {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
+.eventModal-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
 
-  .eventModal-dropzone {
-    width: 100%;
-    padding: 1rem;
-    border: 2px dashed #ccc;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    cursor: pointer;
-    background: #fafafa;
-    margin-bottom: 8px;
-  }
-  .eventModal-dropzone:hover {
-    background-color: #f5f5f5;
-  }
+.eventModal-input:focus,
+.eventModal-textarea:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.eventModal-textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.eventModal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.eventModal-note {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.eventModal-radioGroup {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eventModal-radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.eventModal-radioGroup input[type="radio"] {
+  accent-color: var(--color-red);
+  cursor: pointer;
+}
+
+.eventModal-dropzone {
+  width: 100%;
+  padding: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  background: var(--color-dark-3);
+  margin-bottom: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.eventModal-dropzone:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--color-white);
+}
+
+.eventModal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.eventModal-buttonPrimary {
+  padding: 11px 24px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.eventModal-buttonPrimary:hover {
+  background: var(--color-red-light);
+}
+
+.eventModal-buttonSecondary {
+  padding: 11px 24px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.eventModal-buttonSecondary:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
   
   .timeFieldContainer {
     display: flex;

@@ -1,89 +1,161 @@
+/* ProfileEvents.module.css */
+
+.paginationFooter {
+  margin-top: 16px;
+  padding: 16px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 6px;
+}
+
+.pageNumbers button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: all 0.2s;
+}
+
+.pageNumbers button:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
+
+.pageNumbers .activePage {
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+  font-weight: 700;
+}
+
 .topBar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 5px;
+  margin-bottom: 16px;
 }
 
 .leftGroup {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .addButton {
-  background-color: #e3003b !important;
-  color: white;
-  padding: 0.6rem 1rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-red);
+  color: var(--color-white);
+  padding: 10px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addButton:hover {
+  background: var(--color-red-light);
 }
 
 .searchInput {
-  padding: 0.55rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-dark-3);
+  color: var(--color-white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
   min-width: 200px;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-.paginationFooter {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.95rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.2);
 }
 
-.pageNumbers button {
-  margin: 0 0.2rem;
-  padding: 0.4rem 0.75rem;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.pageNumbers .activePage {
-  background-color: #e3003b;
-  color: white;
-  font-weight: bold;
-  border-color: #e3003b;
+.searchInput:focus {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .rightFilters {
   display: flex;
-  gap: 8px; /* or whatever spacing you prefer */
+  gap: 8px;
   align-items: center;
+}
+
+.filterSelect {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-dark-3);
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, color 0.2s;
+  appearance: none;
+  padding-right: 28px;
+}
+
+.filterSelect:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
 }
 
 .filterCheckbox {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0.4rem 0.75rem;
+  gap: 8px;
+  background: var(--color-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 9px 14px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
   user-select: none;
-  transition: background 0.2s, border 0.2s;
-}
-
-.filterCheckbox input[type="checkbox"] {
-  accent-color: #e3003b;
-  transform: scale(1.1);
-  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .filterCheckbox:hover {
-  background-color: #f5f5f5;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
+
+.filterCheckbox input[type="checkbox"] {
+  accent-color: var(--color-red);
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
 }

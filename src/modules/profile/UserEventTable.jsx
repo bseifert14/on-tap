@@ -21,8 +21,11 @@ export default function UserEventTable({ events, onEdit, onDelete }) {
           <thead className={styles.thead}>
             <tr>
               <th className={styles.th}>Name</th>
-              <th className={styles.th} onClick={toggleSort} style={{ cursor: "pointer", display: 'flex', alignItems: 'center' }}>
-                Date & Time {sortAsc ? "▲" : "▼"}
+              <th
+                className={`${styles.th} ${styles.sortable}`}
+                onClick={toggleSort}
+              >
+                Date & Time {sortAsc ? "↑" : "↓"}
               </th>
               <th className={styles.th}>Location</th>
               <th className={styles.th}>Description</th>

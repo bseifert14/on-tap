@@ -1,51 +1,73 @@
 .cell {
-    padding: 0.75rem 1rem;
-    white-space: nowrap;
-    vertical-align: middle;
-    color: #333;
-  }
-  
-  .truncate {
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .checkmark {
-    font-size: 1rem;
-    color: green;
-  }
-  
-  .empty {
-    font-size: 1rem;
-    color: #aaa;
-  }
+  padding: 14px 16px;
+  white-space: nowrap;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+}
 
-  .actionButtonContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+tr:last-child .cell {
+  border-bottom: none;
+}
 
-  .actionButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: black;
-    font-size: 0.875rem;
-    padding: 5px;
-    border-radius: 4px;
-  }
-  
-  .actionButton:hover {
-    background: #a1a1a1;
-  }
+tr:hover .cell {
+  background: rgba(255, 255, 255, 0.02);
+}
 
-  .eventNameCell {
-    max-width: 300px; /* or whatever width fits your layout */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
+.eventNameCell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+}
+
+.checkmark {
+  color: #4ade80;
+}
+
+.empty {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.actionButtonContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.actionButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionButton:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
+
+.actionButton.delete:hover {
+  border-color: rgba(200, 35, 44, 0.4);
+  color: var(--color-red);
+  background: rgba(200, 35, 44, 0.08);
+}

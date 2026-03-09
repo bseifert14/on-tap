@@ -25,11 +25,16 @@ export default function Modal({ onClose, hero, image, children, footer }) {
         className={`${styles.modal} ${visible ? styles.modalVisible : ""}`}
         tabIndex={-1}
       >
-        <div className={styles.modalHero}>
-          <button className={styles.iconButton} onClick={handleClose}>✕</button>
-          {hero && hero}
-          {/* {image && image} */}
-        </div>
+        {hero ? (
+          <div className={styles.modalHero}>
+            <button className={styles.iconButton} onClick={handleClose}>✕</button>
+            {hero}
+          </div>
+        ) : (
+          <div className={styles.modalHeaderBar}>
+            <button className={styles.iconButton} onClick={handleClose}>✕</button>
+          </div>
+        )}
         <div className={styles.content}>
           <div className={styles.modalBody}>{children}</div>
         </div>

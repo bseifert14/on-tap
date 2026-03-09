@@ -58,8 +58,19 @@
     height: 70%;
     background: linear-gradient(to top, var(--color-dark-2) 0%, rgba(26, 25, 23, 0) 100%);
   }
-  
-  
+
+  .modalHeaderBar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 16px 16px 0 16px;
+    flex-shrink: 0;
+  }
+
+  .modalHeaderBar .iconButton {
+    position: static;
+  }
+    
   .image {
     width: 100%;
     height: 100%;
