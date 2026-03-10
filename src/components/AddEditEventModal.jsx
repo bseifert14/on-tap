@@ -13,7 +13,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
     fileInputRef,
     selectedFile,
     validateAndProcessFile
-  } = useEventForm(user, event, onSave);
+  } = useEventForm(user, event, onSave, business);
 
   const Footer = () => {
     return (

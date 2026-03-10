@@ -6,7 +6,7 @@ const MUTED_TEXT_COLOR = "#8A8680";
 export default function SearchBar({
   value,
   onChange,
-  placeholder = "Search events...",
+  placeholder = "Search events and venues",
   onClear,
   onSubmit
 }) {

@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         const q = escapeLike(qRaw);
         const pattern = `%${q}%`;
         return query.or(
-          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_description.ilike.${pattern}`
+          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_business_name.ilike.${pattern}`
         );
       }
       if (qRaw.length > 0) return null;

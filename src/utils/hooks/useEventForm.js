@@ -7,8 +7,7 @@ import { sanitizeUrl } from "../sanitizeUrl";
 import { formatStartTime } from "../formatDates";
 import { uploadOrReuseEventPhoto } from "../uploadOrReuseEventPhoto";
 
-export default function useEventForm(user, event, onSave) {
-  console.log(event);
+export default function useEventForm(user, event, onSave, business) {
   const [form, setForm] = useState({
     event_name: "",
     event_location: "",
@@ -118,8 +117,13 @@ export default function useEventForm(user, event, onSave) {
 
     const { event_type, event_photo_url, ...rest } = form; // strip old/derived fields
 
+    const eventBusinessName = event?.event_business_name || business?.business_name;
+    const eventLocation = event?.event_location || `${business?.street_address} ${business?.city}, ${business?.state} ${business?.zipcode}`;
+
     const payload = {
       ...rest,
+      event_location: eventLocation,
+      event_business_name: eventBusinessName,
       event_type_id: typeRow.id,          // ← UUID from event_types table
       event_url: cleanUrl || null,
       event_start_timestamp: fullStart,

@@ -3,7 +3,8 @@ import {
   CalendarDays, Trees, Laugh, Gamepad, Mic, HelpCircle, Theater,
   Footprints, Bike, PersonStanding, Drama, Film, Wine, Beer,
   ChefHat, Leaf, Flower2, Camera, Wrench, Gem, Scissors, Dumbbell,
-  HeartPulse, Brain, Users, Gift, Globe, Trophy, Volleyball
+  HeartPulse, Brain, Users, Gift, Globe, Trophy, Volleyball,
+  Palette
 } from "lucide-react";
 
 // ── MASTER EVENT TYPE REGISTRY ─────────────────────────────────────
@@ -24,6 +25,8 @@ export const EVENT_TYPES = {
   film: { label: "Film",  slug: "film",  icon: Film },
   "open-mic":  { label: "Open Mic",  slug: "open-mic", icon: Mic  },
   trivia: { label: "Trivia",  slug: "trivia",  icon: HelpCircle  },
+  "talks-panels": { label: "Talks & Panels", slug: "talks-panels", icon: Mic },
+  "art": { label: "Art", slug: "art", icon: Palette },
 
   // ── Outdoors
   outdoors: { label: "Outdoors", slug: "outdoors", icon: Mountain },
@@ -73,7 +76,7 @@ export const EVENT_TYPE_FILTERS = [
 
 // ── FILTER → SLUG GROUPS ───────────────────────────────────────────
 export const FILTER_TO_TYPES = {
-  events:  ["events","festival","holiday","fundraiser","networking","family","music","comedy","theater","dance","film","open-mic","trivia","games"],
+  events:  ["events","festival","holiday","fundraiser","networking","family","music","comedy","theater","dance","film","open-mic","trivia","games","talks-panels","art"],
   outdoors: ["outdoors","skiing","hiking","cycling","running","climbing"],
   fitness: ["fitness","yoga","wellness","meditation","pilates","barre"],
   "food-drink": ["food-drink","wine-tasting","beer-tasting","dinner","brunch","cooking-class","farmers-market"],
