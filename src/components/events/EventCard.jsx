@@ -39,10 +39,12 @@ export default function EventCard({ event, onSelectEvent }) {
                 <div className={styles.cardTitle}>{event_name}</div>
                 <div className={styles.cardDescription}>{event_description}</div>
                 <div className={styles.cardFooter}>
-                    <div className={styles.cardMeta}>
-                        <Clock size={15} strokeWidth={1.5} />
-                        {formatEventStartTime(event_start_timestamp)}
-                    </div>
+                    {event_start_timestamp && (
+                        <div className={styles.cardMeta}>
+                            <Clock size={15} strokeWidth={1.5} />
+                            {formatEventStartTime(event_start_timestamp)}
+                        </div>
+                    )}
                     <div className={styles.cardAction}>
                         Details
                         <ArrowRight size={15} strokeWidth={1.5} />

@@ -7,6 +7,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
   const {
     event_name,
     event_start_timestamp,
+    event_date,
     event_location,
     event_description,
     event_photo_url,
@@ -14,8 +15,13 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
     event_external_link, // optional field for link support
   } = event;
 
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
+  const formatDate = (event_start_timestamp, event_date) => {
+    if (!event_start_timestamp) {
+      return event_date ? format(new Date(event_date), "PPPP") : "—";
+    }
+
+    const date = new Date(event_start_timestamp);
+
     return format(date, "PPPP");
   };
 
@@ -25,7 +31,7 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
   return (
     <tr>
       <td className={`${styles.cell} ${styles.eventNameCell}`}>{event_name}</td>
-      <td className={styles.cell}>{formatDate(event_start_timestamp)}</td>
+      <td className={styles.cell}>{formatDate(event_start_timestamp, event_date)}</td>
       <td className={styles.cell}>{event_location}</td>
       <td className={`${styles.cell} ${styles.truncate}`}>
         {event_description ? truncate(event_description) : "—"}

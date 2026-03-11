@@ -24,7 +24,7 @@
   }
 
   .cardAction {
-    gap: 10px;
+    padding-right: 6px;
   }
 }
 
@@ -175,7 +175,8 @@
   letter-spacing: 0.06em;
   color: var(--color-red-light);
   text-transform: uppercase;
-  transition: gap 0.2s;
+  transition: padding 0.2s;
+  margin-left: auto;
 }
 
 .imageContainer {

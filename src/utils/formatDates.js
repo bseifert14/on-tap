@@ -1,5 +1,21 @@
 import { format, isToday, isTomorrow, isThisWeek, parseISO } from 'date-fns';
 
+export function formatEventDate(eventDate) {
+  const date = new Date(`${eventDate}T00:00:00`);
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const day = date.getDate();
+
+  if (isToday(date)) {
+    return `Today • ${month} ${day}`;
+  }
+
+  if (isTomorrow(date)) {
+    return `Tomorrow • ${month} ${day}`;
+  }
+
+  return `${month} ${day}`;
+}
+
 export function formatEventDateTime(start, endTime) {
   const startDate = parseISO(start);
   const startTimeStr = format(startDate, 'h:mm a');

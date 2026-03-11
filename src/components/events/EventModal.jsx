@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../styles/EventModal.module.css";
 import { ArrowRight, Calendar, CircleArrowRight, MapPin, Share2 } from "lucide-react";
-import { formatEventDateTime, getEventDate } from "../../utils/formatDates";
+import { formatEventDate, formatEventDateTime, getEventDate } from "../../utils/formatDates";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
 import { getEventImageUrl } from "../../utils/getEventImageUrl";
@@ -102,10 +102,21 @@ export default function EventModal({ event, onClose, isLoading, error }) {
             <Calendar size={15} strokeWidth={1.5} color="white" />
           </div>
           <div className={styles.eventMetaText}>
-            <div className={styles.eventMetaLabel}>DATE & TIME</div>
-            <div className={styles.eventMetaValue}>
-              {formatEventDateTime(event_start_timestamp, event_end_timestamp)}
-            </div>
+            { event_start_timestamp ? (
+              <>
+                <div className={styles.eventMetaLabel}>DATE & TIME</div>
+                <div className={styles.eventMetaValue}>
+                  {formatEventDateTime(event_start_timestamp, event_end_timestamp)}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.eventMetaLabel}>DATE</div>
+                <div className={styles.eventMetaValue}>
+                  {formatEventDate(event_date)}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
