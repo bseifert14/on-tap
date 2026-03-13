@@ -117,8 +117,8 @@ export default function useEventForm(user, event, onSave, business) {
 
     const { event_type, event_photo_url, ...rest } = form; // strip old/derived fields
 
-    const eventBusinessName = event?.event_business_name || business?.business_name;
-    const eventLocation = event?.event_location || `${business?.street_address} ${business?.city}, ${business?.state} ${business?.zipcode}`;
+    const eventBusinessName = form.event_business_name || business?.business_name;
+    const eventLocation = form.event_location || `${business?.street_address} ${business?.city}, ${business?.state} ${business?.zipcode}`;
 
     const payload = {
       ...rest,
