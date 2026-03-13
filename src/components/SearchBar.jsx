@@ -24,7 +24,7 @@ export default function SearchBar({
         <Search color={MUTED_TEXT_COLOR} aria-hidden="true" size={15} strokeWidth={1.5} />
 
         <input
-          type="search"
+          type="text"
           id="event-search"
           enterKeyHint="search"
           value={value}

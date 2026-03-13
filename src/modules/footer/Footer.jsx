@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from '../../styles/Footer.module.css';
 import FooterLogo from './FooterLogo';
 
@@ -9,7 +10,7 @@ export default function Footer() {
       <div className={styles.footerLinks}>
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
-        <a href="#">Contact</a>
+        <Link to="/contact">Contact</Link>
       </div>
 
       <div className={styles.footerCopy}>

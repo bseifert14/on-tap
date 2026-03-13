@@ -15,14 +15,15 @@ export default async function handler(req, res) {
     const rangeFrom = offset;
     const rangeTo = offset + limit - 1;
 
-    const qRaw = (req.query.q ?? "").toString().trim();
+    // const qRaw = (req.query.q ?? "").toString().trim();
+    const qRaw = decodeURIComponent((req.query.q ?? "").toString().trim()).replace(/\+/g, " ");
 
     const typeInRaw = (req.query.type_in ?? "").toString().trim();
     const typeInList = typeInRaw ? typeInRaw.split(",").map((s) => s.trim()).filter(Boolean) : null;
 
-    // ── Resolve slugs → UUIDs ──────────────────────────────────────
+    // ── Resolve slugs → UUIDs (skip for search mode) ──────────────
     let resolvedTypeIds = null;
-    if (typeInList && typeInList.length > 0) {
+    if (mode !== "search" && typeInList && typeInList.length > 0) {
       const { data: typeRows, error: typeError } = await supabase
         .from("event_types")
         .select("id")
@@ -48,8 +49,9 @@ export default async function handler(req, res) {
       if (qRaw.length >= 2) {
         const q = escapeLike(qRaw);
         const pattern = `%${q}%`;
+        const encoded = pattern.replace(/ /g, "%20");
         return query.or(
-          `event_name.ilike.${pattern},event_location.ilike.${pattern},event_business_name.ilike.${pattern}`
+          `event_name.ilike.${encoded},event_location.ilike.${encoded},event_business_name.ilike.${encoded}`
         );
       }
       if (qRaw.length > 0) return null;
@@ -151,7 +153,19 @@ export default async function handler(req, res) {
     // ── LIST / SEARCH / CALENDAR ───────────────────────────────────
     let query = supabase.from("events").select(select);
 
-    if (mode === "list" || mode === "search") {
+    if (mode === "search") {
+      if (qRaw.length < 2) return res.status(200).json({ data: [] });
+
+      const { data, error } = await supabase.rpc("search_events", {
+        search_term: qRaw,
+        result_limit: parseInt(limit, 10),
+        result_offset: parseInt(offset, 10),
+      });
+
+      if (error) return res.status(500).json({ error: error.message });
+      return res.status(200).json({ data: data ?? [] });
+
+    } else if (mode === "list") {
       const today = new Date().toISOString().split("T")[0];
       const fromDate = (req.query.from ?? today).toString();
       query = query.gte("event_date", fromDate);

@@ -42,6 +42,11 @@ export default function useContactForm() {
       return false;
     }
 
+    // Dismiss keyboard before submitting
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     setIsSubmitting(true);
     setErrors({});
 
