@@ -221,6 +221,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--color-white);
+    min-height: fit-content;
   }
 
   .placeholder {
@@ -384,10 +385,10 @@
   }
 
   @media (max-height: 700px) {
-  .modal {
-    height: 95vh;
-    max-height: 95vh;
-  }
+  /* .modal {
+    height: 88vh;
+    max-height: 88vh;
+  } */
 
   .modalHero {
     height: 180px;
