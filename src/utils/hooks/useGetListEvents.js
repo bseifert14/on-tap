@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 import { FILTER_TO_TYPES } from "../../constants/eventTypes";
+import useTrackSearch from "../data-tracking/useTrackSearch";
 
 export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 } = {}) {
   const [events, setEvents] = useState([]);
@@ -11,13 +12,13 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState(null);
 
+  const { trackSearch } = useTrackSearch();
+
   const trimmed = useMemo(() => search.trim(), [search]);
 
-  // Convert selectedType (UI id) => array of DB types
   const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
   const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
 
-  // Reset when search OR selectedType changes
   useEffect(() => {
     setEvents([]);
     setOffset(0);
@@ -38,7 +39,7 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
 
         const baseParams =
           trimmed.length >= 2
-            ? { mode: "search", q: trimmed, from } // include from
+            ? { mode: "search", q: trimmed, from }
             : { mode: "list", from };
 
         const params = {
@@ -53,6 +54,13 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
 
         setEvents((prev) => (offset === 0 ? data : [...prev, ...data]));
         setHasMore(Array.isArray(data) && data.length === pageSize);
+
+        if (trimmed.length >= 2) {
+          trackSearch(trimmed, data.length);
+          // // Disable for now, too much noise to start
+          // data.forEach((event) => trackClick("search_result", event));
+        }
+
       } catch (e) {
         if (!cancelled) setError(e);
       } finally {

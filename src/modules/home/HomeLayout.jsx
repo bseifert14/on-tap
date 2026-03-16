@@ -12,10 +12,12 @@ import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
+import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
 
 export default function HomeLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { trackSearch } = useTrackSearch();
 
   const [selectedType, setSelectedType] = useState("events");
   const [searchInput, setSearchInput] = useState("");
@@ -69,7 +71,9 @@ export default function HomeLayout() {
   }, []);
 
   const handleSearchSubmit = () => {
-    setSearchTerm(searchInput.trim());
+    const term = searchInput.trim();
+    setSearchTerm(term);
+    if (term.length >= 2) trackSearch(term);
   };
 
   const handleSearchClear = () => {

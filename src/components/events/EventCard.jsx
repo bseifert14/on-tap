@@ -6,7 +6,7 @@ import { getEventImageUrl } from "../../utils/getEventImageUrl";
 import { getIconForSlug } from "../../constants/eventTypes";
 
 export default function EventCard({ event, onSelectEvent }) {
-    const { event_description, event_location, event_name, event_date, 
+    const { event_description, event_name, event_date, 
         event_type, event_type_slug, event_start_timestamp, event_min_age, 
         event_business_name, business_name
     } = event;

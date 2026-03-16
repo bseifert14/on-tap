@@ -14,16 +14,22 @@ import ProfileLayout from "./modules/profile/ProfileLayout";
 import Recover from "./modules/common/Recover";
 import CalendarLayout from "./modules/calendar/CalendarLayout";
 import HomeLayout from "./modules/home/HomeLayout";
-import useLoadGoogleMaps from "./utils/hooks/useLoadGoogleMaps";
 import { Toaster } from 'sonner';
 
 import EventRoute from "./modules/events/EventRoute";
 
-const { VITE_GOOGLE_PLACES_API_KEY } = import.meta.env;
-
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Google Analytics page view tracking. Might need to uncomment this to track with React Router
+  // useEffect(() => {
+  //   if (window.gtag) {
+  //     window.gtag("event", "page_view", {
+  //       page_path: location.pathname,
+  //     });
+  //   }
+  // }, [location]);
 
   const state = location.state;
   const backgroundLocation = state?.backgroundLocation;
@@ -31,8 +37,6 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-
-  useLoadGoogleMaps(VITE_GOOGLE_PLACES_API_KEY);
   
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {

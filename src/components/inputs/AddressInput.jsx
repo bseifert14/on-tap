@@ -1,20 +1,7 @@
 import usePlacesAutocomplete, { getGeocode } from "use-places-autocomplete";
 import styles from '../../styles/AddressInput.module.css';
-// import useLoadGoogleMaps from "../../utils/hooks/useLoadGoogleMaps";
 
 export default function AddressInput({ onAddressSelect }) {
-//     useLoadGoogleMaps();
-//     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-
-//   useEffect(() => {
-//     const checkLoaded = setInterval(() => {
-//       if (window.google && window.google.maps) {
-//         setIsScriptLoaded(true);
-//         clearInterval(checkLoaded);
-//       }
-//     }, 100);
-//   }, []);
-
   const {
     ready,
     value,

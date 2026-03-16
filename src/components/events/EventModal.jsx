@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/EventModal.module.css";
 import { ArrowRight, Calendar, CircleArrowRight, MapPin, Share2 } from "lucide-react";
 import { formatEventDate, formatEventDateTime, getEventDate } from "../../utils/formatDates";
@@ -9,9 +9,17 @@ import EventModalSkeleton from "./EventModalSkeleton";
 import emptyEventsView from '/images/site/empty-events-view.png';
 import { useShareEvent } from "../../utils/hooks/useShareEvent";
 import { getIconForSlug } from "../../constants/eventTypes";
+import useTrackClick from "../../utils/data-tracking/useTrackClick";
 
 export default function EventModal({ event, onClose, isLoading, error }) {
   const { shareEvent, toastVisible } = useShareEvent();
+  const { trackClick } = useTrackClick();
+
+  useEffect(() => {
+    if (event) {
+      trackClick("modal_open", event);
+    }
+  }, [event]); 
 
   if (isLoading) {
     return (
@@ -53,6 +61,11 @@ export default function EventModal({ event, onClose, isLoading, error }) {
       return '#';
   }
 
+  function handleOnShareClick(event) {
+    shareEvent(event);
+    trackClick("share", event);
+  }
+
   const Hero = () => {
     return (
       <>
@@ -76,11 +89,17 @@ export default function EventModal({ event, onClose, isLoading, error }) {
   const Footer = () => {
     return (
       <>
-        <a href={getEventUrl(event_url, business_url)} className={styles.footerBtnPrimary} target="_blank" rel="noopener noreferrer">
+        <a
+          href={getEventUrl(event_url, business_url)}
+          className={styles.footerBtnPrimary}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackClick("learn_more", event)}
+        >
           Learn More
           <ArrowRight size={15} strokeWidth={1.5} color="white" />
         </a>
-        <button onClick={() => shareEvent(event)} className={styles.footerBtnShare}>
+        <button onClick={() => handleOnShareClick(event)} className={styles.footerBtnShare}>
           <Share2 size={15} strokeWidth={1.5} color="white" />
         </button>
       </>
@@ -132,6 +151,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
               rel="noopener noreferrer"
               className={styles.eventMetaValue}
               aria-label={`Get directions to ${business_name}`}
+              onClick={() => trackClick("directions", event)}
             >
               {getEventLocation()}
               <CircleArrowRight size={13} strokeWidth={1.5} />
