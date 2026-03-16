@@ -8,15 +8,17 @@ export function getEventImageUrl(event) {
 
   const { event_photo_path, event_photo_url, event_type_slug } = event;
 
-  // 1) New way: path stored in DB
   if (event_photo_path) {
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(event_photo_path);
+    const { data } = supabase.storage.from(BUCKET).getPublicUrl(event_photo_path, {
+      transform: {
+        width: 800,
+        quality: 75,
+      },
+    });
     return data?.publicUrl || getDefaultImage(event_type_slug);
   }
 
-  // 2) Legacy way: full URL stored in DB
   if (event_photo_url) return event_photo_url;
 
-  // 3) Default fallback
   return getDefaultImage(event_type_slug);
 }
