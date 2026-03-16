@@ -1,10 +1,10 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../supabase";
+import { supabase } from "../../supabase";
 import { toast } from "sonner";
 import { CheckCircle } from "lucide-react";
 
-import styles from "../styles/SetPasswordModal.module.css";
+import styles from "../../styles/SetPasswordModal.module.css";
 
 export default function SetPasswordModal({ onClose }) {
   const [pw1, setPw1] = useState("");

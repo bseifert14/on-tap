@@ -4,7 +4,7 @@ import { supabase } from "../../supabase";
 import styles from "../../styles/HomeLayout.module.css";
 import EventFiltersLayout from "../common/EventFiltersLayout";
 import EventList from "../../components/events/EventList";
-import SetPasswordModal from "../../components/SetPasswordModal";
+import SetPasswordModal from "../../components/modals/SetPasswordModal";
 import useGetListEvents from "../../utils/hooks/useGetListEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import Hero from "../common/Hero";

@@ -1,7 +1,7 @@
 import styles from "../../styles/ProfileEvents.module.css";
 
-import AddEditEventModal from "../../components/AddEditEventModal";
-import DeleteModal from "../../components/DeleteModal";
+import AddEditEventModal from "../../components/modals/AddEditEventModal";
+import DeleteModal from "../../components/modals/DeleteModal";
 import UserEventTable from "./UserEventTable";
 import TableActions from "./TableActions";
 import Banner from "../../components/common/Banner";

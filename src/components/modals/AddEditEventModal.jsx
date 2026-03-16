@@ -1,9 +1,9 @@
-import styles from "../styles/AddEditEventModal.module.css";
-import { formatTime, generateTimeOptions } from "../utils/formatDates";
-import useEventForm from "../utils/hooks/useEventForm";
-import Modal from "./common/Modal";
-import FormLabel from "./form/FormLabel";
-import EventTypeOptionList from "./inputs/EventTypeOptionList";
+import styles from "../../styles/AddEditEventModal.module.css";
+import { formatTime, generateTimeOptions } from "../../utils/formatDates";
+import useEventForm from "../../utils/hooks/useEventForm";
+import Modal from "../common/Modal";
+import FormLabel from "../form/FormLabel";
+import EventTypeOptionList from "../inputs/EventTypeOptionList";
 
 export default function AddEditEventModal({ user, business, event, onClose, onSave }) {
   const {

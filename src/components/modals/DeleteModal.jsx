@@ -1,6 +1,6 @@
-import styles from '../styles/AddEditEventModal.module.css'
-import buttonStyle from "../styles/common/Button.module.css";
-import Button from './common/Button';
+import styles from '../../styles/AddEditEventModal.module.css'
+import buttonStyle from "../../styles/common/Button.module.css";
+import Button from '../common/Button';
 
 export default function DeleteModal({ onConfirm, onCancel }) {
     return (

@@ -1,6 +1,6 @@
 import styles from "../../styles/ProfileEvents.module.css";
-import TableEventTypeSelector from "../../modules/profile/TableEventTypeSelector";
-import TableEventDateSelector from "../../modules/profile/TableEventDateSelector";
+import TableEventTypeSelector from "./TableEventTypeSelector";
+import TableEventDateSelector from "./TableEventDateSelector";
 import Button from "../../components/common/Button";
 
 export default function TableActions({

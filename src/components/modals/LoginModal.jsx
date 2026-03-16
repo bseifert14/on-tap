@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../../supabase";
 import { toast } from 'sonner';
 
-import styles from "../styles/LoginModal.module.css";
+import styles from "../../styles/LoginModal.module.css";
 import PasswordResetModal from "./PasswordResetModal";
 
 export default function LoginModal({ onClose, onLoginSuccess }) {

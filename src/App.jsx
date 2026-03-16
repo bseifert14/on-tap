@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "./supabase";
 
-import HeaderLayout from "./modules/header/HeaderLayout";
-import LoginModal from "./components/LoginModal";
-import ConfirmLogoutModal from "./components/ConfirmLogoutModal";
-import Footer from "./modules/footer/Footer";
+import HeaderLayout from "./pages/header/HeaderLayout";
+import LoginModal from "./components/modals/LoginModal";
+import ConfirmLogoutModal from "./components/modals/ConfirmLogoutModal";
+import Footer from "./pages/footer/Footer";
 
 import './styles/global.css';
-import About from "./modules/about/About";
-import Contact from "./modules/contact/Contact";
-import ProfileLayout from "./modules/profile/ProfileLayout";
-import Recover from "./modules/common/Recover";
-import CalendarLayout from "./modules/calendar/CalendarLayout";
-import HomeLayout from "./modules/home/HomeLayout";
+import About from "./pages/about/About";
+import Contact from "./pages/contact/Contact";
+import ProfileLayout from "./pages/profile/ProfileLayout";
+import Recover from "./pages/common/Recover";
+import CalendarLayout from "./pages/calendar/CalendarLayout";
+import HomeLayout from "./pages/home/HomeLayout";
 import { Toaster } from 'sonner';
 
-import EventRoute from "./modules/events/EventRoute";
+import EventRoute from "./pages/events/EventRoute";
 
 export default function App() {
   const navigate = useNavigate();

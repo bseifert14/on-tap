@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { supabase } from "../supabase";
-import styles from "../styles/PasswordResetModal.module.css";
+import { supabase } from "../../supabase";
+import styles from "../../styles/PasswordResetModal.module.css";
 
 export default function PasswordResetModal({ onClose }) {
   const [email, setEmail] = useState("");

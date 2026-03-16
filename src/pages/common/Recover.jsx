@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../supabase";
 import { toast } from "sonner";
-import SetPasswordModal from "../../components/SetPasswordModal";
+import SetPasswordModal from "../../components/modals/SetPasswordModal";
 
 export default function Recover() {
   const navigate = useNavigate();
