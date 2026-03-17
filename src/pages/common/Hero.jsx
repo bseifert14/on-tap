@@ -8,7 +8,7 @@ export default function Hero({ bgImageUrl, label }) {
         src={bgImageUrl}
         alt="Stowe, Vermont"
         className={styles.heroImg}
-        fetchpriority="high"
+        fetchPriority="high"
         decoding="async"
       />
 
