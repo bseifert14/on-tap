@@ -1,0 +1,97 @@
+.card {
+  background: var(--color-dark-2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s;
+  animation: fadeUp 0.5s forwards;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dateBadge {
+  background: var(--color-red);
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.dateMonth {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.dateDay {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--color-white);
+  display: block;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 3px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-red-light);
+  flex-shrink: 0;
+  transition: gap 0.2s;
+}
+
+.card:hover .action {
+  gap: 8px;
+}

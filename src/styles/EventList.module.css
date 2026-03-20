@@ -4,3 +4,11 @@
     gap: 24px;
     grid-template-columns: repeat(auto-fit, minmax(var(--minCard), 1fr));
 }
+
+.compactList {
+    --minCard: 290px;
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(auto-fit, minmax(var(--minCard), 1fr));
+    margin-bottom: 24px;
+}

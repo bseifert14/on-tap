@@ -114,6 +114,7 @@ export default function HomeLayout() {
               <EventList
                 currentView="list"
                 events={events}
+                selectedType={selectedType}
                 onSelectEvent={(event) =>
                   navigate(`/events/${event.id}`, {
                     state: { backgroundLocation: location, event },

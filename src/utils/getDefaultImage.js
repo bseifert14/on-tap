@@ -27,6 +27,7 @@ export const getDefaultImage = (slug) => {
       case 'pilates':
         return PhotoRef.DEFAULT_IMAGES.pilates;
       case 'yoga':
+      case 'fitness':
         return PhotoRef.DEFAULT_IMAGES.yoga;
 
       // Workshops subtype

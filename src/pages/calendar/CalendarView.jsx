@@ -114,6 +114,7 @@ export default function CalendarView({ selectedType, searchTerm }) {
                 currentView="calendar"
                 events={dayEvents}
                 onSelectEvent={handleSelectEvent}
+                selectedType={selectedType}
               />
 
               {hasMore && <LoadMoreButton onClick={loadMore} isLoading={isLoadingMore} />}
