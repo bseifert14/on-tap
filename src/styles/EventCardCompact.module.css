@@ -1,12 +1,12 @@
 .card {
   background: var(--color-dark-2);
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   width: 100%;
   cursor: pointer;
   text-align: left;
@@ -62,12 +62,25 @@
 }
 
 .title {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--color-white);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+
+.eventType {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 2px;
 }
 
 .meta {
@@ -76,7 +89,6 @@
   gap: 5px;
   font-size: 12px;
   color: var(--color-text-muted);
-  margin-top: 3px;
 }
 
 .action {

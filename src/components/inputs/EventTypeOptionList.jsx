@@ -21,6 +21,7 @@ export default function EventTypeOptionList() {
         </optgroup>
 
         <optgroup label="Fitness">
+            <option value="indoor-cycling">Indoor Cycling</option>
             <option value="barre">Barre</option>
             <option value="fitness">Fitness</option>
             <option value="meditation">Meditation</option>

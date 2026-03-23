@@ -43,6 +43,7 @@ export const EVENT_TYPES = {
   meditation: { label: "Meditation", slug: "meditation", icon: Brain },
   pilates: { label: "Pilates", slug: "pilates", icon: HeartPulse },
   barre: { label: "Barre", slug: "barre", icon: PersonStanding },
+  "indoor-cycling": { label: "Indoor Cycling", slug: "indoor-cycling", icon: Bike },
 
   // ── Food & Drink
   "food-drink": { label: "Food & Drink", slug: "food-drink", icon: Utensils },
@@ -76,9 +77,11 @@ export const EVENT_TYPE_FILTERS = [
 
 // ── FILTER → SLUG GROUPS ───────────────────────────────────────────
 export const FILTER_TO_TYPES = {
-  events:  ["events","festival","holiday","fundraiser","networking","family","music","comedy","theater","dance","film","open-mic","trivia","games","talks-panels","art"],
+  events:  ["events","festival","holiday","fundraiser","networking","family","music","comedy","theater",
+    "dance","film","open-mic","trivia","games","talks-panels","art"
+  ],
   outdoors: ["outdoors","skiing","hiking","cycling","running","climbing"],
-  fitness: ["fitness","yoga","wellness","meditation","pilates","barre"],
+  fitness: ["fitness","yoga","wellness","meditation","pilates","barre", "indoor-cycling"],
   "food-drink": ["food-drink","wine-tasting","beer-tasting","dinner","brunch","cooking-class","farmers-market"],
   workshops:  ["workshops","pottery","painting","photography","woodworking","jewelry-making","textile-fiber"],
 };
