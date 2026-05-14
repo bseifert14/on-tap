@@ -155,15 +155,8 @@ export default async function handler(req, res) {
 
     if (mode === "search") {
       if (qRaw.length < 2) return res.status(200).json({ data: [] });
-
-      const { data, error } = await supabase.rpc("search_events", {
-        search_term: qRaw,
-        result_limit: parseInt(limit, 10),
-        result_offset: parseInt(offset, 10),
-      });
-
-      if (error) return res.status(500).json({ error: error.message });
-      return res.status(200).json({ data: data ?? [] });
+      const fromDate = (req.query.from ?? "").toString();
+      if (fromDate) query = query.gte("event_date", fromDate);
 
     } else if (mode === "list") {
       const today = new Date().toISOString().split("T")[0];

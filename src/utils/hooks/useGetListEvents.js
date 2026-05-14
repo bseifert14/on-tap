@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
-import { FILTER_TO_TYPES, getTypeInParam } from "../../constants/eventTypes";
+import { getTypeInParam } from "../../constants/eventTypes";
 import useTrackSearch from "../data-tracking/useTrackSearch";
 
 export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 } = {}) {
@@ -16,7 +16,6 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
 
   const trimmed = useMemo(() => search.trim(), [search]);
 
-  // const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
   const typeList = useMemo(() => getTypeInParam(selectedType), [selectedType]);
   const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
 
