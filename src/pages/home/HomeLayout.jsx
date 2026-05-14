@@ -13,12 +13,26 @@ import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
 import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
+import MobileMenu from "../../components/common/MobileMenu";
+import { Funnel } from "lucide-react";
+import MobileFiltersList from "../common/MobileFiltersList";
+
+function getMobileFilters(setMenuOpen, selectedType, setSelectedType) {
+  return (
+    <MobileFiltersList
+      setMenuOpen={setMenuOpen}
+      selectedType={selectedType}
+      setSelectedType={setSelectedType}
+    />
+  );
+}
 
 export default function HomeLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { trackSearch } = useTrackSearch();
 
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("events");
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -99,7 +113,22 @@ export default function HomeLayout() {
         />
 
         <section className={styles.eventsSection}>
-          <h2 className={styles.eventsHeader}>Upcoming</h2>
+          <div className={styles.eventsHeaderContainer}>
+            <h2 className={styles.eventsHeader}>Upcoming</h2>
+
+            {isMobile && (
+              <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
+                <Funnel color="#8A8680" strokeWidth={1.5}  />
+              </button>
+            )}
+            <MobileMenu
+              id="mobile-filter-menu"
+              isOpen={menuOpen}
+              onClose={() => setMenuOpen(false)}
+            >
+              {getMobileFilters(setMenuOpen, selectedType, setSelectedType)}
+            </MobileMenu>
+          </div>
 
           {isLoading && (
             <>

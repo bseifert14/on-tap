@@ -88,9 +88,13 @@ export const FILTER_TO_TYPES = {
 
 // ── HELPERS ────────────────────────────────────────────────────────
 export function getTypeInParam(selectedType) {
-  if (!selectedType || selectedType === "all") return "";
-  const list = FILTER_TO_TYPES[selectedType] ?? null;
-  return Array.isArray(list) && list.length ? list.join(",") : "";
+  if (FILTER_TO_TYPES[selectedType]) {
+    return FILTER_TO_TYPES[selectedType];
+  } else if (EVENT_TYPES.hasOwnProperty(selectedType)) {
+    return [selectedType];
+  } else {
+    return null
+  }
 }
 
 // Look up icon for any slug — used in cards, modals, etc.
