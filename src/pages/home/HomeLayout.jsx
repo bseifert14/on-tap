@@ -21,7 +21,6 @@ function getMobileFilters(setMenuOpen, selectedType, setSelectedType) {
   return (
     <MobileFiltersList
       setMenuOpen={setMenuOpen}
-      selectedType={selectedType}
       setSelectedType={setSelectedType}
     />
   );
