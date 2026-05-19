@@ -124,6 +124,8 @@ export default function HomeLayout() {
               id="mobile-filter-menu"
               isOpen={menuOpen}
               onClose={() => setMenuOpen(false)}
+              variant="bottom"
+              title="Filter By"
             >
               {getMobileFilters(setMenuOpen, selectedType, setSelectedType)}
             </MobileMenu>

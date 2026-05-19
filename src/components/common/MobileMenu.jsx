@@ -8,6 +8,7 @@ export default function MobileMenu({
   title = "Menu",
   width = "70%",
   maxWidth = "360px",
+  variant = "right",
   children
 }) {
   const [mounted, setMounted] = useState(isOpen);
@@ -68,8 +69,8 @@ export default function MobileMenu({
       />
 
       <aside
-        className={`${styles.drawer} ${visible ? styles.drawerOpen : ""}`}
-        style={{ width, maxWidth }}
+        className={`${styles.drawer} ${variant === "bottom" ? styles.drawerBottom : ""} ${visible ? styles.drawerOpen : ""}`}
+        style={variant === "right" ? { width, maxWidth } : undefined}
         onTransitionEnd={handleTransitionEnd}
         role="dialog"
         aria-modal="false"
