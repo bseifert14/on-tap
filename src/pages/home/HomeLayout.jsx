@@ -13,9 +13,9 @@ import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
 import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
-import MobileMenu from "../../components/common/MobileMenu";
 import { Funnel } from "lucide-react";
 import MobileFiltersList from "../common/MobileFiltersList";
+import BottomSheet from "../../components/common/BottomSheet";
 
 function getMobileFilters(setMenuOpen, selectedType, setSelectedType) {
   return (
@@ -120,15 +120,14 @@ export default function HomeLayout() {
                 <Funnel color="#8A8680" strokeWidth={1.5}  />
               </button>
             )}
-            <MobileMenu
+            <BottomSheet
               id="mobile-filter-menu"
               isOpen={menuOpen}
               onClose={() => setMenuOpen(false)}
-              variant="bottom"
-              title="Filter By"
+              height="80vh"
             >
               {getMobileFilters(setMenuOpen, selectedType, setSelectedType)}
-            </MobileMenu>
+            </BottomSheet>
           </div>
 
           {isLoading && (
