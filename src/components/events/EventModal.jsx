@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "../../styles/EventModal.module.css";
-import { ArrowRight, Calendar, CircleArrowRight, MapPin, Share2 } from "lucide-react";
+import { ArrowRight, Calendar, CircleArrowRight, MapPin, Share } from "lucide-react";
 import { formatEventDate, formatEventDateTime, getEventDate } from "../../utils/formatDates";
 import Modal from "../common/Modal";
 import { getAddressURL } from "../../utils/getAddress";
@@ -100,7 +100,7 @@ export default function EventModal({ event, onClose, isLoading, error }) {
           <ArrowRight size={15} strokeWidth={1.5} color="white" />
         </a>
         <button onClick={() => handleOnShareClick(event)} className={styles.footerBtnShare}>
-          <Share2 size={15} strokeWidth={1.5} color="white" />
+          <Share size={15} strokeWidth={1.5} color="white" />
         </button>
       </>
     );
