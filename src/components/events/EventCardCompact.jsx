@@ -27,7 +27,7 @@ export default function EventCardCompact({ event, onSelectEvent }) {
   function getEventLocation() {
     return event_business_name || business_name;
   }
-  console.log(event);
+
   return (
     <button className={styles.card} onClick={() => onSelectEvent?.(event)}>
       <div className={styles.dateBadge}>

@@ -14,17 +14,8 @@ import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
 import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
 import { Funnel } from "lucide-react";
-import MobileFiltersList from "../common/MobileFiltersList";
 import BottomSheet from "../../components/common/BottomSheet";
-
-function getMobileFilters(setMenuOpen, selectedType, setSelectedType) {
-  return (
-    <MobileFiltersList
-      setMenuOpen={setMenuOpen}
-      setSelectedType={setSelectedType}
-    />
-  );
-}
+import MobileFiltersSheet from "../../components/common/MobileFiltersSheet";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -33,6 +24,7 @@ export default function HomeLayout() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("events");
+  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -126,7 +118,15 @@ export default function HomeLayout() {
               onClose={() => setMenuOpen(false)}
               height="80vh"
             >
-              {getMobileFilters(setMenuOpen, selectedType, setSelectedType)}
+              <MobileFiltersSheet
+                selectedType={selectedType}
+                selectedTimeOfDay={selectedTimeOfDay}
+                onApply={(type, timeOfDay) => {
+                  setSelectedType(type);
+                  setSelectedTimeOfDay(timeOfDay);
+                }}
+                onClose={() => setMenuOpen(false)}
+              />
             </BottomSheet>
           </div>
 

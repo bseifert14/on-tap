@@ -55,9 +55,10 @@
 }
 
 .content {
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 0 1rem 1rem;
 }
 
