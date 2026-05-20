@@ -36,13 +36,13 @@ export default function EventFiltersLayout({
       ) : (
         <div className={styles.filterSection}>
           <ViewToggle />
-          <EventFilters activeId={selectedType} onSelect={onTypeChange} />
           <SearchBar
             value={searchValue}
             onChange={onSearchChange}
             onSubmit={onSearchSubmit}
             onClear={onSearchClear}
           />
+          <EventFilters activeId={selectedType} onSelect={onTypeChange} />
         </div>
       )}
     </>

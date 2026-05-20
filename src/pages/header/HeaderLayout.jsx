@@ -3,8 +3,8 @@ import styles from "../../styles/Header.module.css";
 import HeaderLogo from "./HeaderLogo";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
-import MobileMenu from "../../components/common/MobileMenu";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import Drawer from "../../components/common/Drawer";
 
 export default function HeaderLayout({ user, onLogout, onLoginClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,10 +27,11 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
         
       </header>
 
-      <MobileMenu
+      <Drawer
         id="mobile-nav-menu"
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
+        title="Menu"
       >
         <MobileNav
             user={user}
@@ -38,7 +39,7 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
             onLoginClick={onLoginClick}
             setMenuOpen={setMenuOpen}
         />
-      </MobileMenu>
+      </Drawer>
     </>
   );
 }

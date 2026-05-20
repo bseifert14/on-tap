@@ -6,7 +6,7 @@ const FITNESS_FILTERS = [
   { label: "Yoga", value: "yoga" }
 ]
 
-export default function MobileFiltersList({ setMenuOpen, selectedType, setSelectedType }) {
+export default function MobileFiltersList({ setMenuOpen, setSelectedType }) {
   const location = useLocation();
   const dropdownRef = useRef(null);
   

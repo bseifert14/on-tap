@@ -13,19 +13,9 @@ import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
 import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
-import MobileMenu from "../../components/common/MobileMenu";
 import { Funnel } from "lucide-react";
-import MobileFiltersList from "../common/MobileFiltersList";
-
-function getMobileFilters(setMenuOpen, selectedType, setSelectedType) {
-  return (
-    <MobileFiltersList
-      setMenuOpen={setMenuOpen}
-      selectedType={selectedType}
-      setSelectedType={setSelectedType}
-    />
-  );
-}
+import BottomSheet from "../../components/common/BottomSheet";
+import MobileFiltersSheet from "../../components/common/MobileFiltersSheet";
 
 export default function HomeLayout() {
   const location = useLocation();
@@ -34,6 +24,7 @@ export default function HomeLayout() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("events");
+  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -121,13 +112,22 @@ export default function HomeLayout() {
                 <Funnel color="#8A8680" strokeWidth={1.5}  />
               </button>
             )}
-            <MobileMenu
+            <BottomSheet
               id="mobile-filter-menu"
               isOpen={menuOpen}
               onClose={() => setMenuOpen(false)}
+              height="80vh"
             >
-              {getMobileFilters(setMenuOpen, selectedType, setSelectedType)}
-            </MobileMenu>
+              <MobileFiltersSheet
+                selectedType={selectedType}
+                selectedTimeOfDay={selectedTimeOfDay}
+                onApply={(type, timeOfDay) => {
+                  setSelectedType(type);
+                  setSelectedTimeOfDay(timeOfDay);
+                }}
+                onClose={() => setMenuOpen(false)}
+              />
+            </BottomSheet>
           </div>
 
           {isLoading && (

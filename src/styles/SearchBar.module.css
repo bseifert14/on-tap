@@ -46,6 +46,7 @@
 @media (max-width: 767px) {
   .searchBar {
     width: 100%;
+    margin-bottom: 0;
 
     input {
       width: 100%;

@@ -33,6 +33,7 @@
 @media (max-width: 767px) {
   .toggleWrapper {
     width: 100%;
+    margin-bottom: 0;
   }
 }
   
