@@ -94,6 +94,28 @@ export default function HomeLayout() {
     <div>
       <Hero bgImageUrl={bgImageUrl} label={label} />
       <div id="eventSection">
+        <div className={styles.eventsHeaderContainer}>
+          <h2 className={styles.eventsHeader}>Upcoming</h2>
+
+          {isMobile && <ViewToggle iconOnly />}
+          <BottomSheet
+            id="mobile-filter-menu"
+            isOpen={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            height="80vh"
+          >
+            <MobileFiltersSheet
+              selectedType={selectedType}
+              selectedTimeOfDay={selectedTimeOfDay}
+              onApply={(type, timeOfDay) => {
+                setSelectedType(type);
+                setSelectedTimeOfDay(timeOfDay);
+              }}
+              onClose={() => setMenuOpen(false)}
+            />
+          </BottomSheet>
+        </div>
+
         <EventFiltersLayout
           selectedType={selectedType}
           onTypeChange={setSelectedType}
@@ -105,28 +127,7 @@ export default function HomeLayout() {
         />
 
         <section className={styles.eventsSection}>
-          <div className={styles.eventsHeaderContainer}>
-            <h2 className={styles.eventsHeader}>Upcoming</h2>
-
-            {isMobile && <ViewToggle iconOnly />}
-            <BottomSheet
-              id="mobile-filter-menu"
-              isOpen={menuOpen}
-              onClose={() => setMenuOpen(false)}
-              height="80vh"
-            >
-              <MobileFiltersSheet
-                selectedType={selectedType}
-                selectedTimeOfDay={selectedTimeOfDay}
-                onApply={(type, timeOfDay) => {
-                  setSelectedType(type);
-                  setSelectedTimeOfDay(timeOfDay);
-                }}
-                onClose={() => setMenuOpen(false)}
-              />
-            </BottomSheet>
-          </div>
-
+          
           {isLoading && (
             <>
               <EventCardSkeleton />

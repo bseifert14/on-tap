@@ -101,7 +101,7 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 17px 32px;
-    border-radius: 3px;
+    border-radius: 8px;
     text-decoration: none;
     width: fit-content;
     transition: background 0.2s, transform 0.2s;
