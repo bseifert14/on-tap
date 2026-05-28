@@ -44,7 +44,8 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
     return (FILTER_TO_TYPES[draftCategory] ?? [])
       .filter(slug => slug !== draftCategory)
       .map(slug => EVENT_TYPES[slug])
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((a, b) => a.label.localeCompare(b.label));
   }, [draftCategory]);
 
   const handleCategorySelect = (value) => {
@@ -107,7 +108,7 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
           </>
         )}
 
-        <div className={styles.divider} />
+        {/* <div className={styles.divider} />
 
         <div className={styles.section}>
           <p className={styles.sectionLabel}>Time of day</p>
@@ -123,7 +124,7 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
 
       </div>
 
