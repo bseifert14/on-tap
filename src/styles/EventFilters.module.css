@@ -1,12 +1,36 @@
 @import './theme.css';
 
+.filtersWrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 4px;
+  width: 48px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, var(--color-dark), transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, var(--color-dark), transparent);
+}
+
 .filtersContainer {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
-  margin-bottom: 20px;
 }
 
 .filterOption {
@@ -15,7 +39,7 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border-radius: 4px;
+  border-radius: 30px;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -23,7 +47,7 @@
   transition: all 0.2s;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
-  background: transparent;
+  background: var(--color-dark-3);
 }
 
 .active {

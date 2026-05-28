@@ -87,13 +87,26 @@ export const FILTER_TO_TYPES = {
 };
 
 // ── HELPERS ────────────────────────────────────────────────────────
+export function getParentCategory(type) {
+  if (!type || type === "all") return "all";
+  if (FILTER_TO_TYPES[type]) return type;
+  for (const [cat, types] of Object.entries(FILTER_TO_TYPES)) {
+    if (types.includes(type) && type !== cat) return cat;
+  }
+  return "all";
+}
+
 export function getTypeInParam(selectedType) {
+  if (Array.isArray(selectedType)) {
+    const result = selectedType.flatMap(t => getTypeInParam(t) ?? []);
+    return result.length ? result : null;
+  }
   if (FILTER_TO_TYPES[selectedType]) {
     return FILTER_TO_TYPES[selectedType];
   } else if (EVENT_TYPES.hasOwnProperty(selectedType)) {
     return [selectedType];
   } else {
-    return null
+    return null;
   }
 }
 

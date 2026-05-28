@@ -13,8 +13,8 @@ import { PhotoRef } from "../../constants/photoRef";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import { getTimeLabel } from "../../utils/formatDates";
 import useTrackSearch from "../../utils/data-tracking/useTrackSearch";
-import { Funnel } from "lucide-react";
 import BottomSheet from "../../components/common/BottomSheet";
+import ViewToggle from "../../components/ViewToggle";
 import MobileFiltersSheet from "../../components/common/MobileFiltersSheet";
 
 export default function HomeLayout() {
@@ -24,7 +24,7 @@ export default function HomeLayout() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("events");
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
+  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -94,6 +94,28 @@ export default function HomeLayout() {
     <div>
       <Hero bgImageUrl={bgImageUrl} label={label} />
       <div id="eventSection">
+        <div className={styles.eventsHeaderContainer}>
+          <h2 className={styles.eventsHeader}>Upcoming</h2>
+
+          {isMobile && <ViewToggle iconOnly />}
+          <BottomSheet
+            id="mobile-filter-menu"
+            isOpen={menuOpen}
+            onClose={() => setMenuOpen(false)}
+            height="80vh"
+          >
+            <MobileFiltersSheet
+              selectedType={selectedType}
+              selectedTimeOfDay={selectedTimeOfDay}
+              onApply={(type, timeOfDay) => {
+                setSelectedType(type);
+                setSelectedTimeOfDay(timeOfDay);
+              }}
+              onClose={() => setMenuOpen(false)}
+            />
+          </BottomSheet>
+        </div>
+
         <EventFiltersLayout
           selectedType={selectedType}
           onTypeChange={setSelectedType}
@@ -101,35 +123,15 @@ export default function HomeLayout() {
           onSearchChange={setSearchInput}
           onSearchSubmit={handleSearchSubmit}
           onSearchClear={handleSearchClear}
+          onFilterOpen={isMobile ? () => setMenuOpen(true) : undefined}
+          hasActiveSubFilters={
+            (Array.isArray(selectedType) && selectedType.length > 0) ||
+            selectedTimeOfDay.length > 0
+          }
         />
 
         <section className={styles.eventsSection}>
-          <div className={styles.eventsHeaderContainer}>
-            <h2 className={styles.eventsHeader}>Upcoming</h2>
-
-            {isMobile && (
-              <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
-                <Funnel color="#8A8680" strokeWidth={1.5}  />
-              </button>
-            )}
-            <BottomSheet
-              id="mobile-filter-menu"
-              isOpen={menuOpen}
-              onClose={() => setMenuOpen(false)}
-              height="80vh"
-            >
-              <MobileFiltersSheet
-                selectedType={selectedType}
-                selectedTimeOfDay={selectedTimeOfDay}
-                onApply={(type, timeOfDay) => {
-                  setSelectedType(type);
-                  setSelectedTimeOfDay(timeOfDay);
-                }}
-                onClose={() => setMenuOpen(false)}
-              />
-            </BottomSheet>
-          </div>
-
+          
           {isLoading && (
             <>
               <EventCardSkeleton />

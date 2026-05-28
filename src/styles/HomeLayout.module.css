@@ -8,14 +8,13 @@
   font-weight: 700;
   color: var(--color-white);
   letter-spacing: -0.02em;
-  margin-bottom: 20px;
 }
 
 .eventsHeaderContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  padding: 16px 20px 0;
 }
 
  @media (max-width: 767px) {

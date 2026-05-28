@@ -36,4 +36,33 @@
     margin-bottom: 0;
   }
 }
+
+.iconToggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-dark-3);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.iconToggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.iconToggleBtnActive {
+  background: var(--color-dark-2);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
   

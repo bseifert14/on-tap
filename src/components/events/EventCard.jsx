@@ -33,7 +33,7 @@ export default function EventCard({ event, onSelectEvent }) {
 
             <div className={styles.cardBody}>
                 <div className={styles.cardCategory}>
-                    {React.createElement(getIconForSlug(event_type_slug), { size: 15, strokeWidth: 1.5 })}
+                    {React.createElement(getIconForSlug(event_type_slug), { size: 16, strokeWidth: 1.5 })}
                     {event_type}
                 </div>
                 <div className={styles.cardTitle}>{event_name}</div>

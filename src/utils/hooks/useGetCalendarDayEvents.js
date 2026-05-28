@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
-import { FILTER_TO_TYPES } from "../../constants/eventTypes";
+import { getTypeInParam } from "../../constants/eventTypes";
 
 export default function useGetCalendarDayEvents({
   date,
@@ -18,7 +18,7 @@ export default function useGetCalendarDayEvents({
 
   const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
-  const typeList = useMemo(() => FILTER_TO_TYPES[selectedType] ?? null, [selectedType]);
+  const typeList = useMemo(() => getTypeInParam(selectedType), [selectedType]);
   const typeIn = useMemo(() => (typeList ? typeList.join(",") : ""), [typeList]);
 
   useEffect(() => {
