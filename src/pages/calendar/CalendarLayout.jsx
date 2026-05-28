@@ -1,9 +1,11 @@
 import { useState } from "react";
 import CalendarView from "./CalendarView";
 import EventFiltersLayout from "../common/EventFiltersLayout";
+import ViewToggle from "../../components/ViewToggle";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import Hero from "../common/Hero";
 import { PhotoRef } from "../../constants/photoRef";
+import styles from "../../styles/CalendarLayout.module.css";
 
 export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("all");
@@ -27,6 +29,12 @@ export default function CalendarLayout() {
     <div>
       <Hero bgImageUrl={bgImageUrl} label="this month" />
       <div id="eventSection">
+        {isMobile && (
+          <div className={styles.calendarHeader}>
+            <h2 className={styles.calendarHeading}>Calendar</h2>
+            <ViewToggle iconOnly />
+          </div>
+        )}
         <EventFiltersLayout
           selectedType={selectedType}
           onTypeChange={setSelectedType}

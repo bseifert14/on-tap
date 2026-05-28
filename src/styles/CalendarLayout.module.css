@@ -1,0 +1,16 @@
+@import './theme.css';
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+}
+
+.calendarHeading {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.02em;
+}
