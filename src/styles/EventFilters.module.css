@@ -1,12 +1,36 @@
 @import './theme.css';
 
+.filtersWrapper {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  bottom: 4px;
+  width: 48px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, var(--color-dark), transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, var(--color-dark), transparent);
+}
+
 .filtersContainer {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
-  margin-bottom: 20px;
 }
 
 .filterOption {
