@@ -5,6 +5,7 @@ import { Funnel } from "lucide-react";
 import ViewToggle from "../../components/ViewToggle";
 import SearchBar from "../../components/SearchBar";
 import EventFilters from "../../components/events/EventFilters";
+import { getParentCategory } from "../../constants/eventTypes";
 
 export default function EventFiltersLayout({
   selectedType,
@@ -14,8 +15,13 @@ export default function EventFiltersLayout({
   onSearchSubmit,
   onSearchClear,
   onFilterOpen,
+  hasActiveSubFilters = false,
 }) {
   const isMobile = useMediaQuery("(max-width: 767px)");
+
+  const activePillId = Array.isArray(selectedType)
+    ? selectedType.length ? getParentCategory(selectedType[0]) : "all"
+    : selectedType;
 
   return (
     <>
@@ -30,7 +36,7 @@ export default function EventFiltersLayout({
             />
             <ViewToggle />
           </div>
-          <EventFilters activeId={selectedType} onSelect={onTypeChange} />
+          <EventFilters activeId={activePillId} onSelect={onTypeChange} />
         </div>
       ) : (
         <div className={styles.filterSection}>
@@ -44,12 +50,15 @@ export default function EventFiltersLayout({
               />
             </div>
             {onFilterOpen && (
-              <button className={styles.filterIconBtn} onClick={onFilterOpen} aria-label="Open filters">
-                <Funnel size={20} color="#8A8680" strokeWidth={1.5} />
-              </button>
+              <div className={styles.filterIconWrapper}>
+                <button className={styles.filterIconBtn} onClick={onFilterOpen} aria-label="Open filters">
+                  <Funnel size={20} color="#8A8680" strokeWidth={1.5} />
+                </button>
+                {hasActiveSubFilters && <span className={styles.filterBadge} />}
+              </div>
             )}
           </div>
-          <EventFilters activeId={selectedType} onSelect={onTypeChange} />
+          <EventFilters activeId={activePillId} onSelect={onTypeChange} />
         </div>
       )}
     </>

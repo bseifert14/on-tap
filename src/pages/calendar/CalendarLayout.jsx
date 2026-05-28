@@ -11,7 +11,7 @@ import styles from "../../styles/CalendarLayout.module.css";
 
 export default function CalendarLayout() {
   const [selectedType, setSelectedType] = useState("all");
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
+  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,6 +47,10 @@ export default function CalendarLayout() {
           onSearchSubmit={handleSearchSubmit}
           onSearchClear={handleSearchClear}
           onFilterOpen={isMobile ? () => setMenuOpen(true) : undefined}
+          hasActiveSubFilters={
+            (Array.isArray(selectedType) && selectedType.length > 0) ||
+            selectedTimeOfDay.length > 0
+          }
         />
 
         <BottomSheet

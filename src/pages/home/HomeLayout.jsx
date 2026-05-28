@@ -24,7 +24,7 @@ export default function HomeLayout() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("events");
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
+  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -124,6 +124,10 @@ export default function HomeLayout() {
           onSearchSubmit={handleSearchSubmit}
           onSearchClear={handleSearchClear}
           onFilterOpen={isMobile ? () => setMenuOpen(true) : undefined}
+          hasActiveSubFilters={
+            (Array.isArray(selectedType) && selectedType.length > 0) ||
+            selectedTimeOfDay.length > 0
+          }
         />
 
         <section className={styles.eventsSection}>

@@ -16,21 +16,28 @@ function getCategoryForType(type) {
 }
 
 function initCategory(selectedType) {
-  if (!selectedType || selectedType === "all") return "all";
-  if (FILTER_TO_TYPES[selectedType]) return selectedType;
-  return getCategoryForType(selectedType) ?? "all";
+  const first = Array.isArray(selectedType) ? selectedType[0] : selectedType;
+  if (!first || first === "all") return "all";
+  if (FILTER_TO_TYPES[first]) return first;
+  return getCategoryForType(first) ?? "all";
 }
 
-function initSubType(selectedType) {
-  if (!selectedType || selectedType === "all") return null;
-  if (FILTER_TO_TYPES[selectedType]) return null;
-  return selectedType;
+function initSubTypes(selectedType) {
+  if (!selectedType) return [];
+  const types = Array.isArray(selectedType) ? selectedType : [selectedType];
+  return types.filter(t => t && t !== "all" && !FILTER_TO_TYPES[t]);
+}
+
+function toggleItem(arr, value) {
+  return arr.includes(value) ? arr.filter(v => v !== value) : [...arr, value];
 }
 
 export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, onApply, onClose }) {
   const [draftCategory, setDraftCategory] = useState(() => initCategory(selectedType));
-  const [draftSubType, setDraftSubType] = useState(() => initSubType(selectedType));
-  const [draftTimeOfDay, setDraftTimeOfDay] = useState(selectedTimeOfDay ?? null);
+  const [draftSubTypes, setDraftSubTypes] = useState(() => initSubTypes(selectedType));
+  const [draftTimesOfDay, setDraftTimesOfDay] = useState(() =>
+    Array.isArray(selectedTimeOfDay) ? selectedTimeOfDay : selectedTimeOfDay ? [selectedTimeOfDay] : []
+  );
 
   const subTypes = useMemo(() => {
     if (!draftCategory || draftCategory === "all") return [];
@@ -42,20 +49,20 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
 
   const handleCategorySelect = (value) => {
     setDraftCategory(value);
-    setDraftSubType(null);
+    setDraftSubTypes([]);
   };
 
   const handleSubTypeSelect = (value) => {
-    setDraftSubType(prev => prev === value ? null : value);
+    setDraftSubTypes(prev => toggleItem(prev, value));
   };
 
   const handleTimeOfDaySelect = (value) => {
-    setDraftTimeOfDay(prev => prev === value ? null : value);
+    setDraftTimesOfDay(prev => toggleItem(prev, value));
   };
 
   const handleApply = () => {
-    const type = draftSubType ?? draftCategory;
-    onApply(type, draftTimeOfDay);
+    const type = draftSubTypes.length ? draftSubTypes : draftCategory;
+    onApply(type, draftTimesOfDay);
     onClose();
   };
 
@@ -89,7 +96,7 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
                   <button
                     key={slug}
                     type="button"
-                    className={`${styles.chip} ${draftSubType === slug ? styles.chipActive : ""}`}
+                    className={`${styles.chip} ${draftSubTypes.includes(slug) ? styles.chipActive : ""}`}
                     onClick={() => handleSubTypeSelect(slug)}
                   >
                     {label}
@@ -109,7 +116,7 @@ export default function MobileFiltersSheet({ selectedType, selectedTimeOfDay, on
               <button
                 key={value}
                 type="button"
-                className={`${styles.chip} ${draftTimeOfDay === value ? styles.chipActive : ""}`}
+                className={`${styles.chip} ${draftTimesOfDay.includes(value) ? styles.chipActive : ""}`}
                 onClick={() => handleTimeOfDaySelect(value)}
               >
                 {label}

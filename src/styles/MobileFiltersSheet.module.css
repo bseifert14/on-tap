@@ -44,9 +44,11 @@
   transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 
-.chip:hover {
-  background: rgba(192, 57, 43, 0.15);
-  border-color: #c0392b;
+@media (hover: hover) {
+  .chip:hover {
+    background: rgba(192, 57, 43, 0.15);
+    border-color: #c0392b;
+  }
 }
 
 .chipActive {

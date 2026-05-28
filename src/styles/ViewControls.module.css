@@ -145,9 +145,14 @@
       min-width: 0;
     }
 
+    .filterIconWrapper {
+      position: relative;
+      flex-shrink: 0;
+    }
+
     .filterIconBtn {
       width: 48px;
-      flex-shrink: 0;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -155,5 +160,17 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       cursor: pointer;
+    }
+
+    .filterBadge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-red);
+      border: 1.5px solid var(--color-dark);
+      pointer-events: none;
     }
   }
