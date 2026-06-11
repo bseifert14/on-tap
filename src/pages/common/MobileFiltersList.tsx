@@ -1,18 +1,21 @@
-import React, { useRef, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useRef, useEffect } from "react";
 import styles from "../../styles/Header.module.css";
 
 const FITNESS_FILTERS = [
   { label: "Yoga", value: "yoga" }
 ]
 
-export default function MobileFiltersList({ setMenuOpen, setSelectedType }) {
-  const location = useLocation();
-  const dropdownRef = useRef(null);
+interface MobileFiltersListProps {
+  setMenuOpen: (open: boolean) => void;
+  setSelectedType: (type: string) => void;
+}
+
+export default function MobileFiltersList({ setMenuOpen, setSelectedType }: MobileFiltersListProps) {
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setMenuOpen(false);
       }
     }

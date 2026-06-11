@@ -6,18 +6,22 @@ import { CheckCircle } from "lucide-react";
 
 import styles from "../../styles/SetPasswordModal.module.css";
 
-export default function SetPasswordModal({ onClose }) {
+interface SetPasswordModalProps {
+  onClose: () => void;
+}
+
+export default function SetPasswordModal({ onClose }: SetPasswordModalProps) {
   const [pw1, setPw1] = useState("");
   const [pw2, setPw2] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const passwordRequirements = [
-    { label: "Minimum characters 6", test: (pw1) => pw1.length >= 6 },
-    { label: "One uppercase character", test: (pw1) => /[A-Z]/.test(pw1) },
-    { label: "One special character", test: (pw1) => /[^A-Za-z0-9]/.test(pw1) },
-    { label: "One number", test: (pw1) => /[0-9]/.test(pw1) },
-    { label: "Passwords match", test: (pw1, pw2) => pw1 === pw2 && pw1.length > 0 },
+    { label: "Minimum characters 6", test: (pw1: string) => pw1.length >= 6 },
+    { label: "One uppercase character", test: (pw1: string) => /[A-Z]/.test(pw1) },
+    { label: "One special character", test: (pw1: string) => /[^A-Za-z0-9]/.test(pw1) },
+    { label: "One number", test: (pw1: string) => /[0-9]/.test(pw1) },
+    { label: "Passwords match", test: (pw1: string, pw2: string) => pw1 === pw2 && pw1.length > 0 },
   ];
 
   const requirementResults = useMemo(

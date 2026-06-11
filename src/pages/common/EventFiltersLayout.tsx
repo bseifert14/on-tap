@@ -7,6 +7,17 @@ import SearchBar from "../../components/SearchBar";
 import EventFilters from "../../components/events/EventFilters";
 import { getParentCategory } from "../../constants/eventTypes";
 
+interface EventFiltersLayoutProps {
+  selectedType: string | string[];
+  onTypeChange: (type: string | string[]) => void;
+  searchValue: string;
+  onSearchChange: (value: string) => void;
+  onSearchSubmit?: () => void;
+  onSearchClear?: () => void;
+  onFilterOpen?: () => void;
+  hasActiveSubFilters?: boolean;
+}
+
 export default function EventFiltersLayout({
   selectedType,
   onTypeChange,
@@ -16,7 +27,7 @@ export default function EventFiltersLayout({
   onSearchClear,
   onFilterOpen,
   hasActiveSubFilters = false,
-}) {
+}: EventFiltersLayoutProps) {
   const isMobile = useMediaQuery("(max-width: 767px)");
 
   const activePillId = Array.isArray(selectedType)

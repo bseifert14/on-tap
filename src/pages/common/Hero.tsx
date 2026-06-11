@@ -1,7 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import styles from "../../styles/Hero.module.css";
 
-export default function Hero({ bgImageUrl, label }) {
+interface HeroProps {
+  bgImageUrl: string;
+  label: string;
+}
+
+export default function Hero({ bgImageUrl, label }: HeroProps) {
   return (
     <section className={styles.hero}>
       <img
