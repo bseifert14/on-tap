@@ -3,8 +3,11 @@
  * @param {*} params 
  * @returns data in json format or throws an error if the request fails
  */
-export async function fetchEvents(params) {
-    const queryString = new URLSearchParams(params).toString();
+export async function fetchEvents(params: Record<string, string | undefined>) {
+    const filtered = Object.fromEntries(
+      Object.entries(params).filter(([, v]) => v !== undefined)
+    ) as Record<string, string>;
+    const queryString = new URLSearchParams(filtered).toString();
     const res = await fetch(`/api/events?${queryString}`);
     const json = await res.json();
 

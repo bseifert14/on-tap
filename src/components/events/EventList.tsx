@@ -8,7 +8,7 @@ interface EventListProps {
     events: Event[];
     onSelectEvent?: (event: Event) => void;
     currentView: ViewType;
-    selectedType?: string;
+    selectedType?: string | string[];
 }
 
 export default function EventList({ events, onSelectEvent, currentView, selectedType }: EventListProps) {

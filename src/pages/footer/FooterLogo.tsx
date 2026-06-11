@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styles from "../../styles/Footer.module.css";
 
 export default function FooterLogo() {

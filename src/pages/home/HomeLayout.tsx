@@ -23,14 +23,13 @@ export default function HomeLayout() {
   const { trackSearch } = useTrackSearch();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedType, setSelectedType] = useState("events");
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState([]);
+  const [selectedType, setSelectedType] = useState<string | string[]>("events");
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const { events, isLoading, isLoadingMore, hasMore, loadMore, error } = useGetListEvents({
+  const { events, isLoading, isLoadingMore, hasMore, loadMore } = useGetListEvents({
     search: searchTerm,
     selectedType,
     pageSize: 12,
@@ -88,7 +87,7 @@ export default function HomeLayout() {
 
   const bgImageUrl = isMobile ? PhotoRef.MansfieldStars : PhotoRef.StowePanorama;
   const timeLabel = getTimeLabel();
-  const label = timeLabel !== 'undefined' ? timeLabel : 'tonight';
+  const label = timeLabel ?? 'tonight';
 
   return (
     <div>
@@ -106,10 +105,8 @@ export default function HomeLayout() {
           >
             <MobileFiltersSheet
               selectedType={selectedType}
-              selectedTimeOfDay={selectedTimeOfDay}
-              onApply={(type, timeOfDay) => {
-                setSelectedType(type);
-                setSelectedTimeOfDay(timeOfDay);
+              onApply={(type) => {
+                setSelectedType(type ?? "events");
               }}
               onClose={() => setMenuOpen(false)}
             />
@@ -124,10 +121,7 @@ export default function HomeLayout() {
           onSearchSubmit={handleSearchSubmit}
           onSearchClear={handleSearchClear}
           onFilterOpen={isMobile ? () => setMenuOpen(true) : undefined}
-          hasActiveSubFilters={
-            (Array.isArray(selectedType) && selectedType.length > 0) ||
-            selectedTimeOfDay.length > 0
-          }
+          hasActiveSubFilters={(Array.isArray(selectedType) && selectedType.length > 0)}
         />
 
         <section className={styles.eventsSection}>

@@ -3,14 +3,20 @@ import { fetchEvents } from "../api/fetchEvents";
 import { getTypeInParam } from "../../constants/eventTypes";
 import useTrackSearch from "../data-tracking/useTrackSearch";
 
-export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 } = {}) {
+interface UseGetListEventsParams {
+    search?: string;
+    selectedType?: string | string[];
+    pageSize?: number;
+  }
+
+export default function useGetListEvents({ search = "", selectedType = "All", pageSize = 12 }: UseGetListEventsParams = {}) {
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const { trackSearch } = useTrackSearch();
 
@@ -62,7 +68,7 @@ export default function useGetListEvents({ search = "", selectedType = "All", pa
         }
 
       } catch (e) {
-        if (!cancelled) setError(e);
+        if (!cancelled) setError(e instanceof Error ? e : new Error(String(e)));
       } finally {
         if (!cancelled) {
           setIsLoading(false);
