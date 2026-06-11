@@ -6,13 +6,13 @@ import { ArrowRight } from "lucide-react";
 
 export default function Contact() {
     const { form, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
-    const inputClass = (field) =>
+    const inputClass = (field: keyof typeof errors) =>
         `${styles.formInput} ${errors[field] ? styles.inputError : ""}`;
 
   return (
     <>
         <div className={styles.hero}>
-            <div className={styles.heroImg} style={{ "--hero-bg": `url("${PhotoRef.FrascoApresTwo}")` }} />
+            <div className={styles.heroImg} style={{ "--hero-bg": `url("${PhotoRef.FrascoApresTwo}")` } as React.CSSProperties}  />
             <div className={styles.heroContent}>
                 <div className={styles.heroEyebrow}>Contact</div>
                 <h1 className={styles.heroTitle}>Get In Touch</h1>
@@ -69,7 +69,7 @@ export default function Contact() {
                         <textarea
                             id="message"
                             name="message"
-                            rows="7"
+                            rows={7}
                             autoComplete="off"
                             placeholder="Tell us what you're thinking..."
                             className={inputClass("message")}

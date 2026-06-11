@@ -10,8 +10,7 @@ import { PhotoRef } from "../../constants/photoRef";
 import styles from "../../styles/CalendarLayout.module.css";
 
 export default function CalendarLayout() {
-  const [selectedType, setSelectedType] = useState("all");
-  const [selectedTimeOfDay, setSelectedTimeOfDay] = useState([]);
+  const [selectedType, setSelectedType] = useState<string | string[]>("all");
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -47,10 +46,7 @@ export default function CalendarLayout() {
           onSearchSubmit={handleSearchSubmit}
           onSearchClear={handleSearchClear}
           onFilterOpen={isMobile ? () => setMenuOpen(true) : undefined}
-          hasActiveSubFilters={
-            (Array.isArray(selectedType) && selectedType.length > 0) ||
-            selectedTimeOfDay.length > 0
-          }
+          hasActiveSubFilters={(Array.isArray(selectedType) && selectedType.length > 0)}
         />
 
         <BottomSheet
@@ -61,10 +57,8 @@ export default function CalendarLayout() {
         >
           <MobileFiltersSheet
             selectedType={selectedType}
-            selectedTimeOfDay={selectedTimeOfDay}
-            onApply={(type, timeOfDay) => {
-              setSelectedType(type);
-              setSelectedTimeOfDay(timeOfDay);
+            onApply={(type) => {
+              setSelectedType(type ?? "all");
             }}
             onClose={() => setMenuOpen(false)}
           />

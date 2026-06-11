@@ -11,21 +11,27 @@ import useGetCalendarDayEvents from "../../utils/hooks/useGetCalendarDayEvents";
 import EventCardSkeleton from "../../components/events/EventCardSkeleton";
 import LoadMoreButton from "../../components/LoadMoreButton";
 import EventList from "../../components/events/EventList";
+import { Event } from "../../types";
 
-function toDateKeyLocal(d) {
+function toDateKeyLocal(d: Date) {
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, "0");
   const dd = String(d.getDate()).padStart(2, "0");
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function monthRangeKeys(activeStartDate) {
+function monthRangeKeys(activeStartDate: Date) {
   const start = new Date(activeStartDate.getFullYear(), activeStartDate.getMonth(), 1);
   const end = new Date(activeStartDate.getFullYear(), activeStartDate.getMonth() + 1, 0);
   return { startKey: toDateKeyLocal(start), endKey: toDateKeyLocal(end) };
 }
 
-export default function CalendarView({ selectedType, searchTerm }) {
+interface CalendarViewProps {
+  selectedType: string | string[];
+  searchTerm: string;
+}
+
+export default function CalendarView({ selectedType, searchTerm }: CalendarViewProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -61,7 +67,7 @@ export default function CalendarView({ selectedType, searchTerm }) {
     pageSize: 12,
   });
 
-  const handleSelectEvent = (event) => {
+  const handleSelectEvent = (event: Event) => {
     navigate(`/events/${event.id}`, {
       state: { backgroundLocation: location, event },
     });
@@ -71,9 +77,9 @@ export default function CalendarView({ selectedType, searchTerm }) {
     <div className={styles.container}>
       <div className={styles.calendarWrapper}>
         <Calendar
-          onChange={setSelectedDate}
+          onChange={(val) => { if (val instanceof Date) setSelectedDate(val); }}
           value={selectedDate}
-          onActiveStartDateChange={({ activeStartDate }) => setActiveStartDate(activeStartDate)}
+          onActiveStartDateChange={({ activeStartDate }) => { if (activeStartDate) setActiveStartDate(activeStartDate); }}
           tileClassName={({ date, view }) => {
             if (view !== "month") return "";
 

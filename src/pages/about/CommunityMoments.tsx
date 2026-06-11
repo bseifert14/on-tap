@@ -24,7 +24,7 @@ export default function CommunityMoments() {
           <div
             key={i}
             className={styles.tile}
-            style={{ "--bg": `url(${src})` }}
+            style={{ "--bg": `url(${src})` } as React.CSSProperties}
           />
         ))}
       </div>

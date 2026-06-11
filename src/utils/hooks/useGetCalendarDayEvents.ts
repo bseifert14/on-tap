@@ -2,19 +2,26 @@ import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 import { getTypeInParam } from "../../constants/eventTypes";
 
+interface UseGetCalendarDayEventsParams {
+  date?: string;
+  selectedType?: string | string[];
+  searchTerm?: string;
+  pageSize?: number;
+}
+
 export default function useGetCalendarDayEvents({
   date,
   selectedType = "All",
   searchTerm = "",
   pageSize = 12,
-} = {}) {
+}: UseGetCalendarDayEventsParams = {}) {
   const [events, setEvents] = useState([]);
   const [offset, setOffset] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
@@ -57,7 +64,7 @@ export default function useGetCalendarDayEvents({
         setEvents((prev) => (offset === 0 ? data : [...prev, ...data]));
         setHasMore(Array.isArray(data) && data.length === pageSize);
       } catch (e) {
-        if (!cancelled) setError(e);
+        if (!cancelled) setError(e instanceof Error ? e : new Error(String(e)));
       } finally {
         if (!cancelled) {
           setIsLoading(false);

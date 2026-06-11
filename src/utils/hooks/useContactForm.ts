@@ -2,32 +2,46 @@ import { useState } from "react";
 import { supabase } from "../../supabase";
 import { toast } from "sonner";
 
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+  website: string; // honeypot
+}
+
+interface ContactFormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+  form?: string;
+}
+
 export default function useContactForm() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<ContactForm>({
     name: "",
     email: "",
     message: "",
     website: "", // honeypot
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<ContactFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (field, value) => {
+  const handleChange = (field: keyof ContactForm, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
 
     // Optional: clear error as user types
-    if (errors[field]) {
+    if (errors[field as keyof typeof errors]) {
       setErrors((prev) => {
         const next = { ...prev };
-        delete next[field];
+        delete next[field as keyof typeof next];
         return next;
       });
     }
   };
 
   const validate = () => {
-    const next = {};
+    const next: ContactFormErrors = {};
     if (!form.name.trim()) next.name = "Name is required";
     if (!form.email.trim()) next.email = "Email is required";
     else if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = "Enter a valid email";

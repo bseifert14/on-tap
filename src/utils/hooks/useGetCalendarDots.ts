@@ -2,10 +2,17 @@ import { useEffect, useMemo, useState } from "react";
 import { fetchEvents } from "../api/fetchEvents";
 import { getTypeInParam } from "../../constants/eventTypes";
 
-export default function useGetCalendarDots({ start, end, selectedType = "All", searchTerm } = {}) {
-  const [dates, setDates] = useState([]);
+interface UseGetCalendarDotsParams {
+  start?: string;
+  end?: string;
+  selectedType?: string | string[];
+  searchTerm?: string;
+}
+
+export default function useGetCalendarDots({ start, end, selectedType = "All", searchTerm }: UseGetCalendarDotsParams = {}) {
+  const [dates, setDates] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const trimmed = useMemo(() => (searchTerm ?? "").trim(), [searchTerm]);
 
@@ -37,7 +44,7 @@ export default function useGetCalendarDots({ start, end, selectedType = "All", s
 
         if (!cancelled) setDates(dates);
       } catch (e) {
-        if (!cancelled) setError(e);
+        if (!cancelled) setError(e instanceof Error ? e : new Error(String(e)));
       } finally {
         if (!cancelled) setIsLoading(false);
       }

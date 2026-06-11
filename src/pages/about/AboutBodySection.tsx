@@ -13,7 +13,7 @@ export default function AboutBodySection() {
             <div className={styles.pillars}>
                 <div className={styles.pillar}>
                     <div className={styles.pillarHeader}>
-                        <MountainSnow color="#d6252c" />
+                        <MountainSnow color="var(--color-tertiary)" />
                         <h3>Community Vision</h3>
                     </div>
                     <p>
@@ -23,7 +23,7 @@ export default function AboutBodySection() {
 
                 <div className={styles.pillar}>
                     <div className={styles.pillarHeader}>
-                        <Map color="#d6252c" />
+                        <Map color="var(--color-tertiary)" />
                         <h3>The Guide</h3>
                     </div>
                     <p>
@@ -33,7 +33,7 @@ export default function AboutBodySection() {
 
                 <div className={styles.pillar}>
                     <div className={styles.pillarHeader}>
-                        <Heart color="#d6252c" />
+                        <Heart color="var(--color-tertiary)" />
                         <h3>Local Spirit</h3>
                     </div>
                     <p>
