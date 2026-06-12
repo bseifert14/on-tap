@@ -5,7 +5,7 @@ import FooterLogo from './FooterLogo';
 export default function Footer() {
   return (
     <footer>
-      <div className={styles.footer}>
+      <div className={styles.footerStyle}>
         <FooterLogo />
 
         <div className={styles.footerLinks}>
