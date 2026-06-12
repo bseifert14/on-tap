@@ -1,4 +1,4 @@
-.eventModal-overlay {
+.eventModalOverlay {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -7,21 +7,28 @@
     align-items: center;
     z-index: 999;
   }
-  .eventModal-box {
+  .eventModalBox {
     overflow-y: auto;
     max-height: 60vh;
   }
 
   @media (min-width: 1024px) {
-    .eventModal-box {
+    .eventModalBox {
       max-width: 720px;
     }
   }
 
   @media (max-width: 480px) {
-    .eventModal-box {
+    .eventModalBox {
       padding: 1.25rem;
     }
+  }
+
+  .actionButtonContainer {
+    display: flex;
+    justify-content: right;
+    column-gap: '15px';
+    padding-top: '20px';
   }
   
   .eventModal-title {
