@@ -1,4 +1,3 @@
-import styles from "../../styles/About.module.css";
 import AboutHeroSection from './AboutHeroSection';
 import CommunityMoments from './CommunityMoments';
 import CTASection from './CTASection';
