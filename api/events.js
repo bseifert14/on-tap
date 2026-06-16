@@ -37,6 +37,31 @@ function escapeLike(str) {
   return str.replace(/[\\%_]/g, (m) => `\\${m}`);
 }
 
+const SELECT_FIELDS = `
+  id,
+  event_name,
+  event_location,
+  event_date,
+  event_start_timestamp,
+  event_end_timestamp,
+  event_description,
+  event_min_age,
+  event_photo_url,
+  event_photo_path,
+  event_url,
+  event_business_name,
+  businesses ( business_name ),
+  event_types ( id, name, slug )
+`;
+
+const normalizeEvent = (event) => ({
+  ...event,
+  business_name: event.businesses?.business_name ?? null,
+  event_type: event.event_types?.name ?? null,
+  event_type_slug: event.event_types?.slug ?? null,
+  businesses: undefined,
+  event_types: undefined,
+});
 
 async function handleCalendarDots({ supabase, req, res, applyType, applySearch }) {
     const start = parseDateParam(req.query.start, "start");
@@ -71,6 +96,104 @@ async function handleCalendarDots({ supabase, req, res, applyType, applySearch }
     return res.status(200).json({ dates });
 }
 
+async function handleDay({ supabase, req, res, applyType, applySearch, rangeFrom, rangeTo }) {
+  const date = parseDateParam(req.query.date, "date");
+  if (!date) {
+    return res.status(400).json({ error: "date is required for day mode" });
+  }
+
+  let query = supabase.from("events").select(SELECT_FIELDS).eq("event_date", date);
+  query = applyType(query);
+
+  const searched = applySearch(query);
+  if (searched === null) {
+    return res.status(200).json({ data: [] });
+  }
+
+  const { data, error } = await searched
+    .order("event_start_timestamp", { ascending: true, nullsFirst: false })
+    .order("id", { ascending: true })
+    .range(rangeFrom, rangeTo);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
+}
+
+async function handleById({ supabase, req, res }) {
+  const id = (req.query.id ?? "").toString().trim();
+  if (!id) {
+    return res.status(400).json({ error: "id is required for by_id mode" });
+  }
+
+  const { data, error } = await supabase
+    .from("events")
+    .select(SELECT_FIELDS)
+    .eq("id", id)
+    .limit(1);
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  const event = (data ?? [])[0] ?? null;
+  return res.status(200).json({ data: event ? normalizeEvent(event) : null });
+}
+
+async function handleEventList({ supabase, req, res, mode, qRaw, applyType, applySearch, rangeFrom, rangeTo }) {
+  let query = supabase.from("events").select(SELECT_FIELDS);
+
+  if (mode === "search") {
+    if (qRaw.length < 2) {
+      return res.status(200).json({ data: [] });
+    }
+    const fromDate = parseDateParam(req.query.from, "from");
+
+    if (fromDate) {
+      query = query.gte("event_date", fromDate);
+    }
+
+  } else if (mode === "list") {
+    const today = new Date().toISOString().split("T")[0];
+    const fromDate = parseDateParam(req.query.from ?? today, "from");
+    query = query.gte("event_date", fromDate);
+
+  } else if (mode === "calendar") {
+    const start = parseDateParam(req.query.start, "start");
+    const end = parseDateParam(req.query.end, "end");
+
+    if (!start || !end) {
+      return res.status(400).json({ error: "start and end are required for calendar mode" });
+    }
+    query = query.gte("event_date", start).lte("event_date", end);
+
+  } else {
+    return res.status(400).json({ error: `Unknown mode: ${mode}` });
+  }
+
+  query = applyType(query);
+  const searched = applySearch(query);
+  if (searched === null) {
+    return res.status(200).json({ data: [] });
+  }
+
+  query = searched;
+
+  query = query
+    .order("event_date", { ascending: true })
+    .order("event_start_timestamp", { ascending: true, nullsFirst: false })
+    .order("id", { ascending: true })
+    .range(rangeFrom, rangeTo);
+
+  const { data, error } = await query;
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+
+  return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
+}
 
 export default async function handler(req, res) {
   try {
@@ -128,32 +251,6 @@ export default async function handler(req, res) {
       return query;
     };
 
-    const select = `
-      id,
-      event_name,
-      event_location,
-      event_date,
-      event_start_timestamp,
-      event_end_timestamp,
-      event_description,
-      event_min_age,
-      event_photo_url,
-      event_photo_path,
-      event_url,
-      event_business_name,
-      businesses ( business_name ),
-      event_types ( id, name, slug )
-    `;
-
-    const normalizeEvent = (event) => ({
-      ...event,
-      business_name: event.businesses?.business_name ?? null,
-      event_type: event.event_types?.name ?? null,
-      event_type_slug: event.event_types?.slug ?? null,
-      businesses: undefined,
-      event_types: undefined,
-    });
-
     // CALENDAR DOTS
     if (mode === "calendar_dots") {
       return await handleCalendarDots({ supabase, req, res, applyType, applySearch });
@@ -161,105 +258,16 @@ export default async function handler(req, res) {
 
     // DAY
     if (mode === "day") {
-      const date = parseDateParam(req.query.date, "date");
-      if (!date) {
-        return res.status(400).json({ error: "date is required for day mode" });
-      }
-
-      let query = supabase.from("events").select(select).eq("event_date", date);
-      query = applyType(query);
-      const searched = applySearch(query);
-      
-      if (searched === null) {
-        return res.status(200).json({ data: [] });
-      }
-
-      query = searched;
-
-      query = query
-        .order("event_start_timestamp", { ascending: true, nullsFirst: false })
-        .order("id", { ascending: true })
-        .range(rangeFrom, rangeTo);
-
-      const { data, error } = await query;
-      if (error) {
-        return res.status(500).json({ error: error.message });
-      }
-
-      return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
+      return await handleDay({ supabase, req, res, applyType, applySearch, rangeFrom, rangeTo });
     }
 
     // BY ID
     if (mode === "by_id") {
-      const id = (req.query.id ?? "").toString().trim();
-      if (!id) {
-        return res.status(400).json({ error: "id is required for by_id mode" });
-      }
-
-      const { data, error } = await supabase
-        .from("events")
-        .select(select)
-        .eq("id", id)
-        .limit(1);
-
-      if (error) {
-        return res.status(500).json({ error: error.message });
-      }
-
-      const event = (data ?? [])[0] ?? null;
-      return res.status(200).json({ data: event ? normalizeEvent(event) : null });
+      return await handleById({ supabase, req, res });
     }
 
     // LIST / SEARCH / CALENDAR
-    let query = supabase.from("events").select(select);
-
-    if (mode === "search") {
-      if (qRaw.length < 2) {
-        return res.status(200).json({ data: [] });
-      }
-      const fromDate = parseDateParam(req.query.from, "from");
-
-      if (fromDate) {
-        query = query.gte("event_date", fromDate);
-      }
-
-    } else if (mode === "list") {
-      const today = new Date().toISOString().split("T")[0];
-      const fromDate = parseDateParam(req.query.from ?? today, "from");
-      query = query.gte("event_date", fromDate);
-
-    } else if (mode === "calendar") {
-      const start = parseDateParam(req.query.start, "start");
-      const end = parseDateParam(req.query.end, "end");
-
-      if (!start || !end) {
-        return res.status(400).json({ error: "start and end are required for calendar mode" });
-      }
-      query = query.gte("event_date", start).lte("event_date", end);
-
-    } else {
-      return res.status(400).json({ error: `Unknown mode: ${mode}` });
-    }
-
-    query = applyType(query);
-    const searched = applySearch(query);
-    if (searched === null) {
-      return res.status(200).json({ data: [] });
-    }
-
-    query = searched;
-
-    query = query
-      .order("event_date", { ascending: true })
-      .order("event_start_timestamp", { ascending: true, nullsFirst: false })
-      .order("id", { ascending: true })
-      .range(rangeFrom, rangeTo);
-
-    const { data, error } = await query;
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
-    return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
+    return await handleEventList({ supabase, req, res, mode, qRaw, applyType, applySearch, rangeFrom, rangeTo });
   } catch (err) {
     if (err?.message?.startsWith("Invalid mode:") || err?.message?.includes("must be YYYY-MM-DD")) {
       return res.status(400).json({ error: err.message });
