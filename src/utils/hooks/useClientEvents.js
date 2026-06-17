@@ -20,7 +20,6 @@ export default function useClientEvents(userId) {
   const getSearchableText = (event) =>
     [
       event.event_name,
-      event.business_name,
       event.event_business_name,
       event.event_location,
       event.event_description,
