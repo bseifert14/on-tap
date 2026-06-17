@@ -37,6 +37,10 @@ function escapeLike(str) {
   return str.replace(/[\\%_]/g, (m) => `\\${m}`);
 }
 
+function handleDatabaseError(error) {
+  return { status: 500, message: error?.message ?? "Database error" };
+}
+
 const SELECT_FIELDS = `
   id,
   event_name,
@@ -89,7 +93,8 @@ async function handleCalendarDots({ supabase, req, res, applyType, applySearch }
     const { data, error } = await query.order("event_date", { ascending: true });
 
     if (error) {
-        return res.status(500).json({ error: error.message });
+      const { status, message } = handleDatabaseError(error);
+      return res.status(status).json({ error: message });
     }
 
     const dates = Array.from(new Set((data ?? []).map((row) => row.event_date)));
@@ -116,7 +121,8 @@ async function handleDay({ supabase, req, res, applyType, applySearch, rangeFrom
     .range(rangeFrom, rangeTo);
 
   if (error) {
-    return res.status(500).json({ error: error.message });
+    const { status, message } = handleDatabaseError(error);
+    return res.status(status).json({ error: message });
   }
 
   return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
@@ -132,14 +138,18 @@ async function handleById({ supabase, req, res }) {
     .from("events")
     .select(SELECT_FIELDS)
     .eq("id", id)
-    .limit(1);
+    .maybeSingle();
 
   if (error) {
-    return res.status(500).json({ error: error.message });
+    const { status, message } = handleDatabaseError(error);
+    return res.status(status).json({ error: message });
   }
 
-  const event = (data ?? [])[0] ?? null;
-  return res.status(200).json({ data: event ? normalizeEvent(event) : null });
+  if (!data) {
+    return res.status(404).json({ error: "Event not found" });
+  }
+
+  return res.status(200).json({ data: normalizeEvent(data) });
 }
 
 async function handleEventList({ supabase, req, res, mode, qRaw, applyType, applySearch, rangeFrom, rangeTo }) {
@@ -189,7 +199,8 @@ async function handleEventList({ supabase, req, res, mode, qRaw, applyType, appl
 
   const { data, error } = await query;
   if (error) {
-    return res.status(500).json({ error: error.message });
+    const { status, message } = handleDatabaseError(error);
+    return res.status(status).json({ error: message });
   }
 
   return res.status(200).json({ data: (data ?? []).map(normalizeEvent) });
