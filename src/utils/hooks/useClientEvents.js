@@ -17,6 +17,21 @@ export default function useClientEvents(userId) {
 
   const EVENTS_PER_PAGE = 10;
 
+  const getSearchableText = (event) =>
+    [
+      event.event_name,
+      event.business_name,
+      event.event_business_name,
+      event.event_location,
+      event.event_description,
+      event.event_type,
+      event.event_type_slug,
+      event.event_date,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
   useEffect(() => {
     if (userId) loadEvents();
   }, [userId, showPastEvents]);
@@ -55,8 +70,19 @@ export default function useClientEvents(userId) {
     setIsLoading(false);
   };
 
+  const searchTerms = search
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
   const filtered = events
-    .filter((e) => e.event_name.toLowerCase().includes(search.toLowerCase()))
+    .filter((e) => {
+      if (searchTerms.length === 0) return true;
+
+      const searchableText = getSearchableText(e);
+      return searchTerms.every((term) => searchableText.includes(term));
+    })
     .filter(
       (e) =>
         eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type_slug)
