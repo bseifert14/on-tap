@@ -195,7 +195,9 @@
   .modalBody {
     flex-grow: 1;
     min-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
   }
