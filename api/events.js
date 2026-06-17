@@ -167,7 +167,7 @@ async function handleEventList({ supabase, req, res, mode, qRaw, applyType, appl
 
   } else if (mode === "list") {
     const today = new Date().toISOString().split("T")[0];
-    const fromDate = parseDateParam(req.query.from ?? today, "from");
+    const fromDate = parseDateParam(req.query.from, "from") || today;
     query = query.gte("event_date", fromDate);
 
   } else if (mode === "calendar") {
@@ -217,7 +217,7 @@ export default async function handler(req, res) {
     const rangeFrom = offset;
     const rangeTo = offset + limit - 1;
 
-    const qRaw = decodeURIComponent((req.query.q ?? "").toString().trim()).replace(/\+/g, " ");
+    const qRaw = (req.query.q ?? "").toString().trim();
 
     const typeInRaw = (req.query.type_in ?? "").toString().trim();
     const typeInList = typeInRaw ? typeInRaw.split(",").map((s) => s.trim()).filter(Boolean) : null;
