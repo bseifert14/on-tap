@@ -5,29 +5,30 @@ import DeleteModal from "../../components/modals/DeleteModal";
 import UserEventTable from "./UserEventTable";
 import TableActions from "./TableActions";
 import Banner from "../../components/common/Banner";
-import useClientData from "../../utils/hooks/useClientData";
 import useClientEventsModal from "../../utils/hooks/useClientEventsModal";
 import TableSkeleton from "../../components/TableSkeleton";
+import { useBusinessProfile } from "../../utils/hooks/useBusinessProfile";
+import useClientEvents from "../../utils/hooks/useClientEvents";
 
 export default function ProfileEvents({ user }) {
+  const { business } = useBusinessProfile(user?.id);
   const {
-    business,
-    events,
-    total,
-    currentPage,
-    totalPages,
-    setCurrentPage,
-    search,
-    setSearch,
-    eventTypeFilter,
-    setEventTypeFilter,
-    eventDateFilter,
-    setEventDateFilter,
-    showPastEvents,
-    setShowPastEvents,
-    loadEvents,
-    isLoading
-  } = useClientData(user?.id);
+      events,
+      total,
+      totalPages,
+      currentPage,
+      setCurrentPage,
+      search,
+      setSearch,
+      eventTypeFilter,
+      setEventTypeFilter,
+      eventDateFilter,
+      setEventDateFilter,
+      showPastEvents,
+      setShowPastEvents,
+      loadEvents,
+      isLoading
+    } = useClientEvents(user?.id);
 
   const {
     editingEvent,
