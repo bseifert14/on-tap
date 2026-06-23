@@ -108,6 +108,53 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
           </div>
         </div>
 
+        <div className={styles.recurringSection}>
+          <div className={styles.recurringHeader}>
+            <div>
+              <div className={styles.recurringLabel}>Recurring event</div>
+              <div className={styles.recurringSubtitle}>Repeats on a set schedule</div>
+            </div>
+            <label className={styles.toggleSwitch}>
+              <input
+                type="checkbox"
+                checked={form.is_recurring}
+                onChange={(e) => handleChange("is_recurring", e.target.checked)}
+              />
+              <span className={styles.toggleSlider} />
+            </label>
+          </div>
+
+          {form.is_recurring && (
+            <>
+              <hr className={styles.recurringDivider} />
+              <div className={styles.recurringFields}>
+                <div className={styles.recurringFieldGroup}>
+                  <div className={styles.recurringFieldLabel}>Repeats</div>
+                  <select
+                    className={styles["eventModal-input"]}
+                    value={form.recurrence_frequency}
+                    onChange={(e) => handleChange("recurrence_frequency", e.target.value)}
+                  >
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="biweekly">Biweekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </div>
+                <div className={styles.recurringFieldGroup}>
+                  <div className={styles.recurringFieldLabel}>End Date</div>
+                  <input
+                    type="date"
+                    className={styles["eventModal-input"]}
+                    value={form.recurrence_end_date}
+                    onChange={(e) => handleChange("recurrence_end_date", e.target.value)}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
         <FormLabel label="Description" name="event_description" isRequired />
         <textarea
           className={styles["eventModal-textarea"]}

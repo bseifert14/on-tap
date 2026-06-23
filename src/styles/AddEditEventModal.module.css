@@ -186,4 +186,97 @@ select.eventModal-input {
   .timeFieldItem {
     flex-basis: 50%
   }
+
+.recurringSection {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: var(--color-dark-3);
+}
+
+.recurringHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recurringLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.recurringSubtitle {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.recurringDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 14px 0;
+}
+
+.recurringFields {
+  display: flex;
+  gap: 16px;
+}
+
+.recurringFieldGroup {
+  flex: 1;
+}
+
+.recurringFieldLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggleSlider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: var(--color-white);
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.toggleSwitch input:checked + .toggleSlider {
+  background: var(--color-red);
+}
+
+.toggleSwitch input:checked + .toggleSlider::before {
+  transform: translateX(20px);
+}
   
