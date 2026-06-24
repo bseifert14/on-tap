@@ -129,7 +129,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
               <hr className={styles.recurringDivider} />
               <div className={styles.recurringFields}>
                 <div className={styles.recurringFieldGroup}>
-                  <div className={styles.recurringFieldLabel}>Repeats</div>
+                  <FormLabel label="Frequency" name="recurrence_frequency" />
                   <select
                     className={styles.eventModalInput}
                     value={form.recurrence_frequency}
@@ -142,11 +142,13 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
                   </select>
                 </div>
                 <div className={styles.recurringFieldGroup}>
-                  <div className={styles.recurringFieldLabel}>End Date</div>
+                  <FormLabel label="End Date" name="recurrence_end_date" isRequired />
                   <input
                     type="date"
                     className={styles.eventModalInput}
                     value={form.recurrence_end_date}
+                    required={form.is_recurring}
+                    min={form.event_date || undefined}
                     onChange={(e) => handleChange("recurrence_end_date", e.target.value)}
                   />
                 </div>
