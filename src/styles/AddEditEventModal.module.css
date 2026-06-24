@@ -31,22 +31,15 @@
     padding-top: '20px';
   }
   
-  .eventModal-title {
+  .eventModalTitle {
     margin-bottom: 16px;
     font-size: 1.25rem;
     font-weight: 600;
   }
   
-  .eventModal-label {
-    margin-top: 12px;
-    margin-bottom: 4px;
-    font-weight: 500;
-    display: block;
-  }
-  
-.eventModal-input,
-.eventModal-textarea,
-select.eventModal-input {
+.eventModalInput,
+.eventModalTextArea,
+select.eventModalInput {
   width: 100%;
   padding: 10px 14px;
   border-radius: 8px;
@@ -61,44 +54,35 @@ select.eventModal-input {
   -webkit-appearance: none;
 }
 
-.eventModal-input::placeholder {
+.eventModalInput::placeholder {
   color: rgba(255, 255, 255, 0.2);
 }
 
-.eventModal-input:focus,
-.eventModal-textarea:focus {
+.eventModalInput:focus,
+.eventModalTextArea:focus {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.eventModal-textarea {
+.eventModalTextArea {
   min-height: 100px;
   resize: vertical;
   line-height: 1.6;
 }
 
-.eventModal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-white);
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
-}
-
-.eventModal-note {
+.eventModalNote {
   font-size: 11px;
   color: var(--color-text-muted);
   margin-top: -8px;
   margin-bottom: 12px;
 }
 
-.eventModal-radioGroup {
+.eventModalRadioGroup {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-.eventModal-radioGroup label {
+.eventModalRadioGroup label {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -107,12 +91,12 @@ select.eventModal-input {
   cursor: pointer;
 }
 
-.eventModal-radioGroup input[type="radio"] {
+.eventModalRadioGroup input[type="radio"] {
   accent-color: var(--color-red);
   cursor: pointer;
 }
 
-.eventModal-dropzone {
+.eventModalDropzone {
   width: 100%;
   padding: 20px;
   border: 1px dashed rgba(255, 255, 255, 0.15);
@@ -126,18 +110,18 @@ select.eventModal-input {
   transition: border-color 0.2s, color 0.2s;
 }
 
-.eventModal-dropzone:hover {
+.eventModalDropzone:hover {
   border-color: rgba(255, 255, 255, 0.3);
   color: var(--color-white);
 }
 
-.eventModal-actions {
+.eventModalActions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
 
-.eventModal-buttonPrimary {
+.eventModalButtonPrimary {
   padding: 11px 24px;
   background: var(--color-red);
   color: var(--color-white);
@@ -152,11 +136,11 @@ select.eventModal-input {
   transition: background 0.2s;
 }
 
-.eventModal-buttonPrimary:hover {
+.eventModalButtonPrimary:hover {
   background: var(--color-red-light);
 }
 
-.eventModal-buttonSecondary {
+.eventModalButtonSecondary {
   padding: 11px 24px;
   background: transparent;
   color: var(--color-text-muted);
@@ -171,7 +155,7 @@ select.eventModal-input {
   transition: all 0.2s;
 }
 
-.eventModal-buttonSecondary:hover {
+.eventModalButtonSecondary:hover {
   border-color: rgba(255, 255, 255, 0.2);
   color: var(--color-white);
 }
