@@ -81,6 +81,13 @@ select.input {
   background: var(--color-red-light);
 }
 
+.buttonPrimary:disabled,
+.buttonPrimary:disabled:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
+  cursor: not-allowed;
+}
+
 .buttonSecondary {
   padding: 11px 24px;
   background: transparent;
@@ -114,5 +121,42 @@ select.input {
 }
 
 .linkButton:hover {
+  color: var(--color-white);
+}
+
+.helperText {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.inputWithIcon {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.inputWithIcon > .input {
+  margin-bottom: 0;
+  padding-right: 42px;
+}
+
+.inputIconButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.15s;
+}
+
+.inputIconButton:hover {
   color: var(--color-white);
 }

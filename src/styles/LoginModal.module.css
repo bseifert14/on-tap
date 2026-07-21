@@ -19,13 +19,6 @@
   padding: 0 2px;
 }
 
-.resetHelperText {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  margin: 0 0 12px 0;
-  line-height: 1.5;
-}
-
 .resetSuccessText {
   font-size: 14px;
   color: var(--color-white);

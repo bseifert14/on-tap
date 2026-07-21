@@ -120,7 +120,7 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                 />
-                <p className={styles.resetHelperText}>
+                <p className={formStyles.helperText}>
                   We&apos;ll email you a link to reset your password.
                 </p>
               </>
