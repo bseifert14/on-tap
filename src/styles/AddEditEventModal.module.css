@@ -32,47 +32,6 @@
   }
   
 
-  .eventModalTitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--color-white);
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
-  
-.eventModalInput,
-.eventModalTextArea,
-select.eventModalInput {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: var(--color-dark-3);
-  color: var(--color-white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  margin-bottom: 12px;
-  outline: none;
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
-
-.eventModalInput::placeholder {
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.eventModalInput:focus,
-.eventModalTextArea:focus {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.eventModalTextArea {
-  min-height: 100px;
-  resize: vertical;
-  line-height: 1.6;
-}
-
 .eventModalNote {
   font-size: 11px;
   color: var(--color-text-muted);
@@ -119,52 +78,7 @@ select.eventModalInput {
   color: var(--color-white);
 }
 
-.eventModalActions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.eventModalButtonPrimary {
-  padding: 11px 24px;
-  background: var(--color-red);
-  color: var(--color-white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.eventModalButtonPrimary:hover {
-  background: var(--color-red-light);
-}
-
-.eventModalButtonSecondary {
-  padding: 11px 24px;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.eventModalButtonSecondary:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--color-white);
-}
-  
-  .timeFieldContainer {
+.timeFieldContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

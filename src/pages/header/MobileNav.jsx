@@ -9,7 +9,7 @@ const NAV_ELEMENTS = [
   { to: "/contact", label: "Contact Us" }
 ]
 
-export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen }) {
+export default function MobileNav({ user, onLogout, setMenuOpen }) {
   const location = useLocation();
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
@@ -17,11 +17,6 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
   const handleCloseAndLogout = () => {
     setMenuOpen(false);
     onLogout();
-  };
-
-  const handleLoginClick = () => {
-    setMenuOpen(false);
-    onLoginClick();
   };
 
   useEffect(() => {
@@ -49,22 +44,20 @@ export default function MobileNav({ user, onLogout, onLoginClick, setMenuOpen })
             </Link>
         ))}
 
-        {/* {isLoggedIn ? (
+        {isLoggedIn && (
             <>
-            <Link
-                to="/profile"
-                onClick={() => setMenuOpen(false)}
-                className={
-                    location.pathname === "/profile" ? styles.mobileNavLinkActive : ""
-                }
-            >
-                Profile
-            </Link>
-            <button onClick={handleCloseAndLogout}>Log Out</button>
+              <Link
+                  to="/profile"
+                  onClick={() => setMenuOpen(false)}
+                  className={
+                      location.pathname === "/profile" ? styles.mobileNavLinkActive : ""
+                  }
+              >
+                  Profile
+              </Link>
+              <button onClick={handleCloseAndLogout}>Log Out</button>
             </>
-        ) : (
-            <button onClick={handleLoginClick}>Log In</button>
-        )} */}
+        )}
       </div>
   );
 }

@@ -6,7 +6,7 @@ import MobileNav from "./MobileNav";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import Drawer from "../../components/common/Drawer";
 
-export default function HeaderLayout({ user, onLogout, onLoginClick }) {
+export default function HeaderLayout({ user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useMediaQuery();
 
@@ -15,7 +15,7 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
       <header className={styles.header}>
         <HeaderLogo />
 
-        <Nav user={user} onLogout={onLogout} onLoginClick={onLoginClick} />
+        <Nav user={user} onLogout={onLogout} />
 
         {isMobile && (
           <button className={styles.hamburger} onClick={() => setMenuOpen(true)}>
@@ -36,7 +36,6 @@ export default function HeaderLayout({ user, onLogout, onLoginClick }) {
         <MobileNav
             user={user}
             onLogout={onLogout}
-            onLoginClick={onLoginClick}
             setMenuOpen={setMenuOpen}
         />
       </Drawer>

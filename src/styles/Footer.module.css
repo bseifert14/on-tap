@@ -67,6 +67,18 @@
       color: var(--color-white);
     }
   }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    transition: color 0.2s;
+    
+    &:hover {
+      color: var(--color-white);
+    }
+  }
 }
 
 .footerCopy {
