@@ -28,6 +28,7 @@ export default function PasswordInput({ id, value, onChange, required, disabled,
             type="button"
             className={styles.inputIconButton}
             onClick={onShowPasswordToggle}
+            disabled={disabled || !onShowPasswordToggle}
             aria-label={showPassword ? "Hide password" : "Show password"}
         >
             {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}

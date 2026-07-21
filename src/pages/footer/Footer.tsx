@@ -20,9 +20,21 @@ export default function Footer({ user, onLoginClick, onLogout }: FooterProps) {
           <a href="#">Terms</a>
           <Link to="/contact">Contact</Link>
           {user ? (
-            <a href="#" onClick={(e) => { e.preventDefault(); onLogout(); }}>Log Out</a>
+            <button
+               type="button"
+               onClick={onLogout}
+               aria-label="Log out"
+             >
+              Log Out
+             </button>
           ) : (
-            <a href="#" onClick={(e) => { e.preventDefault(); onLoginClick(); }}>Log In</a>
+            <button
+               type="button"
+               onClick={onLoginClick}
+               aria-label="Log In"
+             >
+              Log In
+             </button>
           )}
         </div>
 

@@ -91,11 +91,8 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
             <FormLabel label="Password" name="password" isRequired />
             <PasswordInput
               id="password"
-              type="password"
-              className={formStyles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
               showPassword={showPassword}
               onShowPasswordToggle={() => setShowPassword((prev) => !prev)}
             />
