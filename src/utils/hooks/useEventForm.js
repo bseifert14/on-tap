@@ -1,4 +1,3 @@
-// hooks/useEventForm.js
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../../supabase";
 import { toast } from "sonner";
@@ -6,6 +5,32 @@ import resizeImageIfNeeded from "../resizeImageIfNeeded";
 import { sanitizeUrl } from "../sanitizeUrl";
 import { formatStartTime } from "../formatDates";
 import { uploadOrReuseEventPhoto } from "../uploadOrReuseEventPhoto";
+
+function generateOccurrences(payload, form) {
+  const occurrences = [];
+  const current = new Date(form.event_date);
+  const end = new Date(form.recurrence_end_date);
+  const stepDays = { daily: 1, weekly: 7, biweekly: 14 };
+  
+  for (; current <= end;) {
+    const dateStr = current.toISOString().split("T")[0];
+
+    occurrences.push({
+      ...payload,
+      event_date: dateStr,
+      event_start_timestamp: form.event_start_timestamp ? `${dateStr}T${form.event_start_timestamp}:00` : null,
+      event_end_timestamp: form.event_end_timestamp ? `${dateStr}T${form.event_end_timestamp}:00` : null,
+    });
+
+    if (form.recurrence_frequency === "monthly") {
+      current.setMonth(current.getMonth() + 1);
+    } else {
+      current.setDate(current.getDate() + stepDays[form.recurrence_frequency]);
+    }
+  }
+
+  return occurrences;
+}
 
 export default function useEventForm(user, event, onSave, business) {
   const [form, setForm] = useState({
@@ -20,6 +45,9 @@ export default function useEventForm(user, event, onSave, business) {
     event_url: "",
     event_photo_url: "",
     event_photo_path: "",
+    is_recurring: false,
+    recurrence_frequency: "weekly",
+    recurrence_end_date: "",
     is_kid_friendly: true,
     is_18_plus: false,
     is_21_plus: false,
@@ -53,6 +81,9 @@ export default function useEventForm(user, event, onSave, business) {
         is_kid_friendly: event.is_kid_friendly ?? true,
         is_18_plus: event.is_18_plus ?? false,
         is_21_plus: event.is_21_plus ?? false,
+        is_recurring: event.is_recurring ?? false,
+        recurrence_frequency: event.recurrence_frequency || "weekly",
+        recurrence_end_date: event.recurrence_end_date || ""
       });
     }
   }, [event]);
@@ -78,6 +109,16 @@ export default function useEventForm(user, event, onSave, business) {
   };
 
   const handleSubmit = async () => {
+    if (form.is_recurring && !form.recurrence_end_date) {
+      toast.error("Recurring events require an end date.");
+      return;
+    }
+
+    if (form.is_recurring && form.recurrence_end_date < form.event_date) {
+      toast.error("Recurrence end date must be on or after the event date.");
+      return;
+    }
+
     let photoPath = form.event_photo_path || null;
 
     if (selectedFile) {
@@ -119,22 +160,28 @@ export default function useEventForm(user, event, onSave, business) {
 
     const eventBusinessName = form.event_business_name || business?.business_name;
     const eventLocation = form.event_location || `${business?.street_address} ${business?.city}, ${business?.state} ${business?.zipcode}`;
+    const recurrenceId = form.is_recurring ? crypto.randomUUID() : null;
 
     const payload = {
       ...rest,
       event_location: eventLocation,
       event_business_name: eventBusinessName,
-      event_type_id: typeRow.id,          // ← UUID from event_types table
+      event_type_id: typeRow.id,
       event_url: cleanUrl || null,
       event_start_timestamp: fullStart,
       event_end_timestamp: fullEnd,
       created_by: user.id,
       event_photo_path: photoPath || null,
+      recurrence_id: recurrenceId,
+      recurrence_frequency: form.is_recurring ? form.recurrence_frequency : null,
+      recurrence_end_date: form.is_recurring ? form.recurrence_end_date : null,
     };
 
+    const rows = form.is_recurring ? generateOccurrences(payload, form) : [payload];
+
     const result = event
-      ? await supabase.from("events").update(payload).eq("id", event.id)
-      : await supabase.from("events").insert(payload);
+      ? await supabase.from("events").update(rows[0]).eq("id", event.id)
+      : await supabase.from("events").insert(rows);
 
     if (result.error) {
       console.error(result.error);
