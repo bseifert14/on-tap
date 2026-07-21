@@ -115,7 +115,11 @@ export default function App() {
         )}
       </div>
 
-      <Footer />
+      <Footer
+        user={user}
+        onLoginClick={() => setShowLogin(true)}
+        onLogout={() => setShowLogoutConfirm(true)}
+      />
     </div>
   );
 }

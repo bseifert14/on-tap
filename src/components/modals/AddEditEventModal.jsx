@@ -1,4 +1,5 @@
 import styles from "../../styles/AddEditEventModal.module.css";
+import formStyles from "../../styles/common/forms.module.css";
 import { formatTime, generateTimeOptions } from "../../utils/formatDates";
 import useEventForm from "../../utils/hooks/useEventForm";
 import Modal from "../common/Modal";
@@ -17,11 +18,11 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
   const Footer = () => {
     return (
-      <div className={styles.eventModalActions}>
-        <button className={styles.eventModalButtonPrimary} onClick={handleSubmit}>
+      <div className={formStyles.actions}>
+        <button className={formStyles.buttonPrimary} onClick={handleSubmit}>
           Save
         </button>
-        <button className={styles.eventModalButtonSecondary} onClick={onClose}>
+        <button className={formStyles.buttonSecondary} onClick={onClose}>
           Cancel
         </button>
       </div>
@@ -35,20 +36,20 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
       onClose={onClose}
       footer={<Footer />}
     >
-      <h3 className={styles.eventModalTitle}>
+      <h3 className={formStyles.title}>
         {event ? "Edit Event" : "Add Event"}
       </h3>
       <div>
         <FormLabel label="Event Name" name="event_name" isRequired />
         <input
-          className={styles.eventModalInput}
+          className={formStyles.input}
           value={form.event_name}
           onChange={(e) => handleChange("event_name", e.target.value)}
         />
 
         <FormLabel label="Event Type" name="event_type" isRequired />
         <select
-          className={styles.eventModalInput}
+          className={formStyles.input}
           value={form.event_type}
           onChange={(e) => handleChange("event_type", e.target.value)}
         >
@@ -57,7 +58,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
         <FormLabel label="Event Address" name="event_location" isRequired />
         <input
-          className={styles.eventModalInput}
+          className={formStyles.input}
           value={form.event_location}
           placeholder={defaultAddress}
           onChange={(e) => handleChange("event_location", e.target.value)}
@@ -65,7 +66,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
         <FormLabel label="Event Business Name" name="event_business_name" isRequired />
         <input
-          className={styles.eventModalInput}
+          className={formStyles.input}
           value={form.event_business_name}
           placeholder={business.business_name}
           onChange={(e) => handleChange("event_business_name", e.target.value)}
@@ -73,7 +74,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
         <FormLabel label="Event Date" name="event_date" isRequired />
         <input
-          className={styles.eventModalInput}
+          className={formStyles.input}
           type="date"
           value={form.event_date}
           onChange={(e) => handleChange("event_date", e.target.value)}
@@ -83,7 +84,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
           <div className={styles.timeFieldItem}>
             <FormLabel label="Start Time" name="event_start_timestamp" isRequired />
             <select
-              className={styles.eventModalInput}
+              className={formStyles.input}
               value={form.event_start_timestamp}
               onChange={(e) => handleChange("event_start_timestamp", e.target.value)}
             >
@@ -96,7 +97,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
           <div className={styles.timeFieldItem}>
             <FormLabel label="End Time" name="event_end_timestamp" />
             <select
-              className={styles.eventModalInput}
+              className={formStyles.input}
               value={form.event_end_timestamp}
               onChange={(e) => handleChange("event_end_timestamp", e.target.value)}
             >
@@ -131,7 +132,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
                 <div className={styles.recurringFieldGroup}>
                   <FormLabel label="Frequency" name="recurrence_frequency" />
                   <select
-                    className={styles.eventModalInput}
+                    className={formStyles.input}
                     value={form.recurrence_frequency}
                     onChange={(e) => handleChange("recurrence_frequency", e.target.value)}
                   >
@@ -145,7 +146,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
                   <FormLabel label="End Date" name="recurrence_end_date" isRequired />
                   <input
                     type="date"
-                    className={styles.eventModalInput}
+                    className={formStyles.input}
                     value={form.recurrence_end_date}
                     required={form.is_recurring}
                     min={form.event_date || undefined}
@@ -159,7 +160,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
         <FormLabel label="Description" name="event_description" isRequired />
         <textarea
-          className={styles.eventModalTextArea}
+          className={formStyles.textarea}
           value={form.event_description}
           onChange={(e) => handleChange("event_description", e.target.value)}
         />
@@ -197,7 +198,7 @@ export default function AddEditEventModal({ user, business, event, onClose, onSa
 
         <FormLabel label="Event Link" name="event_url" />
         <input
-          className={styles.eventModalInput}
+          className={formStyles.input}
           type="url"
           placeholder="https://example.com"
           value={form.event_url}

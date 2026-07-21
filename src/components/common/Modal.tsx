@@ -4,11 +4,13 @@ import styles from "../../styles/EventModal.module.css";
 interface ModalProps {
   onClose: () => void;
   hero?: React.ReactNode;
+  title?: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  size?: "default" | "compact";
 }
 
-export default function Modal({ onClose, hero, children, footer }: ModalProps) {
+export default function Modal({ onClose, hero, title, children, footer, size = "default" }: ModalProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -16,10 +18,9 @@ export default function Modal({ onClose, hero, children, footer }: ModalProps) {
     return () => setVisible(false);
   }, []);
 
-  // Handle fade-out before unmounting (for smoother close)
   const handleClose = () => {
     setVisible(false);
-    setTimeout(onClose, 200); // Match transition duration
+    setTimeout(onClose, 200);
   };
 
   return (
@@ -29,7 +30,7 @@ export default function Modal({ onClose, hero, children, footer }: ModalProps) {
         onClick={handleClose}
       />
       <div
-        className={`${styles.modal} ${visible ? styles.modalVisible : ""}`}
+        className={`${styles.modal} ${visible ? styles.modalVisible : ""} ${size === "compact" ? styles.modalCompact : ""}`}
         tabIndex={-1}
       >
         {hero ? (
@@ -38,7 +39,8 @@ export default function Modal({ onClose, hero, children, footer }: ModalProps) {
             {hero}
           </div>
         ) : (
-          <div className={styles.modalHeaderBar}>
+          <div className={`${styles.modalHeaderBar} ${title ? styles.modalHeaderBarWithTitle : ""}`}>
+            {title && <h3 className={styles.modalHeaderTitle}>{title}</h3>}
             <button className={styles.iconButton} onClick={handleClose}>✕</button>
           </div>
         )}

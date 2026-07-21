@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { supabase } from "../../supabase";
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
-import styles from "../../styles/LoginModal.module.css";
+import formStyles from "../../styles/common/forms.module.css";
+import Modal from "../common/Modal";
+import FormLabel from "../form/FormLabel";
 import PasswordResetModal from "./PasswordResetModal";
 
 export default function LoginModal({ onClose, onLoginSuccess }) {
@@ -19,38 +21,56 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
     if (error) {
       toast.error(error.message);
     } else {
-      onLoginSuccess?.(data.user); // Optional, in case you need to pass back the user
+      onLoginSuccess?.(data.user);
       onClose();
     }
   };
 
+  const footer = (
+    <div className={formStyles.actions}>
+      <button className={formStyles.buttonSecondary} onClick={onClose}>
+        Cancel
+      </button>
+      <button className={formStyles.buttonPrimary} onClick={signIn}>
+        Log In
+      </button>
+    </div>
+  );
+
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <h3 className={styles.title}>Login</h3>
+    <>
+      <Modal size="compact" title="Login" onClose={onClose} footer={footer}>
+        <FormLabel label="Email" name="email" isRequired />
         <input
-          className={styles.input}
+          id="email"
+          className={formStyles.input}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          placeholder="you@example.com"
         />
+
+        <FormLabel label="Password" name="password" isRequired />
         <input
+          id="password"
           type="password"
-          className={styles.input}
+          className={formStyles.input}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="••••••••"
         />
-        <div className={styles.buttonRow}>
-          <button className={styles.button} onClick={signIn}>Log In</button>
-          <button className={styles.cancelButton} onClick={onClose}>Cancel</button>
-          <button onClick={() => setShowResetModal(true)}>Forgot Password?</button>
-        </div>
-      </div>
+
+        <button
+          type="button"
+          className={formStyles.linkButton}
+          onClick={() => setShowResetModal(true)}
+        >
+          Forgot password?
+        </button>
+      </Modal>
 
       {showResetModal && (
         <PasswordResetModal onClose={() => setShowResetModal(false)} />
       )}
-    </div>
+    </>
   );
 }

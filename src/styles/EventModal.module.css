@@ -41,6 +41,12 @@
     pointer-events: auto;
   }
 
+  .modalCompact {
+    max-width: 400px;
+    height: auto;
+    max-height: 90vh;
+  }
+
   .modalHero {
     position: relative;
     height: 260px;
@@ -68,8 +74,26 @@
     flex-shrink: 0;
   }
 
+  .modalHeaderBarWithTitle {
+    justify-content: space-between;
+  }
+
+  .modalHeaderTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
   .modalHeaderBar .iconButton {
     position: static;
+  }
+
+  .modalCompact .modalFooter {
+    border-top: none;
+    justify-content: flex-end;
   }
     
   .image {
