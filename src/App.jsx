@@ -68,7 +68,6 @@ export default function App() {
       
       <HeaderLayout
         user={user}
-        onLoginClick={() => setShowLogin(true)}
         onLogout={() => setShowLogoutConfirm(true)}
       />
 

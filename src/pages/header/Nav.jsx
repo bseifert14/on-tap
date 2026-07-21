@@ -4,7 +4,7 @@ import styles from "../../styles/Header.module.css";
 import { User } from "lucide-react";
 import NavButton from "./NavButton";
 
-export default function Nav({ user, onLogout, onLoginClick }) {
+export default function Nav({ user, onLogout }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
@@ -12,11 +12,6 @@ export default function Nav({ user, onLogout, onLoginClick }) {
   const handleCloseAndLogout = () => {
     setDropdownOpen(false);
     onLogout();
-  };
-
-  const handleLoginClick = () => {
-    setDropdownOpen(false);
-    onLoginClick();
   };
 
   useEffect(() => {
@@ -36,25 +31,21 @@ export default function Nav({ user, onLogout, onLoginClick }) {
         <NavButton path="/about" title="About" />
         <NavButton path="/contact" title="Contact Us" />
 
-        {/* <div className={styles.userMenuWrapper} ref={dropdownRef}>
-        <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
-            <User strokeWidth={1.5} />
-        </button>
-        {dropdownOpen && (
-            <div className={styles.userDropdown}>
-            {isLoggedIn ? (
-                <>
+        {isLoggedIn && (
+          <div className={styles.userMenuWrapper} ref={dropdownRef}>
+            <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
+              <User strokeWidth={1.5} />
+            </button>
+            {dropdownOpen && (
+              <div className={styles.userDropdown}>
                 <Link to="/profile" onClick={() => setDropdownOpen(false)}>
-                    Profile
+                  Profile
                 </Link>
                 <button onClick={handleCloseAndLogout}>Log Out</button>
-                </>
-            ) : (
-                <button onClick={handleLoginClick}>Log In</button>
+              </div>
             )}
-            </div>
+          </div>
         )}
-        </div> */}
     </nav>
   );
 }
