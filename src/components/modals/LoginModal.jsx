@@ -6,11 +6,14 @@ import formStyles from "../../styles/common/forms.module.css";
 import styles from "../../styles/LoginModal.module.css";
 import Modal from "../common/Modal";
 import FormLabel from "../form/FormLabel";
+import PasswordInput from "../inputs/PasswordInput";
+import TextInput from "../inputs/TextInput";
 
 export default function LoginModal({ onClose, onLoginSuccess }) {
   const [view, setView] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [resetSent, setResetSent] = useState(false);
 
   const isLoginView = view === "login";
@@ -77,22 +80,24 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
         <div className={`${styles.slider} ${!isLoginView ? styles.sliderReset : ""}`}>
           <div className={styles.slide} inert={!isLoginView ? "" : undefined}>
             <FormLabel label="Email" name="email" isRequired />
-            <input
+            <TextInput
               id="email"
-              className={formStyles.input}
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
             />
 
             <FormLabel label="Password" name="password" isRequired />
-            <input
+            <PasswordInput
               id="password"
               type="password"
               className={formStyles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
+              showPassword={showPassword}
+              onShowPasswordToggle={() => setShowPassword((prev) => !prev)}
             />
 
             <button
@@ -112,10 +117,9 @@ export default function LoginModal({ onClose, onLoginSuccess }) {
             ) : (
               <>
                 <FormLabel label="Email" name="reset-email" isRequired />
-                <input
+                <TextInput
                   id="reset-email"
                   type="email"
-                  className={formStyles.input}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"

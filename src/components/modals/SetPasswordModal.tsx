@@ -2,12 +2,13 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabase";
 import { toast } from "sonner";
-import { Check, Eye, EyeOff } from "lucide-react";
+import { Check } from "lucide-react";
 
 import formStyles from "../../styles/common/forms.module.css";
 import styles from "../../styles/SetPasswordModal.module.css";
 import Modal from "../common/Modal";
 import FormLabel from "../form/FormLabel";
+import PasswordInput from "../inputs/PasswordInput";
 
 interface SetPasswordModalProps {
   onClose: () => void;
@@ -89,44 +90,24 @@ export default function SetPasswordModal({ onClose }: SetPasswordModalProps) {
       </ul>
 
       <FormLabel label="Password" name="password" isRequired />
-      <div className={formStyles.inputWithIcon}>
-        <input
-          id="password"
-          type={showPw1 ? "text" : "password"}
-          className={formStyles.input}
-          placeholder="Set password..."
-          value={pw1}
-          onChange={(e) => setPw1(e.target.value)}
-        />
-        <button
-          type="button"
-          className={formStyles.inputIconButton}
-          onClick={() => setShowPw1((v) => !v)}
-          aria-label={showPw1 ? "Hide password" : "Show password"}
-        >
-          {showPw1 ? <EyeOff size={16} /> : <Eye size={16} />}
-        </button>
-      </div>
+      <PasswordInput
+        id="password"
+        value={pw1}
+        onChange={(e) => setPw1(e.target.value)}
+        required
+        showPassword={showPw1}
+        onShowPasswordToggle={() => setShowPw1((v) => !v)}
+      />
 
       <FormLabel label="Confirm Password" name="confirmPassword" isRequired />
-      <div className={formStyles.inputWithIcon}>
-        <input
-          id="confirmPassword"
-          type={showPw2 ? "text" : "password"}
-          className={formStyles.input}
-          placeholder="Confirm password..."
-          value={pw2}
-          onChange={(e) => setPw2(e.target.value)}
-        />
-        <button
-          type="button"
-          className={formStyles.inputIconButton}
-          onClick={() => setShowPw2((v) => !v)}
-          aria-label={showPw2 ? "Hide password" : "Show password"}
-        >
-          {showPw2 ? <EyeOff size={16} /> : <Eye size={16} />}
-        </button>
-      </div>
+      <PasswordInput
+        id="confirmPassword"
+        value={pw2}
+        onChange={(e) => setPw2(e.target.value)}
+        required
+        showPassword={showPw2}
+        onShowPasswordToggle={() => setShowPw2((v) => !v)}
+      />
     </Modal>
   );
 }
