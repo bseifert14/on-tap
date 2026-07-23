@@ -1,9 +1,13 @@
+import { toast } from "sonner";
+import { Phone, Mail, Link as LinkIcon } from "lucide-react";
+
 import styles from "../../styles/ProfileSettings.module.css";
+import formStyles from "../../styles/common/forms.module.css";
 import { useBusinessProfile } from "../../utils/hooks/useBusinessProfile";
 import { useContactProfile } from "../../utils/hooks/useContactProfile";
 
-import { toast } from "sonner";
 import FormLabel from "../../components/form/FormLabel";
+import TextInput from "../../components/inputs/TextInput";
 
 export default function ProfileSettings({ user }) {
   const {
@@ -18,7 +22,7 @@ export default function ProfileSettings({ user }) {
     setContact,
     saveContact
   } = useContactProfile(businessId);
-
+  console.log(contact);
   const handleChange = (setter) => (field, value) => {
     setter(prev => ({ ...prev, [field]: value }));
   };
@@ -38,143 +42,157 @@ export default function ProfileSettings({ user }) {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.profileGrid}>
-        <div className={styles.formSection}>
-          <h2 className={styles.sectionTitle}>Business Information</h2>
-          <form>
-            <div className={styles.formGroup}>
-              <FormLabel label="Name" name="business_name" isRequired />
-              <input
-                type="text"
-                id="business_name"
-                required
-                className={styles.formInput}
-                placeholder="Business name"
-                value={business?.business_name || ""}
-                onChange={e => handleChange(setBusiness)("business_name", e.target.value)}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="Street Address" name="street_address" isRequired />
-              <input
-                type="text"
-                id="street_address"
-                className={styles.formInput}
-                placeholder="Business Address"
-                value={business?.street_address || ""}
-                onChange={e => handleChange(setBusiness)("street_address", e.target.value)}
-              />
-            </div>
-            <div className={styles.formGroup}>
+      <section className={styles.section}>
+        <h2 className={formStyles.title}>Business Information</h2>
+        <p className={formStyles.helperText}>
+          Appears publicly on your event listings. Any of these fields can be overriden when you create an event.
+        </p>
+
+        <div className={styles.group}>
+          <p className={styles.groupCaption}>Business</p>
+          <FormLabel label="Name" name="business_name" isRequired />
+          <TextInput
+            id="business_name"
+            required
+            placeholder="Business name"
+            value={business?.business_name || ""}
+            onChange={e => handleChange(setBusiness)("business_name", e.target.value)}
+          />
+        </div>
+
+        <div className={styles.group}>
+          <p className={styles.groupCaption}>Location</p>
+          <FormLabel label="Street Address" name="street_address" isRequired />
+          <TextInput
+            id="street_address"
+            placeholder="123 Main St"
+            value={business?.street_address || ""}
+            onChange={e => handleChange(setBusiness)("street_address", e.target.value)}
+          />
+
+          <div className={styles.row3}>
+            <div>
               <FormLabel label="City" name="city" isRequired />
-              <input
-                type="text"
+              <TextInput
                 id="city"
-                className={styles.formInput}
-                placeholder="Business City"
+                placeholder="Stowe"
                 value={business?.city || ""}
                 onChange={e => handleChange(setBusiness)("city", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
+            <div>
               <FormLabel label="State" name="state" isRequired />
-              <input
-                type="text"
+              <TextInput
                 id="state"
-                className={styles.formInput}
-                placeholder="Business State"
+                placeholder="VT"
                 value={business?.state || ""}
                 onChange={e => handleChange(setBusiness)("state", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="Zipcode" name="zipcode" isRequired />
-              <input
-                type="number"
+            <div>
+              <FormLabel label="Zip" name="zipcode" isRequired />
+              <TextInput
                 id="zipcode"
-                className={styles.formInput}
-                placeholder="Business Zipcode"
+                placeholder="05672"
                 value={business?.zipcode || ""}
                 onChange={e => handleChange(setBusiness)("zipcode", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="Phone Number" name="businessPhone" isRequired />
-              <input
-                type="text"
+          </div>
+        </div>
+
+        <div className={styles.group}>
+          <p className={styles.groupCaption}>Public Contact Info</p>
+          <div className={styles.row2}>
+            <div>
+              <FormLabel label="Phone" name="businessPhone" isRequired />
+              <TextInput
                 id="businessPhone"
-                className={styles.formInput}
-                placeholder="Business Phone Number"
+                type="tel"
+                placeholder="(555) 123-4567"
+                leadingIcon={<Phone size={15} />}
                 value={business?.phone || ""}
                 onChange={e => handleChange(setBusiness)("phone", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
+            <div>
               <FormLabel label="Email" name="email" isRequired />
-              <input
-                type="text"
+              <TextInput
                 id="email"
-                className={styles.formInput}
-                placeholder="Business Email"
+                type="email"
+                placeholder="hello@business.com"
+                leadingIcon={<Mail size={15} />}
                 value={business?.email || ""}
                 onChange={e => handleChange(setBusiness)("email", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="URL" name="url" isRequired />
-              <input
-                type="text"
-                id="url"
-                className={styles.formInput}
-                placeholder="Business URL"
-                value={business?.url || ""}
-                onChange={e => handleChange(setBusiness)("url", e.target.value)}
-              />
-            </div>
-          </form>
-          <button className={styles.saveBtn} onClick={handleSaveBusiness}>Save Business Info</button>
+          </div>
+
+          <FormLabel label="Website" name="url" isRequired />
+          <TextInput
+            id="url"
+            type="url"
+            placeholder="https://yourbusiness.com"
+            leadingIcon={<LinkIcon size={15} />}
+            value={business?.url || ""}
+            onChange={e => handleChange(setBusiness)("url", e.target.value)}
+          />
         </div>
 
-        <div className={styles.formSection}>
-          <h2 className={styles.sectionTitle}>Primary Contact</h2>
-          <form>
-            <div className={styles.formGroup}>
-              <FormLabel label="Contact Name" name="contactName" isRequired />
-              <input
-                type="text"
-                id="contactName"
-                className={styles.formInput}
-                placeholder="Contact Person Name"
-                value={contact?.name || ""}
-                onChange={e => handleChange(setContact)("name", e.target.value)}
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="Contact Phone" name="contactPhone" isRequired />
-              <input
-                type="text"
+        <div className={formStyles.actions}>
+          <button className={formStyles.buttonPrimary} onClick={handleSaveBusiness}>
+            Save Business Info
+          </button>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={formStyles.title}>Primary Contact</h2>
+        <p className={formStyles.helperText}>
+          This info is kept internal and never displayed publicly. We'll use it to reach you directly for time-sensitive or event-related issues.
+        </p>
+
+        <div className={styles.group}>
+          <FormLabel label="Contact Name" name="contactName" isRequired />
+          <TextInput
+            id="contactName"
+            placeholder="Full name"
+            value={contact?.name || ""}
+            onChange={e => handleChange(setContact)("name", e.target.value)}
+          />
+
+          <div className={styles.row2}>
+            <div>
+              <FormLabel label="Phone" name="contactPhone" isRequired />
+              <TextInput
                 id="contactPhone"
-                className={styles.formInput}
-                placeholder="Contact Phone Number"
+                type="tel"
+                placeholder="(555) 123-4567"
+                leadingIcon={<Phone size={15} />}
                 value={contact?.phone || ""}
                 onChange={e => handleChange(setContact)("phone", e.target.value)}
               />
             </div>
-            <div className={styles.formGroup}>
-              <FormLabel label="Contact Email" name="contactEmail" isRequired />
-              <input
-                type="text"
+            <div>
+              <FormLabel label="Email" name="contactEmail" isRequired />
+              <TextInput
                 id="contactEmail"
-                className={styles.formInput}
-                placeholder="Contact Person Email"
+                type="email"
+                placeholder="you@email.com"
+                leadingIcon={<Mail size={15} />}
                 value={contact?.email || ""}
                 onChange={e => handleChange(setContact)("email", e.target.value)}
               />
             </div>
-          </form>
-          <button className={styles.saveBtn} onClick={handleSaveContact}>Save Contact Info</button>
+          </div>
         </div>
-      </div>
+
+        <div className={formStyles.actions}>
+          <button className={formStyles.buttonPrimary} onClick={handleSaveContact}>
+            Save Contact Info
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
