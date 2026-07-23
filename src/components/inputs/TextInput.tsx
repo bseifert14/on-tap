@@ -1,26 +1,16 @@
-import styles from "../../styles/common/forms.module.css";
+import { forwardRef } from "react";
+import BaseInput from "./BaseInput";
 
-interface InputProps {
-  id: string;
-  type?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
-}
+type TextInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> & {
+  type?: "text" | "email" | "url" | "tel" | "search";
+};
 
-export default function TextInput({ id, type, value, onChange, placeholder, required, disabled }: InputProps) {
-  return (
-    <input
-        id={id}
-        type={type || "text"}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-        disabled={disabled}
-        className={styles.input}
-    />
-  );
-}
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  ({ type = "text", ...rest }, ref) => (
+    <BaseInput ref={ref} type={type} {...rest} />
+  )
+);
+
+TextInput.displayName = "TextInput";
+
+export default TextInput;
