@@ -3,6 +3,8 @@ import BaseInput from "./BaseInput";
 
 type TextInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> & {
   type?: "text" | "email" | "url" | "tel" | "search";
+  leadingIcon?: React.ReactNode;
+  trailingAction?: React.ReactNode;
 };
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
