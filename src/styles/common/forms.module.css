@@ -60,6 +60,7 @@ select.input {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  padding-top: 8px;
 }
 
 .buttonPrimary {
