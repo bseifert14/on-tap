@@ -60,6 +60,7 @@ select.input {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  padding-top: 8px;
 }
 
 .buttonPrimary {
@@ -129,6 +130,7 @@ select.input {
   color: var(--color-text-muted);
   margin: 0 0 12px 0;
   line-height: 1.5;
+  text-wrap: pretty;
 }
 
 .inputWithIcon {
@@ -138,7 +140,25 @@ select.input {
 
 .inputWithIcon > .input {
   margin-bottom: 0;
+}
+
+.inputPaddedLeft {
+  padding-left: 38px;
+}
+
+.inputPaddedRight {
   padding-right: 42px;
+}
+
+.inputLeadingIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }
 
 .inputIconButton {

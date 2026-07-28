@@ -1,38 +1,41 @@
-import styles from "../../styles/common/forms.module.css";
+import { forwardRef } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
-interface PasswordInputProps {
-    id: string;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    required?: boolean;
-    disabled?: boolean;
-    showPassword?: boolean;
-    onShowPasswordToggle?: () => void;
-}
+import styles from "../../styles/common/forms.module.css";
+import BaseInput from "./BaseInput";
 
-export default function PasswordInput({ id, value, onChange, required, disabled, showPassword, onShowPasswordToggle }: PasswordInputProps) {
-  return (
-    <div className={styles.inputWithIcon}>
-        <input
-            id={id}
-            value={value}
-            onChange={onChange}
-            required={required}
-            disabled={disabled}
-            className={styles.input}
-            type={showPassword ? "text" : "password"}
-            placeholder="••••••••"
-        />
-        <button
-            type="button"
-            className={styles.inputIconButton}
-            onClick={onShowPasswordToggle}
-            disabled={disabled || !onShowPasswordToggle}
-            aria-label={showPassword ? "Hide password" : "Show password"}
-        >
-            {showPassword ? <Eye size={16} /> : <EyeOff size={16} />}
-        </button>
-    </div>
-  );
-}
+type PasswordInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> & {
+  showPassword?: boolean;
+  onShowPasswordToggle?: () => void;
+};
+
+const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
+  ({ showPassword, onShowPasswordToggle, disabled, placeholder = "••••••••", ...rest }, ref) => {
+    const toggle = onShowPasswordToggle ? (
+      <button
+        type="button"
+        className={styles.inputIconButton}
+        onClick={onShowPasswordToggle}
+        disabled={disabled}
+        aria-label={showPassword ? "Hide password" : "Show password"}
+      >
+        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+      </button>
+    ) : undefined;
+
+    return (
+      <BaseInput
+        ref={ref}
+        type={showPassword ? "text" : "password"}
+        placeholder={placeholder}
+        disabled={disabled}
+        trailingAction={toggle}
+        {...rest}
+      />
+    );
+  }
+);
+
+PasswordInput.displayName = "PasswordInput";
+
+export default PasswordInput;
