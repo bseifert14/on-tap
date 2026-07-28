@@ -22,7 +22,7 @@ export default function ProfileSettings({ user }) {
     setContact,
     saveContact
   } = useContactProfile(businessId);
-  console.log(contact);
+
   const handleChange = (setter) => (field, value) => {
     setter(prev => ({ ...prev, [field]: value }));
   };
@@ -45,7 +45,7 @@ export default function ProfileSettings({ user }) {
       <section className={styles.section}>
         <h2 className={formStyles.title}>Business Information</h2>
         <p className={formStyles.helperText}>
-          Appears publicly on your event listings. Any of these fields can be overriden when you create an event.
+          Appears publicly on your event listings. Any of these fields can be overridden when you create an event.
         </p>
 
         <div className={styles.group}>

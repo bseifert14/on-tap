@@ -23,7 +23,11 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(
 
     return (
       <div className={styles.inputWithIcon}>
-        {leadingIcon && <span className={styles.inputLeadingIcon}>{leadingIcon}</span>}
+        {leadingIcon && (
+          <span className={styles.inputLeadingIcon} aria-hidden="true">
+            {leadingIcon}
+          </span>
+        )}
         {inputEl}
         {trailingAction}
       </div>
