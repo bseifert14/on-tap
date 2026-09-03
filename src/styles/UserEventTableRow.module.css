@@ -5,6 +5,7 @@
   color: rgba(255, 255, 255, 0.75);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   font-size: 13px;
+  background: var(--color-dark-2);
 }
 
 tr:last-child .cell {
@@ -12,7 +13,7 @@ tr:last-child .cell {
 }
 
 tr:hover .cell {
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--color-dark-2), white 2%);
 }
 
 .eventNameCell {
@@ -24,8 +25,23 @@ tr:hover .cell {
   color: var(--color-white);
 }
 
+.stickyLeft {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  transition: box-shadow 0.2s ease;
+}
+
+[data-scrolled="true"] .stickyLeft {
+  box-shadow: 4px 0 6px -4px rgba(0, 0, 0, 0.5);
+}
+
+.actionsCell {
+  text-align: right;
+}
+
 .truncate {
-  max-width: 200px;
+  max-width: 240px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -33,23 +49,30 @@ tr:hover .cell {
   font-size: 12px;
 }
 
-.checkmark {
+.mediaCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mediaOn {
   color: #4ade80;
 }
 
-.empty {
-  color: rgba(255, 255, 255, 0.2);
+.mediaOff {
+  color: rgba(255, 255, 255, 0.15);
 }
 
 .actionButtonContainer {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   gap: 8px;
 }
 
 .actionButton {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: transparent;
@@ -70,4 +93,60 @@ tr:hover .cell {
   border-color: rgba(200, 35, 44, 0.4);
   color: var(--color-red);
   background: rgba(200, 35, 44, 0.08);
+}
+
+.actionMenu {
+  position: relative;
+  display: none;
+}
+
+.actionDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 140px;
+  background: var(--color-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.actionDropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.actionDropdownItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-white);
+}
+
+.actionDropdownItemDanger:hover {
+  color: var(--color-red);
+  background: rgba(200, 35, 44, 0.08);
+}
+
+@media (max-width: 768px) {
+  .actionButtonContainer {
+    display: none;
+  }
+  .actionMenu {
+    display: inline-flex;
+  }
 }

@@ -8,7 +8,8 @@
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 13px;
   font-family: 'DM Sans', sans-serif;
 }
@@ -27,6 +28,7 @@
   color: var(--color-text-muted);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   white-space: nowrap;
+  background: var(--color-dark-3);
 }
 
 .th.sortable {
@@ -39,48 +41,17 @@
   color: var(--color-white);
 }
 
-.td {
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.75);
-  white-space: nowrap;
+.stickyLeft {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  transition: box-shadow 0.2s ease;
 }
 
-.tbody tr:last-child .td {
-  border-bottom: none;
+[data-scrolled="true"] .stickyLeft {
+  box-shadow: 4px 0 6px -4px rgba(0, 0, 0, 0.5);
 }
 
-.tbody tr:hover .td {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.actionBtn {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: transparent;
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.actionBtn:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--color-white);
-}
-
-.actionBtn.delete:hover {
-  border-color: rgba(200, 35, 44, 0.4);
-  color: var(--color-red);
-  background: rgba(200, 35, 44, 0.08);
+.actionsCell {
+  text-align: right;
 }

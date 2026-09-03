@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "../../styles/UserEventTable.module.css";
 import UserEventTableRow from "./UserEventTableRow";
 
 export default function UserEventTable({ events, onEdit, onDelete }) {
     const [sortAsc, setSortAsc] = useState(true);
+    const wrapperRef = useRef(null);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleSort = () => setSortAsc((prev) => !prev);
 
@@ -15,23 +17,33 @@ export default function UserEventTable({ events, onEdit, onDelete }) {
       });
     }, [events, sortAsc]);
 
+    useEffect(() => {
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
+      const handleScroll = () => setIsScrolled(wrapper.scrollLeft > 0);
+      wrapper.addEventListener("scroll", handleScroll, { passive: true });
+      return () => wrapper.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
-      <div className={styles.tableWrapper}>
+      <div
+        ref={wrapperRef}
+        className={styles.tableWrapper}
+        data-scrolled={isScrolled ? "true" : undefined}
+      >
         <table className={styles.table}>
           <thead className={styles.thead}>
             <tr>
-              <th className={styles.th}>Name</th>
+              <th className={`${styles.th} ${styles.stickyLeft}`}>Name</th>
               <th
                 className={`${styles.th} ${styles.sortable}`}
                 onClick={toggleSort}
               >
                 Date & Time {sortAsc ? "↑" : "↓"}
               </th>
-              <th className={styles.th}>Location</th>
               <th className={styles.th}>Description</th>
-              <th className={styles.th}>Has Photo</th>
-              <th className={styles.th}>Has Link</th>
-              <th className={styles.th}>Actions</th>
+              <th className={styles.th}>Media</th>
+              <th className={`${styles.th} ${styles.actionsCell}`}>Actions</th>
             </tr>
           </thead>
           <tbody className={styles.tbody}>
