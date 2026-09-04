@@ -1,5 +1,39 @@
 /* ProfileEvents.module.css */
 
+.addEventRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.addEventButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  background: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.addEventButton:hover {
+  background: var(--color-red-light);
+}
+
+@media (max-width: 767px) {
+  .addEventButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .paginationFooter {
   margin-top: 16px;
   padding: 16px 4px;

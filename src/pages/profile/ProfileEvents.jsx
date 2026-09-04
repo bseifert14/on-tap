@@ -1,3 +1,5 @@
+import { Plus } from "lucide-react";
+
 import styles from "../../styles/ProfileEvents.module.css";
 
 import AddEditEventModal from "../../components/modals/AddEditEventModal";
@@ -51,9 +53,19 @@ export default function ProfileEvents({ user }) {
 
   return (
     <div>
+      <div className={styles.addEventRow}>
+        <button
+          type="button"
+          className={styles.addEventButton}
+          onClick={() => setShowModal(true)}
+        >
+          <Plus size={16} strokeWidth={2.5} />
+          <span>Add Event</span>
+        </button>
+      </div>
+
       {/* Top Bar */}
       <TableActions
-        setShowModal={setShowModal}
         searchValue={search}
         setSearchValue={setSearch}
         eventTypeFilter={eventTypeFilter}
