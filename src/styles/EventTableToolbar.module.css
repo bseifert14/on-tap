@@ -1,13 +1,13 @@
 .toolbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
 }
 
 .searchWrap {
-  flex: 1;
-  min-width: 0;
+  min-width: 35%;
 }
 
 .filterCluster {
@@ -53,74 +53,179 @@
   pointer-events: none;
 }
 
-.sheetBackdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 100;
-  animation: fadeIn 0.15s ease;
-}
-
-.sheet {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 101;
-  background: var(--color-dark-2);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  max-height: 85vh;
-  animation: slideUp 0.2s ease;
-}
-
-.sheetHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.sheetTitle {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-white);
-  margin: 0;
-}
-
-.sheetClose {
-  background: transparent;
-  border: none;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-}
-
-.sheetClose:hover {
-  color: var(--color-white);
-}
-
-.sheetBody {
-  padding: 20px;
-  overflow-y: auto;
+.sheetContent {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding-bottom: 8px;
+}
+
+.sheetBody {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.sheetSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sheetSectionLabel {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.pillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.pillActive {
+  background: rgba(200, 35, 44, 0.15);
+  border-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.datePickerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.clearDateButton {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
+.clearDateButton:hover {
+  color: var(--color-white);
+}
+
+.datePickerWrap :global(.react-datepicker) {
+  background: var(--color-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: var(--color-white);
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+}
+
+.datePickerWrap :global(.react-datepicker__month-container) {
+  width: 100%;
+  float: none;
+}
+
+.datePickerWrap :global(.react-datepicker__header) {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 12px;
+}
+
+.datePickerWrap :global(.react-datepicker__current-month),
+.datePickerWrap :global(.react-datepicker-year-header) {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.datePickerWrap :global(.react-datepicker__day-name) {
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: 2.25rem;
+}
+
+.datePickerWrap :global(.react-datepicker__day) {
+  color: rgba(255, 255, 255, 0.75);
+  width: 2.25rem;
+  line-height: 2.25rem;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.datePickerWrap :global(.react-datepicker__day:hover) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-white);
+}
+
+.datePickerWrap :global(.react-datepicker__day--outside-month) {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.datePickerWrap :global(.react-datepicker__day--today) {
+  color: var(--color-white);
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.datePickerWrap :global(.react-datepicker__day--selected),
+.datePickerWrap :global(.react-datepicker__day--keyboard-selected) {
+  background: var(--color-red);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.datePickerWrap :global(.react-datepicker__day--selected:hover),
+.datePickerWrap :global(.react-datepicker__day--keyboard-selected:hover) {
+  background: var(--color-red-light);
+}
+
+.datePickerWrap :global(.react-datepicker__navigation) {
+  top: 14px;
+}
+
+.datePickerWrap :global(.react-datepicker__navigation-icon::before) {
+  border-color: var(--color-text-muted);
+}
+
+.datePickerWrap :global(.react-datepicker__navigation:hover *::before) {
+  border-color: var(--color-white);
+}
+
+.datePickerWrap :global(.react-datepicker__triangle) {
+  display: none;
 }
 
 .sheetFooter {
-  padding: 16px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .sheetClear {
@@ -160,16 +265,6 @@
   background: var(--color-red-light);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(100%); }
-  to { transform: translateY(0); }
-}
-
 @media (max-width: 767px) {
   .filterCluster {
     display: none;
@@ -178,5 +273,10 @@
     display: block;
     position: relative;
     flex-shrink: 0;
+  }
+
+  .searchWrap {
+    flex: 1;
+    min-width: 0;
   }
 }

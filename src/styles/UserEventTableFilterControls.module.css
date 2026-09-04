@@ -1,109 +1,282 @@
-.dropdownWrapper {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdownButton {
-    background: white;
-    border: 1px solid #ccc;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-  
-  .dropdownPanel {
-    position: absolute;
-    top: calc(100% + 0.25rem);
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 0.75rem;
-    z-index: 1000;
-    width: 200px;
-  }
-  
-  .checkboxItem {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .applyButton {
-    width: 100%;
-    background-color: #e3003b;
-    color: white;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 6px;
-    font-weight: 500;
-    cursor: pointer;
-    margin-top: 0.5rem;
-  }
+.dropdownWrapper,
+.filterWrapper {
+  position: relative;
+  display: inline-block;
+}
 
-  @media (max-width: 768px) {
-    .dropdownPanel {
-      right: auto;
-      left: 0;
-    }
-  }
-  
+.dropdownButton,
+.filterButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--color-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
 
+.dropdownButton:hover,
+.filterButton:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+}
+
+.dropdownButton[data-active="true"],
+.filterButton[data-active="true"] {
+  color: var(--color-white);
+  border-color: rgba(200, 35, 44, 0.6);
+  background: rgba(200, 35, 44, 0.08);
+}
+
+.chevron {
+  color: var(--color-text-muted);
+  transition: transform 0.2s;
+}
+
+.dropdownButton[data-open="true"] .chevron,
+.filterButton[data-open="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdownPanel,
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 220px;
+  background: var(--color-dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.checkboxItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-white);
+}
+
+.checkboxItem input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.checkboxItem input[type="checkbox"]:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.checkboxItem input[type="checkbox"]:checked {
+  background: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.checkboxItem input[type="checkbox"]:checked::after {
+  content: "";
+  width: 4px;
+  height: 8px;
+  border: solid var(--color-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.checkboxItem input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+.dropdownMenu :global(.react-datepicker) {
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  font-family: 'DM Sans', sans-serif;
+  width: 100%;
+}
+
+.dropdownMenu :global(.react-datepicker__month-container) {
+  width: 100%;
+  float: none;
+}
+
+.dropdownMenu :global(.react-datepicker__header) {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+
+.dropdownMenu :global(.react-datepicker__current-month),
+.dropdownMenu :global(.react-datepicker-year-header) {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.dropdownMenu :global(.react-datepicker__day-name) {
+  color: var(--color-text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: 2rem;
+}
+
+.dropdownMenu :global(.react-datepicker__day) {
+  color: rgba(255, 255, 255, 0.75);
+  width: 2rem;
+  line-height: 2rem;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.dropdownMenu :global(.react-datepicker__day:hover) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-white);
+}
+
+.dropdownMenu :global(.react-datepicker__day--outside-month) {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.dropdownMenu :global(.react-datepicker__day--today) {
+  color: var(--color-white);
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdownMenu :global(.react-datepicker__day--selected),
+.dropdownMenu :global(.react-datepicker__day--keyboard-selected) {
+  background: var(--color-red);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.dropdownMenu :global(.react-datepicker__day--selected:hover),
+.dropdownMenu :global(.react-datepicker__day--keyboard-selected:hover) {
+  background: var(--color-red-light);
+}
+
+.dropdownMenu :global(.react-datepicker__navigation) {
+  top: 10px;
+}
+
+.dropdownMenu :global(.react-datepicker__navigation-icon::before) {
+  border-color: var(--color-text-muted);
+}
+
+.dropdownMenu :global(.react-datepicker__navigation:hover *::before) {
+  border-color: var(--color-white);
+}
+
+.dropdownMenu :global(.react-datepicker__triangle) {
+  display: none;
+}
+
+.applyButton {
+  width: 100%;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s;
+}
+
+.applyButton:hover {
+  background: var(--color-red-light);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--color-red);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.clearBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.clearBadge:hover {
+  background: rgba(200, 35, 44, 0.2);
+  color: var(--color-white);
+}
+
+@media (max-width: 767px) {
+  .dropdownWrapper,
   .filterWrapper {
-    position: relative;
-    display: inline-block;
+    display: block;
+    width: 100%;
   }
 
-  .dropdownMenu {
-    position: absolute;
-    top: 110%;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    z-index: 999;
-    padding: 0.75rem;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
+  .dropdownButton,
   .filterButton {
-    position: relative;
-    padding: 0.4rem 0.75rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: white;
-    cursor: pointer;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
   }
-  
-  .buttonLabel {
-    display: inline-block;
+
+  .dropdownPanel,
+  .dropdownMenu {
+    right: auto;
+    left: 0;
+    width: 100%;
   }
-  
-  .badge {
-    background: crimson;
-    color: white;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    width: 1rem;
-    height: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  
+}

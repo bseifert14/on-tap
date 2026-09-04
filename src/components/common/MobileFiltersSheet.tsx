@@ -2,12 +2,6 @@ import { useState, useMemo } from "react";
 import { EVENT_TYPE_FILTERS, FILTER_TO_TYPES, EVENT_TYPES } from "../../constants/eventTypes";
 import styles from "../../styles/MobileFiltersSheet.module.css";
 
-// const TIME_OF_DAY = [
-//   { label: "Morning", value: "morning" },
-//   { label: "Afternoon", value: "afternoon" },
-//   { label: "Evening", value: "evening" },
-// ];
-
 function getCategoryForType(type: string) {
   for (const [cat, types] of Object.entries(FILTER_TO_TYPES)) {
     if (types.includes(type) && type !== cat) return cat;
@@ -41,9 +35,6 @@ interface MobileFiltersSheetProps {
 export default function MobileFiltersSheet({ selectedType, onApply, onClose }: MobileFiltersSheetProps) {
   const [draftCategory, setDraftCategory] = useState(() => initCategory(selectedType));
   const [draftSubTypes, setDraftSubTypes] = useState(() => initSubTypes(selectedType));
-  // const [draftTimesOfDay, setDraftTimesOfDay] = useState(() =>
-  //   Array.isArray(selectedTimeOfDay) ? selectedTimeOfDay : selectedTimeOfDay ? [selectedTimeOfDay] : []
-  // );
 
   const subTypes = useMemo(() => {
     if (!draftCategory || draftCategory === "all") return [];
@@ -63,10 +54,6 @@ export default function MobileFiltersSheet({ selectedType, onApply, onClose }: M
   const handleSubTypeSelect = (value: string) => {
     setDraftSubTypes(prev => toggleItem(prev, value));
   };
-
-  // const handleTimeOfDaySelect = (value) => {
-  //   setDraftTimesOfDay(prev => toggleItem(prev, value));
-  // };
 
   const handleApply = () => {
     const type = draftSubTypes.length ? draftSubTypes : draftCategory;
@@ -114,24 +101,6 @@ export default function MobileFiltersSheet({ selectedType, onApply, onClose }: M
             </div>
           </>
         )}
-
-        {/* <div className={styles.divider} />
-
-        <div className={styles.section}>
-          <p className={styles.sectionLabel}>Time of day</p>
-          <div className={styles.chips}>
-            {TIME_OF_DAY.map(({ label, value }) => (
-              <button
-                key={value}
-                type="button"
-                className={`${styles.chip} ${draftTimesOfDay.includes(value) ? styles.chipActive : ""}`}
-                onClick={() => handleTimeOfDaySelect(value)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div> */}
 
       </div>
 
