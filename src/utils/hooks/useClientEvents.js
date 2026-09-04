@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../supabase";
+import { FILTER_TO_TYPES } from "../../constants/eventTypes";
 
 /**
  * Hook to fetch and filter events created by a given user.
@@ -75,6 +76,17 @@ export default function useClientEvents(userId) {
     .split(/\s+/)
     .filter(Boolean);
 
+  const activeTypeSlugs = useMemo(() => {
+    if (!eventTypeFilter?.length) return null;
+    const expanded = new Set();
+    for (const value of eventTypeFilter) {
+      const group = FILTER_TO_TYPES[value];
+      if (group) group.forEach((slug) => expanded.add(slug));
+      else expanded.add(value);
+    }
+    return expanded;
+  }, [eventTypeFilter]);
+
   const filtered = events
     .filter((e) => {
       if (searchTerms.length === 0) return true;
@@ -82,10 +94,7 @@ export default function useClientEvents(userId) {
       const searchableText = getSearchableText(e);
       return searchTerms.every((term) => searchableText.includes(term));
     })
-    .filter(
-      (e) =>
-        eventTypeFilter.length === 0 || eventTypeFilter.includes(e.event_type_slug)
-    )
+    .filter((e) => !activeTypeSlugs || activeTypeSlugs.has(e.event_type_slug))
     .filter((e) => !eventDateFilter || e.event_date === eventDateFilter);
 
   const total = filtered.length;

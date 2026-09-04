@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import styles from "../../styles/UserEventTableFilterControls.module.css";
 import { EVENT_TYPE_FILTERS } from '../../constants/eventTypes';
 
@@ -19,10 +20,10 @@ export default function EventTypeFilter({ selected, onApply }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open, selected]);
 
-  const toggleType = (type) => {
-    if (tempSelection.includes(type))
-      setTempSelection(tempSelection.filter((t) => t !== type));
-    else setTempSelection([...tempSelection, type]);
+  const toggleType = (value) => {
+    if (tempSelection.includes(value))
+      setTempSelection(tempSelection.filter((t) => t !== value));
+    else setTempSelection([...tempSelection, value]);
   };
 
   const handleApply = () => {
@@ -34,19 +35,25 @@ export default function EventTypeFilter({ selected, onApply }) {
 
   return (
     <div className={styles.dropdownWrapper} ref={wrapperRef}>
-      <button onClick={() => setOpen((o) => !o)} className={styles.dropdownButton}>
-    Event Type
-    {selected.length > 0 && <span className={styles.badge}>{selected.length}</span>}
-    ▼
-    </button>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={styles.dropdownButton}
+        data-active={selected.length > 0}
+        data-open={open}
+      >
+        <span>Event Type</span>
+        {selected.length > 0 && <span className={styles.badge}>{selected.length}</span>}
+        <ChevronDown size={14} strokeWidth={2} className={styles.chevron} />
+      </button>
       {open && (
         <div className={styles.dropdownPanel}>
-          {EVENT_TYPE_FILTERS.map(({ label }) => (
-            <label key={label} className={styles.checkboxItem}>
+          {EVENT_TYPE_FILTERS.filter(({ value }) => value !== "all").map(({ label, value }) => (
+            <label key={value} className={styles.checkboxItem}>
               <input
                 type="checkbox"
-                checked={tempSelection.includes(label)}
-                onChange={() => toggleType(label)}
+                checked={tempSelection.includes(value)}
+                onChange={() => toggleType(value)}
               />
               {label}
             </label>
