@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Camera, Link as LinkIcon } from "lucide-react";
 
 import styles from "../../styles/UserEventTableRow.module.css";
+import Icon from "../../components/common/Icon";
 import EventRowActions from "./EventRowActions";
 
 export default function UserEventTableRow({ event, onEdit, onDelete }) {
@@ -53,17 +54,21 @@ export default function UserEventTableRow({ event, onEdit, onDelete }) {
       </td>
       <td className={styles.cell}>
         <div className={styles.mediaCell}>
-          <Camera
+          <Icon
+            icon={Camera}
             size={16}
             strokeWidth={1.5}
             className={hasPhoto ? styles.mediaOn : styles.mediaOff}
             aria-label={hasPhoto ? "Photo attached" : "No photo"}
+            title={hasPhoto ? "Photo attached" : "No photo"}
           />
-          <LinkIcon
+          <Icon
+            icon={LinkIcon}
             size={16}
             strokeWidth={1.5}
             className={hasLink ? styles.mediaOn : styles.mediaOff}
             aria-label={hasLink ? "Link attached" : "No link"}
+            title={hasLink ? "Link attached" : "No link"}
           />
         </div>
       </td>
