@@ -1,6 +1,6 @@
 # On Tap Events
 
-A community event discovery platform for Stowe, Vermont — helping locals and visitors find everything happening in town, from live music and dining to various other activities and local business events.
+A community event discovery platform for Stowe, Vermont. The goal of helping locals and visitors find everything happening in town, from live music and dining to various other activities and local business events.
 
 **Live site:** [ontap-events.com](https://ontap-events.com)
 
