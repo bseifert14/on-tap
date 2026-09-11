@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/Header.module.css";
 import { User } from "lucide-react";
 import NavButton from "./NavButton";
+import useIsAdmin from "../../utils/hooks/useIsAdmin";
 
 export default function Nav({ user, onLogout }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
+  const { isAdmin } = useIsAdmin();
 
   const handleCloseAndLogout = () => {
     setDropdownOpen(false);
@@ -31,6 +33,8 @@ export default function Nav({ user, onLogout }) {
         <NavButton path="/about" title="About" />
         <NavButton path="/contact" title="Contact Us" />
 
+        {!isLoggedIn && <NavButton path="/post-event" title="Submit an Event" />}
+
         {isLoggedIn && (
           <div className={styles.userMenuWrapper} ref={dropdownRef}>
             <button className={styles.userIcon} onClick={() => setDropdownOpen((prev) => !prev)}>
@@ -41,6 +45,11 @@ export default function Nav({ user, onLogout }) {
                 <Link to="/profile" onClick={() => setDropdownOpen(false)}>
                   Profile
                 </Link>
+                {isAdmin && (
+                  <Link to="/admin/submissions" onClick={() => setDropdownOpen(false)}>
+                    Admin
+                  </Link>
+                )}
                 <button onClick={handleCloseAndLogout}>Log Out</button>
               </div>
             )}

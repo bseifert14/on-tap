@@ -17,6 +17,8 @@ import HomeLayout from "./pages/home/HomeLayout";
 import { Toaster } from 'sonner';
 
 import EventRoute from "./pages/events/EventRoute";
+import PostEvent from "./pages/post-event/PostEvent";
+import AdminSubmissions from "./pages/admin/AdminSubmissions";
 
 export default function App() {
   const navigate = useNavigate();
@@ -101,6 +103,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/recover" element={<Recover />} />
+          <Route path="/post-event" element={<PostEvent />} />
+          <Route path="/admin/submissions" element={<AdminSubmissions />} />
 
           {/* If someone lands on a share link directly, they’ll hit this route */}
           <Route path="/events/:eventId" element={<EventRoute />} />

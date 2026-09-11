@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styles from "../../styles/Header.module.css";
+import useIsAdmin from "../../utils/hooks/useIsAdmin";
 
 const NAV_ELEMENTS = [
   { to: "/", label: "Home" },
@@ -9,10 +10,15 @@ const NAV_ELEMENTS = [
   { to: "/contact", label: "Contact Us" }
 ]
 
+const ANON_NAV_ELEMENTS = [
+  { to: "/post-event", label: "Submit an Event" }
+]
+
 export default function MobileNav({ user, onLogout, setMenuOpen }) {
   const location = useLocation();
   const isLoggedIn = !!user;
   const dropdownRef = useRef(null);
+  const { isAdmin } = useIsAdmin();
 
   const handleCloseAndLogout = () => {
     setMenuOpen(false);
@@ -44,6 +50,19 @@ export default function MobileNav({ user, onLogout, setMenuOpen }) {
             </Link>
         ))}
 
+        {!isLoggedIn && ANON_NAV_ELEMENTS.map(({ to, label }) => (
+            <Link
+              key={to}
+              to={to}
+              onClick={() => setMenuOpen(false)}
+              className={
+                  location.pathname === to ? styles.mobileNavLinkActive : ""
+              }
+            >
+              {label}
+            </Link>
+        ))}
+
         {isLoggedIn && (
             <>
               <Link
@@ -55,6 +74,17 @@ export default function MobileNav({ user, onLogout, setMenuOpen }) {
               >
                   Profile
               </Link>
+              {isAdmin && (
+                <Link
+                    to="/admin/submissions"
+                    onClick={() => setMenuOpen(false)}
+                    className={
+                        location.pathname === "/admin/submissions" ? styles.mobileNavLinkActive : ""
+                    }
+                >
+                    Admin
+                </Link>
+              )}
               <button onClick={handleCloseAndLogout}>Log Out</button>
             </>
         )}
