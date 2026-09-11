@@ -1,0 +1,225 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.intro {
+  margin-bottom: 24px;
+}
+
+.introTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+}
+
+.introText {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.stepIndicator {
+  display: flex;
+  align-items: flex-start;
+  margin: 24px 0 32px;
+  padding: 0 12px;
+  list-style: none;
+}
+
+.stepItem {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.stepDot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.stepDotActive {
+  border-color: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(200, 35, 44, 0.15);
+}
+
+.stepDotComplete {
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.stepConnector {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 15px 12px 0;
+  transition: background 0.2s;
+}
+
+.stepConnectorComplete {
+  background: var(--color-red);
+}
+
+.stepLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.stepLabelActive {
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .stepIndicator {
+    padding: 0 20px;
+  }
+  .stepConnector {
+    margin: 14px 8px 0;
+  }
+  .stepLabel {
+    font-size: 11px;
+  }
+  .stepDot {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .stepConnector {
+    margin-top: 13px;
+  }
+}
+
+.card {
+  background: var(--color-dark-2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.sectionTitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 16px 0;
+}
+
+.footerBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.footerBarRight {
+  display: flex;
+  gap: 10px;
+}
+
+.paymentPlaceholder {
+  padding: 32px 20px;
+  text-align: center;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.helperTextTop {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.paymentError {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(255, 77, 90, 0.08);
+  border: 1px solid rgba(255, 77, 90, 0.35);
+  color: #ff8a92;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.reviewSection {
+  margin-bottom: 20px;
+}
+
+.reviewLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.reviewValue {
+  color: var(--color-white);
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.reviewDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 16px 0;
+}
+
+.successCard {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.successIcon {
+  color: var(--color-red);
+  margin-bottom: 16px;
+}
+
+.successTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--color-white);
+  margin: 0 0 12px 0;
+}
+
+.successText {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 24px;
+}
